@@ -2,14 +2,15 @@
   "name": "parcel",
   "version": "1.0.0",
   "description": "",
-  "source": "index.html",
+  "source": "index.pug",
   "scripts": {
-    "start": "./node_modules/.bin/parcel index.html",
-    "production": "./node_modules/.bin/parcel build index.html"
+    "start": "parcel",
+    "production": "parcel build"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "parcel": "^2.0.0"
+    "@parcel/transformer-pug": "^2.0.1",
+    "parcel": "latest"
   }
 }
