@@ -1,16 +1,19 @@
 {
   "name": "parcel",
   "version": "1.0.0",
-  "description": "",
-  "source": "index.pug",
+  "description": "messenger app",
   "scripts": {
-    "start": "parcel",
-    "production": "parcel build"
+    "start": "parcel build ./static/pages/**/*.html && node ./src/server.js",
+    "production": "parcel build ./static/pages/**/*.html"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@parcel/transformer-pug": "^2.0.1",
+    "@parcel/transformer-sass": "^2.0.1",
     "parcel": "latest"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
