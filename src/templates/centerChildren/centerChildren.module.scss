@@ -1,4 +1,7 @@
-.center-children {
-  // это будет flex-container
-  border: 2px solid green;
+.center_children {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,0 +1,5 @@
+mixin errorMessage(code, message, linkTo, linkMessage, errorMessageClasses)
+  div(class=`${errorMessageClasses.error_message}`)
+    div(class=`${errorMessageClasses.error_code}`)= code
+    div(class=`${errorMessageClasses.error_title}`)= message
+    a(class=`${errorMessageClasses.error_link}` href=linkTo) #{linkMessage}

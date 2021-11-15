@@ -1,6 +1,12 @@
-//- h1(class=`${classes.colormy}`) Sign In...124 #{data}!
+//- parent template
 extends ../../../src/templates/centerChildren/centerChildren
-
+//- variables (styles) passed to parent template 
+block variables
+  - var body_class= parentClasses.center_children
+//- including mixins
+include ../../../src/components/errorMessage/errorMessage.pug
+//- current template
 block content
   div(class=`${classes.page_not_found_logo_wrapper}`)
     img(src= pageNotFoundLogo class=`${classes.page_not_found_logo}`)
+  +errorMessage('404', 'Page Not Found', '/index.html', 'Go Back', errorMessageClasses)
