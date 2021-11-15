@@ -5,12 +5,14 @@ import * as classes from  './index.module.scss';
 // 1 - generate context
 const ctx = { 
   classes,
-  404: 'hello',
-  500: '',
-  chat: '',
-  createAccount: '',
-  profile: '',
-  signIn: ''
+  pages: {
+    404: '/404.html',
+    500: '/500.html',
+    chat: '/chat.html',
+    createAccount: '/createAccount.html',
+    profile: '/profile.html',
+    signIn: '/signIn.html'
+  }
 }
 
 // 2 - generate markup
