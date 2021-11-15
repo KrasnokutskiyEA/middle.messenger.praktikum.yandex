@@ -2,7 +2,7 @@
 
 ## Description
 
-Tiny messenger app without 3-rd party js-libraries.
+Tiny messenger app almost without 3-rd party js-libraries.
 
 Supported features:
 
@@ -14,9 +14,10 @@ Supported features:
 
 ## Install
 
-- `npm install` — get required npm-packages,
-- `npm start` — run in development mode,
-- `npm run build:prod` — run in productiion mode.
+- `npm i` — get required npm-packages,
+- `npm run start` — build dist and start express-server,
+- `npm run production` — make production build.
+- `npm run dev` — run in development mode.
 
 ## API Documentation
 
