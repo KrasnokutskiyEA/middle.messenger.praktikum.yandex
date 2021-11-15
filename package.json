@@ -4,14 +4,16 @@
   "description": "messenger app",
   "scripts": {
     "start": "parcel build ./static/pages/**/*.html && node ./src/server.js",
-    "production": "parcel build ./static/pages/**/*.html"
+    "watch": "parcel watch ./static/pages/**/*.html",
+    "production": "parcel build ./static/pages/**/*.html",
+    "dev": "npm run watch & node ./src/server.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@parcel/transformer-pug": "^2.0.1",
     "@parcel/transformer-sass": "^2.0.1",
-    "parcel": "latest"
+    "parcel": "latest",
+    "parcel-transformer-pug-precompile": "^1.0.6"
   },
   "dependencies": {
     "express": "^4.17.1"
