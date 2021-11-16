@@ -1,13 +1,17 @@
 .primary_btn {
-  display: flex;
-  flex-direction: column;
+  display: inline-block;
+  text-align: center;
   align-items: center;
   justify-content: center;
   background-color: #FFCC00;
   border-radius: 8px;
   width: 400px;
   height: 50px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
   .primary_btn_title {
     font-size: 1.3em;
+    line-height: 20px;
   }
 }
