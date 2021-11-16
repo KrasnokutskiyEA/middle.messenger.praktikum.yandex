@@ -1,17 +1,18 @@
 import compileTemplate from './404.pug';
 import pageNotFoundLogo from '../../assets/images/ghost.svg'
-import '../../assets/styles/global.scss';
 
-// parent and children styles
-import * as classes from  './404.module.scss';
-import * as parentClasses from  '../../templates/centerChildren/centerChildren.module.scss';
-import * as errorMessageClasses from '../../components/errorMessage/errorMessage.module.scss';
+// styles
+import '../../assets/styles/global.scss';
+import * as pageStyles from  './404.module.scss';
+import * as templateStyles from  '../../templates/centerChildren/centerChildren.module.scss';
+import * as componentErrorMessageStyles from '../../components/errorMessage/errorMessage.module.scss';
+
 
 // 1 - generate context
 const ctx = {
-  classes,
-  parentClasses,
-  errorMessageClasses,
+  pageStyles,
+  templateStyles,
+  componentErrorMessageStyles,
   pageNotFoundLogo
 }
 

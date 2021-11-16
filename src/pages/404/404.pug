@@ -2,8 +2,17 @@
 include ../../../src/components/errorMessage/errorMessage.pug
 include ../../../src/templates/centerChildren/centerChildrenMixin.pug
 
+//- variables
+- 
+  const parameters = {
+    code: "404",
+    message: "Page Not Found",
+    linkTo: "/index.html",
+    linkMessage: "Go Back"
+  }
+
 //- markup
-+centerChildrenMixin(parentClasses.center_children)
-  div(class=`${classes.page_not_found_logo_wrapper}`)
-    img(src= pageNotFoundLogo class=`${classes.page_not_found_logo}`)
-  +errorMessage('404', 'Page Not Found', '/index.html', 'Go Back', errorMessageClasses)
++centerChildrenMixin(templateStyles.center_children)
+  div(class=`${pageStyles.page_not_found_logo_wrapper}`)
+    img(src= pageNotFoundLogo class=`${pageStyles.page_not_found_logo}`)
+  +errorMessage(parameters, componentErrorMessageStyles)

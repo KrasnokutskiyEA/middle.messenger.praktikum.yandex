@@ -4,7 +4,7 @@ include ../../../src/templates/centerChildren/centerChildrenMixin.pug
 
 //- variables
 - 
-  var parameters = {
+  const parameters = {
     code: "500",
     message: "Internal Server Error",
     linkTo: "/index.html",
@@ -12,5 +12,5 @@ include ../../../src/templates/centerChildren/centerChildrenMixin.pug
   }
 
 //- markup
-+centerChildrenMixin(parentClasses.center_children)
-  +credentialsForm(parameters, signInClasses)
++centerChildrenMixin(templateStyles.center_children)
+  +credentialsForm(parameters, moduleSignInStyles)
