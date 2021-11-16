@@ -1,12 +1,9 @@
-//- parent template
-extends ../../../src/templates/centerChildren/centerChildren
-//- variables (styles) passed to parent template 
-block variables
-  - var body_class= parentClasses.center_children
 //- including mixins
 include ../../../src/components/errorMessage/errorMessage.pug
-//- current template
-block content
+include ../../../src/templates/centerChildren/centerChildrenMixin.pug
+
+//- markup
++centerChildrenMixin(parentClasses.center_children)
   div(class=`${classes.server_error_logo_wrapper}`)
     img(src= serverErrorLogo class=`${classes.server_error_logo}`)
   +errorMessage('500', 'Internal Server Error', '/index.html', 'Go Back', errorMessageClasses)

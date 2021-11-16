@@ -1,17 +1,16 @@
-//- parent template
-extends ../../../src/templates/centerChildren/centerChildren
-//- variables (styles) passed to parent template 
-block variables
-  - var body_class= parentClasses.center_children
-  - 
-    var parameters = {
-      code: "500",
-      message: "Internal Server Error",
-      linkTo: "/index.html",
-      linkMessage: "Go Back"
-    }
 //- including mixins
 include ../../../src/modules/credentialsForm/credentialsForm.pug
-//- current template
-block content
+include ../../../src/templates/centerChildren/centerChildrenMixin.pug
+
+//- variables
+- 
+  var parameters = {
+    code: "500",
+    message: "Internal Server Error",
+    linkTo: "/index.html",
+    linkMessage: "Go Back"
+  }
+
+//- markup
++centerChildrenMixin(parentClasses.center_children)
   +credentialsForm(parameters, signInClasses)

@@ -1,6 +1,6 @@
 import compileTemplate from './500.pug';
-import '../../assets/styles/global.scss';
 import serverErrorLogo from '../../assets/images/fire.svg'
+import '../../assets/styles/global.scss';
 
 // parent and children styles
 import * as classes from  './500.module.scss';

@@ -1,6 +1,6 @@
 import compileTemplate from './404.pug';
-import '../../assets/styles/global.scss';
 import pageNotFoundLogo from '../../assets/images/ghost.svg'
+import '../../assets/styles/global.scss';
 
 // parent and children styles
 import * as classes from  './404.module.scss';
