@@ -1,0 +1,13 @@
+.primary_btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFCC00;
+  border-radius: 8px;
+  width: 400px;
+  height: 50px;
+  .primary_btn_title {
+    font-size: 1.3em;
+  }
+}

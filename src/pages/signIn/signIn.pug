@@ -1,16 +1,17 @@
 //- including mixins
 include ../../../src/modules/credentialsForm/credentialsForm.pug
 include ../../../src/templates/centerChildren/centerChildrenMixin.pug
+include ../../../src/components/primaryBtn/primaryBtn.pug
 
 //- variables
 - 
   const parameters = {
-    code: "500",
-    message: "Internal Server Error",
+    title: "Sign In",
     linkTo: "/index.html",
-    linkMessage: "Go Back"
+    linkMessage: "Create account?"
   }
 
 //- markup
 +centerChildrenMixin(templateStyles.center_children)
   +credentialsForm(parameters, moduleSignInStyles)
+    +primaryBtn("Sign In", componentPrimaryBtnStyles)
