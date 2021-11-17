@@ -64,7 +64,8 @@ include ../../../src/components/avatar/avatar.pug
 
 //- template
 +sideNavMixin(templateSideNavStyles)
-  +roundBtn(componentRoundBtnStyles)(style="transform: rotate(180deg);")
+  form
+    +roundBtn(componentRoundBtnStyles)(style="transform: rotate(180deg);", formaction="/chat.html")
 +centerChildrenMixin(templateStyles)
   +credentialsForm(parameters, moduleSignInStyles)
     +avatar(componentAvatarStyles)(style="margin-bottom:40px;")
