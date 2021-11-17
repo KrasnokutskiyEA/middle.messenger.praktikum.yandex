@@ -8,7 +8,7 @@ include ../../../src/components/textField/textField.pug
 - 
   const parameters = {
     title: "Sign In",
-    linkTo: "/index.html",
+    linkTo: "/createAccount.html",
     linkMessage: "Create account?"
   }
 - 
@@ -16,25 +16,18 @@ include ../../../src/components/textField/textField.pug
     {
       label: "Username",
       type: "text",
-      name: "name", 
-      id: "name", 
+      name: "login", 
+      id: "login", 
       placeholder: "Username"
     },
     {
       label: "Password",
       type: "text",
-      name: "name", 
-      id: "name", 
+      name: "password", 
+      id: "password", 
       placeholder: "Password"
     }
   ]
-
-//- markup
-//- +centerChildrenMixin(templateStyles.center_children)
-//-   +credentialsForm(parameters, moduleSignInStyles)(style="margin-bottom:40px;")
-//-     each item in textFieldParameters//- 
-//-       +textField(item, componentTextFieldStyles)
-//-     +primaryBtn("Sign In", componentPrimaryBtnStyles)(style="margin-top:60px;")
 
 +centerChildrenMixin(templateStyles.center_children)
   +credentialsForm(parameters, moduleSignInStyles)(style="margin-bottom:60px;")
