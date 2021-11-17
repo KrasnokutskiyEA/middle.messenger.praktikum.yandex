@@ -65,7 +65,9 @@ include ../../../src/components/textField/textField.pug
   ]
 
 +centerChildrenMixin(templateStyles.center_children)
-  +credentialsForm(parameters, moduleSignInStyles)(style="margin-bottom:40px;")
+  +credentialsForm(parameters, moduleSignInStyles)
+    div(class=`${moduleSignInStyles.credentials_title}` style="margin-bottom:40px;")= parameters.title
     each item in textFieldParameters
       +textField(item, componentTextFieldStyles)
     +primaryBtn("Sign Up", componentPrimaryBtnStyles)(style="margin-top:60px;")
+    a(class=`${moduleSignInStyles.credentials_link}` href=parameters.linkTo) #{parameters.linkMessage}
