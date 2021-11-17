@@ -10,67 +10,67 @@ include ../../../src/components/avatar/avatar.pug
 //- variables
 - 
   const parameters = {
-    title: "Create Account",
-    linkPasswordTo: "/signIn.html",
-    linkPasswordLabel: "Change password",
-    linkLogoutTo: "/signIn.html",
-    linkLogoutLabel: "Log out"
+    title: 'Create Account',
+    linkPasswordTo: '/signIn.html',
+    linkPasswordLabel: 'Change password',
+    linkLogoutTo: '/signIn.html',
+    linkLogoutLabel: 'Log out'
   }
 - 
   const textFieldParameters = [
     {
-      label: "Email",
-      type: "text",
-      name: "email", 
-      id: "email", 
-      placeholder: "Email"
+      label: 'Email',
+      type: 'text',
+      name: 'email', 
+      id: 'email', 
+      placeholder: 'Email'
     },
     {
-      label: "Username",
-      type: "text",
-      name: "login", 
-      id: "login", 
-      placeholder: "Username"
+      label: 'Username',
+      type: 'text',
+      name: 'login', 
+      id: 'login', 
+      placeholder: 'Username'
     },
     {
-      label: "First Name",
-      type: "text",
-      name: "first_name", 
-      id: "first_name", 
-      placeholder: "First Name"
+      label: 'First Name',
+      type: 'text',
+      name: 'first_name', 
+      id: 'first_name', 
+      placeholder: 'First Name'
     },
     {
-      label: "Last Name",
-      type: "text",
-      name: "second_name", 
-      id: "second_name", 
-      placeholder: "Last Name"
+      label: 'Last Name',
+      type: 'text',
+      name: 'second_name', 
+      id: 'second_name', 
+      placeholder: 'Last Name'
     },
     {
-      label: "Nickname",
-      type: "text",
-      name: "display_name", 
-      id: "display_name", 
-      placeholder: "Nickname"
+      label: 'Nickname',
+      type: 'text',
+      name: 'display_name', 
+      id: 'display_name', 
+      placeholder: 'Nickname'
     },
     {
-      label: "Phone",
-      type: "text",
-      name: "phone", 
-      id: "phone", 
-      placeholder: "Phone"
+      label: 'Phone',
+      type: 'text',
+      name: 'phone', 
+      id: 'phone', 
+      placeholder: 'Phone'
     }
   ]
 
 //- template
 +sideNavMixin(templateSideNavStyles)
   form
-    +roundBtn(componentRoundBtnStyles)(style="transform: rotate(180deg);", formaction="/chat.html")
+    +roundBtn(componentRoundBtnStyles)(style='transform: rotate(180deg);', formaction='/chat.html')
 +centerChildrenMixin(templateStyles)
   +credentialsForm(parameters, moduleSignInStyles)
-    +avatar(componentAvatarStyles)(style="margin-bottom:40px;")
+    +avatar(componentAvatarStyles)(style='margin-bottom:40px;')
     each item in textFieldParameters
       +textField(item, componentTextFieldStyles)
-    +primaryBtn("Submit", componentPrimaryBtnStyles)(style="margin-top:60px;")
+    +primaryBtn('Submit', componentPrimaryBtnStyles)(style='margin-top:60px;')
     a(class=`${moduleSignInStyles.credentials_link}` href= parameters.linkPasswordTo) #{parameters.linkPasswordLabel}
     a(class=`${moduleSignInStyles.credentials_link}` href= parameters.linkLogoutTo) #{parameters.linkLogoutLabel}
