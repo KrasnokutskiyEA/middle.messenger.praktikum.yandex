@@ -3,13 +3,16 @@ include ../../../src/modules/credentialsForm/credentialsForm.pug
 include ../../../src/templates/centerChildren/centerChildrenMixin.pug
 include ../../../src/components/primaryBtn/primaryBtn.pug
 include ../../../src/components/textField/textField.pug
+include ../../../src/components/avatar/avatar.pug
 
 //- variables
 - 
   const parameters = {
     title: "Create Account",
-    linkTo: "/signIn.html",
-    linkMessage: "Sign in"
+    linkPasswordTo: "/signIn.html",
+    linkPasswordLabel: "Change password",
+    linkLogoutTo: "/signIn.html",
+    linkLogoutLabel: "Log out"
   }
 - 
   const textFieldParameters = [
@@ -42,33 +45,27 @@ include ../../../src/components/textField/textField.pug
       placeholder: "Last Name"
     },
     {
+      label: "Nickname",
+      type: "text",
+      name: "display_name", 
+      id: "display_name", 
+      placeholder: "Nickname"
+    },
+    {
       label: "Phone",
       type: "text",
       name: "phone", 
       id: "phone", 
       placeholder: "Phone"
-    },
-    {
-      label: "Password",
-      type: "password",
-      name: "password", 
-      id: "password", 
-      placeholder: "Password"
-    },
-    {
-      label: "Confirm password",
-      type: "password",
-      name: "confirm_password", 
-      id: "confirm_password", 
-      placeholder: "Confirm password"
     }
   ]
 
 //- template
 +centerChildrenMixin(templateStyles.center_children)
   +credentialsForm(parameters, moduleSignInStyles)
-    div(class=`${moduleSignInStyles.credentials_title}` style="margin-bottom:40px;")= parameters.title
+    +avatar(componentAvatarStyles)(style="margin-bottom:40px;")
     each item in textFieldParameters
       +textField(item, componentTextFieldStyles)
-    +primaryBtn("Sign Up", componentPrimaryBtnStyles)(style="margin-top:60px;")
-    a(class=`${moduleSignInStyles.credentials_link}` href=parameters.linkTo) #{parameters.linkMessage}
+    +primaryBtn("Submit", componentPrimaryBtnStyles)(style="margin-top:60px;")
+    a(class=`${moduleSignInStyles.credentials_link}` href= parameters.linkPasswordTo) #{parameters.linkPasswordLabel}
+    a(class=`${moduleSignInStyles.credentials_link}` href= parameters.linkLogoutTo) #{parameters.linkLogoutLabel}
