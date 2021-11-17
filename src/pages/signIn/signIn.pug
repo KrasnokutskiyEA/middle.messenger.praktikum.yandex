@@ -2,6 +2,7 @@
 include ../../../src/modules/credentialsForm/credentialsForm.pug
 include ../../../src/templates/centerChildren/centerChildrenMixin.pug
 include ../../../src/components/primaryBtn/primaryBtn.pug
+include ../../../src/components/textField/textField.pug
 
 //- variables
 - 
@@ -10,8 +11,27 @@ include ../../../src/components/primaryBtn/primaryBtn.pug
     linkTo: "/index.html",
     linkMessage: "Create account?"
   }
+- 
+  const textFieldParameters = [
+    {
+      label: "Username",
+      type: "text",
+      name: "name", 
+      id: "name", 
+      placeholder: "Username"
+    },
+    {
+      label: "Password",
+      type: "text",
+      name: "name", 
+      id: "name", 
+      placeholder: "Password"
+    }
+  ]
 
 //- markup
 +centerChildrenMixin(templateStyles.center_children)
   +credentialsForm(parameters, moduleSignInStyles)
-    +primaryBtn("Sign In", componentPrimaryBtnStyles)
+    each item in textFieldParameters
+      +textField(item, componentTextFieldStyles)
+    +primaryBtn("Sign In", componentPrimaryBtnStyles)(style="margin-top:auto;")
