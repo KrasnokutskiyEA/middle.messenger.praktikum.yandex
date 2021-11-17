@@ -1,0 +1,18 @@
+//- including mixins
+include ../../../src/components/errorMessage/errorMessage.pug
+include ../../../src/templates/centerChildren/centerChildrenMixin.pug
+
+//- variables
+- 
+  const parameters = {
+    code: '500',
+    message: 'Internal Server Error',
+    linkTo: '/index.html',
+    linkMessage: 'Go Back'
+  }
+
+//- markup
++centerChildrenMixin(templateStyles)
+  div(class=`${pageStyles.server_error_logo_wrapper}`)
+    img(src= serverErrorLogo class=`${pageStyles.server_error_logo}`)
+  +errorMessage(parameters, componentErrorMessageStyles)

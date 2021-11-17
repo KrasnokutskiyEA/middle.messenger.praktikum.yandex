@@ -1,0 +1,18 @@
+//- including mixins
+include ../../../src/components/errorMessage/errorMessage.pug
+include ../../../src/templates/centerChildren/centerChildrenMixin.pug
+
+//- variables
+- 
+  const parameters = {
+    code: '404',
+    message: 'Page Not Found',
+    linkTo: '/index.html',
+    linkMessage: 'Go Back'
+  }
+
+//- markup
++centerChildrenMixin(templateStyles)
+  div(class=`${pageStyles.page_not_found_logo_wrapper}`)
+    img(src= pageNotFoundLogo class=`${pageStyles.page_not_found_logo}`)
+  +errorMessage(parameters, componentErrorMessageStyles)
