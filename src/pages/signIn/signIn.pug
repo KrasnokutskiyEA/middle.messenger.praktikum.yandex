@@ -30,7 +30,7 @@ include ../../../src/components/textField/textField.pug
   ]
 
 //- template
-+centerChildrenMixin(templateStyles.center_children)
++centerChildrenMixin(templateStyles)
   +credentialsForm(parameters, moduleSignInStyles)
     div(class=`${moduleSignInStyles.credentials_title}` style="margin-bottom:60px;")= parameters.title
     each item in textFieldParameters

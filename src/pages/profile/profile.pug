@@ -1,5 +1,6 @@
 //- including mixins
 include ../../../src/modules/credentialsForm/credentialsForm.pug
+include ../../../src/templates/sideNav/sideNavMixin.pug
 include ../../../src/templates/centerChildren/centerChildrenMixin.pug
 include ../../../src/components/primaryBtn/primaryBtn.pug
 include ../../../src/components/textField/textField.pug
@@ -61,7 +62,8 @@ include ../../../src/components/avatar/avatar.pug
   ]
 
 //- template
-+centerChildrenMixin(templateStyles.center_children)
++sideNavMixin(templateSideNavStyles)
++centerChildrenMixin(templateStyles)
   +credentialsForm(parameters, moduleSignInStyles)
     +avatar(componentAvatarStyles)(style="margin-bottom:40px;")
     each item in textFieldParameters

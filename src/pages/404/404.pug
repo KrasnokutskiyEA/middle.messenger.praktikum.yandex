@@ -12,7 +12,7 @@ include ../../../src/templates/centerChildren/centerChildrenMixin.pug
   }
 
 //- markup
-+centerChildrenMixin(templateStyles.center_children)
++centerChildrenMixin(templateStyles)
   div(class=`${pageStyles.page_not_found_logo_wrapper}`)
     img(src= pageNotFoundLogo class=`${pageStyles.page_not_found_logo}`)
   +errorMessage(parameters, componentErrorMessageStyles)
