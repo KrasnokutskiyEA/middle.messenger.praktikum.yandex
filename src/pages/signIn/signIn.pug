@@ -30,8 +30,14 @@ include ../../../src/components/textField/textField.pug
   ]
 
 //- markup
+//- +centerChildrenMixin(templateStyles.center_children)
+//-   +credentialsForm(parameters, moduleSignInStyles)(style="margin-bottom:40px;")
+//-     each item in textFieldParameters//- 
+//-       +textField(item, componentTextFieldStyles)
+//-     +primaryBtn("Sign In", componentPrimaryBtnStyles)(style="margin-top:60px;")
+
 +centerChildrenMixin(templateStyles.center_children)
-  +credentialsForm(parameters, moduleSignInStyles)
+  +credentialsForm(parameters, moduleSignInStyles)(style="margin-bottom:60px;")
     each item in textFieldParameters
       +textField(item, componentTextFieldStyles)
     +primaryBtn("Sign In", componentPrimaryBtnStyles)(style="margin-top:auto;")
