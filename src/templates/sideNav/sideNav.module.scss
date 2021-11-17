@@ -4,10 +4,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
-  .sidenav_btn {
-    width: 20px;
-    height: 20px;
-    border: 1px solid red;
-  }
+  align-items: center;
+  justify-content: center;
+  background-color: #EFEFEF;
 }

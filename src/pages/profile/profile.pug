@@ -3,6 +3,7 @@ include ../../../src/modules/credentialsForm/credentialsForm.pug
 include ../../../src/templates/sideNav/sideNavMixin.pug
 include ../../../src/templates/centerChildren/centerChildrenMixin.pug
 include ../../../src/components/primaryBtn/primaryBtn.pug
+include ../../../src/components/roundBtn/roundBtn.pug
 include ../../../src/components/textField/textField.pug
 include ../../../src/components/avatar/avatar.pug
 
@@ -63,6 +64,7 @@ include ../../../src/components/avatar/avatar.pug
 
 //- template
 +sideNavMixin(templateSideNavStyles)
+  +roundBtn(componentRoundBtnStyles)(style="transform: rotate(180deg);")
 +centerChildrenMixin(templateStyles)
   +credentialsForm(parameters, moduleSignInStyles)
     +avatar(componentAvatarStyles)(style="margin-bottom:40px;")
