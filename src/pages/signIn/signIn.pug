@@ -31,9 +31,10 @@ include ../../../src/components/textField/textField.pug
 
 //- template
 +centerChildrenMixin(templateStyles)
-  +credentialsForm(parameters, moduleSignInStyles)
-    div(class=`${moduleSignInStyles.credentials_title}` style='margin-bottom:60px;')= parameters.title
-    each item in textFieldParameters
-      +textField(item, componentTextFieldStyles)
-    +primaryBtn('Sign In', componentPrimaryBtnStyles)(style='margin-top:auto;')
-    a(class=`${moduleSignInStyles.credentials_link}` href=parameters.linkTo) #{parameters.linkMessage}
+  main
+    +credentialsForm(parameters, moduleSignInStyles)
+      div(class=`${moduleSignInStyles.credentials_title}` style='margin-bottom:60px;')= parameters.title
+      each item in textFieldParameters
+        +textField(item, componentTextFieldStyles)
+      +primaryBtn('Sign In', componentPrimaryBtnStyles)(style='margin-top:auto;')
+      a(class=`${moduleSignInStyles.credentials_link}` href=parameters.linkTo) #{parameters.linkMessage}

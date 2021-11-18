@@ -67,10 +67,11 @@ include ../../../src/components/avatar/avatar.pug
   form
     +roundBtn(componentRoundBtnStyles)(style='transform: rotate(180deg);', formaction='/chat.html')
 +centerChildrenMixin(templateStyles)
-  +credentialsForm(parameters, moduleSignInStyles)
-    +avatar(componentAvatarStyles)(style='margin-bottom:40px;')
-    each item in textFieldParameters
-      +textField(item, componentTextFieldStyles)
-    +primaryBtn('Submit', componentPrimaryBtnStyles)(style='margin-top:60px;')
-    a(class=`${moduleSignInStyles.credentials_link}` href= parameters.linkPasswordTo) #{parameters.linkPasswordLabel}
-    a(class=`${moduleSignInStyles.credentials_link}` href= parameters.linkLogoutTo) #{parameters.linkLogoutLabel}
+  main
+    +credentialsForm(parameters, moduleSignInStyles)
+      +avatar(componentAvatarStyles)(style='margin-bottom:40px;')
+      each item in textFieldParameters
+        +textField(item, componentTextFieldStyles)
+      +primaryBtn('Submit', componentPrimaryBtnStyles)(style='margin-top:60px;')
+      a(class=`${moduleSignInStyles.credentials_link}` href= parameters.linkPasswordTo) #{parameters.linkPasswordLabel}
+      a(class=`${moduleSignInStyles.credentials_link}` href= parameters.linkLogoutTo) #{parameters.linkLogoutLabel}
