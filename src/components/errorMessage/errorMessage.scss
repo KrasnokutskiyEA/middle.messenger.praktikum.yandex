@@ -1,0 +1,19 @@
+@use 'sass:map';
+
+.error_message {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .error_code {
+    font-size: 4vw;
+  }
+  .error_title {
+    font-size: 2vw;
+  }
+  .error_link {
+    margin-top: 8vw;
+    font-size: 1vw;
+    color: map.get($colors, 'gray');
+  }
+}

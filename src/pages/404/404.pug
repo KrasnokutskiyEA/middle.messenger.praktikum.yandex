@@ -1,0 +1,9 @@
+//- including mixins
+include ../../../src/components/errorMessage/errorMessage.pug
+include ../../../src/templates/centerChildren/centerChildrenMixin.pug
+
+//- markup
++centerChildrenMixin()
+  div(class='page_not_found_logo_wrapper')
+    img(src= pageNotFoundLogo class='page_not_found_logo')
+  +errorMessage(parameters)

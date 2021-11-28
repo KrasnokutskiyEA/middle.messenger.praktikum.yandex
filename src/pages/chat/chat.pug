@@ -1,0 +1,11 @@
+//- including mixins
+include ../../../src/components/errorMessage/errorMessage.pug
+include ../../../src/templates/centerChildren/centerChildrenMixin.pug
+include ../../../src/components/roundBtn/roundBtn.pug
+
+//- markup
++centerChildrenMixin()
+  +errorMessage(parameters)
+  div(style='align-self:flex-end;margin-bottom:30px;display:flex;')
+    input(type= 'text', name= 'message', id= 'message', placeholder= 'message', style='margin-right:20px;')
+    +roundBtn()

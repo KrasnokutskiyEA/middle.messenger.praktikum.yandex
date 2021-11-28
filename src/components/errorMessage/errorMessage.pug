@@ -1,0 +1,5 @@
+mixin errorMessage(parameters)
+  main(class='error_message')
+    div(class='error_code')= parameters.code
+    div(class='error_title')= parameters.message
+    a(class='error_link' href=parameters.linkTo) #{parameters.linkMessage}
