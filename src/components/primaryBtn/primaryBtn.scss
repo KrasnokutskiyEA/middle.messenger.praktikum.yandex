@@ -1,9 +1,11 @@
+@use 'sass:map';
+
 .primary_btn {
   display: inline-block;
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: #FFCC00;
+  background-color: map.get($colors, 'yellow');
   border-radius: 20px;
   width: 400px;
   height: 50px;

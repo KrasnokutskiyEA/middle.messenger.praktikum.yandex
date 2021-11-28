@@ -1,5 +1,7 @@
-.credentials_form {
-  border: 1px solid #999999;
+@use 'sass:map';
+
+.form {
+  border: 1px solid map.get($colors, 'gray');
   border-radius: 50px;
   width: 480px;
   min-height: 630px;
@@ -8,17 +10,12 @@
   align-items: center;
   padding-top: 60px;
   padding-bottom: 30px;
-  .credentials_title {
+  .form_title {
     font-size: 2em;
   }
-  .credentials_inputs_wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-  }
-  .credentials_link {
+  .form_link {
     font-size: 1em;
-    color: #999999;
+    color: map.get($colors, 'gray');
     margin-top: 20px;
   }
 }

@@ -1,20 +1,41 @@
 import compileTemplate from './signIn.pug';
 
-// parent and children styles
-import '../../assets/styles/global.scss';
-import * as templateStyles from  '../../templates/centerChildren/centerChildren.module.scss';
-import * as moduleSignInStyles from '../../modules/credentialsForm/credentialsForm.module.scss';
-import * as componentPrimaryBtnStyles from '../../components/primaryBtn/primaryBtn.module.scss';
-import * as componentTextFieldStyles from '../../components/textField/textField.module.scss';
+// styles
+import '../../assets/styles/index.scss';
 
 // 1 - generate context
 const ctx = {
-  templateStyles,
-  moduleSignInStyles,
-  componentPrimaryBtnStyles,
-  componentTextFieldStyles
+  parameters: {
+    title: 'Sign In',
+    linkTo: '/createAccount.html',
+    linkMessage: 'Create account?'
+  },
+  textFieldParameters: [
+    {
+      label: 'Username',
+      type: 'text',
+      name: 'login', 
+      id: 'login', 
+      placeholder: 'Username',
+      required: 'required'
+    },
+    {
+      label: 'Password',
+      type: 'text',
+      name: 'password', 
+      id: 'password', 
+      placeholder: 'Password',
+      required: 'required'
+    }
+  ],
+  primaryBtnParameters: {
+    text: 'Sign In',
+    type: 'submit',
+    classes: ['mt-auto']
+  }
 }
 
 // 2 - generate markup
-document.body.innerHTML = ''
-document.body.insertAdjacentHTML('afterbegin', compileTemplate(ctx));
+const app = document.getElementById('app')
+app.innerHTML = ''
+app.insertAdjacentHTML('afterbegin', compileTemplate(ctx));

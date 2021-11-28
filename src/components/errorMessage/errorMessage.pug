@@ -1,5 +1,5 @@
-mixin errorMessage(parameters, styles)
-  main(class=`${styles.error_message}`)
-    div(class=`${styles.error_code}`)= parameters.code
-    div(class=`${styles.error_title}`)= parameters.message
-    a(class=`${styles.error_link}` href=parameters.linkTo) #{parameters.linkMessage}
+mixin errorMessage(parameters)
+  main(class='error_message')
+    div(class='error_code')= parameters.code
+    div(class='error_title')= parameters.message
+    a(class='error_link' href=parameters.linkTo) #{parameters.linkMessage}

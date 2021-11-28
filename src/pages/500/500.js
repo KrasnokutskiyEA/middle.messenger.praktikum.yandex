@@ -2,19 +2,20 @@ import compileTemplate from './500.pug';
 import serverErrorLogo from '../../assets/images/fire.svg'
 
 // styles
-import '../../assets/styles/global.scss';
-import * as pageStyles from  './500.module.scss';
-import * as templateStyles from  '../../templates/centerChildren/centerChildren.module.scss';
-import * as componentErrorMessageStyles from '../../components/errorMessage/errorMessage.module.scss';
+import '../../assets/styles/index.scss';
 
 // 1 - generate context
 const ctx = {
-  pageStyles,
-  templateStyles,
-  componentErrorMessageStyles,
+  parameters: {
+    code: '500',
+    message: 'Internal Server Error',
+    linkTo: '/index.html',
+    linkMessage: 'Go Back'
+  },
   serverErrorLogo
 }
 
 // 2 - generate markup
-document.body.innerHTML = ''
-document.body.insertAdjacentHTML('afterbegin', compileTemplate(ctx));
+const app = document.getElementById('app')
+app.innerHTML = ''
+app.insertAdjacentHTML('afterbegin', compileTemplate(ctx));

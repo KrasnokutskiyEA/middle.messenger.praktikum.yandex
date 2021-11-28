@@ -1,11 +1,11 @@
-mixin textField(parameters, styles)
-  div(class=`${styles.text_field_wrapper}`)
+mixin textField(parameters)
+  div(class='text_field_wrapper')
     label(for= parameters.id) #{parameters.label}
     input(
       type= parameters.type 
       name= parameters.name 
       id= parameters.id
       placeholder= parameters.placeholder
-      required 
+      required= parameters.required
       autofocus
     )

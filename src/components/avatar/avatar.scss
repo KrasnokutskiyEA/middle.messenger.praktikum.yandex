@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 .avatar_wrapper {
   width: 130px;
   height: 130px;
@@ -17,7 +19,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: black;
+    background-color: map.get($colors, 'black');
     opacity: 50%;
     overflow: hidden;
     width: 100%;
@@ -26,7 +28,7 @@
   }
 
   .avatar_text {
-    color: white;
+    color: map.get($colors, 'white');
     font-size: 20px;
     position: absolute;
     top: 50%;

@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 .error_message {
   position: absolute;
   display: flex;
@@ -12,6 +14,6 @@
   .error_link {
     margin-top: 8vw;
     font-size: 1vw;
-    color: #999999
+    color: map.get($colors, 'gray');
   }
 }

@@ -1,40 +1,15 @@
 //- including mixins
-include ../../../src/modules/credentialsForm/credentialsForm.pug
+include ../../../src/modules/form/form.pug
 include ../../../src/templates/centerChildren/centerChildrenMixin.pug
 include ../../../src/components/primaryBtn/primaryBtn.pug
 include ../../../src/components/textField/textField.pug
 
-//- variables
-- 
-  const parameters = {
-    title: 'Sign In',
-    linkTo: '/createAccount.html',
-    linkMessage: 'Create account?'
-  }
-- 
-  const textFieldParameters = [
-    {
-      label: 'Username',
-      type: 'text',
-      name: 'login', 
-      id: 'login', 
-      placeholder: 'Username'
-    },
-    {
-      label: 'Password',
-      type: 'text',
-      name: 'password', 
-      id: 'password', 
-      placeholder: 'Password'
-    }
-  ]
-
 //- template
-+centerChildrenMixin(templateStyles)
++centerChildrenMixin()
   main
-    +credentialsForm(parameters, moduleSignInStyles)
-      div(class=`${moduleSignInStyles.credentials_title}` style='margin-bottom:60px;')= parameters.title
+    +form()
+      div(class='form_title mb-6')= parameters.title
       each item in textFieldParameters
-        +textField(item, componentTextFieldStyles)
-      +primaryBtn('Sign In', componentPrimaryBtnStyles)(style='margin-top:auto;')
-      a(class=`${moduleSignInStyles.credentials_link}` href=parameters.linkTo) #{parameters.linkMessage}
+        +textField(item)
+      +primaryBtn(primaryBtnParameters)
+      a(class='form_link' href=parameters.linkTo) #{parameters.linkMessage}

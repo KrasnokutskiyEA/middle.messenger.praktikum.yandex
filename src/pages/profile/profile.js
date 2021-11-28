@@ -2,29 +2,84 @@ import compileTemplate from './profile.pug';
 import avatarLogo from '../../assets/images/avatar.svg'
 import arrowLogo from '../../assets/images/arrow.svg'
 
-// parent and children styles
-import '../../assets/styles/global.scss';
-import * as templateStyles from  '../../templates/centerChildren/centerChildren.module.scss';
-import * as templateSideNavStyles from  '../../templates/sideNav/sideNav.module.scss';
-import * as moduleSignInStyles from '../../modules/credentialsForm/credentialsForm.module.scss';
-import * as componentPrimaryBtnStyles from '../../components/primaryBtn/primaryBtn.module.scss';
-import * as componentRoundBtnStyles from '../../components/roundBtn/roundBtn.module.scss';
-import * as componentTextFieldStyles from '../../components/textField/textField.module.scss';
-import * as componentAvatarStyles from '../../components/avatar/avatar.module.scss';
+// styles
+import '../../assets/styles/index.scss';
 
 // 1 - generate context
 const ctx = {
-  templateStyles,
-  templateSideNavStyles,
-  moduleSignInStyles,
-  componentPrimaryBtnStyles,
-  componentRoundBtnStyles,
-  componentTextFieldStyles,
-  componentAvatarStyles,
+  parameters: {
+    title: 'Create Account',
+    linkPasswordTo: '/signIn.html',
+    linkPasswordLabel: 'Change password',
+    linkLogoutTo: '/signIn.html',
+    linkLogoutLabel: 'Log out'
+  },
+  textFieldParameters: [
+    {
+      label: 'Email',
+      type: 'text',
+      name: 'email', 
+      id: 'email', 
+      placeholder: 'Email',
+      required: 'required'
+    },
+    {
+      label: 'Username',
+      type: 'text',
+      name: 'login', 
+      id: 'login', 
+      placeholder: 'Username',
+      required: 'required'
+    },
+    {
+      label: 'First Name',
+      type: 'text',
+      name: 'first_name', 
+      id: 'first_name', 
+      placeholder: 'First Name',
+      required: 'required'
+    },
+    {
+      label: 'Last Name',
+      type: 'text',
+      name: 'second_name', 
+      id: 'second_name', 
+      placeholder: 'Last Name',
+      required: 'required'
+    },
+    {
+      label: 'Nickname',
+      type: 'text',
+      name: 'display_name', 
+      id: 'display_name', 
+      placeholder: 'Nickname',
+      required: 'required'
+    },
+    {
+      label: 'Phone',
+      type: 'text',
+      name: 'phone', 
+      id: 'phone', 
+      placeholder: 'Phone',
+      required: 'required'
+    }
+  ],
+  primaryBtnParameters: {
+    text: 'Submit',
+    type: 'submit',
+    classes: ['mt-6']
+  },
+  avatarParameters: {
+    classes: ['mb-4']
+  },
+  roundBtnParameters: {
+    classes: ['rot-180']
+  },
   avatarLogo,
   arrowLogo
 }
 
 // 2 - generate markup
-document.body.innerHTML = ''
-document.body.insertAdjacentHTML('afterbegin', compileTemplate(ctx));
+const app = document.getElementById('app')
+app.innerHTML = ''
+app.insertAdjacentHTML('afterbegin', compileTemplate(ctx));

@@ -2,21 +2,20 @@ import compileTemplate from './chat.pug';
 import arrowLogo from '../../assets/images/arrow.svg'
 
 // styles
-import '../../assets/styles/global.scss';
-import * as pageStyles from  './chat.module.scss';
-import * as templateStyles from  '../../templates/centerChildren/centerChildren.module.scss';
-import * as componentErrorMessageStyles from '../../components/errorMessage/errorMessage.module.scss';
-import * as componentRoundBtnStyles from '../../components/roundBtn/roundBtn.module.scss';
+import '../../assets/styles/index.scss';
 
 // 1 - generate context
 const ctx = {
-  pageStyles,
-  templateStyles,
-  componentErrorMessageStyles,
-  componentRoundBtnStyles,
+  parameters: {
+    code: '418',
+    message: 'Coming soon...',
+    linkTo: '/index.html',
+    linkMessage: 'Go Back'
+  },
   arrowLogo
 }
 
 // 2 - generate markup
-document.body.innerHTML = ''
-document.body.insertAdjacentHTML('afterbegin', compileTemplate(ctx));
+const app = document.getElementById('app')
+app.innerHTML = ''
+app.insertAdjacentHTML('afterbegin', compileTemplate(ctx));
