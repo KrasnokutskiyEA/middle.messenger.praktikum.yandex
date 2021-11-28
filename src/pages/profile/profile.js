@@ -7,6 +7,63 @@ import '../../assets/styles/index.scss';
 
 // 1 - generate context
 const ctx = {
+  parameters: {
+    title: 'Create Account',
+    linkPasswordTo: '/signIn.html',
+    linkPasswordLabel: 'Change password',
+    linkLogoutTo: '/signIn.html',
+    linkLogoutLabel: 'Log out'
+  },
+  textFieldParameters: [
+    {
+      label: 'Email',
+      type: 'text',
+      name: 'email', 
+      id: 'email', 
+      placeholder: 'Email',
+      required: 'required'
+    },
+    {
+      label: 'Username',
+      type: 'text',
+      name: 'login', 
+      id: 'login', 
+      placeholder: 'Username',
+      required: 'required'
+    },
+    {
+      label: 'First Name',
+      type: 'text',
+      name: 'first_name', 
+      id: 'first_name', 
+      placeholder: 'First Name',
+      required: 'required'
+    },
+    {
+      label: 'Last Name',
+      type: 'text',
+      name: 'second_name', 
+      id: 'second_name', 
+      placeholder: 'Last Name',
+      required: 'required'
+    },
+    {
+      label: 'Nickname',
+      type: 'text',
+      name: 'display_name', 
+      id: 'display_name', 
+      placeholder: 'Nickname',
+      required: 'required'
+    },
+    {
+      label: 'Phone',
+      type: 'text',
+      name: 'phone', 
+      id: 'phone', 
+      placeholder: 'Phone',
+      required: 'required'
+    }
+  ],
   avatarLogo,
   arrowLogo
 }

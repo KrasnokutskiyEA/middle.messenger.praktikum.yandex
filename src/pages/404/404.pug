@@ -2,15 +2,6 @@
 include ../../../src/components/errorMessage/errorMessage.pug
 include ../../../src/templates/centerChildren/centerChildrenMixin.pug
 
-//- variables
-- 
-  const parameters = {
-    code: '404',
-    message: 'Page Not Found',
-    linkTo: '/index.html',
-    linkMessage: 'Go Back'
-  }
-
 //- markup
 +centerChildrenMixin()
   div(class='page_not_found_logo_wrapper')

@@ -6,6 +6,12 @@ import '../../assets/styles/index.scss';
 
 // 1 - generate context
 const ctx = {
+  parameters: {
+    code: '500',
+    message: 'Internal Server Error',
+    linkTo: '/index.html',
+    linkMessage: 'Go Back'
+  },
   serverErrorLogo
 }
 

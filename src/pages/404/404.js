@@ -6,6 +6,12 @@ import '../../assets/styles/index.scss';
 
 // 1 - generate context
 const ctx = {
+  parameters: {
+    code: '404',
+    message: 'Page Not Found',
+    linkTo: '/index.html',
+    linkMessage: 'Go Back'
+  },
   pageNotFoundLogo
 }
 

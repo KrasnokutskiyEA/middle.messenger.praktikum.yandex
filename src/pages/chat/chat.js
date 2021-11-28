@@ -6,6 +6,12 @@ import '../../assets/styles/index.scss';
 
 // 1 - generate context
 const ctx = {
+  parameters: {
+    code: '418',
+    message: 'Coming soon...',
+    linkTo: '/index.html',
+    linkMessage: 'Go Back'
+  },
   arrowLogo
 }
 

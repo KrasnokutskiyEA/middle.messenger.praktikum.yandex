@@ -4,33 +4,6 @@ include ../../../src/templates/centerChildren/centerChildrenMixin.pug
 include ../../../src/components/primaryBtn/primaryBtn.pug
 include ../../../src/components/textField/textField.pug
 
-//- variables
-- 
-  const parameters = {
-    title: 'Sign In',
-    linkTo: '/createAccount.html',
-    linkMessage: 'Create account?'
-  }
-- 
-  const textFieldParameters = [
-    {
-      label: 'Username',
-      type: 'text',
-      name: 'login', 
-      id: 'login', 
-      placeholder: 'Username',
-      required: 'required'
-    },
-    {
-      label: 'Password',
-      type: 'text',
-      name: 'password', 
-      id: 'password', 
-      placeholder: 'Password',
-      required: 'required'
-    }
-  ]
-
 //- template
 +centerChildrenMixin()
   main
