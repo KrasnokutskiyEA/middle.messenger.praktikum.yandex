@@ -30,7 +30,8 @@ const ctx = {
   ],
   primaryBtnParameters: {
     text: 'Sign In',
-    type: 'submit'
+    type: 'submit',
+    classes: ['mt-auto']
   }
 }
 

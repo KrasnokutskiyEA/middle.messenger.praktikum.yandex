@@ -66,7 +66,14 @@ const ctx = {
   ],
   primaryBtnParameters: {
     text: 'Submit',
-    type: 'submit'
+    type: 'submit',
+    classes: ['mt-6']
+  },
+  avatarParameters: {
+    classes: ['mb-4']
+  },
+  roundBtnParameters: {
+    classes: ['rot-180']
   },
   avatarLogo,
   arrowLogo

@@ -70,7 +70,8 @@ const ctx = {
   ],
   primaryBtnParameters: {
     text: 'Sign Up',
-    type: 'submit'
+    type: 'submit',
+    classes: ['mt-6']
   }
 }
 

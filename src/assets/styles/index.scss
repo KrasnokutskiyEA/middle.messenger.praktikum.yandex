@@ -1,8 +1,11 @@
 // variables
 @import 'variables';
 
-// reset styles & layout
+// reset styles
 @import 'base';
+
+// utility
+@import 'utility';
 
 // fonts
 @import url('./fonts.scss');
@@ -17,7 +20,7 @@
 @import '../../pages/chat/chat';
 
 // modules
-@import '../../modules/credentialsForm/credentialsForm';
+@import '../../modules/form/form';
 
 // components
 @import '../../components/errorMessage/errorMessage';

@@ -1,3 +1,3 @@
-mixin roundBtn()
-  button(class='round_btn' type='button' style=`${attributes.style}`)
+mixin roundBtn(parameters = { classes: [] })
+  button(class=['round_btn', ...parameters.classes] type='button')
     img(src= arrowLogo)

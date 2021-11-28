@@ -1,5 +1,5 @@
 //- including mixins
-include ../../../src/modules/credentialsForm/credentialsForm.pug
+include ../../../src/modules/form/form.pug
 include ../../../src/templates/centerChildren/centerChildrenMixin.pug
 include ../../../src/components/primaryBtn/primaryBtn.pug
 include ../../../src/components/textField/textField.pug
@@ -7,9 +7,9 @@ include ../../../src/components/textField/textField.pug
 //- template
 +centerChildrenMixin()
   main
-    +credentialsForm()
-      div(class='credentials_title' style='margin-bottom:40px;')= parameters.title
+    +form()
+      div(class='form_title mb-4')= parameters.title
       each item in textFieldParameters
         +textField(item)
-      +primaryBtn(primaryBtnParameters)(style='margin-top:60px;')
-      a(class='credentials_link' href=parameters.linkTo) #{parameters.linkMessage}
+      +primaryBtn(primaryBtnParameters)
+      a(class='form_link' href=parameters.linkTo) #{parameters.linkMessage}
