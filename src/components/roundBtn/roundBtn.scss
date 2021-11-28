@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 .round_btn {
   display: flex;
   flex-direction: column;
@@ -8,5 +10,5 @@
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  background-color: #FFCC00;
+  background-color: map.get($colors, 'yellow');
 }

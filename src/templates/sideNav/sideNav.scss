@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 .sidenav_wrapper {
   position: absolute;
   width: 60px;
@@ -6,5 +8,5 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #EFEFEF;
+  background-color: map.get($colors, 'lightgray');
 }
