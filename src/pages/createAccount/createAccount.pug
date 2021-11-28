@@ -11,5 +11,5 @@ include ../../../src/components/textField/textField.pug
       div(class='credentials_title' style='margin-bottom:40px;')= parameters.title
       each item in textFieldParameters
         +textField(item)
-      +primaryBtn('Sign Up')(style='margin-top:60px;')
+      +primaryBtn(primaryBtnParameters)(style='margin-top:60px;')
       a(class='credentials_link' href=parameters.linkTo) #{parameters.linkMessage}

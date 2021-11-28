@@ -27,9 +27,14 @@ const ctx = {
       placeholder: 'Password',
       required: 'required'
     }
-  ]
+  ],
+  primaryBtnParameters: {
+    text: 'Sign In',
+    type: 'submit'
+  }
 }
 
 // 2 - generate markup
-document.body.innerHTML = ''
-document.body.insertAdjacentHTML('afterbegin', compileTemplate(ctx));
+const app = document.getElementById('app')
+app.innerHTML = ''
+app.insertAdjacentHTML('afterbegin', compileTemplate(ctx));

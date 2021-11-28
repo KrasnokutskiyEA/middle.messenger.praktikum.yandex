@@ -9,14 +9,13 @@ include ../../../src/components/avatar/avatar.pug
 
 //- template
 +sideNavMixin()
-  form
-    +roundBtn()(style='transform: rotate(180deg);', formaction='/chat.html')
+  +roundBtn()(style='transform: rotate(180deg);')
 +centerChildrenMixin()
   main
     +credentialsForm(parameters)
       +avatar()(style='margin-bottom:40px;')
       each item in textFieldParameters
         +textField(item)
-      +primaryBtn('Submit')(style='margin-top:60px;')
+      +primaryBtn(primaryBtnParameters)(style='margin-top:60px;')
       a(class='credentials_link' href= parameters.linkPasswordTo) #{parameters.linkPasswordLabel}
       a(class='credentials_link' href= parameters.linkLogoutTo) #{parameters.linkLogoutLabel}
