@@ -13,8 +13,8 @@ include ../../../src/components/roundBtn/roundBtn.pug
   }
 
 //- markup
-+centerChildrenMixin(templateStyles)
-  +errorMessage(parameters, componentErrorMessageStyles)
++centerChildrenMixin()
+  +errorMessage(parameters)
   div(style='align-self:flex-end;margin-bottom:30px;display:flex;')
     input(type= 'text', name= 'message', id= 'message', placeholder= 'message', style='margin-right:20px;')
-    +roundBtn(componentRoundBtnStyles)
+    +roundBtn()

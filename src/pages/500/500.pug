@@ -12,7 +12,7 @@ include ../../../src/templates/centerChildren/centerChildrenMixin.pug
   }
 
 //- markup
-+centerChildrenMixin(templateStyles)
-  div(class=`${pageStyles.server_error_logo_wrapper}`)
-    img(src= serverErrorLogo class=`${pageStyles.server_error_logo}`)
-  +errorMessage(parameters, componentErrorMessageStyles)
++centerChildrenMixin()
+  div(class='server_error_logo_wrapper')
+    img(src= serverErrorLogo class='server_error_logo')
+  +errorMessage(parameters)

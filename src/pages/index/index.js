@@ -1,10 +1,10 @@
 import compileTemplate from './index.pug';
-import '../../assets/styles/global.scss';
-import * as classes from  './index.module.scss';
+
+// styles
+import '../../assets/styles/index.scss';
 
 // 1 - generate context
 const ctx = { 
-  classes,
   pages: {
     404: '/404.html',
     500: '/500.html',
