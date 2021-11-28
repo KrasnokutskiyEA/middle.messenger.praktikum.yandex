@@ -1,5 +1,5 @@
 import compileTemplate from './404.pug';
-import pageNotFoundLogo from '../../assets/images/ghost.svg'
+import pageNotFoundLogo from '../../assets/images/ghost.svg';
 
 // styles
 import '../../assets/styles/index.scss';
@@ -16,6 +16,6 @@ const ctx = {
 }
 
 // 2 - generate markup
-const app = document.getElementById('app')
-app.innerHTML = ''
+const app: HTMLElement = document.getElementById('app')!;
+app.innerHTML = '';
 app.insertAdjacentHTML('afterbegin', compileTemplate(ctx));
