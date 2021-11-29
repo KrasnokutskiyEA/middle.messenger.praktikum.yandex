@@ -1,6 +1,6 @@
 @use 'sass:map';
 
-.primary_btn {
+.primary-btn {
   display: inline-block;
   text-align: center;
   align-items: center;
@@ -12,7 +12,8 @@
   text-decoration: none;
   border: none;
   cursor: pointer;
-  .primary_btn_title {
+
+  .primary-btn-title {
     font-size: 1.3em;
     line-height: 20px;
   }

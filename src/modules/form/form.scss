@@ -10,10 +10,12 @@
   align-items: center;
   padding-top: 60px;
   padding-bottom: 30px;
-  .form_title {
+
+  .form-title {
     font-size: 2em;
   }
-  .form_link {
+
+  .form-link {
     font-size: 1em;
     color: map.get($colors, 'gray');
     margin-top: 20px;
