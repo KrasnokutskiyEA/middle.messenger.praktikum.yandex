@@ -1,2 +1,2 @@
-declare module '*.svg';
-declare module '*.pug';
+declare module '*.svg'
+declare module '*.pug'

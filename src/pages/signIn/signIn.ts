@@ -1,7 +1,7 @@
-import compileTemplate from './signIn.pug';
+import compileTemplate from './signIn.pug'
 
 // styles
-import '../../assets/styles/index.scss';
+import '../../assets/styles/index.scss'
 
 // 1 - generate context
 const ctx = {
@@ -14,16 +14,16 @@ const ctx = {
     {
       label: 'Username',
       type: 'text',
-      name: 'login', 
-      id: 'login', 
+      name: 'login',
+      id: 'login',
       placeholder: 'Username',
       required: 'required'
     },
     {
       label: 'Password',
       type: 'text',
-      name: 'password', 
-      id: 'password', 
+      name: 'password',
+      id: 'password',
       placeholder: 'Password',
       required: 'required'
     }
@@ -36,6 +36,8 @@ const ctx = {
 }
 
 // 2 - generate markup
-const app = document.getElementById('app')
-app.innerHTML = ''
-app.insertAdjacentHTML('afterbegin', compileTemplate(ctx));
+const app: HTMLElement | null = document.getElementById('app')
+if (app !== null) {
+  app.innerHTML = ''
+  app.insertAdjacentHTML('afterbegin', compileTemplate(ctx))
+}
