@@ -1,6 +1,15 @@
+import { v4 as uuidv4 } from 'uuid'
 import EventBus from './EventBus'
 
-export default class Block {
+/* props schema */
+export interface IBloc {
+  withInternalId?: boolean
+  events?: {[key: string]: any}
+  [index: string]: any
+}
+
+export class Block {
+  /* class properties */
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -8,52 +17,52 @@ export default class Block {
     FLOW_RENDER: 'flow:render'
   }
 
-  _element = null
-  _meta = null
+  private _element!: HTMLElement
+  readonly _meta: { tagName: string, props: IBloc }
+  readonly _id: string
+  readonly props: IBloc
+  readonly eventBus: () => EventBus
 
-  constructor (tagName = 'div', props = {}) {
+  /* constructor */
+  constructor (tagName = 'div', props: IBloc) {
     const eventBus = new EventBus()
-
-    this._meta = {
-      tagName,
-      props
-    }
-
-    this.props = this._makePropsProxy(props)
-
+    this._meta = { tagName, props }
+    this._id = props.withInternalId === true ? uuidv4() : ''
+    this.props = this._makePropsProxy({ ...props, _id: this._id })
     this.eventBus = () => eventBus
-
     this._registerEvents(eventBus)
     eventBus.emit(Block.EVENTS.INIT)
   }
 
-  _registerEvents (eventBus: any): any {
-    eventBus.on(Block.EVENTS.INIT, this.init.bind(this))
+  /* getters */
+  get element (): HTMLElement | undefined {
+    return this._element
+  }
+
+  /* private methods */
+  private _registerEvents (eventBus: EventBus): void {
+    eventBus.on(Block.EVENTS.INIT, this._init.bind(this))
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this))
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this))
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this))
   }
 
-  _createResources (): any {
+  private _createResources (): void {
     const { tagName } = this._meta
     this._element = this._createDocumentElement(tagName)
   }
 
-  init (): any {
+  private _init (): void {
     this._createResources()
     this.eventBus().emit(Block.EVENTS.FLOW_CDM)
   }
 
-  _componentDidMount (): any {
-    this.componentDidMount();
+  private _componentDidMount (): void {
+    this.componentDidMount()
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
   }
 
-  componentDidMount (oldProps): any {
-
-  }
-
-  _componentDidUpdate (oldProps, newProps): any {
+  private _componentDidUpdate (oldProps: IBloc, newProps: IBloc): void {
     const response = this.componentDidUpdate(oldProps, newProps)
     if (!response) {
       return
@@ -61,68 +70,96 @@ export default class Block {
     this._render()
   }
 
-  componentDidUpdate (oldProps, newProps): any {
-    return true
-  }
+  private _render (): void {
+    const block = this.render()
 
-  setProps = (nextProps: any): any => {
-    if (!nextProps) {
-      return
+    this._removeEvents() // remove old event handlers
+
+    if (this._element !== undefined) {
+      this._element.innerHTML = block
     }
 
-    Object.assign(this.props, nextProps)
+    this._addEvents() // add new event handlers
   }
 
-  get element (): any {
-    return this._element
+  private _addEvents (): void {
+    const { events = {} } = this.props
+
+    Object.entries(events).forEach(([eventName, evt]) => {
+      this._element?.addEventListener(eventName, evt)
+    })
   }
 
-  _render (): any {
-    const block = this.render()
-    console.log('_render method block=', block, 'this._element=', this._element)
-    this._element.innerHTML = block
+  private _removeEvents (): void {
+    const { events = {} } = this.props
+
+    Object.entries(events).forEach(([eventName, evt]) => {
+      this._element?.removeEventListener(eventName, evt)
+    })
   }
 
-  render (): any {}
-
-  getContent (): any {
-    return this.element
-  }
-
-  _makePropsProxy (props): any {
-    // Можно и так передать this
-    // Такой способ больше не применяется с приходом ES6+
-    const self = this
-
+  private _makePropsProxy (props: IBloc): IBloc {
     return new Proxy(props, {
-      get (target, prop) {
+      get (target, prop: string) {
+        if (prop.indexOf('_') === 0) {
+          throw new Error('Нет доступа')
+        }
+
         const value = target[prop]
         return typeof value === 'function' ? value.bind(target) : value
       },
-      set (target, prop, value) {
-        target[prop] = value
 
-        // Запускаем обновление компоненты
-        // Плохой cloneDeep, в след итерации нужно заставлять добавлять cloneDeep им самим
-        self.eventBus().emit(Block.EVENTS.FLOW_CDU)
+      set: (target, prop: string, value) => {
+        if (prop.indexOf('_') === 0) {
+          throw new Error('Нет доступа')
+        }
+
+        // 1 - set props
+        target[prop] = value
         return true
       },
+
       deleteProperty () {
         throw new Error('Нет доступа')
       }
     })
   }
 
-  _createDocumentElement (tagName): any {
-    // Можно сделать метод, который через фрагменты в цикле создает сразу несколько блоков
-    return document.createElement(tagName)
+  private _createDocumentElement (tagName: string): HTMLElement {
+    const element = document.createElement(tagName)
+    if (this.props.withInternalId ?? false) {
+      element.setAttribute('data-id', this._id)
+    }
+    return element
   }
 
-  show (): any {
+  /* public methods */
+  public render (): void {}
+
+  public componentDidMount (): void {}
+
+  public getContent (): HTMLElement {
+    return this.element
+  }
+
+  public componentDidUpdate (oldProps: IBloc, newProps: IBloc): boolean {
+    return true
+  }
+
+  public setProps = (nextProps: IBloc): void => {
+    if (!nextProps) {
+      return
+    }
+
+    Object.assign(this.props, nextProps)
+    this.eventBus().emit(Block.EVENTS.FLOW_CDU) // emit CDU
+  }
+
+  public show (): void {
     this.getContent().style.display = 'block'
   }
 
-  hide (): any {
+  public hide (): void {
     this.getContent().style.display = 'none'
   }
 }

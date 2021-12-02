@@ -1,31 +1,18 @@
-import Block from '../../classes/Block'
+import { Block, IBloc } from '../../classes/Block'
 import compileTemplate from './primaryBtn2.pug'
 
-interface IBtn {
-  type: string
-  text: string
-  classes: string[]
-}
-
 class Button extends Block {
-  // properties
-  // type = ''
-  // text = ''
-  // classes = ['']
-
-  // constructor
-  constructor (props: IBtn) {
-    // this.type = props.type
-    // this.text = props.text
-    // this.classes = props.classes
-    super ('div', {
+  constructor (props: IBloc) {
+    super('div', {
       type: props.type,
       text: props.text,
-      classes: props.classes
+      classes: props.classes,
+      withInternalId: props.withInternalId,
+      events: props.events
     })
   }
 
-  render (): any {
+  render (): void {
     return compileTemplate(this.props)
   }
 }

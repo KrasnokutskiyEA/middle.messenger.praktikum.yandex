@@ -1,20 +1,22 @@
+import { IBloc } from './Block'
+
 export default class EventBus {
-  listeners: {[index: string]: Array<() => void>} = {}
+  readonly listeners: Record<string, Function[]>
 
   constructor () {
     this.listeners = {}
   }
 
-  on (event: string, callback: any): any {
-    if (!this.listeners[event]) {
+  on (event: string, callback: (oldProps: IBloc, newProps: IBloc) => void): void {
+    if (this.listeners[event] === undefined) {
       this.listeners[event] = []
     }
 
     this.listeners[event].push(callback)
   }
 
-  off (event: string, callback: any): any {
-    if (!this.listeners[event]) {
+  off (event: string, callback: (oldProps: IBloc, newProps: IBloc) => void): void {
+    if (this.listeners[event] === undefined) {
       throw new Error(`Нет события: ${event}`)
     }
 
@@ -23,8 +25,8 @@ export default class EventBus {
     )
   }
 
-  emit (event: string, ...args: any): any {
-    if (!this.listeners[event]) {
+  emit (event: string, ...args: unknown[]): void {
+    if (this.listeners[event] === undefined) {
       throw new Error(`Нет события: ${event}`)
     }
 

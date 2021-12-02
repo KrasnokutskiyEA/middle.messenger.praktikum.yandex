@@ -24,23 +24,32 @@ import '../../assets/styles/index.scss'
 
 import Button from '../../components/primaryBtn/primaryBtn2'
 
-const ctx = {
+// 1 - создаем экземпляр кнопки
+const btn = new Button({
   type: 'button',
-  text: 'my text1!!!',
-  classes: ['mt-6']
-}
+  text: 'old button',
+  classes: ['mt-6'],
+  withInternalId: true,
+  events: {
+    click: (event: any) => console.log('OLD EVENT=', event)
+  }
+})
 
-const btn = new Button(ctx)
-
+// 2 - помещаем кнопку в DOM
 const app: HTMLElement | null = document.getElementById('app')
 if (app !== null) {
   app.innerHTML = ''
   app.appendChild(btn.getContent())
 }
 
+// 3 - обновим пропсы
 setTimeout(() => {
-  console.log('------5 secs passed')
+  console.log('------2 sec passed')
   btn.setProps({
-    text: '777'
+    text: 'new button',
+    classes: ['mt-5'],
+    events: {
+      click: (event: any) => console.log('NEW EVENT=', event)
+    }
   })
-}, 5000)
+}, 2000)
