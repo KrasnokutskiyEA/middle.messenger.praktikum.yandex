@@ -73,8 +73,6 @@ export class Block {
   private _render (): void {
     const block = this.render()
 
-    this._removeEvents() // remove old event handlers
-
     if (this._element !== undefined) {
       this._element.innerHTML = block
     }
@@ -114,7 +112,6 @@ export class Block {
           throw new Error('Нет доступа')
         }
 
-        // 1 - set props
         target[prop] = value
         return true
       },
@@ -151,8 +148,11 @@ export class Block {
       return
     }
 
+    // 1 - remove old event handlers
+    this._removeEvents()
+
     Object.assign(this.props, nextProps)
-    this.eventBus().emit(Block.EVENTS.FLOW_CDU) // emit CDU
+    this.eventBus().emit(Block.EVENTS.FLOW_CDU, this._meta.props, nextProps) // emit CDU
   }
 
   public show (): void {
