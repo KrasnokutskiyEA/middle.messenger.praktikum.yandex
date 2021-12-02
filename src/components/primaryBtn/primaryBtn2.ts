@@ -12,8 +12,13 @@ class Button extends Block {
     })
   }
 
-  render (): void {
+  render (): HTMLElement {
     return compileTemplate(this.props)
+  }
+
+  componentDidUpdate (prev: IBloc, next: IBloc): boolean {
+    console.log('componentDidUpdate prev=', prev, 'next=', next)
+    return true
   }
 }
 
