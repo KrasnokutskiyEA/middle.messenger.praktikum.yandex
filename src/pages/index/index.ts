@@ -24,6 +24,7 @@ import '../../assets/styles/index.scss'
 
 import Button from '../../components/primaryBtn/primaryBtn2'
 import CenterChildren from '../../templates/centerChildren/centerChildren'
+
 const btn = new Button({
   type: 'button',
   text: 'old button',
@@ -52,11 +53,8 @@ if (app !== null) {
 
 setTimeout(() => {
   console.log('------2 sec passed')
-  btn.setProps({
+  center.setProps({
     text: 'new button',
-    classes: ['mt-5'],
-    events: {
-      click: (event: any) => console.log('NEW EVENT=', event)
-    }
+    classes: ['mt-5']
   })
 }, 2000)
