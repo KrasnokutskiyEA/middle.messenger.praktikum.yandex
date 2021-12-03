@@ -22,24 +22,11 @@ import '../../assets/styles/index.scss'
 // -   app.insertAdjacentHTML('afterbegin', compileTemplate(ctx))
 // - }
 
-import Button from '../../components/primaryBtn/primaryBtn2'
 import CenterChildren from '../../templates/centerChildren/centerChildren'
-
-const btn = new Button({
-  type: 'button',
-  text: 'old button',
-  classes: ['mt-6'],
-  withInternalId: true,
-  events: {
-    click: (event: any) => console.log('OLD EVENT=', event)
-  }
-})
 
 // 1 - создаем экземпляр центровщика
 const center = new CenterChildren({
-  withInternalId: true,
-  type: 'center',
-  button: btn
+  withInternalId: true
 })
 
 // 2 - помещаем центровщик в DOM
@@ -50,11 +37,9 @@ if (app !== null) {
 }
 
 // 3 - обновим пропсы кнопки
-
 setTimeout(() => {
   console.log('------2 sec passed')
   center.setProps({
-    text: 'new button',
-    classes: ['mt-5']
+    text: 'NEW'
   })
 }, 2000)

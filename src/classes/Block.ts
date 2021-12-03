@@ -6,6 +6,9 @@ export interface IBloc {
   withInternalId?: boolean
   events?: {[key: string]: any}
   children?: {[key: string]: any}
+  classes?: string[]
+  text?: string
+  type?: string
   [index: string]: any
 }
 
