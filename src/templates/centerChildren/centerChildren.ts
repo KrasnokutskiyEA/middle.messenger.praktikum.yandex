@@ -1,14 +1,12 @@
 import { Block, IBloc } from '../../classes/Block'
-import compileTemplate from './primaryBtn2.pug'
+import compileTemplate from './centerChildren.pug'
 
-class Button extends Block {
+class CenterChildren extends Block {
   constructor (props: IBloc) {
     super('div', {
       type: props.type,
-      text: props.text,
-      classes: props.classes,
       withInternalId: props.withInternalId,
-      events: props.events
+      button: props.button
     })
   }
 
@@ -18,4 +16,4 @@ class Button extends Block {
   }
 }
 
-export default Button
+export default CenterChildren
