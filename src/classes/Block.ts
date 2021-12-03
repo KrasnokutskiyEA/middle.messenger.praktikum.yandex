@@ -31,7 +31,7 @@ export class Block {
     this._meta = { tagName, propsAndChildren }
     this._id = propsAndChildren.withInternalId === true ? uuidv4() : ''
     this.props = this._makePropsProxy({ ...propsAndChildren, _id: this._id })
-    const { children, props } = this._getChildren(propsAndChildren)
+    const { children } = this._getChildren(propsAndChildren)
     this.children = children ?? {}
     this.eventBus = () => eventBus
     this._registerEvents(eventBus)
@@ -95,7 +95,6 @@ export class Block {
 
   private _render (): void {
     const block = this.render()
-    console.log('---block=', block, typeof block)
 
     if (block !== undefined) {
       this._element.innerHTML = ''
@@ -124,19 +123,11 @@ export class Block {
   private _makePropsProxy (props: IBloc): IBloc {
     return new Proxy(props, {
       get (target, prop: string) {
-        // if (prop.indexOf('_') === 0) {
-        //   throw new Error('Нет доступа')
-        // }
-
         const value = target[prop]
         return typeof value === 'function' ? value.bind(target) : value
       },
 
       set: (target, prop: string, value) => {
-        // if (prop.indexOf('_') === 0) {
-        //   throw new Error('Нет доступа')
-        // }
-
         target[prop] = value
         return true
       },
@@ -199,17 +190,12 @@ export class Block {
       propsAndStubs[key] = `<div data-id="${child._id}"></div>`
     })
 
-    console.log('2--propAndStubs=', propsAndStubs, 'compileTemplate=', compileTemplate)
-
     const fragment = this._createDocumentElement('template')
-
-    console.log('3--compileTemplate=', compileTemplate(propsAndStubs))
 
     fragment.innerHTML = compileTemplate(propsAndStubs)
 
     Object.values(this.children).forEach(child => {
       const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
-      console.log('4--child.getContent()=', child.getContent())
       stub.replaceWith(child.getContent())
     })
 
