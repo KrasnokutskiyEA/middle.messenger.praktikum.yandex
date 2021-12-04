@@ -54,6 +54,9 @@ export class Block {
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof Block) {
         children[key] = value
+      } else if (key === 'childrenList') {
+        children[key] = []
+        value.forEach((v: Block) => (children[key].push(v)))
       } else {
         props[key] = value
       }
@@ -83,7 +86,13 @@ export class Block {
     this.componentDidMount()
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
 
-    Object.values(this.children).forEach(child => {
+    const { childrenList = [], ...otherChildren } = this.children
+
+    Object.values(otherChildren).forEach(child => {
+      child.dispatchComponentDidMount()
+    })
+
+    childrenList.forEach(child => {
       child.dispatchComponentDidMount()
     })
   }
@@ -102,7 +111,6 @@ export class Block {
     if (block !== undefined) {
       this._element.innerHTML = ''
       this._element.appendChild(block)
-
       this._addEvents() // add new event handlers
     }
   }
@@ -188,16 +196,37 @@ export class Block {
 
   public compile (compileTemplate: any, props: IBloc): HTMLElement {
     const propsAndStubs = { ...props }
+    const { childrenList = [], ...otherChildren } = this.children
 
-    Object.entries(this.children).forEach(([key, child]) => {
+    // ordinary children
+    Object.entries(otherChildren).forEach(([key, child]) => {
       propsAndStubs[key] = `<div data-id="${child._id}"></div>`
     })
 
-    const fragment = this._createDocumentElement('template')
+    // childrenList
+    let res = ''
+    let buffer = []
+    if (childrenList.length > 0) {
+      childrenList.forEach(child => {
+        res += `<div data-id="${child._id}"></div>`
+      })
 
+      buffer = propsAndStubs.childrenList
+      propsAndStubs.childrenList = res
+    }
+
+    // compile template
+    const fragment = this._createDocumentElement('template')
     fragment.innerHTML = compileTemplate(propsAndStubs)
 
-    Object.values(this.children).forEach(child => {
+    // replace stubs - ordinary children
+    Object.values(otherChildren).forEach(child => {
+      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
+      stub.replaceWith(child.getContent())
+    })
+
+    // replace stubs - childrenlist
+    buffer.forEach(child => {
       const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
       stub.replaceWith(child.getContent())
     })
