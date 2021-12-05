@@ -110,8 +110,15 @@ export class Block {
     const block = this.render()
 
     if (block !== undefined) {
-      this._element.innerHTML = ''
-      this._element.appendChild(block)
+      const tgt = document.getElementById(this._element.getAttribute('id'))
+
+      if (tgt === null) {
+        this._element.innerHTML = ''
+        this._element.appendChild(block)
+      } else {
+        block.firstElementChild.setAttribute('id', tgt.id)
+        tgt.parentNode?.replaceChild(block, tgt)
+      }
       this._addEvents() // add new event handlers
     }
   }
@@ -120,7 +127,10 @@ export class Block {
     const { events = {} } = this.props
 
     Object.entries(events).forEach(([eventName, evt]) => {
-      this._element?.addEventListener(eventName, evt)
+      const id = this._element.getAttribute('id')
+      const tgt = document.querySelector(`[id="${id}"]`)
+      const target = tgt === null ? this._element.firstElementChild : tgt
+      target?.addEventListener(eventName, evt)
     })
   }
 
@@ -128,7 +138,7 @@ export class Block {
     const { events = {} } = this.props
 
     Object.entries(events).forEach(([eventName, evt]) => {
-      this._element?.removeEventListener(eventName, evt)
+      this._element?.firstElementChild?.removeEventListener(eventName, evt)
     })
   }
 
@@ -153,7 +163,7 @@ export class Block {
   private _createDocumentElement (tagName: string): HTMLElement {
     const element = document.createElement(tagName)
     if (this.props.withInternalId ?? false) {
-      element.setAttribute('data-id', this._id)
+      element.setAttribute('id', this._id)
     }
     return element
   }
@@ -202,7 +212,7 @@ export class Block {
 
     // ordinary children
     Object.entries(otherChildren).forEach(([key, child]) => {
-      propsAndStubs[key] = `<div data-id="${child._id}"></div>`
+      propsAndStubs[key] = `<div id="${child._id}"></div>`
     })
 
     // childrenList
@@ -210,7 +220,7 @@ export class Block {
     let buffer = []
     if (childrenList.length > 0) {
       childrenList.forEach(child => {
-        res += `<div data-id="${child._id}"></div>`
+        res += `<div id="${child._id}"></div>`
       })
 
       buffer = propsAndStubs.childrenList
@@ -223,13 +233,15 @@ export class Block {
 
     // replace stubs - ordinary children
     Object.values(otherChildren).forEach(child => {
-      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
-      stub.replaceWith(child.getContent())
+      const stub = fragment.content.querySelector(`[id="${child._id}"]`)
+      const el = child.getContent().firstElementChild
+      el.setAttribute('id', child._id)
+      stub.replaceWith(el)
     })
 
     // replace stubs - childrenlist
     buffer.forEach(child => {
-      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
+      const stub = fragment.content.querySelector(`[id="${child._id}"]`)
       stub.replaceWith(child.getContent())
     })
 

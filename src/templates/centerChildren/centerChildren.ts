@@ -16,8 +16,8 @@ class CenterChildren extends Block {
             click: (event: any) => console.log('OLD10 EVENT=', event)
           }
         })
-      },
-
+      }
+      /*
       ...{
         childrenList: [
           new Button({
@@ -49,22 +49,21 @@ class CenterChildren extends Block {
           })
         ]
       }
+      */
     })
   }
 
   init (): void {
-    /*
     setTimeout(() => {
-      console.log('------2 sec passed')
+      console.log('------5 sec passed')
       this.children.button.setProps({
         text: 'NEW',
         events: {
           click: (event: any) => console.log('NEW EVENT=', event)
         }
       })
-      this.children.childrenList.forEach(el => el.hide())
-    }, 2000)
-    */
+      // this.children.childrenList.forEach(el => el.hide())
+    }, 5000)
   }
 
   componentDidMount (): void {
