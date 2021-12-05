@@ -79,6 +79,7 @@ export class Block {
 
   private _init (): void {
     this._createResources()
+    this.init()
     this.eventBus().emit(Block.EVENTS.FLOW_CDM)
   }
 
@@ -160,6 +161,8 @@ export class Block {
   /* public methods */
   public render (): void {}
 
+  public init (): void {}
+
   public componentDidMount (): void {}
 
   public dispatchComponentDidMount (): void {
@@ -181,7 +184,6 @@ export class Block {
 
     // 1 - remove old event handlers
     this._removeEvents()
-
     Object.assign(this.props, nextProps)
     this.eventBus().emit(Block.EVENTS.FLOW_CDU, this._meta.props, nextProps) // emit CDU
   }

@@ -35,11 +35,3 @@ if (app !== null) {
   app.innerHTML = ''
   app.appendChild(center.getContent())
 }
-
-// 3 - обновим пропсы кнопки
-setTimeout(() => {
-  console.log('------2 sec passed')
-  center.setProps({
-    text: 'NEW'
-  })
-}, 2000)

@@ -9,7 +9,7 @@ class CenterChildren extends Block {
       ...{
         button: new Button({
           type: 'button',
-          text: 'OLD10',
+          text: 'BTN - 0',
           classes: ['mt-6'],
           withInternalId: true,
           events: {
@@ -17,11 +17,12 @@ class CenterChildren extends Block {
           }
         })
       },
+
       ...{
         childrenList: [
           new Button({
             type: 'button',
-            text: 'OLD1',
+            text: 'BTN - 1',
             classes: ['mt-6'],
             withInternalId: true,
             events: {
@@ -30,7 +31,7 @@ class CenterChildren extends Block {
           }),
           new Button({
             type: 'button',
-            text: 'OLD2',
+            text: 'BTN - 2',
             classes: ['mt-6'],
             withInternalId: true,
             events: {
@@ -39,7 +40,7 @@ class CenterChildren extends Block {
           }),
           new Button({
             type: 'button',
-            text: 'OLD3',
+            text: 'BTN - 3',
             classes: ['mt-6'],
             withInternalId: true,
             events: {
@@ -51,14 +52,26 @@ class CenterChildren extends Block {
     })
   }
 
+  init (): void {
+    /*
+    setTimeout(() => {
+      console.log('------2 sec passed')
+      this.children.button.setProps({
+        text: 'NEW',
+        events: {
+          click: (event: any) => console.log('NEW EVENT=', event)
+        }
+      })
+      this.children.childrenList.forEach(el => el.hide())
+    }, 2000)
+    */
+  }
+
   componentDidMount (): void {
 
   }
 
   componentDidUpdate (oldProps, newProps): boolean {
-    this.children.button.setProps(newProps)
-    this.children.childrenList.setProps(newProps)
-
     return true
   }
 
