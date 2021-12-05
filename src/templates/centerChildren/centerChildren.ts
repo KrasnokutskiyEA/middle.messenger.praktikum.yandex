@@ -55,7 +55,7 @@ class CenterChildren extends Block {
 
   init (): void {
     setTimeout(() => {
-      console.log('------5 sec passed')
+      console.log('------2 sec passed')
       this.children.button.setProps({
         text: 'NEW',
         events: {
@@ -63,7 +63,7 @@ class CenterChildren extends Block {
         }
       })
       // this.children.childrenList.forEach(el => el.hide())
-    }, 5000)
+    }, 2000)
   }
 
   componentDidMount (): void {
