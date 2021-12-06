@@ -51,6 +51,7 @@ export class Block {
     const props: IBloc = {}
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
+      console.log('key=', key, 'value=', value)
       if (value instanceof Block) {
         children[key] = value
       } else if (key === 'childrenList') {
