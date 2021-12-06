@@ -13,11 +13,11 @@ class CenterChildren extends Block {
           classes: ['mt-6'],
           withInternalId: true,
           events: {
-            click: (event: any) => console.log('OLD10 EVENT=', event)
+            click: (event: any) => console.log('OLD 0 EVENT=', event)
           }
         })
-      }
-      /*
+      },
+
       ...{
         childrenList: [
           new Button({
@@ -49,21 +49,25 @@ class CenterChildren extends Block {
           })
         ]
       }
-      */
     })
   }
 
   init (): void {
     setTimeout(() => {
-      console.log('------2 sec passed')
+      console.log('------5 sec passed')
       this.children.button.setProps({
-        text: 'NEW',
+        text: 'NEW 5 SEC',
         events: {
-          click: (event: any) => console.log('NEW EVENT=', event)
+          click: (event: any) => console.log('NEW EVENT 5=', event)
         }
       })
-      // this.children.childrenList.forEach(el => el.hide())
-    }, 2000)
+      // this.children.childrenList.forEach(el => el.setProps({
+      //   text: 'NEW777',
+      //   events: {
+      //     click: (event: any) => console.log('NEW EVENT 777=', event)
+      //   }
+      // }))
+    }, 5000)
   }
 
   componentDidMount (): void {
