@@ -1,13 +1,17 @@
+// import base class
 import { Block, IBloc } from '../../classes/Block'
-import compileTemplate from './primaryBtn2.pug'
 
+// import template
+import template from './primaryBtn.pug'
+
+// component
 class Button extends Block {
   constructor (props: IBloc) {
     super('div', props)
   }
 
   render (): HTMLElement {
-    return this.compile(compileTemplate, this.props)
+    return this.compile(template, this.props)
   }
 }
 

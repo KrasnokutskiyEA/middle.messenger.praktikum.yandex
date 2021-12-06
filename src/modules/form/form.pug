@@ -1,3 +1,5 @@
-mixin form()
-  form(class='form')
-    block
+form(class='form')
+  div(class='form-title mb-4')= title
+  != childrenList
+  != submitBtn
+  a(class='form-link' href=linkTo) #{linkMessage}

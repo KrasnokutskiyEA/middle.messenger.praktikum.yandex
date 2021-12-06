@@ -7,19 +7,17 @@ import CenterContent from '../../templates/centerContent/centerContent'
 import ErrorMesssage from '../../components/errorMessage/errorMessage'
 
 // 1 - generate context
-const ctx = {
-  parameters: {
-    code: '500',
-    message: 'Internal Server Error',
-    linkTo: '/index.html',
-    linkMessage: 'Go Back'
-  },
+const errorMessageProps = {
+  code: '500',
+  message: 'Internal Server Error',
+  linkTo: '/index.html',
+  linkMessage: 'Go Back',
   logo
 }
 
 // 2 - create page structure
 const page = new CenterContent({
-  content: new ErrorMesssage(ctx)
+  content: new ErrorMesssage(errorMessageProps)
 })
 
 // 3 - generate markup

@@ -3,8 +3,8 @@ import EventBus from './EventBus'
 
 /* props schema */
 export interface IBloc {
-  events?: {[key: string]: any}
-  children?: {[key: string]: any}
+  events?: { [key: string]: any }
+  children?: { [key: string]: any }
   classes?: string[]
   text?: string
   type?: string
@@ -24,7 +24,7 @@ export class Block {
   readonly _meta: { tagName: string, propsAndChildren: IBloc }
   readonly _id: string
   readonly props: IBloc
-  readonly children: {[key: string]: any}
+  readonly children: { [key: string]: any }
   readonly eventBus: () => EventBus
 
   /* constructor */
@@ -60,6 +60,8 @@ export class Block {
         props[key] = value
       }
     })
+
+    console.log('----children=', children)
 
     return { children, props }
   }
@@ -166,11 +168,11 @@ export class Block {
   }
 
   /* public methods */
-  public render (): void {}
+  public render (): void { }
 
-  public init (): void {}
+  public init (): void { }
 
-  public componentDidMount (): void {}
+  public componentDidMount (): void { }
 
   public dispatchComponentDidMount (): void {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM)
@@ -229,17 +231,17 @@ export class Block {
     fragment.innerHTML = compileTemplate(propsAndStubs)
 
     // replace stubs - ordinary children
-    Object.values(otherChildren).forEach(child => {
+    Object.values(otherChildren)?.forEach(child => {
       const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
       const el = child.getContent().firstElementChild
       el.setAttribute('data-id', child._id)
-      stub.replaceWith(el)
+      stub?.replaceWith(el)
     })
 
     // replace stubs - childrenlist
-    buffer.forEach(child => {
+    buffer?.forEach(child => {
       const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
-      stub.replaceWith(child.getContent())
+      stub?.replaceWith(child.getContent())
     })
 
     return fragment.content
