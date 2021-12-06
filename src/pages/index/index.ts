@@ -25,9 +25,7 @@ import '../../assets/styles/index.scss'
 import CenterChildren from '../../templates/centerChildren/centerChildren'
 
 // 1 - создаем экземпляр центровщика
-const center = new CenterChildren({
-  withInternalId: true
-})
+const center = new CenterChildren({})
 
 // 2 - помещаем центровщик в DOM
 const app: HTMLElement | null = document.getElementById('app')

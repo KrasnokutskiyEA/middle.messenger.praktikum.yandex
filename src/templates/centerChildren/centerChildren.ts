@@ -11,7 +11,6 @@ class CenterChildren extends Block {
           type: 'button',
           text: 'BTN - 0',
           classes: ['mt-6'],
-          withInternalId: true,
           events: {
             click: (event: any) => console.log('OLD 0 EVENT=', event)
           }
@@ -24,7 +23,6 @@ class CenterChildren extends Block {
             type: 'button',
             text: 'BTN - 1',
             classes: ['mt-6'],
-            withInternalId: true,
             events: {
               click: (event: any) => console.log('OLD1 EVENT=', event)
             }
@@ -33,7 +31,6 @@ class CenterChildren extends Block {
             type: 'button',
             text: 'BTN - 2',
             classes: ['mt-6'],
-            withInternalId: true,
             events: {
               click: (event: any) => console.log('OLD2 EVENT=', event)
             }
@@ -42,7 +39,6 @@ class CenterChildren extends Block {
             type: 'button',
             text: 'BTN - 3',
             classes: ['mt-6'],
-            withInternalId: true,
             events: {
               click: (event: any) => console.log('OLD3 EVENT=', event)
             }

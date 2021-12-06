@@ -3,7 +3,6 @@ import EventBus from './EventBus'
 
 /* props schema */
 export interface IBloc {
-  withInternalId?: boolean
   events?: {[key: string]: any}
   children?: {[key: string]: any}
   classes?: string[]
@@ -32,7 +31,7 @@ export class Block {
   constructor (tagName = 'div', propsAndChildren: IBloc) {
     const eventBus = new EventBus()
     this._meta = { tagName, propsAndChildren }
-    this._id = propsAndChildren.withInternalId === true ? uuidv4() : ''
+    this._id = uuidv4()
     this.props = this._makePropsProxy({ ...propsAndChildren, _id: this._id })
     const { children } = this._getChildren(propsAndChildren)
     this.children = children ?? {}
@@ -162,9 +161,7 @@ export class Block {
 
   private _createDocumentElement (tagName: string): HTMLElement {
     const element = document.createElement(tagName)
-    if (this.props.withInternalId ?? false) {
-      element.setAttribute('data-id', this._id)
-    }
+    element.setAttribute('data-id', this._id)
     return element
   }
 
