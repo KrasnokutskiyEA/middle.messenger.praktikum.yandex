@@ -1,5 +1,7 @@
-mixin errorMessage(parameters)
-  main(class='error-message')
+main(class='error-logo-wrapper')
+  img(src= pageNotFoundLogo class='error-logo')
+
+  div(class='error-message')
     div(class='error-code')= parameters.code
     div(class='error-title')= parameters.message
     a(class='error-link' href=parameters.linkTo) #{parameters.linkMessage}
