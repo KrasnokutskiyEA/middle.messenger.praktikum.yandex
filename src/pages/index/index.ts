@@ -21,17 +21,3 @@ if (app !== null) {
   app.innerHTML = ''
   app.insertAdjacentHTML('afterbegin', compileIndexPageTemplate(ctx))
 }
-
-// !! this is ts import !!
-// import CenterChildren from '../../templates/centerChildren/centerChildren'
-
-// 1 - создаем экземпляр центровщика
-// const center = new CenterChildren({})
-// const indexPage = new IndexPageTemplate()
-
-// 2 - помещаем центровщик в DOM
-// const app: HTMLElement | null = document.getElementById('app')
-// if (app !== null) {
-//   app.innerHTML = ''
-//   app.appendChild(center.getContent())
-// }

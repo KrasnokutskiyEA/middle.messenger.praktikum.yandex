@@ -1,21 +1,21 @@
 //- including mixins
-include ../../../src/modules/form/form.pug
-include ../../../src/templates/sideNav/sideNavMixin.pug
-include ../../../src/templates/centerChildren/centerChildrenMixin.pug
-include ../../../src/components/primaryBtn/primaryBtn.pug
-include ../../../src/components/roundBtn/roundBtn.pug
-include ../../../src/components/textField/textField.pug
-include ../../../src/components/avatar/avatar.pug
+//- include ../../../src/modules/form/form.pug
+//- include ../../../src/templates/sideNav/sideNavMixin.pug
+//- include ../../../src/templates/centerChildren/centerChildrenMixin.pug
+//- include ../../../src/components/primaryBtn/primaryBtn.pug
+//- include ../../../src/components/roundBtn/roundBtn.pug
+//- include ../../../src/components/textField/textField.pug
+//- include ../../../src/components/avatar/avatar.pug
 
 //- template
-+sideNavMixin()
-  +roundBtn(roundBtnParameters)
-+centerChildrenMixin()
-  main
-    +form()
-      +avatar(avatarParameters)
-      each item in textFieldParameters
-        +textField(item)
-      +primaryBtn(primaryBtnParameters)
-      a(class='form-link' href= parameters.linkPasswordTo) #{parameters.linkPasswordLabel}
-      a(class='form-link' href= parameters.linkLogoutTo) #{parameters.linkLogoutLabel}
+//- +sideNavMixin()
+//-   +roundBtn(roundBtnParameters)
+//- +centerChildrenMixin()
+//-   main
+//-     +form()
+//-       +avatar(avatarParameters)
+//-       each item in textFieldParameters
+//-         +textField(item)
+//-       +primaryBtn(primaryBtnParameters)
+//-       a(class='form-link' href= parameters.linkPasswordTo) #{parameters.linkPasswordLabel}
+//-       a(class='form-link' href= parameters.linkLogoutTo) #{parameters.linkLogoutLabel}

@@ -1,8 +1,8 @@
+// import base class
 import { Block, IBloc } from '../../classes/Block'
 
-// template imports
+// import template
 import errorMessageCompileTemplate from './errorMessage.pug'
-// import Button from '../../components/primaryBtn/primaryBtn2'
 
 // component
 class ErrorMessage extends Block {
