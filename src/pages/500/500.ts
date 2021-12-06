@@ -1,8 +1,10 @@
-import compileTemplate from './500.pug'
-import serverErrorLogo from '../../assets/images/fire.svg'
-
-// styles
+// asssets import
 import '../../assets/styles/index.scss'
+import logo from '../../assets/images/fire.svg'
+
+// components import (.ts)
+import CenterContent from '../../templates/centerContent/centerContent'
+import ErrorMesssage from '../../components/errorMessage/errorMessage'
 
 // 1 - generate context
 const ctx = {
@@ -12,12 +14,17 @@ const ctx = {
     linkTo: '/index.html',
     linkMessage: 'Go Back'
   },
-  serverErrorLogo
+  logo
 }
 
-// 2 - generate markup
+// 2 - create page structure
+const page = new CenterContent({
+  content: new ErrorMesssage(ctx)
+})
+
+// 3 - generate markup
 const app: HTMLElement | null = document.getElementById('app')
 if (app !== null) {
   app.innerHTML = ''
-  app.insertAdjacentHTML('afterbegin', compileTemplate(ctx))
+  app.appendChild(page.getContent())
 }

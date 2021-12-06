@@ -2,7 +2,7 @@
 import { Block, IBloc } from '../../classes/Block'
 
 // import template
-import errorMessageCompileTemplate from './errorMessage.pug'
+import template from './errorMessage.pug'
 
 // component
 class ErrorMessage extends Block {
@@ -11,7 +11,7 @@ class ErrorMessage extends Block {
   }
 
   render (): HTMLElement {
-    return this.compile(errorMessageCompileTemplate, this.props)
+    return this.compile(template, this.props)
   }
 }
 

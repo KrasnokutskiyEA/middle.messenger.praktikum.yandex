@@ -2,7 +2,7 @@
 import '../../assets/styles/index.scss'
 import logo from '../../assets/images/ghost.svg'
 
-// components import
+// components import (.ts)
 import CenterContent from '../../templates/centerContent/centerContent'
 import ErrorMesssage from '../../components/errorMessage/errorMessage'
 
