@@ -1,6 +1,9 @@
 // asssets import
 import '../../assets/styles/index.scss'
 
+// helpers import
+import validate from '../../helpers/validate'
+
 // components import (.ts)
 import CenterContent from '../../templates/centerContent/centerContent'
 import Form from '../../modules/form/form'
@@ -21,7 +24,13 @@ const textFieldProps = [
     name: 'email',
     id: 'email',
     placeholder: 'Email',
-    required: 'required'
+    required: 'required',
+    pattern: '',
+    errorText: 'latin, may include special chars, @ required',
+    events: {
+      focus: (event: any): void => validate(event),
+      blur: (event: any): void => validate(event)
+    }
   },
   {
     label: 'Username',
@@ -29,7 +38,15 @@ const textFieldProps = [
     name: 'login',
     id: 'login',
     placeholder: 'Username',
-    required: 'required'
+    required: 'required',
+    pattern: '',
+    maxlength: 20,
+    minlength: 3,
+    errorText: '3-20 latin symbols, no spaces, no special chars',
+    events: {
+      focus: (event: any): void => validate(event),
+      blur: (event: any): void => validate(event)
+    }
   },
   {
     label: 'First Name',
@@ -37,7 +54,13 @@ const textFieldProps = [
     name: 'first_name',
     id: 'first_name',
     placeholder: 'First Name',
-    required: 'required'
+    required: 'required',
+    pattern: '',
+    errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars',
+    events: {
+      focus: (event: any): void => validate(event),
+      blur: (event: any): void => validate(event)
+    }
   },
   {
     label: 'Last Name',
@@ -45,7 +68,13 @@ const textFieldProps = [
     name: 'second_name',
     id: 'second_name',
     placeholder: 'Last Name',
-    required: 'required'
+    required: 'required',
+    pattern: '',
+    errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars',
+    events: {
+      focus: (event: any): void => validate(event),
+      blur: (event: any): void => validate(event)
+    }
   },
   {
     label: 'Phone',
@@ -53,7 +82,15 @@ const textFieldProps = [
     name: 'phone',
     id: 'phone',
     placeholder: 'Phone',
-    required: 'required'
+    required: 'required',
+    maxlength: 15,
+    minlength: 10,
+    pattern: '',
+    errorText: '10-15 numbers, may start with +',
+    events: {
+      focus: (event: any): void => validate(event),
+      blur: (event: any): void => validate(event)
+    }
   },
   {
     label: 'Password',
@@ -61,7 +98,15 @@ const textFieldProps = [
     name: 'password',
     id: 'password',
     placeholder: 'Password',
-    required: 'required'
+    required: 'required',
+    pattern: '',
+    maxlength: 40,
+    minlength: 8,
+    errorText: '8-40 symbols, at least one capital letter and number',
+    events: {
+      focus: (event: any): void => validate(event),
+      blur: (event: any): void => validate(event)
+    }
   },
   {
     label: 'Confirm password',
@@ -69,7 +114,15 @@ const textFieldProps = [
     name: 'confirm_password',
     id: 'confirm_password',
     placeholder: 'Confirm password',
-    required: 'required'
+    required: 'required',
+    pattern: '',
+    maxlength: 40,
+    minlength: 8,
+    errorText: '8-40 symbols, at least one capital letter and number',
+    events: {
+      focus: (event: any): void => validate(event),
+      blur: (event: any): void => validate(event)
+    }
   }
 ]
 
