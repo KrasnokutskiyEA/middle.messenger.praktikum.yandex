@@ -9,6 +9,7 @@ import Form from '../../modules/form/form'
 import TextField from '../../components/textField/textField'
 import PriamryBtn from '../../components/primaryBtn/primaryBtn'
 import RoundBtn from '../../components/roundBtn/roundBtn'
+import Avatar from '../../components/avatar/avatar'
 
 const textFieldProps = [
   {
@@ -62,12 +63,10 @@ const textFieldProps = [
 ]
 
 const formProps = {
-  title: 'Create Account',
   primaryLinkTo: '/signIn.html',
   primaryLinkLabel: 'Change password',
   secondaryLinkTo: '/signIn.html',
-  secondaryLinkLabel: 'Log out',
-  avatarLogo
+  secondaryLinkLabel: 'Log out'
 }
 
 const primaryBtnProps = {
@@ -81,15 +80,20 @@ const roundBtnProps = {
   logo: arrowLogo
 }
 
+const avatarProps = {
+  classes: ['mb-4'],
+  logo: avatarLogo
+}
+
 // 2 - create page structure
 const page = new SideNav({
   ctrlElement: new RoundBtn(roundBtnProps),
-  content: null
-  // content: new Form({
-  //   ...formProps,
-  //   childrenList: textFieldProps.map(p => new TextField(p)),
-  //   submitBtn: new PriamryBtn(primaryBtnProps)
-  // })
+  content: new Form({
+    ...formProps,
+    avatar: new Avatar(avatarProps),
+    childrenList: textFieldProps.map(p => new TextField(p)),
+    submitBtn: new PriamryBtn(primaryBtnProps)
+  })
 })
 
 // 3 - generate markup

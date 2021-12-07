@@ -1,22 +1,18 @@
 form(class='form')
   //- form avatar
-  if avatarLogo
-    div(class=['avatar-wrapper', ...avatarClasses])
-      img(src= avatarLogo class='avatar-logo')
-      div(class='avatar-overlay')
-        div(id='avatar' class='avatar-text') Change
+  != avatar
 
   //- form title
   if title
     div(class='form-title mb-4')= title
 
-  //- input fields list
+  //- form input fields list
   != childrenList
 
   //- form submit element
   != submitBtn
 
-  //- additional links
+  //- form additional links
   if primaryLinkTo
     a(class='form-link' href=primaryLinkTo) #{primaryLinkLabel}
 
