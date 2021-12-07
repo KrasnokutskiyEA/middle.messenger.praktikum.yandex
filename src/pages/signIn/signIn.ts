@@ -1,6 +1,8 @@
 // asssets import
 import '../../assets/styles/index.scss'
 
+import validate from '../../helpers/validate'
+
 // components import (.ts)
 import CenterContent from '../../templates/centerContent/centerContent'
 import Form from '../../modules/form/form'
@@ -21,22 +23,36 @@ const textFieldProps = [
     name: 'login',
     id: 'login',
     placeholder: 'Username',
-    required: 'required'
+    required: 'required',
+    pattern: '[\\w.]*',
+    maxlength: 60,
+    events: {
+      focus: (event: any): void => validate(event, validationTarget),
+      blur: (event: any): void => validate(event, validationTarget)
+    }
   },
   {
     label: 'Password',
-    type: 'text',
+    type: 'password',
     name: 'password',
     id: 'password',
     placeholder: 'Password',
-    required: 'required'
+    required: 'required',
+    pattern: '[-+~!?@#$%^&*;\\()\\[\\]\\|:\\w]*',
+    maxlength: 200,
+    events: {
+      focus: (event: any): void => validate(event, validationTarget),
+      blur: (event: any): void => validate(event, validationTarget)
+    }
   }
 ]
 
 const primaryBtnProps = {
   text: 'Sign In',
   type: 'submit',
+  id: 'submit-form-btn',
   classes: ['mt-auto'],
+  disabled: false,
   events: {
     click: (event: any) => console.log('OLD 0 EVENT=', event)
   }
@@ -57,3 +73,6 @@ if (app !== null) {
   app.innerHTML = ''
   app.appendChild(page.render())
 }
+
+// 4 - form validation target
+const validationTarget = page.children.content.children.submitBtn

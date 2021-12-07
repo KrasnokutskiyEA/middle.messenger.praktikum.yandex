@@ -20,4 +20,12 @@
     border-bottom: 2px solid map.get($colors, 'gray');
     padding: 0;
   }
+
+  input:valid {
+    background-color: #dfd;
+  }
+
+  input:invalid {
+    background-color: #fdd;
+  }
 }

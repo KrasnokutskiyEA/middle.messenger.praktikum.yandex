@@ -5,16 +5,24 @@
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: map.get($colors, 'yellow');
   border-radius: 20px;
   width: 400px;
   height: 50px;
   text-decoration: none;
   border: none;
-  cursor: pointer;
 
   .primary-btn-title {
     font-size: 1.3em;
     line-height: 20px;
+  }
+
+  &-enabled {
+    background-color: map.get($colors, 'yellow');
+    cursor: pointer;
+  }
+
+  &-disabled {
+    background-color: map.get($colors, 'lightgray');
+    cursor: auto;
   }
 }

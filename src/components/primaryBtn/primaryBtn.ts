@@ -10,6 +10,11 @@ class PrimaryBtn extends Block {
     super('div', props)
   }
 
+  setDisabled (isDisabled: boolean): void {
+    isDisabled ? this.setProps({ disabled: true }) : this.setProps({ disabled: false })
+
+  }
+
   render (): HTMLElement {
     return this.compile(template, this.props)
   }

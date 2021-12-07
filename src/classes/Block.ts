@@ -129,7 +129,7 @@ export class Block {
       const id = this._element.getAttribute('data-id')
       const tgt = document.querySelector(`[data-id="${id}"]`)
       const target = tgt === null ? this._element.firstElementChild : tgt
-      target?.addEventListener(eventName, evt)
+      target?.addEventListener(eventName, evt, true)
     })
   }
 

@@ -1,2 +1,11 @@
-button(class=['primary-btn', ...classes] type= type)
+button(
+  class=[
+    'primary-btn',
+    disabled ? 'primary-btn-disabled' : 'primary-btn-enabled',
+    ...classes
+  ]
+  type= type,
+  id= id,
+  disabled= disabled
+)
   span(class='primary-btn-title')= text
