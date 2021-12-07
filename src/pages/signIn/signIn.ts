@@ -1,6 +1,7 @@
 // asssets import
 import '../../assets/styles/index.scss'
 
+// helpers import
 import validate from '../../helpers/validate'
 
 // components import (.ts)
@@ -27,9 +28,10 @@ const textFieldProps = [
     pattern: '[\\w.]*',
     maxlength: 20,
     minlength: 3,
+    errorText: '3-20 latin symbols, no spaces, no special chars',
     events: {
-      focus: (event: any): void => validate(event, validationTarget),
-      blur: (event: any): void => validate(event, validationTarget)
+      focus: (event: any): void => validate(event),
+      blur: (event: any): void => validate(event)
     }
   },
   {
@@ -42,9 +44,10 @@ const textFieldProps = [
     pattern: '[-+~!?@#$%^&*;\\()\\[\\]\\|:\\w]*',
     maxlength: 40,
     minlength: 8,
+    errorText: '8-40 symbols, at least one capital letter and number',
     events: {
-      focus: (event: any): void => validate(event, validationTarget),
-      blur: (event: any): void => validate(event, validationTarget)
+      focus: (event: any): void => validate(event),
+      blur: (event: any): void => validate(event)
     }
   }
 ]
@@ -75,6 +78,3 @@ if (app !== null) {
   app.innerHTML = ''
   app.appendChild(page.render())
 }
-
-// 4 - form validation target
-const validationTarget = page.children.content.children.submitBtn

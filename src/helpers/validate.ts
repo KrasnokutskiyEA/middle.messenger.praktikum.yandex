@@ -1,9 +1,12 @@
-export default (event: Event, validationTarget): void => {
-  const isFormValid = event.target?.form.checkValidity()
+export default (event: Event): void => {
+  const tgt = event.target
+  const isValid = tgt.validity.valid
 
-  if (isFormValid === false) {
-    validationTarget.setDisabled(true)
+  console.log('----event=', event)
+
+  if (isValid === false) {
+    tgt.nextSibling.classList.remove('hidden')
   } else {
-    validationTarget.setDisabled(false)
+    tgt.nextSibling.classList.add('hidden')
   }
 }

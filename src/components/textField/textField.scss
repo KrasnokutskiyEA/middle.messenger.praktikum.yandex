@@ -3,7 +3,7 @@
 .text-field-wrapper {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   justify-content: flex-end;
   width: 400px;
   height: 50px;
@@ -22,10 +22,18 @@
   }
 
   input:valid {
-    background-color: #dfd;
+    background-color: map.get($colors, 'success-bkg');
+    border-bottom: 2px solid map.get($colors, 'success-brd');
   }
 
   input:invalid {
-    background-color: #fdd;
+    background-color: map.get($colors, 'error-bkg');
+    border-bottom: 2px solid map.get($colors, 'error-brd');
+  }
+
+  .input-error-message {
+    font-size: 0.75em;
+    color: map.get($colors, 'red');
+    height: 20px;
   }
 }
