@@ -1,12 +1,12 @@
 form(class='form')
-  //- загаловок формы
+  //- form title
   div(class='form-title mb-4')= title
 
-  //- поля ввода
+  //- input fields list
   != childrenList
 
-  //- кнопка отправки формы
+  //- form submit element
   != submitBtn
 
-  //- ссылка
+  //- additional link
   a(class='form-link' href=linkTo) #{linkMessage}
