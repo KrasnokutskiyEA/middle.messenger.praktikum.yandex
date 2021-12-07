@@ -24,5 +24,5 @@ const page = new CenterContent({
 const app: HTMLElement | null = document.getElementById('app')
 if (app !== null) {
   app.innerHTML = ''
-  app.appendChild(page.getContent())
+  app.appendChild(page.render())
 }

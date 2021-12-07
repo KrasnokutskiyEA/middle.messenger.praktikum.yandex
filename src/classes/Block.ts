@@ -51,7 +51,6 @@ export class Block {
     const props: IBloc = {}
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
-      console.log('key=', key, 'value=', value)
       if (value instanceof Block) {
         children[key] = value
       } else if (key === 'childrenList') {
@@ -61,8 +60,6 @@ export class Block {
         props[key] = value
       }
     })
-
-    console.log('----children=', children)
 
     return { children, props }
   }
@@ -95,7 +92,7 @@ export class Block {
       child.dispatchComponentDidMount()
     })
 
-    childrenList.forEach(child => {
+    childrenList.forEach((child: IBloc) => {
       child.dispatchComponentDidMount()
     })
   }
