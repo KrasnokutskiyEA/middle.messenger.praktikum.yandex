@@ -25,7 +25,8 @@ const textFieldProps = [
     placeholder: 'Username',
     required: 'required',
     pattern: '[\\w.]*',
-    maxlength: 60,
+    maxlength: 20,
+    minlength: 3,
     events: {
       focus: (event: any): void => validate(event, validationTarget),
       blur: (event: any): void => validate(event, validationTarget)
@@ -39,7 +40,8 @@ const textFieldProps = [
     placeholder: 'Password',
     required: 'required',
     pattern: '[-+~!?@#$%^&*;\\()\\[\\]\\|:\\w]*',
-    maxlength: 200,
+    maxlength: 40,
+    minlength: 8,
     events: {
       focus: (event: any): void => validate(event, validationTarget),
       blur: (event: any): void => validate(event, validationTarget)
