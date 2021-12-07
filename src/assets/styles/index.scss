@@ -12,22 +12,14 @@
 
 // templates
 @import '../../templates/centerContent/centerContent';
-
-// @import '../../templates/sideNav/sideNav';
-
-// pages
-// @import '../../pages/404/404';
-// @import '../../pages/500/500';
-// @import '../../pages/chat/chat';
+@import '../../templates/sideNav/sideNav';
 
 // modules
 @import '../../modules/form/form';
 
 // components
 @import '../../components/errorMessage/errorMessage';
-
-// @import '../../components/avatar/avatar';
+@import '../../components/avatar/avatar';
 @import '../../components/primaryBtn/primaryBtn';
-
-// @import '../../components/roundBtn/roundBtn';
+@import '../../components/roundBtn/roundBtn';
 @import '../../components/textField/textField';

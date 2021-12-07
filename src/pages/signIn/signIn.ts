@@ -10,8 +10,8 @@ import PriamryBtn from '../../components/primaryBtn/primaryBtn'
 // 1 - generate context
 const formProps = {
   title: 'Sign In',
-  linkTo: '/createAccount.html',
-  linkMessage: 'Create account?'
+  primaryLinkTo: '/createAccount.html',
+  primaryLinkLabel: 'Create account?'
 }
 
 const textFieldProps = [

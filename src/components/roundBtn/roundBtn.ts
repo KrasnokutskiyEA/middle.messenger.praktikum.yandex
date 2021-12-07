@@ -2,10 +2,10 @@
 import { Block, IBloc } from '../../classes/Block'
 
 // import template
-import template from './primaryBtn.pug'
+import template from './roundBtn.pug'
 
 // component
-class PrimaryBtn extends Block {
+class RoundBtn extends Block {
   constructor (props: IBloc) {
     super('div', props)
   }
@@ -15,4 +15,4 @@ class PrimaryBtn extends Block {
   }
 }
 
-export default PrimaryBtn
+export default RoundBtn

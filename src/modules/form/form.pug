@@ -1,6 +1,14 @@
 form(class='form')
+  //- form avatar
+  if avatarLogo
+    div(class=['avatar-wrapper', ...avatarClasses])
+      img(src= avatarLogo class='avatar-logo')
+      div(class='avatar-overlay')
+        div(id='avatar' class='avatar-text') Change
+
   //- form title
-  div(class='form-title mb-4')= title
+  if title
+    div(class='form-title mb-4')= title
 
   //- input fields list
   != childrenList
@@ -8,5 +16,9 @@ form(class='form')
   //- form submit element
   != submitBtn
 
-  //- additional link
-  a(class='form-link' href=linkTo) #{linkMessage}
+  //- additional links
+  if primaryLinkTo
+    a(class='form-link' href=primaryLinkTo) #{primaryLinkLabel}
+
+  if secondaryLinkTo
+    a(class='form-link' href=secondaryLinkTo) #{secondaryLinkLabel}

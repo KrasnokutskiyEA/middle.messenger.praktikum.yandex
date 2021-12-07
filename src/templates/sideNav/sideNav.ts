@@ -1,13 +1,12 @@
-// import base class
 import { Block, IBloc } from '../../classes/Block'
 
-// import template
-import template from './primaryBtn.pug'
+// template imports
+import template from './sideNav.pug'
 
 // component
-class PrimaryBtn extends Block {
+class sideNav extends Block {
   constructor (props: IBloc) {
-    super('div', props)
+    super('div', { ...props })
   }
 
   render (): HTMLElement {
@@ -15,4 +14,4 @@ class PrimaryBtn extends Block {
   }
 }
 
-export default PrimaryBtn
+export default sideNav
