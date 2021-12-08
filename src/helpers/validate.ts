@@ -1,11 +1,15 @@
-export default (event: Event): void => {
-  const tgt = event.target
-  const isValid = tgt.validity.valid
+export function validateInput (input: HTMLElement): void {
+  const isValid = input.validity.valid
 
-  console.log('----tgt.validity=', tgt.validity)
   if (isValid === false) {
-    tgt.nextSibling.classList.remove('hidden')
+    input.nextSibling.classList.remove('hidden')
   } else {
-    tgt.nextSibling.classList.add('hidden')
+    input.nextSibling.classList.add('hidden')
   }
+}
+
+export function validateForm (): void {
+  const tgt = document.querySelectorAll('input')
+
+  tgt.forEach((input: HTMLElement) => validateInput(input))
 }

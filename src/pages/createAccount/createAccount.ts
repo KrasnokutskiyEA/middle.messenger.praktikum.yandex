@@ -2,7 +2,7 @@
 import '../../assets/styles/index.scss'
 
 // helpers import
-import validate from '../../helpers/validate'
+import { validateInput, validateForm } from '../../helpers/validate'
 
 // components import (.ts)
 import CenterContent from '../../templates/centerContent/centerContent'
@@ -28,8 +28,8 @@ const textFieldProps = [
     pattern: '^[A-Za-z0-9_\\/^#&+-]+@[A-Za-z0-9_\\/^#&+-]+\\.+[A-Za-z]+$',
     errorText: 'latin, may include special chars, @ required',
     events: {
-      focus: (event: any): void => validate(event),
-      blur: (event: any): void => validate(event)
+      focus: (event: any): void => validateInput(event.target),
+      blur: (event: any): void => validateInput(event.target)
     }
   },
   {
@@ -44,8 +44,8 @@ const textFieldProps = [
     minlength: 3,
     errorText: '3-20 latin symbols, no spaces, no special chars',
     events: {
-      focus: (event: any): void => validate(event),
-      blur: (event: any): void => validate(event)
+      focus: (event: any): void => validateInput(event.target),
+      blur: (event: any): void => validateInput(event.target)
     }
   },
   {
@@ -58,8 +58,8 @@ const textFieldProps = [
     pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
     errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars',
     events: {
-      focus: (event: any): void => validate(event),
-      blur: (event: any): void => validate(event)
+      focus: (event: any): void => validateInput(event.target),
+      blur: (event: any): void => validateInput(event.target)
     }
   },
   {
@@ -72,8 +72,8 @@ const textFieldProps = [
     pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
     errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars',
     events: {
-      focus: (event: any): void => validate(event),
-      blur: (event: any): void => validate(event)
+      focus: (event: any): void => validateInput(event.target),
+      blur: (event: any): void => validateInput(event.target)
     }
   },
   {
@@ -88,8 +88,8 @@ const textFieldProps = [
     pattern: '^[+]?[0-9]*$',
     errorText: '10-15 numbers, may start with +',
     events: {
-      focus: (event: any): void => validate(event),
-      blur: (event: any): void => validate(event)
+      focus: (event: any): void => validateInput(event.target),
+      blur: (event: any): void => validateInput(event.target)
     }
   },
   {
@@ -104,8 +104,8 @@ const textFieldProps = [
     minlength: 8,
     errorText: '8-40 symbols, at least one capital letter and number',
     events: {
-      focus: (event: any): void => validate(event),
-      blur: (event: any): void => validate(event)
+      focus: (event: any): void => validateInput(event.target),
+      blur: (event: any): void => validateInput(event.target)
     }
   },
   {
@@ -120,8 +120,8 @@ const textFieldProps = [
     minlength: 8,
     errorText: '8-40 symbols, at least one capital letter and number',
     events: {
-      focus: (event: any): void => validate(event),
-      blur: (event: any): void => validate(event)
+      focus: (event: any): void => validateInput(event.target),
+      blur: (event: any): void => validateInput(event.target)
     }
   }
 ]
@@ -131,7 +131,7 @@ const primaryBtnProps = {
   type: 'submit',
   classes: ['mt-6'],
   events: {
-    click: (event: any) => console.log('OLD 0 EVENT=', event)
+    click: () => validateForm()
   }
 }
 
