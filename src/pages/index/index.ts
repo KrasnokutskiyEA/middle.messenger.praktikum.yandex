@@ -1,6 +1,9 @@
 // asssets import
 import '../../assets/styles/index.scss'
 
+// http transport import
+import HTTPTransport from '../../classes/HttpTransport'
+
 // components import (.ts)
 import CenterContent from '../../templates/centerContent/centerContent'
 import Form from '../../modules/form/form'
@@ -28,7 +31,9 @@ const btnProps = [{
   classes: ['mt-6'],
   disabled: false,
   events: {
-    click: () => console.log('GET REQUEST')
+    click: async () => await getData(
+      'https://jsonplaceholder.typicode.com/comments', { data: { postId: 1 } }
+    )
   }
 },
 {
@@ -38,7 +43,10 @@ const btnProps = [{
   classes: ['mt-6', 'mb-4'],
   disabled: false,
   events: {
-    click: () => console.log('POST REQUEST')
+    click: async () => await postData('https://jsonplaceholder.typicode.com/posts', {
+      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+      data: { title: 'foo', body: 'bar', userId: 1 }
+    })
   }
 }
 ]
@@ -60,4 +68,23 @@ const app: HTMLElement | null = document.getElementById('app')
 if (app !== null) {
   app.innerHTML = ''
   app.appendChild(page.render())
+}
+
+// 4 - utility functuions
+const getData = async (url: string, payload: object): Promise<void> => {
+  try {
+    const { response } = await new HTTPTransport().get(url, payload)
+    console.log('GET response=', JSON.parse(response))
+  } catch (e) {
+    console.log('GET e=', e)
+  }
+}
+
+const postData = async (url: string, payload: object): Promise<void> => {
+  try {
+    const { response } = await new HTTPTransport().post(url, payload)
+    console.log('POST response=', JSON.parse(response))
+  } catch (e) {
+    console.log('POST e=', e)
+  }
 }
