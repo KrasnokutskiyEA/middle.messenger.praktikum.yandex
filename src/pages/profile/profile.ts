@@ -22,7 +22,7 @@ const textFieldProps = [
     id: 'email',
     placeholder: 'Email',
     required: 'required',
-    pattern: '',
+    pattern: '^[A-Za-z0-9_\\/^#&+-]+@[A-Za-z0-9_\\/^#&+-]+\\.+[A-Za-z]+$',
     errorText: 'latin, may include special chars, @ required',
     events: {
       focus: (event: any): void => validate(event),
@@ -36,7 +36,7 @@ const textFieldProps = [
     id: 'login',
     placeholder: 'Username',
     required: 'required',
-    pattern: '',
+    pattern: '^\\d*[a-zA-Z][a-zA-Z0-9]*$',
     maxlength: 20,
     minlength: 3,
     errorText: '3-20 latin symbols, no spaces, no special chars',
@@ -52,7 +52,7 @@ const textFieldProps = [
     id: 'first_name',
     placeholder: 'First Name',
     required: 'required',
-    pattern: '',
+    pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
     errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars',
     events: {
       focus: (event: any): void => validate(event),
@@ -66,7 +66,7 @@ const textFieldProps = [
     id: 'second_name',
     placeholder: 'Last Name',
     required: 'required',
-    pattern: '',
+    pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
     errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars',
     events: {
       focus: (event: any): void => validate(event),
@@ -82,7 +82,8 @@ const textFieldProps = [
     required: 'required',
     maxlength: 10,
     minlength: 3,
-    errorText: '3-10 chars',
+    pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
+    errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars',
     events: {
       focus: (event: any): void => validate(event),
       blur: (event: any): void => validate(event)
@@ -97,7 +98,7 @@ const textFieldProps = [
     required: 'required',
     maxlength: 15,
     minlength: 10,
-    pattern: '',
+    pattern: '^[+]?[0-9]*$',
     errorText: '10-15 numbers, may start with +',
     events: {
       focus: (event: any): void => validate(event),
