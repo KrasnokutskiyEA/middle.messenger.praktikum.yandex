@@ -10,7 +10,7 @@ import { validateInput, validateForm, submitForm } from '../../helpers/validate'
 import SideNav from '../../templates/sideNav/sideNav'
 import Form from '../../modules/form/form'
 import TextField from '../../components/textField/textField'
-import PriamryBtn from '../../components/primaryBtn/primaryBtn'
+import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
 import RoundBtn from '../../components/roundBtn/roundBtn'
 import Avatar from '../../components/avatar/avatar'
 
@@ -140,7 +140,7 @@ const page = new SideNav({
     ...formProps,
     avatar: new Avatar(avatarProps),
     childrenList: textFieldProps.map(p => new TextField(p)),
-    submitBtn: new PriamryBtn(primaryBtnProps),
+    submitBtn: new PrimaryBtn(primaryBtnProps),
     events: {
       submit: (event: any) => submitForm(event)
     }

@@ -8,7 +8,7 @@ import { validateInput, validateForm, submitForm } from '../../helpers/validate'
 import CenterContent from '../../templates/centerContent/centerContent'
 import Form from '../../modules/form/form'
 import TextField from '../../components/textField/textField'
-import PriamryBtn from '../../components/primaryBtn/primaryBtn'
+import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
 
 // 1 - generate context
 const formProps = {
@@ -68,7 +68,7 @@ const page = new CenterContent({
   content: new Form({
     ...formProps,
     childrenList: textFieldProps.map(p => new TextField(p)),
-    submitBtn: new PriamryBtn(primaryBtnProps),
+    submitBtn: new PrimaryBtn(primaryBtnProps),
     events: {
       submit: (event: any) => submitForm(event)
     }

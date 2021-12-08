@@ -2,16 +2,12 @@
 import { Block, IBloc } from '../../classes/Block'
 
 // import template
-import template from './primaryBtn.pug'
+import template from './linkList.pug'
 
 // component
-class PrimaryBtn extends Block {
+class LinkList extends Block {
   constructor (props: IBloc) {
     super('div', props)
-  }
-
-  setDisabled (isDisabled: boolean): void {
-    isDisabled ? this.setProps({ disabled: true }) : this.setProps({ disabled: false })
   }
 
   render (): HTMLElement {
@@ -19,4 +15,4 @@ class PrimaryBtn extends Block {
   }
 }
 
-export default PrimaryBtn
+export default LinkList
