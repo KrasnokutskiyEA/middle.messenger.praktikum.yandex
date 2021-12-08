@@ -4,7 +4,7 @@ import avatarLogo from '../../assets/images/avatar.svg'
 import arrowLogo from '../../assets/images/arrow.svg'
 
 // helpers import
-import { validateInput, validateForm } from '../../helpers/validate'
+import { validateInput, validateForm, submitForm } from '../../helpers/validate'
 
 // components import (.ts)
 import SideNav from '../../templates/sideNav/sideNav'
@@ -140,7 +140,10 @@ const page = new SideNav({
     ...formProps,
     avatar: new Avatar(avatarProps),
     childrenList: textFieldProps.map(p => new TextField(p)),
-    submitBtn: new PriamryBtn(primaryBtnProps)
+    submitBtn: new PriamryBtn(primaryBtnProps),
+    events: {
+      submit: (event: any) => submitForm(event)
+    }
   })
 })
 
