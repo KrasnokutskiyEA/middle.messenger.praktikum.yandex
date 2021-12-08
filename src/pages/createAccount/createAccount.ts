@@ -2,7 +2,7 @@
 import '../../assets/styles/index.scss'
 
 // helpers import
-import { validateInput, validateForm } from '../../helpers/validate'
+import { validateInput, validateForm, submitForm } from '../../helpers/validate'
 
 // components import (.ts)
 import CenterContent from '../../templates/centerContent/centerContent'
@@ -140,7 +140,10 @@ const page = new CenterContent({
   content: new Form({
     ...formProps,
     childrenList: textFieldProps.map(p => new TextField(p)),
-    submitBtn: new PriamryBtn(primaryBtnProps)
+    submitBtn: new PriamryBtn(primaryBtnProps),
+    events: {
+      submit: (event: any) => submitForm(event)
+    }
   })
 })
 
