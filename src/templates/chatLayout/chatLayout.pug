@@ -1,0 +1,17 @@
+div(class='chat-layout')
+  //- left menu
+  aside(class='chat-menu')
+    div(class='chat-menu-search')
+      != chatSearch
+    //- div(class='chat-menu-list')
+    != chatsList
+    div(class='chat-menu-controls')
+      != chatMenuCtrls
+  //- main window
+  main(class='chat-messages')
+    div(class='chat-messages-header')
+      != chatHeader
+    div(class='chat-messages-list')
+      != chatMessagesList
+    div(class='chat-messages-controls')
+      != chatMessagesCtrls

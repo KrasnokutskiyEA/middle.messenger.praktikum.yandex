@@ -1,0 +1,63 @@
+@use 'sass:map';
+
+$aside-width: 20%;
+$menus-height: 60px;
+
+.chat-layout {
+  height: 100vh;
+  display: flex;
+
+  .chat-menu {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid map.get($colors, 'gray');
+
+    .chat-menu-search {
+      height: $menus-height;
+      border-bottom: 1px solid map.get($colors, 'gray');
+    }
+
+    // .chat-menu-list {
+    //   flex: 1 0 auto;
+    // }
+
+    .chat-menu-controls {
+      height: $menus-height;
+      border-top: 1px solid map.get($colors, 'gray');
+    }
+  }
+
+  .chat-messages {
+    width: calc(100% - $aside-width);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .chat-messages-header {
+      height: $menus-height;
+      border-bottom: 1px solid map.get($colors, 'gray');
+    }
+
+    .chat-messages-list {
+      flex: 1 0 auto;
+    }
+
+    .chat-messages-controls {
+      height: $menus-height;
+      border-top: 1px solid map.get($colors, 'gray');
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .chat-menu {
+    width: $aside-width * 2;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .chat-menu {
+    width: $aside-width;
+  }
+}

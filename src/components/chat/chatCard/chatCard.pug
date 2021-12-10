@@ -1,0 +1,11 @@
+div(class='chat-card')
+  div(class= 'chat-card-avatar')
+    != chatAvatar
+
+  div(class= 'chat-card-main')
+    div #{chatName}
+    div #{chatLastMessageText}
+
+  div(class= 'chat-card-misc')
+    div #{chatLastMessageTime}
+    div #{chatUnreadMessagesQty}
