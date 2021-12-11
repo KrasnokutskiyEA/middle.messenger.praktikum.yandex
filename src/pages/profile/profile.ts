@@ -125,7 +125,8 @@ const primaryBtnProps = {
 
 const roundBtnProps = {
   classes: ['rot-180'],
-  logo: arrowLogo
+  logo: arrowLogo,
+  type: 'button'
 }
 
 const avatarProps = {

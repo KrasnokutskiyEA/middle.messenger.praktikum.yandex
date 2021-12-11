@@ -4,6 +4,7 @@ import arrowLogo from '../../assets/images/arrow.svg'
 
 // helpers import
 import { chats, messages } from '../../helpers/fakeData'
+import { submitForm } from '../../helpers/validate'
 
 // components import (.ts)
 import ChatLayout from '../../templates/chatLayout/chatLayout'
@@ -20,13 +21,14 @@ const inputFieldProps = {
   name: 'message',
   id: 'message',
   placeholder: 'Message',
-  minlength: 1,
+  required: true,
   classes: ['ml-2']
 }
 
 const roundBtnProps = {
   logo: arrowLogo,
-  classes: ['ml-2', 'mr-2']
+  classes: ['ml-2', 'mr-2'],
+  type: 'submit'
 }
 
 // 2 - create page structure
@@ -42,7 +44,10 @@ const page = new ChatLayout({
   }),
   messagesCtrls: new MessagesCtrls({
     inputField: new InputField(inputFieldProps),
-    sendBtn: new RoundBtn(roundBtnProps)
+    sendBtn: new RoundBtn(roundBtnProps),
+    events: {
+      submit: (event: any) => submitForm(event)
+    }
   })
 })
 
