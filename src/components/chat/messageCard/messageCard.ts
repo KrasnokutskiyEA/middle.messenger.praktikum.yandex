@@ -31,7 +31,7 @@ class MessageCard extends Block {
       authorName: props.authorName,
       text: props.text,
       image: props.image,
-      formattedDate: formatTime(props.date)
+      time: formatTime(props.date)
     })
   }
 

@@ -36,15 +36,17 @@ $menus-height: 60px;
     .chat-messages-header {
       height: $menus-height;
       border-bottom: 1px solid map.get($colors, 'lightgray');
+      flex-shrink: 0;
     }
 
-    .chat-messages-list {
-      flex: 1 0 auto;
-    }
+    // .chat-messages-list {
+    //   flex: 1 0 auto;
+    // }
 
     .chat-messages-controls {
       height: $menus-height;
       border-top: 1px solid map.get($colors, 'lightgray');
+      flex-shrink: 0;
     }
   }
 }

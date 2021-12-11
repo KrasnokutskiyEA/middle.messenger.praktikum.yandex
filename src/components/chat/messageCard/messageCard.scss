@@ -2,4 +2,14 @@
 
 .message-card {
   background-color: map.get($colors, 'altgray');
+  padding: 10px;
+  max-width: 40%;
+  border-radius: 10px;
+
+  .message-card-time {
+    float: right;
+    margin-left: 20px;
+    font-size: 0.8em;
+    color: darkgrey;
+  }
 }

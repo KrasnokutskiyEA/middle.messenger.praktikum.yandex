@@ -37,7 +37,7 @@ export const messages = [
     authorId: 'a1',
     authorName: 'Steve Jordan',
     ownerId: 'a1',
-    text: 'Hi! What are you doing right now?',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pharetra, nibh sed condimentum dapibus, erat nunc suscipit sem, sed sollicitudin nisi velit non justo. Nulla luctus ligula ac laoreet viverra. Duis quis pellentesque nunc. Phasellus pretium neque orci, et tincidunt risus pretium vel. Vivamus sagittis, lectus quis sollicitudin sagittis, lacus risus faucibus leo, id condimentum arcu magna sed massa. Donec sodales vestibulum erat dapibus viverr Nulla varius in enim at fringilla. Duis at arcu consequat, pulvinar ante non, vehicula felis. Ut at sapien eu sem interdum ultricies id id neque. Aenean non enim iaculis, tincidunt augue vel. Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
     image: null,
     date: '2021-05-24T15:17:02.563Z'
   },
