@@ -3,7 +3,7 @@ export const chats = [
     id: '1',
     name: 'Steve Jordan',
     isGroup: false,
-    lastMessage: 'Hi, how are you?',
+    lastMessage: "Hi, how are you? I'd like to introduce you to my new friend who knows a lot of interesting stuff about political situation in a middle eastern region",
     ownerLastMessage: 'Steve Jordan',
     counterUnreadMessages: 1,
     avatar: null,
