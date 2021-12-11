@@ -1,0 +1,12 @@
+div(class='chat-card')
+  img(src= chatAvatar class= 'chat-card-avatar')
+
+  div(class='chat-card-main')
+    strong #{chatName}
+    div(class='chat-card-main-message' title= chatLastMessageText) #{chatLastMessageText}
+
+  div(class= 'chat-card-misc')
+    div(class= 'chat-card-misc-time') #{chatLastMessageTime}
+    if chatUnreadMessagesQty
+      div(class= 'chat-card-misc-unread-wrapper')
+        div(class= 'chat-card-misc-unread') #{chatUnreadMessagesQty}

@@ -1,11 +1,13 @@
-mixin textField(parameters)
-  div(class='text_field_wrapper')
-    label(for= parameters.id) #{parameters.label}
-    input(
-      type= parameters.type 
-      name= parameters.name 
-      id= parameters.id
-      placeholder= parameters.placeholder
-      required= parameters.required
-      autofocus
-    )
+div(class='text-field-wrapper')
+  label(for= id) #{label}
+  input(
+    type= type
+    name= name
+    id= id
+    placeholder= placeholder
+    required= required
+    pattern= pattern
+    maxlength= maxlength
+    minlength= minlength
+  )
+  div(class='input-error-message hidden') #{errorText}

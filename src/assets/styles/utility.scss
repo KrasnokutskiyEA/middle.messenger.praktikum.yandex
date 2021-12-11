@@ -1,15 +1,26 @@
+// margin-horizontal
+.ml-2 {
+  margin-left: 20px;
+}
+
+.mr-2 {
+  margin-right: 20px;
+}
+
 // margin-bottom
 .mb-4 {
-  margin-bottom: 40px;  
+  margin-bottom: 40px;
 }
+
 .mb-6 {
-  margin-bottom: 60px;  
+  margin-bottom: 60px;
 }
 
 // margin-top
 .mt-6 {
   margin-top: 60px;
 }
+
 .mt-auto {
   margin-top: auto;
 }
@@ -17,4 +28,9 @@
 // rotation
 .rot-180 {
   transform: rotate(180deg);
+}
+
+// other stuff
+.hidden {
+  visibility: hidden;
 }

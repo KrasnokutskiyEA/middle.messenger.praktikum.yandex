@@ -1,0 +1,42 @@
+@use 'sass:map';
+
+$aside-width: 380px;
+$menus-height: 60px;
+
+.chat-layout {
+  height: 100vh;
+  display: flex;
+
+  .chat-menu {
+    height: 100%;
+    width: $aside-width;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid map.get($colors, 'lightgray');
+
+    .chat-menu-search {
+      height: $menus-height;
+      border-bottom: 1px solid map.get($colors, 'lightgray');
+      flex-shrink: 0;
+    }
+
+    .chat-menu-controls {
+      height: $menus-height;
+      border-top: 1px solid map.get($colors, 'lightgray');
+      flex-shrink: 0;
+    }
+  }
+
+  .chat-messages {
+    width: calc(100% - $aside-width);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .chat-messages-header {
+      height: $menus-height;
+      border-bottom: 1px solid map.get($colors, 'lightgray');
+      flex-shrink: 0;
+    }
+  }
+}

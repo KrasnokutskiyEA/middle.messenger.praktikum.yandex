@@ -1,0 +1,22 @@
+// import base class
+import { Block, IBloc } from '../../classes/Block'
+
+// import template
+import template from './primaryBtn.pug'
+
+// component
+class PrimaryBtn extends Block {
+  constructor (props: IBloc) {
+    super('div', props)
+  }
+
+  setDisabled (isDisabled: boolean): void {
+    isDisabled ? this.setProps({ disabled: true }) : this.setProps({ disabled: false })
+  }
+
+  render (): HTMLElement {
+    return this.compile(template, this.props)
+  }
+}
+
+export default PrimaryBtn

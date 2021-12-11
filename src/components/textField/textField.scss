@@ -1,21 +1,39 @@
 @use 'sass:map';
 
-.text_field_wrapper {
+.text-field-wrapper {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   justify-content: flex-end;
   width: 400px;
   height: 50px;
+
   label {
     color: map.get($colors, 'gray');
     font-size: 0.8em;
     display: none;
   }
-  input[type=text], input[type=password] {
+
+  input[type='text'],
+  input[type='password'] {
     border: none;
     border-bottom: 2px solid map.get($colors, 'gray');
     padding: 0;
   }
-}
 
+  input:valid {
+    background-color: map.get($colors, 'success-bkg');
+    border-bottom: 2px solid map.get($colors, 'success-brd');
+  }
+
+  input:invalid {
+    background-color: map.get($colors, 'error-bkg');
+    border-bottom: 2px solid map.get($colors, 'error-brd');
+  }
+
+  .input-error-message {
+    font-size: 0.75em;
+    color: map.get($colors, 'red');
+    height: 20px;
+  }
+}
