@@ -23,7 +23,7 @@ export const chats = [
     id: '3',
     name: 'Work',
     isGroup: true,
-    lastMessage: 'We are going to fail deadline...',
+    lastMessage: 'I assume, we are going to fail deadline. Again.',
     ownerLastMessage: 'George Hampton',
     counterUnreadMessages: 0,
     avatar: null,
