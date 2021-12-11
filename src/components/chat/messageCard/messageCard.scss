@@ -1,0 +1,5 @@
+@use 'sass:map';
+
+.message-card {
+  background-color: map.get($colors, 'altgray');
+}

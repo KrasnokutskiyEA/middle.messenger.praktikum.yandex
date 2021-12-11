@@ -8,6 +8,8 @@ import { chats, messages } from '../../helpers/fakeData'
 import ChatLayout from '../../templates/chatLayout/chatLayout'
 import ChatsList from '../../components/chat/chatsList/chatsList'
 import ChatCard from '../../components/chat/chatCard/chatCard'
+import MessagesList from '../../components/chat/messagesList/messagesList'
+import MessageCard from '../../components/chat/messageCard/messageCard'
 
 // 1 - generate context
 /*
@@ -28,10 +30,12 @@ const page = new ChatLayout({
   // chatSearch:
   chatsList: new ChatsList({
     childrenList: chats.map(chat => new ChatCard(chat))
-  })
+  }),
   // chatMenuCtrls:
   // chatHeader:
-  // chatMessagesList:
+  messagesList: new MessagesList({
+    childrenList: messages.map(message => new MessageCard(message))
+  })
   // chatMessagesCtrls:
 })
 

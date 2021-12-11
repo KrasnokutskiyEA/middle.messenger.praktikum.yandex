@@ -38,7 +38,7 @@ export const messages = [
     authorName: 'Steve Jordan',
     ownerId: 'a1',
     text: 'Hi! What are you doing right now?',
-    avatar: null,
+    image: null,
     date: '2021-05-24T15:17:02.563Z'
   },
   {
@@ -47,7 +47,7 @@ export const messages = [
     authorName: 'Peter Ganapolsky',
     ownerId: 'a1',
     text: 'Man, who are you?',
-    avatar: null,
+    image: null,
     date: '2021-05-24T15:18:02.563Z'
   },
   {
@@ -56,7 +56,7 @@ export const messages = [
     authorName: 'Steve Jordan',
     ownerId: 'a1',
     text: 'I am your creator',
-    avatar: null,
+    image: null,
     date: '2021-05-24T15:19:02.563Z'
   },
   {
@@ -65,7 +65,7 @@ export const messages = [
     authorName: 'Steve Jordan',
     ownerId: 'a1',
     text: 'I created you two days ago...',
-    avatar: null,
+    image: null,
     date: '2021-05-27T15:20:02.563Z'
   },
   {
@@ -74,7 +74,7 @@ export const messages = [
     authorName: 'Peter Ganapolsky',
     ownerId: 'a1',
     text: "Ok... I'm calling 911. Seems you need help!",
-    avatar: null,
+    image: null,
     date: '2021-05-28T15:21:02.563Z'
   }
 ]
