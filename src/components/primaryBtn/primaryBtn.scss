@@ -19,6 +19,7 @@
   &-enabled {
     background-color: map.get($colors, 'yellow');
     cursor: pointer;
+    box-shadow: 1px 1px 10px map.get($colors, 'primary-btn-shadow');
   }
 
   &-disabled {

@@ -12,17 +12,17 @@ $menus-height: 60px;
     width: $aside-width;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid map.get($colors, 'gray');
+    border-right: 1px solid map.get($colors, 'lightgray');
 
     .chat-menu-search {
       height: $menus-height;
-      border-bottom: 1px solid map.get($colors, 'gray');
+      border-bottom: 1px solid map.get($colors, 'lightgray');
       flex-shrink: 0;
     }
 
     .chat-menu-controls {
       height: $menus-height;
-      border-top: 1px solid map.get($colors, 'gray');
+      border-top: 1px solid map.get($colors, 'lightgray');
       flex-shrink: 0;
     }
   }
@@ -35,7 +35,7 @@ $menus-height: 60px;
 
     .chat-messages-header {
       height: $menus-height;
-      border-bottom: 1px solid map.get($colors, 'gray');
+      border-bottom: 1px solid map.get($colors, 'lightgray');
     }
 
     .chat-messages-list {
@@ -44,7 +44,7 @@ $menus-height: 60px;
 
     .chat-messages-controls {
       height: $menus-height;
-      border-top: 1px solid map.get($colors, 'gray');
+      border-top: 1px solid map.get($colors, 'lightgray');
     }
   }
 }
