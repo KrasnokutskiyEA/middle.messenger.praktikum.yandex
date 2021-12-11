@@ -1,4 +1,7 @@
-div(class='message-card')
+div(class= [
+  'message-card', (ownerId === authorId)
+    ? 'message-card-outgoing' : 'message-card-incoming'
+])
   span(class='message-card-text' title= text) #{text}
   div(class='message-card-time') #{time}
 

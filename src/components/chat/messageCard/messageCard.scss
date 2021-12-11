@@ -13,8 +13,16 @@
   .message-card-time {
     float: right;
     margin-left: 20px;
-    margin-top: 5px;
-    font-size: 0.8em;
+    margin-top: 10px;
+    font-size: 0.7em;
     color: darkgrey;
+  }
+
+  &-outgoing {
+    align-self: flex-end;
+  }
+
+  &-incoming {
+    align-self: flex-start;
   }
 }
