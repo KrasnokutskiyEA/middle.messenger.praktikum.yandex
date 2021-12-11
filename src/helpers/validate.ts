@@ -26,3 +26,7 @@ export function submitForm (event: Event): void {
   const data = serializeForm(event.target)
   console.log('form data=', Object.fromEntries(data.entries()))
 }
+
+export function clearInput (event: Event): void {
+  event.target.firstElementChild.lastElementChild.value = ''
+}

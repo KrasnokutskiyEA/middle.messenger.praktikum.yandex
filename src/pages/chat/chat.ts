@@ -4,7 +4,7 @@ import arrowLogo from '../../assets/images/arrow.svg'
 
 // helpers import
 import { chats, messages } from '../../helpers/fakeData'
-import { submitForm } from '../../helpers/validate'
+import { clearInput, submitForm } from '../../helpers/validate'
 
 // components import (.ts)
 import ChatLayout from '../../templates/chatLayout/chatLayout'
@@ -46,7 +46,10 @@ const page = new ChatLayout({
     inputField: new InputField(inputFieldProps),
     sendBtn: new RoundBtn(roundBtnProps),
     events: {
-      submit: (event: any) => submitForm(event)
+      submit: (event: any) => {
+        submitForm(event)
+        clearInput(event)
+      }
     }
   })
 })
