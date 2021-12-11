@@ -1,5 +1,6 @@
 // asssets import
 import '../../assets/styles/index.scss'
+import arrowLogo from '../../assets/images/arrow.svg'
 
 // helpers import
 import { chats, messages } from '../../helpers/fakeData'
@@ -10,20 +11,23 @@ import ChatsList from '../../components/chat/chatsList/chatsList'
 import ChatCard from '../../components/chat/chatCard/chatCard'
 import MessagesList from '../../components/chat/messagesList/messagesList'
 import MessageCard from '../../components/chat/messageCard/messageCard'
+import MessagesCtrls from '../../components/chat/messagesCtrls/messagesCtrls'
+import RoundBtn from '../../components/roundBtn/roundBtn'
+import InputField from '../../components/chat/inputField/inputField'
 
 // 1 - generate context
-/*
-const primaryBtnProps = {
-  text: 'Sign In',
-  type: 'submit',
-  id: 'submit-form-btn',
-  classes: ['mt-auto'],
-  disabled: false,
-  events: {
-    click: () => validateForm()
-  }
+const inputFieldProps = {
+  name: 'message',
+  id: 'message',
+  placeholder: 'Message',
+  minlength: 1,
+  classes: ['ml-2']
 }
-*/
+
+const roundBtnProps = {
+  logo: arrowLogo,
+  classes: ['ml-2', 'mr-2']
+}
 
 // 2 - create page structure
 const page = new ChatLayout({
@@ -35,8 +39,11 @@ const page = new ChatLayout({
   // chatHeader:
   messagesList: new MessagesList({
     childrenList: messages.map(message => new MessageCard(message))
+  }),
+  messagesCtrls: new MessagesCtrls({
+    inputField: new InputField(inputFieldProps),
+    sendBtn: new RoundBtn(roundBtnProps)
   })
-  // chatMessagesCtrls:
 })
 
 // 3 - generate markup
