@@ -1,4 +1,4 @@
-export function validateInput (input: HTMLElement): void {
+export function validateInput (input: EventTarget): void {
   const isValid = input.validity.valid
 
   if (isValid === false) {
@@ -28,5 +28,5 @@ export function submitForm (event: Event): void {
 }
 
 export function clearInput (event: Event): void {
-  event.target.firstElementChild.lastElementChild.value = ''
+  event.target!.firstElementChild.lastElementChild.value = ''
 }

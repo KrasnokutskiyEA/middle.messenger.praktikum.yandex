@@ -30,8 +30,8 @@ const textFieldProps = [
     minlength: 3,
     errorText: '3-20 latin symbols, no spaces, no special chars',
     events: {
-      focus: (event: any): void => validateInput(event.target),
-      blur: (event: any): void => validateInput(event.target)
+      focus: (event: Event): void => validateInput(event.target!),
+      blur: (event: Event): void => validateInput(event.target!)
     }
   },
   {
@@ -46,8 +46,8 @@ const textFieldProps = [
     minlength: 8,
     errorText: '8-40 symbols, at least one capital letter and number',
     events: {
-      focus: (event: any): void => validateInput(event.target),
-      blur: (event: any): void => validateInput(event.target)
+      focus: (event: Event): void => validateInput(event.target!),
+      blur: (event: Event): void => validateInput(event.target!)
     }
   }
 ]
@@ -70,7 +70,7 @@ const page = new CenterContent({
     childrenList: textFieldProps.map(p => new TextField(p)),
     submitBtn: new PrimaryBtn(primaryBtnProps),
     events: {
-      submit: (event: any) => submitForm(event)
+      submit: (event: Event) => submitForm(event)
     }
   })
 })

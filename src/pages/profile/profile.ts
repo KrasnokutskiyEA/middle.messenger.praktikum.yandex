@@ -25,8 +25,8 @@ const textFieldProps = [
     pattern: '^[A-Za-z0-9_\\/^#&+-]+@[A-Za-z0-9_\\/^#&+-]+\\.+[A-Za-z]+$',
     errorText: 'latin, may include special chars, @ required',
     events: {
-      focus: (event: any): void => validateInput(event.target),
-      blur: (event: any): void => validateInput(event.target)
+      focus: (event: Event): void => validateInput(event.target!),
+      blur: (event: Event): void => validateInput(event.target!)
     }
   },
   {
@@ -41,8 +41,8 @@ const textFieldProps = [
     minlength: 3,
     errorText: '3-20 latin symbols, no spaces, no special chars',
     events: {
-      focus: (event: any): void => validateInput(event.target),
-      blur: (event: any): void => validateInput(event.target)
+      focus: (event: Event): void => validateInput(event.target!),
+      blur: (event: Event): void => validateInput(event.target!)
     }
   },
   {
@@ -55,8 +55,8 @@ const textFieldProps = [
     pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
     errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars',
     events: {
-      focus: (event: any): void => validateInput(event.target),
-      blur: (event: any): void => validateInput(event.target)
+      focus: (event: Event): void => validateInput(event.target!),
+      blur: (event: Event): void => validateInput(event.target!)
     }
   },
   {
@@ -69,8 +69,8 @@ const textFieldProps = [
     pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
     errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars',
     events: {
-      focus: (event: any): void => validateInput(event.target),
-      blur: (event: any): void => validateInput(event.target)
+      focus: (event: Event): void => validateInput(event.target!),
+      blur: (event: Event): void => validateInput(event.target!)
     }
   },
   {
@@ -85,8 +85,8 @@ const textFieldProps = [
     pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
     errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars',
     events: {
-      focus: (event: any): void => validateInput(event.target),
-      blur: (event: any): void => validateInput(event.target)
+      focus: (event: Event): void => validateInput(event.target!),
+      blur: (event: Event): void => validateInput(event.target!)
     }
   },
   {
@@ -101,8 +101,8 @@ const textFieldProps = [
     pattern: '^[+]?[0-9]*$',
     errorText: '10-15 numbers, may start with +',
     events: {
-      focus: (event: any): void => validateInput(event.target),
-      blur: (event: any): void => validateInput(event.target)
+      focus: (event: Event): void => validateInput(event.target!),
+      blur: (event: Event): void => validateInput(event.target!)
     }
   }
 ]
@@ -143,7 +143,7 @@ const page = new SideNav({
     childrenList: textFieldProps.map(p => new TextField(p)),
     submitBtn: new PrimaryBtn(primaryBtnProps),
     events: {
-      submit: (event: any) => submitForm(event)
+      submit: (event: Event) => submitForm(event)
     }
   })
 })

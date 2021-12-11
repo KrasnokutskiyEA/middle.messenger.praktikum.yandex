@@ -3,8 +3,8 @@ import EventBus from './EventBus'
 
 /* props schema */
 export interface IBloc {
-  events?: { [key: string]: any }
-  children?: { [key: string]: any }
+  events?: { [key: string]: (event: Event) => void }
+  children?: IBloc | IBloc[]
   classes?: string[]
   text?: string
   type?: string
@@ -24,7 +24,7 @@ export class Block {
   readonly _meta: { tagName: string, propsAndChildren: IBloc }
   readonly _id: string
   readonly props: IBloc
-  readonly children: { [key: string]: any }
+  readonly children: IBloc | IBloc[]
   readonly eventBus: () => EventBus
 
   /* constructor */
@@ -109,7 +109,7 @@ export class Block {
     const block = this.render()
 
     if (block !== undefined) {
-      const tgt = document.querySelector(`[data-id="${this._element.getAttribute('data-id')}"]`)
+      const tgt = document.querySelector(`[data-id="${this._element.getAttribute('data-id')!}"]`)
 
       if (tgt === null) {
         this._element.innerHTML = ''
@@ -176,7 +176,7 @@ export class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM)
   }
 
-  public getContent (): HTMLElement {
+  public getContent (): HTMLElement | undefined {
     return this.element
   }
 
@@ -196,14 +196,14 @@ export class Block {
   }
 
   public show (): void {
-    this.getContent().style.display = 'block'
+    this.getContent()!.style.display = 'block'
   }
 
   public hide (): void {
-    this.getContent().style.display = 'none'
+    this.getContent()!.style.display = 'none'
   }
 
-  public compile (compileTemplate: any, props: IBloc): HTMLElement {
+  public compile (compileTemplate: any, props: IBloc): HTMLTemplateElement {
     const propsAndStubs = { ...props }
     const { childrenList = [], ...otherChildren } = this.children
 
@@ -216,7 +216,7 @@ export class Block {
     let res = ''
     let buffer = []
     if (childrenList.length > 0) {
-      childrenList.forEach(child => {
+      childrenList.forEach((child: IBloc) => {
         res += `<div data-id="${child._id}"></div>`
       })
 
@@ -237,7 +237,7 @@ export class Block {
     })
 
     // replace stubs - childrenlist
-    buffer?.forEach(child => {
+    buffer?.forEach((child: IBloc) => {
       const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
       const el = child.getContent().firstElementChild
       el.setAttribute('data-id', child._id)

@@ -46,7 +46,7 @@ const page = new ChatLayout({
     inputField: new InputField(inputFieldProps),
     sendBtn: new RoundBtn(roundBtnProps),
     events: {
-      submit: (event: any) => {
+      submit: (event: Event) => {
         submitForm(event)
         clearInput(event)
       }
