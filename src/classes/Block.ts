@@ -239,7 +239,9 @@ export class Block {
     // replace stubs - childrenlist
     buffer?.forEach(child => {
       const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
-      stub?.replaceWith(child.getContent())
+      const el = child.getContent().firstElementChild
+      el.setAttribute('data-id', child._id)
+      stub?.replaceWith(el)
     })
 
     return fragment.content
