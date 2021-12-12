@@ -30,5 +30,5 @@ https://ya-praktikum.tech/api/v2/swagger/#/
 
 ## Pull request
 
-https://github.com/KrasnokutskiyEA/middle.messenger.praktikum.yandex/pull/3
+https://github.com/KrasnokutskiyEA/middle.messenger.praktikum.yandex/pull/7
 
