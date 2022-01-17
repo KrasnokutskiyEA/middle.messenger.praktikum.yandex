@@ -50,7 +50,7 @@ class HTTPTransport {
       timeout = 3000
     } = options
 
-    return await new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest()
       const isGet = method === METHODS.GET
 
