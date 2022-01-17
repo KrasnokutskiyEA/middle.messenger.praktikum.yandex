@@ -11,13 +11,13 @@ import TextField from '../../components/textField/textField'
 import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
 
 // 1 - generate context
-const formProps = {
+const formIProps = {
   title: 'Sign In',
   primaryLinkTo: '/createAccount.html',
   primaryLinkLabel: 'Create account?'
 }
 
-const textFieldProps = [
+const textFieldIProps = [
   {
     label: 'Username',
     type: 'text',
@@ -52,7 +52,7 @@ const textFieldProps = [
   }
 ]
 
-const primaryBtnProps = {
+const primaryBtnIProps = {
   text: 'Sign In',
   type: 'submit',
   id: 'submit-form-btn',
@@ -66,9 +66,9 @@ const primaryBtnProps = {
 // 2 - create page structure
 const page = new CenterContent({
   content: new Form({
-    ...formProps,
-    childrenList: textFieldProps.map(p => new TextField(p)),
-    submitBtn: new PrimaryBtn(primaryBtnProps),
+    ...formIProps,
+    childrenList: textFieldIProps.map(p => new TextField(p)),
+    submitBtn: new PrimaryBtn(primaryBtnIProps),
     events: {
       submit: (event: Event) => submitForm(event)
     }

@@ -11,11 +11,11 @@ import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
 import LinkList from '../../components/linkList/linkList'
 
 // 1 - generate context
-const formProps = {
+const formIProps = {
   title: 'Table of contents'
 }
 
-const linkProps = [
+const linkIProps = [
   { label: '/404', addr: '/404.html' },
   { label: '/500', addr: '/500.html' },
   { label: '/chat', addr: '/chat.html' },
@@ -24,7 +24,7 @@ const linkProps = [
   { label: '/signIn', addr: '/signIn.html' }
 ]
 
-const btnProps = [{
+const btnIProps = [{
   text: 'Test GET request',
   id: 'test-get-btn',
   type: 'button',
@@ -54,11 +54,11 @@ const btnProps = [{
 // 2 - create page structure
 const page = new CenterContent({
   content: new Form({
-    ...formProps,
-    // childrenList: btnProps.map(p => new PrimaryBtn(p))
+    ...formIProps,
+    // childrenList: btnIProps.map(p => new PrimaryBtn(p))
     childrenList: [
-      new LinkList({ list: linkProps }),
-      ...btnProps.map(p => new PrimaryBtn(p))
+      new LinkList({ list: linkIProps }),
+      ...btnIProps.map(p => new PrimaryBtn(p))
     ]
   })
 })

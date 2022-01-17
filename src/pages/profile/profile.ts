@@ -14,7 +14,7 @@ import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
 import RoundBtn from '../../components/roundBtn/roundBtn'
 import Avatar from '../../components/avatar/avatar'
 
-const textFieldProps = [
+const textFieldIProps = [
   {
     label: 'Email',
     type: 'text',
@@ -107,14 +107,14 @@ const textFieldProps = [
   }
 ]
 
-const formProps = {
+const formIProps = {
   primaryLinkTo: '/signIn.html',
   primaryLinkLabel: 'Change password',
   secondaryLinkTo: '/signIn.html',
   secondaryLinkLabel: 'Log out'
 }
 
-const primaryBtnProps = {
+const primaryBtnIProps = {
   text: 'Submit',
   type: 'submit',
   classes: ['mt-6'],
@@ -123,25 +123,25 @@ const primaryBtnProps = {
   }
 }
 
-const roundBtnProps = {
+const roundBtnIProps = {
   classes: ['rot-180'],
   logo: arrowLogo,
   type: 'button'
 }
 
-const avatarProps = {
+const avatarIProps = {
   classes: ['mb-4'],
   logo: avatarLogo
 }
 
 // 2 - create page structure
 const page = new SideNav({
-  ctrlElement: new RoundBtn(roundBtnProps),
+  ctrlElement: new RoundBtn(roundBtnIProps),
   content: new Form({
-    ...formProps,
-    avatar: new Avatar(avatarProps),
-    childrenList: textFieldProps.map(p => new TextField(p)),
-    submitBtn: new PrimaryBtn(primaryBtnProps),
+    ...formIProps,
+    avatar: new Avatar(avatarIProps),
+    childrenList: textFieldIProps.map(p => new TextField(p)),
+    submitBtn: new PrimaryBtn(primaryBtnIProps),
     events: {
       submit: (event: Event) => submitForm(event)
     }

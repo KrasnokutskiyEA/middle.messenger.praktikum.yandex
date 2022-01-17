@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid'
 import EventBus from './EventBus'
 
 /* props schema */
-export interface IBloc {
+export interface IProps {
   events?: { [key: string]: (event: Event) => void }
   childrenList?: Block[]
   classes?: string[]
@@ -25,18 +25,18 @@ export abstract class Block {
   }
 
   private _element!: HTMLElement
-  readonly _meta: { tagName: string, propsAndChildren: IBloc }
+  readonly _meta: { tagName: string, propsAndChildren: IProps }
   readonly _id: string
-  readonly props: IBloc
+  readonly props: IProps
   readonly children: IChildren
   readonly eventBus: () => EventBus
 
   /* constructor */
-  constructor (tagName = 'div', propsAndChildren: IBloc) {
+  constructor (tagName = 'div', propsAndChildren: IProps) {
     const eventBus = new EventBus()
     this._meta = { tagName, propsAndChildren }
     this._id = uuidv4()
-    this.props = this._makePropsProxy({ ...propsAndChildren, _id: this._id })
+    this.props = this._makeIPropsProxy({ ...propsAndChildren, _id: this._id })
     const { children } = this._getChildren(propsAndChildren)
     this.children = children ?? {}
     this.eventBus = () => eventBus
@@ -50,9 +50,9 @@ export abstract class Block {
   }
 
   /* private methods */
-  private _getChildren (propsAndChildren: IBloc): IBloc {
-    const children: IBloc = {}
-    const props: IBloc = {}
+  private _getChildren (propsAndChildren: IProps): IProps {
+    const children: IProps = {}
+    const props: IProps = {}
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof Block) {
@@ -101,8 +101,8 @@ export abstract class Block {
     })
   }
 
-  private _componentDidUpdate (oldProps: IBloc, newProps: IBloc): void {
-    const response = this.componentDidUpdate(oldProps, newProps)
+  private _componentDidUpdate (oldIProps: IProps, newIProps: IProps): void {
+    const response = this.componentDidUpdate(oldIProps, newIProps)
     if (!response) {
       return
     }
@@ -145,7 +145,7 @@ export abstract class Block {
     })
   }
 
-  private _makePropsProxy (props: IBloc): IBloc {
+  private _makeIPropsProxy (props: IProps): IProps {
     return new Proxy(props, {
       get (target, prop: string) {
         const value = target[prop]
@@ -184,11 +184,11 @@ export abstract class Block {
     return this.element
   }
 
-  public componentDidUpdate (oldProps: IBloc, newProps: IBloc): boolean {
+  public componentDidUpdate (oldProps: IProps, newProps: IProps): boolean {
     return true
   }
 
-  public setProps = (nextProps: IBloc): void => {
+  public setIProps = (nextProps: IProps): void => {
     if (nextProps === undefined) {
       return
     }
@@ -207,7 +207,7 @@ export abstract class Block {
     this.getContent()!.style.display = 'none'
   }
 
-  public compile (compileTemplate: any, props: IBloc): HTMLTemplateElement {
+  public compile (compileTemplate: any, props: IProps): HTMLTemplateElement {
     const propsAndStubs = { ...props }
     const { childrenList = [], ...otherChildren } = this.children
 

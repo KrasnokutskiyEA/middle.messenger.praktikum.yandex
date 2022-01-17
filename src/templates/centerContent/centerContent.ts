@@ -1,11 +1,11 @@
-import { Block, IBloc } from '../../classes/Block'
+import { Block, IProps } from '../../classes/Block'
 
 // template imports
 import template from './centerContent.pug'
 
 // component
 class CenterContent extends Block {
-  constructor (props: IBloc) {
+  constructor (props: IProps) {
     super('div', { ...props })
   }
 

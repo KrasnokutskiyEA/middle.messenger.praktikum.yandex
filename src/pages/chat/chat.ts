@@ -17,7 +17,7 @@ import RoundBtn from '../../components/roundBtn/roundBtn'
 import InputField from '../../components/chat/inputField/inputField'
 
 // 1 - generate context
-const inputFieldProps = {
+const inputFieldIProps = {
   name: 'message',
   id: 'message',
   placeholder: 'Message',
@@ -25,7 +25,7 @@ const inputFieldProps = {
   classes: ['ml-2']
 }
 
-const roundBtnProps = {
+const roundBtnIProps = {
   logo: arrowLogo,
   classes: ['ml-2', 'mr-2'],
   type: 'submit'
@@ -43,8 +43,8 @@ const page = new ChatLayout({
     childrenList: messages.map(message => new MessageCard(message))
   }),
   messagesCtrls: new MessagesCtrls({
-    inputField: new InputField(inputFieldProps),
-    sendBtn: new RoundBtn(roundBtnProps),
+    inputField: new InputField(inputFieldIProps),
+    sendBtn: new RoundBtn(roundBtnIProps),
     events: {
       submit: (event: Event) => {
         submitForm(event)

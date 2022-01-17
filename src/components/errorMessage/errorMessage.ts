@@ -1,12 +1,12 @@
 // import base class
-import { Block, IBloc } from '../../classes/Block'
+import { Block, IProps } from '../../classes/Block'
 
 // import template
 import template from './errorMessage.pug'
 
 // component
 class ErrorMessage extends Block {
-  constructor (props: IBloc) {
+  constructor (props: IProps) {
     super('div', { ...props })
   }
 

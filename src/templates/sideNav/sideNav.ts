@@ -1,11 +1,11 @@
-import { Block, IBloc } from '../../classes/Block'
+import { Block, IProps } from '../../classes/Block'
 
 // template imports
 import template from './sideNav.pug'
 
 // component
 class sideNav extends Block {
-  constructor (props: IBloc) {
+  constructor (props: IProps) {
     super('div', { ...props })
   }
 
