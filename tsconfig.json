@@ -5,7 +5,7 @@
 
     /* Modules */
     "module": "es2020",                                  /* Specify what module code is generated. */
-    "rootDir": "./src",                                  /* Specify the root folder within your source files. */
+    "rootDir": "/",                                      /* Specify the root folder within your source files. */
 
     /* Emit */
     "sourceMap": true,                                   /* Create source map files for emitted JavaScript files. */
@@ -22,5 +22,5 @@
     "noUnusedLocals": true,                              /* Enable error reporting when a local variables aren't read. */
     "noUnusedParameters": true                           /* Raise an error when a function parameter isn't read */
   },
-  "include": ["./src/"]
+  "include": ["./src/", "./server.ts"]
 }

@@ -7,7 +7,6 @@
     "standard-with-typescript"
   ],
   "parser": "@typescript-eslint/parser",
-  "files": ["*.ts"],
   "parserOptions": {
     "ecmaVersion": 2021,
     "sourceType": "module",
