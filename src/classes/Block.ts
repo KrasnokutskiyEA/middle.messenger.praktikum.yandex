@@ -15,7 +15,7 @@ interface IChildrenSimple { [childName: string]: Block }
 interface IChildrenList { childrenList?: Block[] }
 type IChildren = IChildrenSimple & IChildrenList
 
-export class Block {
+export abstract class Block {
   /* class properties */
   static EVENTS = {
     INIT: 'init',
