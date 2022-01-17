@@ -188,7 +188,7 @@ export abstract class Block {
     return true
   }
 
-  public setIProps = (nextProps: IProps): void => {
+  public setProps = (nextProps: IProps): void => {
     if (nextProps === undefined) {
       return
     }

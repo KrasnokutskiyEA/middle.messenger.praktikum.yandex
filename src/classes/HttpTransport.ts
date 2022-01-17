@@ -5,11 +5,10 @@
 */
 function queryStringify (data: object): string {
   let res = ''
-  Object.entries(data).forEach(([key, val]) => { res += `${key}=${val}&` })
+  Object.entries(data).forEach(([key, val]: [string, any]) => { res += `${key}=${val}&` })
   return '?' + res.slice(0, -1)
 }
 
-// -------------------------------
 enum METHODS {
   GET = 'GET',
   POST = 'POST',
@@ -25,24 +24,28 @@ interface IRequestOptions {
   data?: unknown
 }
 
+interface IRequestData {
+  [key: string]: string | number
+}
+
 class HTTPTransport {
-  get = async (url: string, options = {}): Promise<unknown> => {
-    return await this.request(url, { ...options, method: METHODS.GET })
+  get = async (url: string, options = {}): Promise<XMLHttpRequest> => {
+    return this.request(url, { ...options, method: METHODS.GET })
   }
 
-  post = async (url: string, options = {}): Promise<unknown> => {
-    return await this.request(url, { ...options, method: METHODS.POST })
+  post = async (url: string, options = {}): Promise<XMLHttpRequest> => {
+    return this.request(url, { ...options, method: METHODS.POST })
   }
 
-  put = async (url: string, options = {}): Promise<unknown> => {
-    return await this.request(url, { ...options, method: METHODS.PUT })
+  put = async (url: string, options = {}): Promise<XMLHttpRequest> => {
+    return this.request(url, { ...options, method: METHODS.PUT })
   }
 
-  delete = async (url: string, options = {}): Promise<unknown> => {
-    return await this.request(url, { ...options, method: METHODS.DELETE })
+  delete = async (url: string, options = {}): Promise<XMLHttpRequest> => {
+    return this.request(url, { ...options, method: METHODS.DELETE })
   }
 
-  request = async (url: string, options: IRequestOptions = {}): Promise<unknown> => {
+  request = async (url: string, options: IRequestOptions = {}): Promise<XMLHttpRequest> => {
     const {
       headers = {},
       method = METHODS.GET,
@@ -50,26 +53,24 @@ class HTTPTransport {
       timeout = 3000
     } = options
 
+    const query: string = method === METHODS.GET ? queryStringify(data as IRequestData) : ''
+
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest()
-      const isGet = method === METHODS.GET
 
-      xhr.open(method, isGet && !!data ? `${url}${queryStringify(data)}` : url)
+      xhr.open(method, url + query)
 
       Object.keys(headers).forEach(key => {
         xhr.setRequestHeader(key, headers[key])
       })
 
-      xhr.onload = function () {
-        resolve(xhr)
-      }
-
+      xhr.onload = () => xhr.status >= 300 ? reject(xhr) : resolve(xhr)
       xhr.onabort = reject
       xhr.onerror = reject
       xhr.timeout = timeout
       xhr.ontimeout = reject
 
-      if (isGet || !data) {
+      if (method === METHODS.GET || data === undefined) {
         xhr.send()
       } else {
         xhr.send(JSON.stringify(data))

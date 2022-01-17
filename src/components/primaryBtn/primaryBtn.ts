@@ -11,7 +11,7 @@ class PrimaryBtn extends Block {
   }
 
   setDisabled (isDisabled: boolean): void {
-    isDisabled ? this.setIProps({ disabled: true }) : this.setIProps({ disabled: false })
+    isDisabled ? this.setProps({ disabled: true }) : this.setProps({ disabled: false })
   }
 
   render (): HTMLElement {
