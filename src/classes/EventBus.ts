@@ -1,5 +1,3 @@
-import { IBloc } from './Block'
-
 export default class EventBus {
   readonly listeners: Record<string, Function[]>
 
@@ -7,7 +5,7 @@ export default class EventBus {
     this.listeners = {}
   }
 
-  on (event: string, callback: (oldProps: IBloc, newProps: IBloc) => void): void {
+  on (event: string, callback: (...args: any[]) => void): void {
     if (this.listeners[event] === undefined) {
       this.listeners[event] = []
     }
@@ -15,7 +13,7 @@ export default class EventBus {
     this.listeners[event].push(callback)
   }
 
-  off (event: string, callback: (oldProps: IBloc, newProps: IBloc) => void): void {
+  off (event: string, callback: (...args: any[]) => void): void {
     if (this.listeners[event] === undefined) {
       throw new Error(`Нет события: ${event}`)
     }

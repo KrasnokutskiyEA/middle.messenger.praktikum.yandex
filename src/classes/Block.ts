@@ -4,12 +4,16 @@ import EventBus from './EventBus'
 /* props schema */
 export interface IBloc {
   events?: { [key: string]: (event: Event) => void }
-  children?: IBloc | IBloc[]
+  childrenList?: Block[]
   classes?: string[]
   text?: string
   type?: string
   [index: string]: any
 }
+
+interface IChildrenSimple { [childName: string]: Block }
+interface IChildrenList { childrenList?: Block[] }
+type IChildren = IChildrenSimple & IChildrenList
 
 export class Block {
   /* class properties */
@@ -24,7 +28,7 @@ export class Block {
   readonly _meta: { tagName: string, propsAndChildren: IBloc }
   readonly _id: string
   readonly props: IBloc
-  readonly children: IBloc | IBloc[]
+  readonly children: IChildren
   readonly eventBus: () => EventBus
 
   /* constructor */
@@ -55,7 +59,7 @@ export class Block {
         children[key] = value
       } else if (key === 'childrenList') {
         children[key] = []
-        value.forEach((v: Block) => (children[key].push(v)))
+        value.forEach((v: Block) => (children[key]!.push(v)))
       } else {
         props[key] = value
       }
@@ -86,13 +90,13 @@ export class Block {
     this.componentDidMount()
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
 
-    const { childrenList = [], ...otherChildren } = this.children
+    const { childrenList = [] as Block[], ...otherChildren } = this.children
 
     Object.values(otherChildren).forEach(child => {
       child.dispatchComponentDidMount()
     })
 
-    childrenList.forEach((child: IBloc) => {
+    childrenList.forEach((child: Block) => {
       child.dispatchComponentDidMount()
     })
   }
@@ -106,7 +110,7 @@ export class Block {
   }
 
   private _render (): void {
-    const block = this.render()
+    const block = this.render() as unknown as Element
 
     if (block !== undefined) {
       const tgt = document.querySelector(`[data-id="${this._element.getAttribute('data-id')!}"]`)
@@ -115,7 +119,7 @@ export class Block {
         this._element.innerHTML = ''
         this._element.appendChild(block)
       } else {
-        block.firstElementChild.setAttribute('data-id', tgt.getAttribute('data-id'))
+        block.firstElementChild!.setAttribute('data-id', tgt.getAttribute('data-id')!)
         tgt.parentNode?.replaceChild(block, tgt)
       }
       this._addEvents() // add new event handlers
@@ -127,7 +131,7 @@ export class Block {
 
     Object.entries(events).forEach(([eventName, evt]) => {
       const id = this._element.getAttribute('data-id')
-      const tgt = document.querySelector(`[data-id="${id}"]`)
+      const tgt = document.querySelector(`[data-id="${id!}"]`)
       const target = tgt === null ? this._element.firstElementChild : tgt
       target?.addEventListener(eventName, evt, true)
     })
@@ -185,14 +189,14 @@ export class Block {
   }
 
   public setProps = (nextProps: IBloc): void => {
-    if (!nextProps) {
+    if (nextProps === undefined) {
       return
     }
 
     // 1 - remove old event handlers
     this._removeEvents()
     Object.assign(this.props, nextProps)
-    this.eventBus().emit(Block.EVENTS.FLOW_CDU, this._meta.props, nextProps) // emit CDU
+    this.eventBus().emit(Block.EVENTS.FLOW_CDU, this._meta.propsAndChildren, nextProps) // emit CDU
   }
 
   public show (): void {
@@ -208,41 +212,38 @@ export class Block {
     const { childrenList = [], ...otherChildren } = this.children
 
     // ordinary children
-    Object.entries(otherChildren).forEach(([key, child]) => {
+    Object.entries(otherChildren).forEach(([key, child]: [string, Block]) => {
       propsAndStubs[key] = `<div data-id="${child._id}"></div>`
     })
 
     // childrenList
     let res = ''
-    let buffer = []
+    let buffer: Block[] | undefined = []
     if (childrenList.length > 0) {
-      childrenList.forEach((child: IBloc) => {
+      childrenList.forEach((child: Block) => {
         res += `<div data-id="${child._id}"></div>`
       })
 
       buffer = propsAndStubs.childrenList
-      propsAndStubs.childrenList = res
+      propsAndStubs.childrenList = res as unknown as Block[]
     }
 
     // compile template
     const fragment = this._createDocumentElement('template')
     fragment.innerHTML = compileTemplate(propsAndStubs)
 
-    // replace stubs - ordinary children
-    Object.values(otherChildren)?.forEach(child => {
+    const replaceStub = (child: Block): void => {
       const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
-      const el = child.getContent().firstElementChild
-      el.setAttribute('data-id', child._id)
+      const el = child?.getContent()?.firstElementChild
+      el?.setAttribute('data-id', child._id)
       stub?.replaceWith(el)
-    })
+    }
+
+    // replace stubs - ordinary children
+    Object.values(otherChildren).forEach((child: Block) => replaceStub(child))
 
     // replace stubs - childrenlist
-    buffer?.forEach((child: IBloc) => {
-      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
-      const el = child.getContent().firstElementChild
-      el.setAttribute('data-id', child._id)
-      stub?.replaceWith(el)
-    })
+    buffer?.forEach((child: Block) => replaceStub(child))
 
     return fragment.content
   }
