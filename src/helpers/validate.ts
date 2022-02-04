@@ -1,3 +1,4 @@
+// validate single input
 export function validateInput (input: EventTarget): void {
   const isValid = input.validity.valid
 
@@ -8,6 +9,7 @@ export function validateInput (input: EventTarget): void {
   }
 }
 
+// validate whole form (all inputs at once)
 export function validateForm (): void {
   const input = document.querySelectorAll('input')
 
@@ -18,13 +20,14 @@ function serializeForm (formNode: HTMLFormElement): FormData {
   return new FormData(formNode)
 }
 
-export function submitForm (event: Event): void {
+export function submitForm (event: Event): Record<string, unknown> {
   // 1- prevent form default behaviour
   event.preventDefault()
 
   // 2 - gather inputs data
-  const data = serializeForm(event.target)
-  console.log('form data=', Object.fromEntries(data.entries()))
+  const data = serializeForm(event.target as HTMLFormElement)
+  // console.log('form data=', Object.fromEntries(data.entries()))
+  return Object.fromEntries(data.entries())
 }
 
 export function clearInput (event: Event): void {

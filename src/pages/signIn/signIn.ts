@@ -9,6 +9,8 @@ import CenterContent from '../../templates/centerContent/centerContent'
 import Form from '../../modules/form/form'
 import TextField from '../../components/textField/textField'
 import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
+import { authController } from '../../controllers/index'
+// import Message from '../../components/message/message'
 
 // 1 - generate context
 const formIProps = {
@@ -65,12 +67,21 @@ const primaryBtnIProps = {
 
 // 2 - create page structure
 const page = new CenterContent({
+  // infoMessage: new Message({ text: 'aaaabbb', classes: ['message-error'] }),
   content: new Form({
     ...formIProps,
     childrenList: textFieldIProps.map(p => new TextField(p)),
     submitBtn: new PrimaryBtn(primaryBtnIProps),
     events: {
-      submit: (event: Event) => submitForm(event)
+      submit: (event: Event) => {
+        const data = submitForm(event)
+        // console.log('---data=', data)
+
+        authController.signIn({
+          login: data.login,
+          password: data.password
+        })
+      }
     }
   })
 })

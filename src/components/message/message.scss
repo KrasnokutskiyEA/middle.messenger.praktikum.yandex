@@ -1,0 +1,22 @@
+@use 'sass:map';
+
+.message {
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3em;
+  font-weight: bold;
+  color: white;
+
+  &-success {
+    background-color: map.get($colors, 'success-message');
+  }
+
+  &-error {
+    background-color: map.get($colors, 'error-message');
+  }
+}
