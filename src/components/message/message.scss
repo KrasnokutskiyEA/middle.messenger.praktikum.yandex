@@ -1,5 +1,12 @@
 @use 'sass:map';
 
+@keyframes transit {
+  0% { bottom: -50px; }
+  10% { bottom: 0; }
+  90% { bottom: 0; }
+  100% { bottom: -50px; }
+}
+
 .message {
   position: absolute;
   display: flex;
@@ -11,6 +18,8 @@
   font-size: 1.3em;
   font-weight: bold;
   color: white;
+  animation-name: transit;
+  animation-duration: 3s;
 
   &-success {
     background-color: map.get($colors, 'success-message');

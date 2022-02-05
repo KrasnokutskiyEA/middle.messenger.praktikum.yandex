@@ -180,8 +180,8 @@ export abstract class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM)
   }
 
-  public getContent (): HTMLElement | undefined {
-    return this.element
+  public getContent (): HTMLElement {
+    return this.element!
   }
 
   public componentDidUpdate (oldProps: IProps, newProps: IProps): boolean {
@@ -199,15 +199,9 @@ export abstract class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_CDU, this._meta.propsAndChildren, nextProps) // emit CDU
   }
 
-  /*
-  public show (val: string): void {
-    this.getContent()!.style.display = val
+  public unmount (): void {
+    this._element.remove()
   }
-
-  public hide (): void {
-    this.getContent()!.style.display = 'none'
-  }
-  */
 
   public compile (compileTemplate: any, props: IProps): HTMLTemplateElement {
     const propsAndStubs = { ...props }

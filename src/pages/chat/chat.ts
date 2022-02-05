@@ -4,7 +4,7 @@ import arrowLogo from '../../assets/images/arrow.svg'
 
 // helpers import
 import { chats, messages } from '../../helpers/fakeData'
-import { clearInput, submitForm } from '../../helpers/validate'
+import { clearInput, submitForm } from '../../helpers/formUtils'
 
 // components import (.ts)
 import ChatLayout from '../../templates/chatLayout/chatLayout'

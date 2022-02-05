@@ -4,7 +4,7 @@ import avatarLogo from '../../assets/images/avatar.svg'
 import arrowLogo from '../../assets/images/arrow.svg'
 
 // helpers import
-import { validateInput, validateForm, submitForm } from '../../helpers/validate'
+import { validateInput, validateForm, submitForm } from '../../helpers/formUtils'
 
 // components import (.ts)
 import SideNav from '../../templates/sideNav/sideNav'

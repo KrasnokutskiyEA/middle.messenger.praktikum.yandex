@@ -2,7 +2,7 @@
 import '../../assets/styles/index.scss'
 
 // helpers import
-import { validateInput, validateForm, submitForm } from '../../helpers/validate'
+import { validateInput, validateForm, submitForm } from '../../helpers/formUtils'
 
 // components import (.ts)
 import CenterContent from '../../templates/centerContent/centerContent'

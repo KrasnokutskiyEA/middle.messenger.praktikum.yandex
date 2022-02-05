@@ -2,7 +2,7 @@
 import '../../assets/styles/index.scss'
 
 // helpers import
-import { validateInput, validateForm, submitForm } from '../../helpers/validate'
+import { validateInput, validateForm, submitForm } from '../../helpers/formUtils'
 
 // components import (.ts)
 import CenterContent from '../../templates/centerContent/centerContent'
@@ -67,7 +67,6 @@ const primaryBtnIProps = {
 
 // 2 - create page structure
 const page = new CenterContent({
-  // infoMessage: new Message({ text: 'aaaabbb', classes: ['message-error'] }),
   content: new Form({
     ...formIProps,
     childrenList: textFieldIProps.map(p => new TextField(p)),
@@ -75,12 +74,7 @@ const page = new CenterContent({
     events: {
       submit: (event: Event) => {
         const data = submitForm(event)
-        // console.log('---data=', data)
-
-        authController.signIn({
-          login: data.login,
-          password: data.password
-        })
+        authController.signIn({ login: data.login, password: data.password })
       }
     }
   })
