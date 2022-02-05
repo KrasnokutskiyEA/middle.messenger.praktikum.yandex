@@ -15,4 +15,4 @@ class Message extends Block {
   }
 }
 
-export default Message
+export default new Message({ text: '', classes: [''] })
