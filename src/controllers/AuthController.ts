@@ -1,9 +1,14 @@
-import { showMessage } from '../helpers/infoMessage'
+import { /* showMessage, */ showSpinner /*, hideSpinner */ } from '../helpers/infoMessage'
 
 class AuthController {
   public signIn (user: object): void {
     console.log('----signing in..........user=', user)
-    showMessage('this is text', ['message-success'])
+    // showMessage('this is text', ['message-success'])
+    showSpinner()
+
+    // setTimeout(() => {
+    //   hideSpinner()
+    // }, 3000)
   }
 }
 
