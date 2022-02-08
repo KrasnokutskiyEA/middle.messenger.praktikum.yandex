@@ -1,6 +1,9 @@
 // asssets import
 import '../../assets/styles/index.scss'
-import arrowLogo from '../../assets/images/arrow.svg'
+// import arrowLogo from '../../assets/images/arrow.svg'
+import textLogo from '../../assets/images/text.svg'
+import sendLogo from '../../assets/images/send.svg'
+// import searchLogo from '../../assets/images/search.svg'
 
 // helpers import
 import { chats, messages } from '../../helpers/fakeData'
@@ -20,13 +23,14 @@ import InputField from '../../components/chat/inputField/inputField'
 const inputFieldIProps = {
   name: 'message',
   id: 'message',
-  placeholder: 'Message',
+  placeholder: 'Write a message...',
   required: true,
-  classes: ['ml-2']
+  classes: ['ml-2'],
+  logo: textLogo
 }
 
 const roundBtnIProps = {
-  logo: arrowLogo,
+  logo: sendLogo,
   classes: ['ml-2', 'mr-2'],
   type: 'submit'
 }
