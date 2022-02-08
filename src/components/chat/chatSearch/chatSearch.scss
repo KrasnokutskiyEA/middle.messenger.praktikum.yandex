@@ -1,0 +1,9 @@
+@use 'sass:map';
+
+.chat-search {
+  height: $menus-height;
+  border-bottom: 1px solid map.get($colors, 'lightgray');
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}

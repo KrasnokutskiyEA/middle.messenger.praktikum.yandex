@@ -14,11 +14,11 @@ $menus-height: 60px;
     flex-direction: column;
     border-right: 1px solid map.get($colors, 'lightgray');
 
-    .chat-menu-search {
-      height: $menus-height;
-      border-bottom: 1px solid map.get($colors, 'lightgray');
-      flex-shrink: 0;
-    }
+    // .chat-search {
+    //   height: $menus-height;
+    //   border-bottom: 1px solid map.get($colors, 'lightgray');
+    //   flex-shrink: 0;
+    // }
 
     .chat-menu-controls {
       height: $menus-height;
