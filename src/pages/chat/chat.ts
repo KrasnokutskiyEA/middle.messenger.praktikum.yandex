@@ -3,6 +3,8 @@ import '../../assets/styles/index.scss'
 import textLogo from '../../assets/images/text.svg'
 import sendLogo from '../../assets/images/send.svg'
 import searchLogo from '../../assets/images/search.svg'
+import addLogo from '../../assets/images/add.svg'
+import personLogo from '../../assets/images/person.svg'
 
 // helpers import
 import { chats, messages } from '../../helpers/fakeData'
@@ -11,12 +13,13 @@ import { clearInput, submitForm } from '../../helpers/formUtils'
 // components import (.ts)
 import ChatLayout from '../../templates/chatLayout/chatLayout'
 import ChatsList from '../../components/chat/chatsList/chatsList'
-import ChatSearch from '../../components/chat/chatSearch/chatSearch'
+import ChatCtrlsContainer from '../../components/chat/chatCtrlsContainer/chatCtrlsContainer'
 import ChatCard from '../../components/chat/chatCard/chatCard'
 import MessagesList from '../../components/chat/messagesList/messagesList'
 import MessageCard from '../../components/chat/messageCard/messageCard'
 import MessagesCtrls from '../../components/chat/messagesCtrls/messagesCtrls'
 import RoundBtn from '../../components/roundBtn/roundBtn'
+import SecondaryBtn from '../../components/secondaryBtn/secondaryBtn'
 import InputField from '../../components/chat/inputField/inputField'
 
 // 1 - generate context
@@ -46,15 +49,36 @@ const roundBtnIProps = {
   type: 'submit'
 }
 
+const addChatBtnIProps = {
+  type: 'button',
+  text: 'New chat',
+  isRed: false,
+  logo: addLogo
+}
+
+const openProfileBtnIProps = {
+  type: 'button',
+  text: 'My profile',
+  isRed: false,
+  logo: personLogo
+}
+
 // 2 - create page structure
 const page = new ChatLayout({
-  chatSearch: new ChatSearch({
-    inputField: new InputField(inputFieldSearchIProps)
+  chatSearch: new ChatCtrlsContainer({
+    classes: ['chat-search-top'],
+    childrenList: [new InputField(inputFieldSearchIProps)]
   }),
   chatsList: new ChatsList({
     childrenList: chats.map(chat => new ChatCard(chat))
   }),
-  // chatMenuCtrls:
+  chatMenuCtrls: new ChatCtrlsContainer({
+    classes: ['chat-search-bottom'],
+    childrenList: [
+      new SecondaryBtn(addChatBtnIProps),
+      new SecondaryBtn(openProfileBtnIProps)
+    ]
+  }),
   // chatHeader:
   messagesList: new MessagesList({
     childrenList: messages.map(message => new MessageCard(message))

@@ -1,11 +1,11 @@
 // import base class
-import { Block, IProps } from '../../../classes/Block'
+import { Block, IProps } from '../../classes/Block'
 
 // import template
-import template from './chatSearch.pug'
+import template from './secondaryBtn.pug'
 
 // component
-class ChatSearch extends Block {
+class SecondaryBtn extends Block {
   constructor (props: IProps) {
     super('div', props)
   }
@@ -15,4 +15,4 @@ class ChatSearch extends Block {
   }
 }
 
-export default ChatSearch
+export default SecondaryBtn

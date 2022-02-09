@@ -6,4 +6,12 @@
   flex-shrink: 0;
   display: flex;
   align-items: center;
+
+  &-top {
+    border-bottom: 1px solid map.get($colors, 'lightgray');
+  }
+
+  &-bottom {
+    border-top: 1px solid map.get($colors, 'lightgray');
+  }
 }

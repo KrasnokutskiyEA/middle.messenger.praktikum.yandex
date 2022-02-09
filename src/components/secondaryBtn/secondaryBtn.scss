@@ -1,0 +1,23 @@
+@use 'sass:map';
+
+.secondary-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+
+  &-red {
+    color: map.get($colors, 'red');
+  }
+
+  .title {
+    font-size: 1em;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+}
