@@ -2,6 +2,7 @@
 import '../../assets/styles/index.scss'
 import textLogo from '../../assets/images/text.svg'
 import sendLogo from '../../assets/images/send.svg'
+import settingsLogo from '../../assets/images/settings.svg'
 import searchLogo from '../../assets/images/search.svg'
 import addLogo from '../../assets/images/add.svg'
 import personLogo from '../../assets/images/person.svg'
@@ -13,11 +14,10 @@ import { clearInput, submitForm } from '../../helpers/formUtils'
 // components import (.ts)
 import ChatLayout from '../../templates/chatLayout/chatLayout'
 import ChatsList from '../../components/chat/chatsList/chatsList'
-import ChatCtrlsContainer from '../../components/chat/chatCtrlsContainer/chatCtrlsContainer'
+import ChatControls from '../../components/chat/chatControls/chatControls'
 import ChatCard from '../../components/chat/chatCard/chatCard'
 import MessagesList from '../../components/chat/messagesList/messagesList'
 import MessageCard from '../../components/chat/messageCard/messageCard'
-import MessagesCtrls from '../../components/chat/messagesCtrls/messagesCtrls'
 import RoundBtn from '../../components/roundBtn/roundBtn'
 import SecondaryBtn from '../../components/secondaryBtn/secondaryBtn'
 import InputField from '../../components/chat/inputField/inputField'
@@ -43,10 +43,16 @@ const inputFieldSearchIProps = {
   logo: searchLogo
 }
 
-const roundBtnIProps = {
+const sendMessageBtnIProps = {
   logo: sendLogo,
-  classes: ['ml-2', 'mr-2'],
+  classes: ['round-btn-normal', 'ml-2', 'mr-2'],
   type: 'submit'
+}
+
+const chatSettingsBtnIProps = {
+  logo: settingsLogo,
+  classes: ['round-btn-icon', 'ml-2', 'mr-2'],
+  type: 'button'
 }
 
 const addChatBtnIProps = {
@@ -65,27 +71,42 @@ const openProfileBtnIProps = {
 
 // 2 - create page structure
 const page = new ChatLayout({
-  chatSearch: new ChatCtrlsContainer({
-    classes: ['chat-search-top'],
+  chatSearch: new ChatControls({
+    classes: ['chat-controls-top'],
     childrenList: [new InputField(inputFieldSearchIProps)]
   }),
   chatsList: new ChatsList({
     childrenList: chats.map(chat => new ChatCard(chat))
   }),
-  chatMenuCtrls: new ChatCtrlsContainer({
-    classes: ['chat-search-bottom'],
+  chatMenuCtrls: new ChatControls({
+    classes: ['chat-controls-bottom'],
     childrenList: [
       new SecondaryBtn(addChatBtnIProps),
       new SecondaryBtn(openProfileBtnIProps)
     ]
   }),
-  // chatHeader:
+  chatHeader: new ChatControls({
+    classes: ['chat-controls-top'],
+    childrenList: [
+      new InputField(inputFieldMessageIProps),
+      new RoundBtn(chatSettingsBtnIProps)
+    ]
+    // events: {
+    //   submit: (event: Event) => {
+    //     submitForm(event)
+    //     clearInput(event)
+    //   }
+    // }
+  }),
   messagesList: new MessagesList({
     childrenList: messages.map(message => new MessageCard(message))
   }),
-  messagesCtrls: new MessagesCtrls({
-    inputField: new InputField(inputFieldMessageIProps),
-    sendBtn: new RoundBtn(roundBtnIProps),
+  messagesCtrls: new ChatControls({
+    classes: ['chat-controls-bottom'],
+    childrenList: [
+      new InputField(inputFieldMessageIProps),
+      new RoundBtn(sendMessageBtnIProps)
+    ],
     events: {
       submit: (event: Event) => {
         submitForm(event)

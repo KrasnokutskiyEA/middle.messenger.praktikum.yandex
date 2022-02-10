@@ -10,5 +10,16 @@
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  background-color: map.get($colors, 'yellow');
+
+  &-normal {
+    background-color: map.get($colors, 'yellow');
+  }
+
+  &-icon {
+    background-color: map.get($colors, 'white');
+
+    &:hover {
+      background-color: map.get($colors, 'lightyellow');
+    }
+  }
 }

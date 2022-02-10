@@ -2,10 +2,10 @@
 import { Block, IProps } from '../../../classes/Block'
 
 // import template
-import template from './messagesCtrls.pug'
+import template from './chatControls.pug'
 
 // component
-class MessagesCtrls extends Block {
+class ChatControls extends Block {
   constructor (props: IProps) {
     super('div', props)
   }
@@ -15,4 +15,4 @@ class MessagesCtrls extends Block {
   }
 }
 
-export default MessagesCtrls
+export default ChatControls
