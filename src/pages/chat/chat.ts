@@ -16,6 +16,7 @@ import ChatLayout from '../../templates/chatLayout/chatLayout'
 import ChatsList from '../../components/chat/chatsList/chatsList'
 import ChatControls from '../../components/chat/chatControls/chatControls'
 import ChatCard from '../../components/chat/chatCard/chatCard'
+import ChatTitle from '../../components/chat/chatTitle/chatTitle'
 import MessagesList from '../../components/chat/messagesList/messagesList'
 import MessageCard from '../../components/chat/messageCard/messageCard'
 import RoundBtn from '../../components/roundBtn/roundBtn'
@@ -69,6 +70,12 @@ const openProfileBtnIProps = {
   logo: personLogo
 }
 
+const chatTitleIProps = {
+  chatName: 'Steve Jordan',
+  chatAvatar: null,
+  classes: ['ml-2']
+}
+
 // 2 - create page structure
 const page = new ChatLayout({
   chatSearch: new ChatControls({
@@ -88,7 +95,7 @@ const page = new ChatLayout({
   chatHeader: new ChatControls({
     classes: ['chat-controls-top'],
     childrenList: [
-      new InputField(inputFieldMessageIProps),
+      new ChatTitle(chatTitleIProps),
       new RoundBtn(chatSettingsBtnIProps)
     ]
     // events: {
