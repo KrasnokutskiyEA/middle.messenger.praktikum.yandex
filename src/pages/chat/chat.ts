@@ -100,8 +100,7 @@ const page = new ChatLayout({
       new RoundBtn({
         ...chatSettingsBtnIProps,
         events: {
-          click: (event: Event) => {
-            console.log('----Toggle menu event=', event)
+          click: () => {
             showChatSettingsMenu()
           }
         }

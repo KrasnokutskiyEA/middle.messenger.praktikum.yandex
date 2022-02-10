@@ -24,9 +24,9 @@ export const hideSpinner = (): void => {
 }
 
 export const showChatSettingsMenu = (): void => {
-  document.body.append(ChatSettingsDropdown.getContent())
+  document.body.append(new ChatSettingsDropdown({}).getContent())
 }
 
-export const hideChatSettingsMenu = (): void => {
-  ChatSettingsDropdown.unmount()
-}
+// export const hideChatSettingsMenu = (): void => {
+//   ChatSettingsDropdown.unmount()
+// }
