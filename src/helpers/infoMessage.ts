@@ -1,5 +1,6 @@
 import Message from '../components/message/message'
 import Spinner from '../components/spinner/spinner'
+import ChatSettingsDropdown from '../components/chat/chatSettingsDropdown/chatSettingsDropdown'
 
 export const showMessage = (text: string, classes: string[]): void => {
   if (Message.props.text === '') {
@@ -20,4 +21,12 @@ export const showSpinner = (): void => {
 export const hideSpinner = (): void => {
   document.querySelector<HTMLElement>('#app')!.removeAttribute('style')
   Spinner.unmount()
+}
+
+export const showChatSettingsMenu = (): void => {
+  document.body.append(ChatSettingsDropdown.getContent())
+}
+
+export const hideChatSettingsMenu = (): void => {
+  ChatSettingsDropdown.unmount()
 }

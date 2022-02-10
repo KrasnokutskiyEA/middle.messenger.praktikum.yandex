@@ -10,6 +10,7 @@ import personLogo from '../../assets/images/person.svg'
 // helpers import
 import { chats, messages } from '../../helpers/fakeData'
 import { clearInput, submitForm } from '../../helpers/formUtils'
+import { showChatSettingsMenu } from '../../helpers/infoMessage'
 
 // components import (.ts)
 import ChatLayout from '../../templates/chatLayout/chatLayout'
@@ -96,14 +97,16 @@ const page = new ChatLayout({
     classes: ['chat-controls-top'],
     childrenList: [
       new ChatTitle(chatTitleIProps),
-      new RoundBtn(chatSettingsBtnIProps)
+      new RoundBtn({
+        ...chatSettingsBtnIProps,
+        events: {
+          click: (event: Event) => {
+            console.log('----Toggle menu event=', event)
+            showChatSettingsMenu()
+          }
+        }
+      })
     ]
-    // events: {
-    //   submit: (event: Event) => {
-    //     submitForm(event)
-    //     clearInput(event)
-    //   }
-    // }
   }),
   messagesList: new MessagesList({
     childrenList: messages.map(message => new MessageCard(message))
