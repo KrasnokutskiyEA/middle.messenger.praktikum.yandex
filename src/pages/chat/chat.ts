@@ -106,6 +106,7 @@ const ctx = {
 // 2 - create page structure
 const page = new ChatLayout({
   chatSearch: new ChatControls({
+    isForm: false,
     classes: ['chat-controls-top'],
     childrenList: [new InputField(inputFieldSearchIProps)]
   }),
@@ -113,6 +114,7 @@ const page = new ChatLayout({
     childrenList: chats.map(chat => new ChatCard(chat))
   }),
   chatMenuCtrls: new ChatControls({
+    isForm: false,
     classes: ['chat-controls-bottom'],
     childrenList: [
       new SecondaryBtn(addChatBtnIProps),
@@ -120,6 +122,7 @@ const page = new ChatLayout({
     ]
   }),
   chatHeader: new ChatControls({
+    isForm: false,
     classes: ['chat-controls-top'],
     childrenList: [
       new ChatTitle(chatTitleIProps),
@@ -137,6 +140,7 @@ const page = new ChatLayout({
     childrenList: messages.map(message => new MessageCard(message))
   }),
   messagesCtrls: new ChatControls({
+    isForm: true,
     classes: ['chat-controls-bottom'],
     childrenList: [
       new InputField(inputFieldMessageIProps),
