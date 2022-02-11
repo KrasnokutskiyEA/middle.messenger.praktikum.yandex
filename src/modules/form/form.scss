@@ -10,7 +10,8 @@
   align-items: center;
   padding-top: 60px;
   padding-bottom: 30px;
-  box-shadow: 1px 1px 100px 1px map.get($colors, 'shadow');
+  box-shadow: 1px 1px 10px 1px map.get($colors, 'white');
+  background-color: white;
 
   .form-title {
     font-size: 2em;

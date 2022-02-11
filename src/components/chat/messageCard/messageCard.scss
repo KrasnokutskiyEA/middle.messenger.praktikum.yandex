@@ -1,7 +1,7 @@
 @use 'sass:map';
 
 .message-card {
-  background-color: map.get($colors, 'altgray');
+  // background-color: map.get($colors, 'altgray');
   padding: 10px;
   margin-top: 20px;
   margin-left: 20px;
@@ -20,9 +20,15 @@
 
   &-outgoing {
     align-self: flex-end;
+    background-color: #fcffc8;
+    box-shadow: 1px 1px 20px #fbffc3;
   }
 
   &-incoming {
     align-self: flex-start;
+    background-color: white;
+    box-shadow: 1px 1px 40px white;
+
+    // background-image: linear-gradient(to right, #ebebeb, #ededed, #eeefee, #f0f0f0, #f2f2f2);
   }
 }

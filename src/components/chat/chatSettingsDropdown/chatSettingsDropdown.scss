@@ -1,8 +1,13 @@
+@use 'sass:map';
+
 .chat-settings-dropdown {
-  width: 150px;
-  height: 200px;
-  background-color: aquamarine;
+  width: 170px;
+  height: 180px;
+  background-color: map.get($colors, 'white');
   position: absolute;
   top: 80px;
   right: 20px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 30px map.get($colors, 'shadow-dark');
+  overflow: hidden;
 }

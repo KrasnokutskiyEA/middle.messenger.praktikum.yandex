@@ -26,7 +26,7 @@ export function submitForm (event: Event): Record<string, unknown> {
 
   // 2 - gather inputs data
   const data = serializeForm(event.target as HTMLFormElement)
-  // console.log('form data=', Object.fromEntries(data.entries()))
+  console.log('form data=', Object.fromEntries(data.entries()))
   return Object.fromEntries(data.entries())
 }
 

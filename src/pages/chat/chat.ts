@@ -5,12 +5,15 @@ import sendLogo from '../../assets/images/send.svg'
 import settingsLogo from '../../assets/images/settings.svg'
 import searchLogo from '../../assets/images/search.svg'
 import addLogo from '../../assets/images/add.svg'
+import deleteLogo from '../../assets/images/delete.svg'
 import personLogo from '../../assets/images/person.svg'
+import userAddLogo from '../../assets/images/user_add.svg'
+import userRemoveLogo from '../../assets/images/user_remove.svg'
 
 // helpers import
 import { chats, messages } from '../../helpers/fakeData'
 import { clearInput, submitForm } from '../../helpers/formUtils'
-import { showChatSettingsMenu } from '../../helpers/infoMessage'
+import { showChatSettingsMenu } from '../../helpers/showComponents'
 
 // components import (.ts)
 import ChatLayout from '../../templates/chatLayout/chatLayout'
@@ -60,21 +63,44 @@ const chatSettingsBtnIProps = {
 const addChatBtnIProps = {
   type: 'button',
   text: 'New chat',
-  isRed: false,
-  logo: addLogo
+  logo: addLogo,
+  classes: ['w-full', 'h-full', 'pr-2']
 }
 
 const openProfileBtnIProps = {
   type: 'button',
   text: 'My profile',
-  isRed: false,
-  logo: personLogo
+  logo: personLogo,
+  classes: ['w-full', 'h-full']
 }
 
 const chatTitleIProps = {
   chatName: 'Steve Jordan',
   chatAvatar: null,
   classes: ['ml-2']
+}
+
+const ctx = {
+  childrenList: [
+    new SecondaryBtn({
+      type: 'button',
+      text: 'Add user',
+      logo: userAddLogo,
+      classes: ['w-full', 'h-6', 'pr-22']
+    }),
+    new SecondaryBtn({
+      type: 'button',
+      text: 'Delete user',
+      logo: userRemoveLogo,
+      classes: ['w-full', 'h-6']
+    }),
+    new SecondaryBtn({
+      type: 'button',
+      text: 'Delete chat',
+      logo: deleteLogo,
+      classes: ['w-full', 'h-6', 'secondary-btn-red']
+    })
+  ]
 }
 
 // 2 - create page structure
@@ -101,7 +127,7 @@ const page = new ChatLayout({
         ...chatSettingsBtnIProps,
         events: {
           click: () => {
-            showChatSettingsMenu()
+            showChatSettingsMenu(ctx)
           }
         }
       })

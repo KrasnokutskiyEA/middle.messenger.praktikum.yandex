@@ -1,4 +1,4 @@
-import { /* showMessage, */ showSpinner /*, hideSpinner */ } from '../helpers/infoMessage'
+import { /* showMessage, */ showSpinner /*, hideSpinner */ } from '../helpers/showComponents'
 
 class AuthController {
   public signIn (user: object): void {

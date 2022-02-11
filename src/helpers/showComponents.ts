@@ -1,5 +1,6 @@
 import Message from '../components/message/message'
 import Spinner from '../components/spinner/spinner'
+import SecondaryBtn from '../components/secondaryBtn/secondaryBtn'
 import ChatSettingsDropdown from '../components/chat/chatSettingsDropdown/chatSettingsDropdown'
 
 export const showMessage = (text: string, classes: string[]): void => {
@@ -23,10 +24,6 @@ export const hideSpinner = (): void => {
   Spinner.unmount()
 }
 
-export const showChatSettingsMenu = (): void => {
-  document.body.append(new ChatSettingsDropdown({}).getContent())
+export const showChatSettingsMenu = (ctx: { childrenList: SecondaryBtn[] }): void => {
+  document.body.append(new ChatSettingsDropdown(ctx).getContent())
 }
-
-// export const hideChatSettingsMenu = (): void => {
-//   ChatSettingsDropdown.unmount()
-// }

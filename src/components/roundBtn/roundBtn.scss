@@ -19,7 +19,7 @@
     background-color: map.get($colors, 'white');
 
     &:hover {
-      background-color: map.get($colors, 'lightyellow');
+      background-color: map.get($colors, 'yellow');
     }
   }
 }
