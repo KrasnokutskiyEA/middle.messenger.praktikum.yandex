@@ -8,7 +8,6 @@ $colors: (
   'black': #000,
   'white': #fff,
   'yellow': #fc0,
-  // 'lightyellow': rgb(255 233 146),
   'red': #f00,
   'success-bkg': #fff7cf,
   'error-bkg': #fbecec,
@@ -16,4 +15,9 @@ $colors: (
   'error-brd': #f19b9b,
   'success-message': #00c58a,
   'error-message': #ff005c
+) !default;
+
+$gradients: (
+  'main-bkg': linear-gradient(to top, #c4fcff, #94eafc, #63d6fd, #2fbfff, #00a7ff),
+  'msg-outgoing': linear-gradient(to left top, #fcffb0, #fcfca7, #fdf89e, #fef594, #fff18b)
 ) !default;

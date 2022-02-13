@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 .center-content {
   width: 100%;
   height: 100vh;
@@ -5,5 +7,5 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(to right top, #d9ffa6, #c4ffc0, #b8ffd9, #b7ffed, #c0fffa);
+  background-image: map.get($gradients, 'main-bkg');
 }

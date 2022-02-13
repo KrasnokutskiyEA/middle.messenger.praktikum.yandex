@@ -1,16 +1,8 @@
+@use 'sass:map';
+
 .messages-list {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  overflow-y: scroll;
-  background-image: linear-gradient(to right top, #d9ffa6, #c4ffc0, #b8ffd9, #b7ffed, #c0fffa);
+  @extend %scrollable-list;
+  @extend %hidden-scrollbar;
 
-  /* Hide scrollbar */
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-
-  &::-webkit-scrollbar {
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    display: none;
-  }
+  background-image: map.get($gradients, 'main-bkg');
 }

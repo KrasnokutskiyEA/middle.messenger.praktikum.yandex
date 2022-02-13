@@ -1,27 +1,14 @@
-@use 'sass:map';
-
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-.spinner-overlay {
-  position: absolute;
-  display: flex;
-  width: 100%;
-  height: 100%;
-  background: hsl(0deg 42% 37% / 50%);
-  top: 0;
-  justify-content: center;
-  align-items: center;
-
-  .spinner {
-    border: 16px solid #ffd6d6;
-    border-radius: 50%;
-    border-top-color: #fff0f0;
-    box-shadow: 1px 1px 70px #ffc6c6;
-    width: 120px;
-    height: 120px;
-    animation: spin 0.7s linear infinite;
-  }
+.spinner {
+  border: 16px solid #d6f2ff;
+  border-radius: 50%;
+  border-top-color: #f0fcff;
+  box-shadow: 1px 1px 40px #b1e6ff;
+  width: 120px;
+  height: 120px;
+  animation: spin 0.7s linear infinite;
 }
