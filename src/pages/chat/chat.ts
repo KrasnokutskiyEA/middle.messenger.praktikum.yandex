@@ -117,7 +117,14 @@ const page = new ChatLayout({
     isForm: false,
     classes: ['chat-controls-bottom'],
     childrenList: [
-      new SecondaryBtn(addChatBtnIProps),
+      new SecondaryBtn({
+        ...addChatBtnIProps,
+        events: {
+          click: () => {
+            showChatSettingsMenu(ctx)
+          }
+        }
+      }),
       new SecondaryBtn(openProfileBtnIProps)
     ]
   }),

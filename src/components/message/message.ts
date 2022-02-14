@@ -6,8 +6,15 @@ import template from './message.pug'
 
 // component
 class Message extends Block {
+  static instance: Message | undefined
+
   constructor (props: IProps) {
     super('div', props)
+    Message.instance = this
+  }
+
+  componentDidUnmount (): void {
+    Message.instance = undefined
   }
 
   render (): HTMLElement {
@@ -15,4 +22,4 @@ class Message extends Block {
   }
 }
 
-export default new Message({ text: '', classes: [''] })
+export default Message
