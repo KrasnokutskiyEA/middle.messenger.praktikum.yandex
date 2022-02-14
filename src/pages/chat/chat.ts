@@ -13,7 +13,7 @@ import userRemoveLogo from '../../assets/images/user_remove.svg'
 // helpers import
 import { chats, messages } from '../../helpers/fakeData'
 import { clearInput, submitForm } from '../../helpers/formUtils'
-import { showChatSettingsMenu } from '../../helpers/showComponents'
+import { showChatSettingsMenu, showModal } from '../../helpers/showComponents'
 
 // components import (.ts)
 import ChatLayout from '../../templates/chatLayout/chatLayout'
@@ -24,8 +24,11 @@ import ChatTitle from '../../components/chat/chatTitle/chatTitle'
 import MessagesList from '../../components/chat/messagesList/messagesList'
 import MessageCard from '../../components/chat/messageCard/messageCard'
 import RoundBtn from '../../components/roundBtn/roundBtn'
+import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
 import SecondaryBtn from '../../components/secondaryBtn/secondaryBtn'
 import InputField from '../../components/chat/inputField/inputField'
+import TextField from '../../components/textField/textField'
+import Form from '../../modules/form/form'
 
 // 1 - generate context
 const inputFieldMessageIProps = {
@@ -121,7 +124,38 @@ const page = new ChatLayout({
         ...addChatBtnIProps,
         events: {
           click: () => {
-            showChatSettingsMenu(ctx)
+            showModal({
+              content: new Form({
+                title: 'Create Chat',
+                avatar: null,
+                childrenList: [
+                  new TextField({
+                    label: 'Username',
+                    type: 'text',
+                    name: 'login',
+                    id: 'login',
+                    placeholder: 'Username',
+                    required: 'required',
+                    pattern: '^\\d*[a-zA-Z][a-zA-Z0-9]*$',
+                    maxlength: 20,
+                    minlength: 3,
+                    errorText: '3-20 latin symbols, no spaces, no special chars'
+                    // events: {
+                    //   focus: (event: Event): void => validateInput(event.target!),
+                    //   blur: (event: Event): void => validateInput(event.target!)
+                    // }
+                  })
+                ],
+                submitBtn: new PrimaryBtn({
+                  text: 'Sign Up',
+                  type: 'submit',
+                  classes: ['mt-6']
+                  // events: {
+                  //   click: () => validateForm()
+                  // }
+                })
+              })
+            })
           }
         }
       }),

@@ -1,3 +1,4 @@
+import Form from '../modules/form/form'
 import Message from '../components/message/message'
 import Spinner from '../components/spinner/spinner'
 import Overlay from '../components/overlay/overlay'
@@ -12,15 +13,17 @@ export const showMessage = (text: string, classes: string[]): void => {
 }
 
 export const showSpinner = (): void => {
-  document.querySelector<HTMLElement>('#app')!.style.filter = 'blur(4px)'
-  document.body.append(Overlay.getInstance({ content: Spinner }).getContent())
+  document.body.append(new Overlay({ content: Spinner, isClosable: false }).getContent())
 }
 
 export const hideSpinner = (): void => {
-  document.querySelector<HTMLElement>('#app')!.removeAttribute('style')
-  Overlay.instance.unmount()
+  Overlay.instance!.unmount()
 }
 
 export const showChatSettingsMenu = (ctx: { childrenList: SecondaryBtn[] }): void => {
   document.body.append(new ChatSettingsDropdown(ctx).getContent())
+}
+
+export const showModal = (ctx: { content: Form }): void => {
+  document.body.append(new Overlay({ ...ctx, isClosable: true }).getContent())
 }
