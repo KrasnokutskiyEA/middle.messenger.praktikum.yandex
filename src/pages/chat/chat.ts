@@ -149,7 +149,7 @@ const page = new ChatLayout({
                 submitBtn: new PrimaryBtn({
                   text: 'Sign Up',
                   type: 'submit',
-                  classes: ['mt-6']
+                  classes: ['mb-2', 'mt-2']
                   // events: {
                   //   click: () => validateForm()
                   // }

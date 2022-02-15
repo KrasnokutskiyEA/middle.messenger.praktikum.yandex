@@ -58,7 +58,7 @@ const primaryBtnIProps = {
   text: 'Sign In',
   type: 'submit',
   id: 'submit-form-btn',
-  classes: ['mt-auto'],
+  classes: ['mt-2'],
   disabled: false,
   events: {
     click: () => validateForm()

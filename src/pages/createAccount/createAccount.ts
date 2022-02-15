@@ -129,7 +129,7 @@ const textFieldIProps = [
 const primaryBtnIProps = {
   text: 'Sign Up',
   type: 'submit',
-  classes: ['mt-6'],
+  classes: ['mt-2'],
   events: {
     click: () => validateForm()
   }
