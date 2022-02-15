@@ -12,7 +12,7 @@ import userRemoveLogo from '../../assets/images/user_remove.svg'
 
 // helpers import
 import { chats, messages } from '../../helpers/fakeData'
-import { clearInput, submitForm } from '../../helpers/formUtils'
+import { validateInput, clearInput, submitForm } from '../../helpers/formUtils'
 import { showChatSettingsMenu, showModal } from '../../helpers/showComponents'
 
 // components import (.ts)
@@ -83,7 +83,42 @@ const chatTitleIProps = {
   classes: ['ml-2']
 }
 
-const ctx = {
+const createChatModal = {
+  content: new Form({
+    title: 'Create Chat',
+    avatar: null,
+    childrenList: [
+      new TextField({
+        label: 'Chat name',
+        type: 'text',
+        name: 'chat_name',
+        id: 'chat_name',
+        placeholder: 'Chat name',
+        required: 'required',
+        pattern: '^\\d*[a-zA-Z][a-zA-Z0-9]*$',
+        maxlength: 20,
+        minlength: 3,
+        errorText: '3-20 latin symbols, no spaces, no special chars',
+        events: {
+          focus: (event: Event): void => validateInput(event.target!),
+          blur: (event: Event): void => validateInput(event.target!)
+        }
+      })
+    ],
+    submitBtn: new PrimaryBtn({
+      text: 'Submit',
+      type: 'submit',
+      classes: ['mb-2', 'mt-2']
+    }),
+    events: {
+      submit: (event: Event) => {
+        submitForm(event)
+      }
+    }
+  })
+}
+
+const chatSettingsMenu = {
   childrenList: [
     new SecondaryBtn({
       type: 'button',
@@ -124,38 +159,7 @@ const page = new ChatLayout({
         ...addChatBtnIProps,
         events: {
           click: () => {
-            showModal({
-              content: new Form({
-                title: 'Create Chat',
-                avatar: null,
-                childrenList: [
-                  new TextField({
-                    label: 'Username',
-                    type: 'text',
-                    name: 'login',
-                    id: 'login',
-                    placeholder: 'Username',
-                    required: 'required',
-                    pattern: '^\\d*[a-zA-Z][a-zA-Z0-9]*$',
-                    maxlength: 20,
-                    minlength: 3,
-                    errorText: '3-20 latin symbols, no spaces, no special chars'
-                    // events: {
-                    //   focus: (event: Event): void => validateInput(event.target!),
-                    //   blur: (event: Event): void => validateInput(event.target!)
-                    // }
-                  })
-                ],
-                submitBtn: new PrimaryBtn({
-                  text: 'Sign Up',
-                  type: 'submit',
-                  classes: ['mb-2', 'mt-2']
-                  // events: {
-                  //   click: () => validateForm()
-                  // }
-                })
-              })
-            })
+            showModal(createChatModal)
           }
         }
       }),
@@ -171,7 +175,7 @@ const page = new ChatLayout({
         ...chatSettingsBtnIProps,
         events: {
           click: () => {
-            showChatSettingsMenu(ctx)
+            showChatSettingsMenu(chatSettingsMenu)
           }
         }
       })

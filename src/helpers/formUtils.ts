@@ -3,6 +3,7 @@ export function validateInput (input: EventTarget): void {
   const isValid = input.validity.valid
 
   if (isValid === false) {
+    console.log('----input.nextSib=', input.nextSibling)
     input.nextSibling.classList.remove('hidden')
   } else {
     input.nextSibling.classList.add('hidden')
