@@ -15,6 +15,9 @@ import { chats, messages } from '../../helpers/fakeData'
 import { validateInput, clearInput, submitForm } from '../../helpers/formUtils'
 import { showChatSettingsMenu, showModal } from '../../helpers/showComponents'
 
+// controllers import
+import { chatController } from '../../controllers/index'
+
 // components import (.ts)
 import ChatLayout from '../../templates/chatLayout/chatLayout'
 import ChatsList from '../../components/chat/chatsList/chatsList'
@@ -112,7 +115,8 @@ const createChatModal = {
     }),
     events: {
       submit: (event: Event) => {
-        submitForm(event)
+        const data = submitForm(event)
+        chatController.createChat({ chat: data.chat_name })
       }
     }
   })

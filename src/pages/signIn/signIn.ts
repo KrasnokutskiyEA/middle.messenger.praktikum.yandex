@@ -4,12 +4,15 @@ import '../../assets/styles/index.scss'
 // helpers import
 import { validateInput, validateForm, submitForm } from '../../helpers/formUtils'
 
+// controllers import
+import { authController } from '../../controllers/index'
+
 // components import (.ts)
 import CenterContent from '../../templates/centerContent/centerContent'
 import Form from '../../modules/form/form'
 import TextField from '../../components/textField/textField'
 import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
-import { authController } from '../../controllers/index'
+
 // import Message from '../../components/message/message'
 
 // 1 - generate context
