@@ -24,6 +24,10 @@ export const showChatSettingsMenu = (ctx: { childrenList: SecondaryBtn[] }): voi
   document.body.append(new ChatSettingsDropdown(ctx).getContent())
 }
 
+export const hideChatSettingsMenu = (): void => {
+  ChatSettingsDropdown.instance!.unmount()
+}
+
 export const showModal = (ctx: { content: Form }): void => {
   document.body.append(new Overlay({ ...ctx, isClosable: true }).getContent())
 }

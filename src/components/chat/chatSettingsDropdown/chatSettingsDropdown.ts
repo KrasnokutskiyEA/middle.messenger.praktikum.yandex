@@ -6,12 +6,19 @@ import template from './chatSettingsDropdown.pug'
 
 // component
 class ChatSettingsDropdown extends Block {
-  readonly unmountDropdown: () => void
-  readonly handleOverlay: () => void
+  static instance: ChatSettingsDropdown | undefined
+
+  readonly unmountDropdown: (evt: MouseEvent) => void
+  readonly handleOverlay: (evt: MouseEvent) => void
 
   constructor (props: IProps) {
     super('div', props)
-    this.unmountDropdown = () => this.unmount()
+    ChatSettingsDropdown.instance = this
+
+    this.unmountDropdown = (evt: MouseEvent) => {
+      const target = evt.target as HTMLElement
+      target.className === 'chat-settings-dropdown-overlay' && this.unmount()
+    }
     this.handleOverlay = this.unmountDropdown.bind(this)
     document.addEventListener('mousedown', this.handleOverlay)
   }
