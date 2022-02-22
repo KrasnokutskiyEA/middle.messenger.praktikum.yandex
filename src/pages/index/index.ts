@@ -21,7 +21,8 @@ const linkIProps = [
   { label: '/chat', addr: '/chat.html' },
   { label: '/createAccount', addr: '/createAccount.html' },
   { label: '/profile', addr: '/profile.html' },
-  { label: '/signIn', addr: '/signIn.html' }
+  { label: '/signIn', addr: '/signIn.html' },
+  { label: '/password', addr: '/password.html' }
 ]
 
 const btnIProps = [{

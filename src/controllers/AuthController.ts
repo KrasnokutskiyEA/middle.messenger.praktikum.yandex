@@ -10,6 +10,16 @@ class AuthController {
       hideSpinner()
     }, 5000)
   }
+
+  public changePassword (password: object): void {
+    console.log('----changing password..........password=', password)
+    // showMessage('this is text', ['message-success'])
+    showSpinner()
+
+    setTimeout(() => {
+      hideSpinner()
+    }, 5000)
+  }
 }
 
 export default new AuthController()
