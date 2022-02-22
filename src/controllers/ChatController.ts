@@ -13,7 +13,18 @@ class ChatController {
   }
 
   public addUserToChat (user: object): void {
-    console.log('----adding user chat..........user=', user)
+    console.log('----adding user to chat..........user=', user)
+    hideSpinner()
+    // showMessage('this is text', ['message-success'])
+    showSpinner()
+
+    setTimeout(() => {
+      hideSpinner()
+    }, 5000)
+  }
+
+  public removeUserFromChat (user: object): void {
+    console.log('----removing user from chat..........user=', user)
     hideSpinner()
     // showMessage('this is text', ['message-success'])
     showSpinner()

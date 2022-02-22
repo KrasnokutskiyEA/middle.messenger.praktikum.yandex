@@ -152,7 +152,43 @@ const addUserToChatModal = {
     events: {
       submit: (event: Event) => {
         const data = submitForm(event)
-        chatController.addUserToChat({ chat: data.chat_name })
+        chatController.addUserToChat({ chat: data.user_name })
+      }
+    }
+  })
+}
+
+const removeUserFromChatModal = {
+  content: new Form({
+    title: 'Remove user',
+    avatar: null,
+    childrenList: [
+      new TextField({
+        label: 'User name',
+        type: 'text',
+        name: 'user_name',
+        id: 'user_name',
+        placeholder: 'User name',
+        required: 'required',
+        pattern: '^\\d*[a-zA-Z][a-zA-Z0-9]*$',
+        maxlength: 20,
+        minlength: 3,
+        errorText: '3-20 latin symbols, no spaces, no special chars',
+        events: {
+          focus: (event: Event): void => validateInput(event.target!),
+          blur: (event: Event): void => validateInput(event.target!)
+        }
+      })
+    ],
+    submitBtn: new PrimaryBtn({
+      text: 'Submit',
+      type: 'submit',
+      classes: ['mb-2', 'mt-2']
+    }),
+    events: {
+      submit: (event: Event) => {
+        const data = submitForm(event)
+        chatController.removeUserFromChat({ chat: data.user_name })
       }
     }
   })
@@ -174,9 +210,15 @@ const chatSettingsMenu = {
     }),
     new SecondaryBtn({
       type: 'button',
-      text: 'Delete user',
+      text: 'Remove user',
       logo: userRemoveLogo,
-      classes: ['w-full', 'h-6']
+      classes: ['w-full', 'h-6'],
+      events: {
+        click: () => {
+          showModal(removeUserFromChatModal)
+          hideChatSettingsMenu()
+        }
+      }
     }),
     new SecondaryBtn({
       type: 'button',
