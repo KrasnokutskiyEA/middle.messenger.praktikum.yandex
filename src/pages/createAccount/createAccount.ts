@@ -28,8 +28,8 @@ const textFieldIProps = [
     pattern: '^[A-Za-z0-9_\\/^#&+-]+@[A-Za-z0-9_\\/^#&+-]+\\.+[A-Za-z]+$',
     errorText: 'latin, may include special chars, @ required',
     events: {
-      focus: (event: Event): void => validateInput(event.target!),
-      blur: (event: Event): void => validateInput(event.target!)
+      focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
+      blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
     }
   },
   {
@@ -44,8 +44,8 @@ const textFieldIProps = [
     minlength: 3,
     errorText: '3-20 latin symbols, no spaces, no special chars',
     events: {
-      focus: (event: Event): void => validateInput(event.target!),
-      blur: (event: Event): void => validateInput(event.target!)
+      focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
+      blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
     }
   },
   {
@@ -58,8 +58,8 @@ const textFieldIProps = [
     pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
     errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars',
     events: {
-      focus: (event: Event): void => validateInput(event.target!),
-      blur: (event: Event): void => validateInput(event.target!)
+      focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
+      blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
     }
   },
   {
@@ -72,8 +72,8 @@ const textFieldIProps = [
     pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
     errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars',
     events: {
-      focus: (event: Event): void => validateInput(event.target!),
-      blur: (event: Event): void => validateInput(event.target!)
+      focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
+      blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
     }
   },
   {
@@ -88,8 +88,8 @@ const textFieldIProps = [
     pattern: '^[+]?[0-9]*$',
     errorText: '10-15 numbers, may start with +',
     events: {
-      focus: (event: Event): void => validateInput(event.target!),
-      blur: (event: Event): void => validateInput(event.target!)
+      focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
+      blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
     }
   },
   {
@@ -104,8 +104,8 @@ const textFieldIProps = [
     minlength: 8,
     errorText: '8-40 symbols, at least one capital letter and number',
     events: {
-      focus: (event: Event): void => validateInput(event.target!),
-      blur: (event: Event): void => validateInput(event.target!)
+      focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
+      blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
     }
   },
   {
@@ -120,8 +120,8 @@ const textFieldIProps = [
     minlength: 8,
     errorText: '8-40 symbols, at least one capital letter and number',
     events: {
-      focus: (event: Event): void => validateInput(event.target!),
-      blur: (event: Event): void => validateInput(event.target!)
+      focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
+      blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
     }
   }
 ]

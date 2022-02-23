@@ -1,19 +1,33 @@
-// validate single input
-export function validateInput (input: EventTarget): void {
-  const isValid = input.validity.valid
+// toggle error visibility
+function toggleError (isValid: Boolean, input: HTMLInputElement): void {
+  !isValid
+    ? input.nextSibling!.classList.remove('hidden')
+    : input.nextSibling!.classList.add('hidden')
+}
 
-  if (isValid === false) {
-    input.nextSibling.classList.remove('hidden')
-  } else {
-    input.nextSibling.classList.add('hidden')
-  }
+// validate single input
+export function validateInput (input: HTMLInputElement): void {
+  const isValid = input.validity.valid
+  toggleError(isValid, input)
+}
+
+// validate new password input
+export function validateNewPassword (input: HTMLInputElement): void {
+  const newPass = document.querySelector('#new_password')
+  const isValid = newPass!.value === input.value
+
+  !isValid
+    ? input.setCustomValidity('Passwords do not match')
+    : input.setCustomValidity('')
+
+  toggleError(isValid, input)
 }
 
 // validate whole form (all inputs at once)
 export function validateForm (): void {
   const input = document.querySelectorAll('input')
 
-  input.forEach((i: HTMLElement) => validateInput(i))
+  input.forEach((i: HTMLInputElement) => validateInput(i))
 }
 
 function serializeForm (formNode: HTMLFormElement): FormData {
@@ -30,6 +44,6 @@ export function submitForm (event: Event): Record<string, unknown> {
   return Object.fromEntries(data.entries())
 }
 
-export function clearInput (event: Event): void {
-  event.target!.firstElementChild.lastElementChild.value = ''
+export function clearInput (input: HTMLInputElement): void {
+  input.firstElementChild!.lastElementChild!.value = ''
 }

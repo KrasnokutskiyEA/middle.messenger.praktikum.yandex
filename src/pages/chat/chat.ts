@@ -103,8 +103,8 @@ const createChatModal = {
         minlength: 3,
         errorText: '3-20 latin symbols, no spaces, no special chars',
         events: {
-          focus: (event: Event): void => validateInput(event.target!),
-          blur: (event: Event): void => validateInput(event.target!)
+          focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
+          blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
         }
       })
     ],
@@ -139,8 +139,8 @@ const addUserToChatModal = {
         minlength: 3,
         errorText: '3-20 latin symbols, no spaces, no special chars',
         events: {
-          focus: (event: Event): void => validateInput(event.target!),
-          blur: (event: Event): void => validateInput(event.target!)
+          focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
+          blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
         }
       })
     ],
@@ -175,8 +175,8 @@ const removeUserFromChatModal = {
         minlength: 3,
         errorText: '3-20 latin symbols, no spaces, no special chars',
         events: {
-          focus: (event: Event): void => validateInput(event.target!),
-          blur: (event: Event): void => validateInput(event.target!)
+          focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
+          blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
         }
       })
     ],
@@ -282,7 +282,7 @@ const page = new ChatLayout({
     events: {
       submit: (event: Event) => {
         submitForm(event)
-        clearInput(event)
+        clearInput(event.target as HTMLInputElement)
       }
     }
   })

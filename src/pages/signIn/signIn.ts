@@ -35,8 +35,8 @@ const textFieldIProps = [
     minlength: 3,
     errorText: '3-20 latin symbols, no spaces, no special chars',
     events: {
-      focus: (event: Event): void => validateInput(event.target!),
-      blur: (event: Event): void => validateInput(event.target!)
+      focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
+      blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
     }
   },
   {
@@ -51,8 +51,8 @@ const textFieldIProps = [
     minlength: 8,
     errorText: '8-40 symbols, at least one capital letter and number',
     events: {
-      focus: (event: Event): void => validateInput(event.target!),
-      blur: (event: Event): void => validateInput(event.target!)
+      focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
+      blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
     }
   }
 ]

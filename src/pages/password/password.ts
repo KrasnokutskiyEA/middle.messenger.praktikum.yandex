@@ -3,7 +3,7 @@ import '../../assets/styles/index.scss'
 import arrowLogo from '../../assets/images/arrow.svg'
 
 // helpers import
-import { validateInput, validateForm, submitForm } from '../../helpers/formUtils'
+import { validateInput, validateForm, submitForm, validateNewPassword } from '../../helpers/formUtils'
 
 // controllers import
 import { authController } from '../../controllers/index'
@@ -41,8 +41,7 @@ const textFieldIProps = [
     minlength: 3,
     errorText: '8-40 symbols, at least one capital letter and number',
     events: {
-      focus: (event: Event): void => validateInput(event.target!),
-      blur: (event: Event): void => validateInput(event.target!)
+      input: (event: Event): void => validateInput(event.target as HTMLInputElement)
     }
   },
   {
@@ -57,8 +56,7 @@ const textFieldIProps = [
     minlength: 8,
     errorText: '8-40 symbols, at least one capital letter and number',
     events: {
-      focus: (event: Event): void => validateInput(event.target!),
-      blur: (event: Event): void => validateInput(event.target!)
+      input: (event: Event): void => validateInput(event.target as HTMLInputElement)
     }
   },
   {
@@ -68,13 +66,11 @@ const textFieldIProps = [
     id: 'confirm_new_password',
     placeholder: 'Confirm new password',
     required: 'required',
-    pattern: '^(?:(?=.*\\d)(?=.*[A-Z]).*)$',
     maxlength: 40,
     minlength: 8,
-    errorText: '8-40 symbols, at least one capital letter and number',
+    errorText: 'Passwords do not match',
     events: {
-      focus: (event: Event): void => validateInput(event.target!),
-      blur: (event: Event): void => validateInput(event.target!)
+      input: (event: Event): void => validateNewPassword(event.target as HTMLInputElement)
     }
   }
 ]
