@@ -23,7 +23,7 @@ const formIProps = {
 }
 
 const roundBtnIProps = {
-  classes: ['rot-180'],
+  classes: ['rot-180', 'round-btn-normal'],
   logo: arrowLogo,
   type: 'button'
 }
