@@ -20,6 +20,7 @@ interface IChatCard {
   counterUnreadMessages: number
   avatar: string | null
   updatedAt: string
+  events: { [key: string]: (event: Event) => void }
 }
 
 // component
@@ -33,7 +34,8 @@ class ChatCard extends Block {
       ownerLastMessage: props.ownerLastMessage,
       chatUnreadMessagesQty: props.counterUnreadMessages,
       chatAvatar: props.avatar ?? defaultAvatar,
-      chatLastMessageTime: formatTime(props.updatedAt)
+      chatLastMessageTime: formatTime(props.updatedAt),
+      events: props.events
     })
   }
 

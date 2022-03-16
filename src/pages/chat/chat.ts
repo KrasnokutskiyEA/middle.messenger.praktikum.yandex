@@ -237,7 +237,14 @@ const page = new ChatLayout({
     childrenList: [new InputField(inputFieldSearchIProps)]
   }),
   chatsList: new ChatsList({
-    childrenList: chats.map(chat => new ChatCard(chat))
+    childrenList: chats.map(chat => new ChatCard({
+      ...chat,
+      events: {
+        click: () => {
+          console.log('chat=', chat)
+        }
+      }
+    }))
   }),
   chatMenuCtrls: new ChatControls({
     isForm: false,

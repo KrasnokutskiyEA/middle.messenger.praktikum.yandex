@@ -8,6 +8,10 @@
   padding-right: 10px;
   cursor: pointer;
 
+  &:hover {
+    background-color: map.get($colors, 'success-bkg');
+  }
+
   .chat-card-avatar {
     width: 50px;
     height: 50px;
