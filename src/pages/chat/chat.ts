@@ -33,65 +33,133 @@ import InputField from '../../components/chat/inputField/inputField'
 import TextField from '../../components/textField/textField'
 import Form from '../../modules/form/form'
 
+// 0 - generate common context
+const ctxCommon = {
+  /* modal windows stuff */
+  userInput: {
+    label: 'User name',
+    type: 'text',
+    name: 'user_name',
+    id: 'user_name',
+    placeholder: 'User name',
+    required: 'required',
+    pattern: '^\\d*[a-zA-Z][a-zA-Z0-9]*$',
+    maxlength: 20,
+    minlength: 3,
+    errorText: '3-20 latin symbols, no spaces, no special chars'
+  },
+  submintBtn: {
+    text: 'Submit',
+    type: 'submit',
+    classes: ['mb-2', 'mt-2']
+  }
+}
+
 // 1 - generate context
-const inputFieldMessageIProps = {
-  name: 'message',
-  id: 'message',
-  placeholder: 'Write a message...',
-  required: true,
-  type: 'text',
-  classes: ['ml-2'],
-  logo: textLogo
-}
+const ctx = {
+  /* top search section */
+  chatSearch: {
+    main: {
+      isForm: false,
+      classes: ['chat-controls-top']
+    },
+    input: {
+      name: 'search',
+      id: 'search',
+      placeholder: 'Search...',
+      required: false,
+      type: 'search',
+      classes: ['ml-2', 'mr-2'],
+      logo: searchLogo
+    }
+  },
 
-const inputFieldSearchIProps = {
-  name: 'search',
-  id: 'search',
-  placeholder: 'Search...',
-  required: false,
-  type: 'search',
-  classes: ['ml-2', 'mr-2'],
-  logo: searchLogo
-}
+  /* bottom chat menu section */
+  chatMenu: {
+    main: {
+      isForm: false,
+      classes: ['chat-controls-bottom']
+    },
+    newChatBtn: {
+      type: 'button',
+      text: 'New chat',
+      logo: addLogo,
+      classes: ['w-full', 'h-full', 'pr-2']
+    },
+    myProfileBtn: {
+      type: 'button',
+      text: 'My profile',
+      logo: personLogo,
+      classes: ['w-full', 'h-full']
+    }
+  },
 
-const sendMessageBtnIProps = {
-  logo: sendLogo,
-  classes: ['round-btn-normal', 'ml-2', 'mr-2'],
-  type: 'submit'
-}
+  /* top header section */
+  chatHeader: {
+    main: {
+      isForm: false,
+      classes: ['chat-controls-top']
+    },
+    title: {
+      chatName: 'Steve Jordan',
+      chatAvatar: null,
+      classes: ['ml-2']
+    },
+    settingsBtn: {
+      logo: settingsLogo,
+      classes: ['round-btn-icon', 'ml-2', 'mr-2'],
+      type: 'button'
+    },
+    addUserBtn: {
+      type: 'button',
+      text: 'Add user',
+      logo: userAddLogo,
+      classes: ['w-full', 'h-6', 'pr-34']
+    },
+    removeUserBtn: {
+      type: 'button',
+      text: 'Remove user',
+      logo: userRemoveLogo,
+      classes: ['w-full', 'h-6']
+    },
+    deleteChatBtn: {
+      type: 'button',
+      text: 'Delete chat',
+      logo: deleteLogo,
+      classes: ['w-full', 'h-6', 'secondary-btn-red', 'pr-24']
+    }
+  },
 
-const chatSettingsBtnIProps = {
-  logo: settingsLogo,
-  classes: ['round-btn-icon', 'ml-2', 'mr-2'],
-  type: 'button'
-}
+  /* bottom message form section */
+  messageForm: {
+    main: {
+      isForm: true,
+      classes: ['chat-controls-bottom']
+    },
+    input: {
+      name: 'message',
+      id: 'message',
+      placeholder: 'Write a message...',
+      required: true,
+      type: 'text',
+      classes: ['ml-2'],
+      logo: textLogo
+    },
+    sendBtn: {
+      logo: sendLogo,
+      classes: ['round-btn-normal', 'ml-2', 'mr-2'],
+      type: 'submit'
+    }
+  },
 
-const addChatBtnIProps = {
-  type: 'button',
-  text: 'New chat',
-  logo: addLogo,
-  classes: ['w-full', 'h-full', 'pr-2']
-}
-
-const openProfileBtnIProps = {
-  type: 'button',
-  text: 'My profile',
-  logo: personLogo,
-  classes: ['w-full', 'h-full']
-}
-
-const chatTitleIProps = {
-  chatName: 'Steve Jordan',
-  chatAvatar: null,
-  classes: ['ml-2']
-}
-
-const createChatModal = {
-  content: new Form({
-    title: 'Create Chat',
-    avatar: null,
-    childrenList: [
-      new TextField({
+  /* modal window properties */
+  modal: {
+    newChat: {
+      main: {
+        title: 'Create Chat',
+        avatar: null
+      },
+      input: {
         label: 'Chat name',
         type: 'text',
         name: 'chat_name',
@@ -101,130 +169,104 @@ const createChatModal = {
         pattern: '^\\d*[a-zA-Z][a-zA-Z0-9]*$',
         maxlength: 20,
         minlength: 3,
-        errorText: '3-20 latin symbols, no spaces, no special chars',
-        events: {
-          focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
-          blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
-        }
-      })
-    ],
-    submitBtn: new PrimaryBtn({
-      text: 'Submit',
-      type: 'submit',
-      classes: ['mb-2', 'mt-2']
-    }),
-    events: {
-      submit: (event: Event) => {
-        const data = submitForm(event)
-        chatController.createChat({ chat: data.chat_name })
+        errorText: '3-20 latin symbols, no spaces, no special chars'
       }
+    },
+    addUser: {
+      main: {
+        title: 'Add user',
+        avatar: null
+      },
+      input: ctxCommon.userInput
+    },
+    removeUser: {
+      main: {
+        title: 'Remove user',
+        avatar: null
+      },
+      input: ctxCommon.userInput
     }
-  })
+  }
 }
 
-const addUserToChatModal = {
-  content: new Form({
-    title: 'Add user',
-    avatar: null,
-    childrenList: [
-      new TextField({
-        label: 'User name',
-        type: 'text',
-        name: 'user_name',
-        id: 'user_name',
-        placeholder: 'User name',
-        required: 'required',
-        pattern: '^\\d*[a-zA-Z][a-zA-Z0-9]*$',
-        maxlength: 20,
-        minlength: 3,
-        errorText: '3-20 latin symbols, no spaces, no special chars',
-        events: {
-          focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
-          blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
-        }
-      })
-    ],
-    submitBtn: new PrimaryBtn({
-      text: 'Submit',
-      type: 'submit',
-      classes: ['mb-2', 'mt-2']
-    }),
-    events: {
-      submit: (event: Event) => {
-        const data = submitForm(event)
-        chatController.addUserToChat({ chat: data.user_name })
-      }
-    }
-  })
+/* modal window generator */
+const generateModal = (mainProps: {}, inputProps: {}, submitAction: {}): { content: Form } => {
+  return {
+    content: new Form({
+      ...mainProps,
+
+      childrenList: [
+        new TextField({
+          ...inputProps,
+
+          events: {
+            focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
+            blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
+          }
+        })
+      ],
+
+      submitBtn: new PrimaryBtn(ctxCommon.submintBtn),
+      events: submitAction
+    })
+  }
 }
 
-const removeUserFromChatModal = {
-  content: new Form({
-    title: 'Remove user',
-    avatar: null,
-    childrenList: [
-      new TextField({
-        label: 'User name',
-        type: 'text',
-        name: 'user_name',
-        id: 'user_name',
-        placeholder: 'User name',
-        required: 'required',
-        pattern: '^\\d*[a-zA-Z][a-zA-Z0-9]*$',
-        maxlength: 20,
-        minlength: 3,
-        errorText: '3-20 latin symbols, no spaces, no special chars',
-        events: {
-          focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
-          blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
-        }
-      })
-    ],
-    submitBtn: new PrimaryBtn({
-      text: 'Submit',
-      type: 'submit',
-      classes: ['mb-2', 'mt-2']
-    }),
-    events: {
-      submit: (event: Event) => {
-        const data = submitForm(event)
-        chatController.removeUserFromChat({ chat: data.user_name })
-      }
-    }
-  })
-}
-
+/* chat settings menu */
 const chatSettingsMenu = {
   childrenList: [
     new SecondaryBtn({
-      type: 'button',
-      text: 'Add user',
-      logo: userAddLogo,
-      classes: ['w-full', 'h-6', 'pr-22'],
+      ...ctx.chatHeader.addUserBtn,
+
       events: {
         click: () => {
-          showModal(addUserToChatModal)
+          showModal(
+            generateModal(
+              ctx.modal.addUser.main,
+              ctx.modal.addUser.input,
+              {
+                submit: (event: Event) => {
+                  const data = submitForm(event)
+                  chatController.addUserToChat({ chat: data.user_name })
+                }
+              }
+            )
+          )
+
           hideChatSettingsMenu()
         }
       }
     }),
     new SecondaryBtn({
-      type: 'button',
-      text: 'Remove user',
-      logo: userRemoveLogo,
-      classes: ['w-full', 'h-6'],
+      ...ctx.chatHeader.removeUserBtn,
+
       events: {
         click: () => {
-          showModal(removeUserFromChatModal)
+          showModal(
+            generateModal(
+              ctx.modal.removeUser.main,
+              ctx.modal.removeUser.input,
+              {
+                submit: (event: Event) => {
+                  const data = submitForm(event)
+                  chatController.removeUserFromChat({ chat: data.user_name })
+                }
+              }
+            )
+          )
+
           hideChatSettingsMenu()
         }
       }
     }),
     new SecondaryBtn({
-      type: 'button',
-      text: 'Delete chat',
-      logo: deleteLogo,
-      classes: ['w-full', 'h-6', 'secondary-btn-red']
+      ...ctx.chatHeader.deleteChatBtn,
+
+      events: {
+        click: () => {
+          console.log('delete chat')
+        }
+      }
     })
   ]
 }
@@ -232,13 +274,17 @@ const chatSettingsMenu = {
 // 2 - create page structure
 const page = new ChatLayout({
   chatSearch: new ChatControls({
-    isForm: false,
-    classes: ['chat-controls-top'],
-    childrenList: [new InputField(inputFieldSearchIProps)]
+    ...ctx.chatSearch.main,
+
+    childrenList: [
+      new InputField(ctx.chatSearch.input)
+    ]
   }),
+
   chatsList: new ChatsList({
     childrenList: chats.map(chat => new ChatCard({
       ...chat,
+
       events: {
         click: () => {
           console.log('chat=', chat)
@@ -246,28 +292,51 @@ const page = new ChatLayout({
       }
     }))
   }),
+
   chatMenuCtrls: new ChatControls({
-    isForm: false,
-    classes: ['chat-controls-bottom'],
+    ...ctx.chatMenu.main,
+
     childrenList: [
       new SecondaryBtn({
-        ...addChatBtnIProps,
+        ...ctx.chatMenu.newChatBtn,
+
         events: {
           click: () => {
-            showModal(createChatModal)
+            showModal(
+              generateModal(
+                ctx.modal.newChat.main,
+                ctx.modal.newChat.input,
+                {
+                  submit: (event: Event) => {
+                    const data = submitForm(event)
+                    chatController.createChat({ chat: data.chat_name })
+                  }
+                }
+              )
+            )
           }
         }
       }),
-      new SecondaryBtn(openProfileBtnIProps)
+      new SecondaryBtn({
+        ...ctx.chatMenu.myProfileBtn,
+
+        events: {
+          click: () => {
+            console.log('goto my profile')
+          }
+        }
+      })
     ]
   }),
+
   chatHeader: new ChatControls({
-    isForm: false,
-    classes: ['chat-controls-top'],
+    ...ctx.chatHeader.main,
+
     childrenList: [
-      new ChatTitle(chatTitleIProps),
+      new ChatTitle(ctx.chatHeader.title),
       new RoundBtn({
-        ...chatSettingsBtnIProps,
+        ...ctx.chatHeader.settingsBtn,
+
         events: {
           click: () => {
             showChatSettingsMenu(chatSettingsMenu)
@@ -276,16 +345,19 @@ const page = new ChatLayout({
       })
     ]
   }),
+
   messagesList: new MessagesList({
     childrenList: messages.map(message => new MessageCard(message))
   }),
+
   messagesCtrls: new ChatControls({
-    isForm: true,
-    classes: ['chat-controls-bottom'],
+    ...ctx.messageForm.main,
+
     childrenList: [
-      new InputField(inputFieldMessageIProps),
-      new RoundBtn(sendMessageBtnIProps)
+      new InputField(ctx.messageForm.input),
+      new RoundBtn(ctx.messageForm.sendBtn)
     ],
+
     events: {
       submit: (event: Event) => {
         submitForm(event)
