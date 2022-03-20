@@ -1,0 +1,17 @@
+@use 'sass:map';
+
+.chat-controls {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  justify-content: space-between;
+  height: $menus-height;
+
+  &-top {
+    border-bottom: 1px solid map.get($colors, 'lightgray');
+  }
+
+  &-bottom {
+    border-top: 1px solid map.get($colors, 'lightgray');
+  }
+}

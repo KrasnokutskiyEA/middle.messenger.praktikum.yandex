@@ -1,0 +1,4 @@
+.chats-list {
+  @extend %scrollable-list;
+  @extend %hidden-scrollbar;
+}

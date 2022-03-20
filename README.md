@@ -28,7 +28,7 @@ https://elated-aryabhata-ab7239.netlify.app
 
 https://ya-praktikum.tech/api/v2/swagger/#/
 
-## Pull request
+## Pull request SPRINT 2
 
 https://github.com/KrasnokutskiyEA/middle.messenger.praktikum.yandex/pull/7
 

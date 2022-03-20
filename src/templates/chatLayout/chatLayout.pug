@@ -1,0 +1,11 @@
+div(class='chat-layout')
+  //- left menu
+  aside(class='chat-menu')
+    != chatSearch
+    != chatsList
+    != chatMenuCtrls
+  //- main window
+  main(class='chat-messages')
+    != chatHeader
+    != messagesList
+    != messagesCtrls

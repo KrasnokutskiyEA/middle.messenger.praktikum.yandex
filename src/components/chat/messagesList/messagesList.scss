@@ -1,0 +1,8 @@
+@use 'sass:map';
+
+.messages-list {
+  @extend %scrollable-list;
+  @extend %hidden-scrollbar;
+
+  background-image: map.get($gradients, 'main-bkg');
+}

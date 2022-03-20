@@ -1,7 +1,23 @@
 $colors: (
-  'gray': #999999,
-  'lightgray': #EFEFEF,
-  'black': #000000,
-  'white': #FFFFFF,
-  'yellow': #FFCC00
+  'gray': #999,
+  'lightgray': #efefef,
+  'altgray': #e7e7e7,
+  'shadow': #ddd,
+  'shadow-dark': rgb(200 200 200),
+  'primary-btn-shadow': #ffcc0080,
+  'black': #000,
+  'white': #fff,
+  'yellow': #fc0,
+  'red': #f00,
+  'success-bkg': #fff7cf,
+  'error-bkg': #fbecec,
+  'success-brd': #fc0,
+  'error-brd': #f19b9b,
+  'success-message': #00c58a,
+  'error-message': #ff005c
+) !default;
+
+$gradients: (
+  'main-bkg': linear-gradient(to top, #c4fcff, #94eafc, #63d6fd, #2fbfff, #00a7ff),
+  'msg-outgoing': linear-gradient(to left top, #fcffb0, #fcfca7, #fdf89e, #fef594, #fff18b)
 ) !default;

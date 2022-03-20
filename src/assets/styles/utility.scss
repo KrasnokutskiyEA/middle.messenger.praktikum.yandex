@@ -1,20 +1,86 @@
-// margin-bottom
-.mb-4 {
-  margin-bottom: 40px;  
+// margin-horizontal
+.ml-2 {
+  margin-left: 20px;
 }
+
+.mr-1 {
+  margin-right: 10px;
+}
+
+.mr-2 {
+  margin-right: 20px;
+}
+
+// margin-bottom
+.mb-2 {
+  margin-bottom: 20px;
+}
+
+.mb-4 {
+  margin-bottom: 40px;
+}
+
 .mb-6 {
-  margin-bottom: 60px;  
+  margin-bottom: 60px;
 }
 
 // margin-top
+.mt-1 {
+  margin-top: 10px;
+}
+
+.mt-2 {
+  margin-top: 20px;
+}
+
+.mt-4 {
+  margin-top: 40px;
+}
+
 .mt-6 {
   margin-top: 60px;
 }
+
 .mt-auto {
   margin-top: auto;
+}
+
+// padding-right
+.pr-1 {
+  padding-right: 10px;
+}
+
+.pr-2 {
+  padding-right: 20px;
+}
+
+.pr-24 {
+  padding-right: 24px;
+}
+
+.pr-34 {
+  padding-right: 34px;
+}
+
+// width and height
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.h-6 {
+  height: 60px;
 }
 
 // rotation
 .rot-180 {
   transform: rotate(180deg);
+}
+
+// other stuff
+.hidden {
+  visibility: hidden;
 }

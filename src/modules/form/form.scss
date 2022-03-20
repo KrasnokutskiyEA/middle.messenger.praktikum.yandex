@@ -1,19 +1,25 @@
 @use 'sass:map';
 
 .form {
-  border: 1px solid map.get($colors, 'gray');
   border-radius: 50px;
   width: 480px;
-  min-height: 630px;
+
+  // min-height: 420px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 60px;
+  padding-top: 50px;
   padding-bottom: 30px;
-  .form_title {
+  box-shadow: 1px 1px 10px 1px map.get($colors, 'white');
+  background-color: white;
+
+  .form-title {
     font-size: 2em;
+    margin-bottom: 40px;
   }
-  .form_link {
+
+  .form-link {
     font-size: 1em;
     color: map.get($colors, 'gray');
     margin-top: 20px;

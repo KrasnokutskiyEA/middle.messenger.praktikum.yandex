@@ -1,6 +1,6 @@
 @use 'sass:map';
 
-.sidenav_wrapper {
+.sidenav {
   position: absolute;
   width: 60px;
   height: 100%;
@@ -8,5 +8,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: map.get($colors, 'lightgray');
+  background-color: map.get($colors, 'white');
+  box-shadow: 1px 1px 10px 1px #fff;
 }
