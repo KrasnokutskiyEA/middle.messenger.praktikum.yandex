@@ -13,7 +13,7 @@ import userRemoveLogo from '../../assets/images/user_remove.svg'
 // helpers import
 import { chats, messages } from '../../helpers/fakeData'
 import { validateInput, clearInput, submitForm } from '../../helpers/formUtils'
-import { showChatSettingsMenu, hideChatSettingsMenu, showModal } from '../../helpers/showComponents'
+import { showChatSettingsMenu, hideChatSettingsMenu, showOverlayModal } from '../../helpers/showComponents'
 
 // controllers import
 import { chatController } from '../../controllers/index'
@@ -220,7 +220,7 @@ const chatSettingsMenu = {
 
       events: {
         click: () => {
-          showModal(
+          showOverlayModal(
             generateModal(
               ctx.modal.addUser.main,
               ctx.modal.addUser.input,
@@ -242,7 +242,7 @@ const chatSettingsMenu = {
 
       events: {
         click: () => {
-          showModal(
+          showOverlayModal(
             generateModal(
               ctx.modal.removeUser.main,
               ctx.modal.removeUser.input,
@@ -302,7 +302,7 @@ const page = new ChatLayout({
 
         events: {
           click: () => {
-            showModal(
+            showOverlayModal(
               generateModal(
                 ctx.modal.newChat.main,
                 ctx.modal.newChat.input,

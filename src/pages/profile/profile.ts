@@ -14,134 +14,244 @@ import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
 import RoundBtn from '../../components/roundBtn/roundBtn'
 import Avatar from '../../components/avatar/avatar'
 
-const textFieldIProps = [
-  {
-    label: 'Email',
-    type: 'text',
-    name: 'email',
-    id: 'email',
-    placeholder: 'Email',
-    required: 'required',
-    pattern: '^[A-Za-z0-9_\\/^#&+-]+@[A-Za-z0-9_\\/^#&+-]+\\.+[A-Za-z]+$',
-    errorText: 'latin, may include special chars, @ required',
-    events: {
-      focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
-      blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
-    }
+// 1 - generate context
+const ctx = {
+  main: {
+    primaryLinkTo: '/password.html',
+    primaryLinkLabel: 'Change password',
+    secondaryLinkTo: '/signIn.html',
+    secondaryLinkLabel: 'Log out'
   },
-  {
-    label: 'Username',
-    type: 'text',
-    name: 'login',
-    id: 'login',
-    placeholder: 'Username',
-    required: 'required',
-    pattern: '^\\d*[a-zA-Z][a-zA-Z0-9]*$',
-    maxlength: 20,
-    minlength: 3,
-    errorText: '3-20 latin symbols, no spaces, no special chars',
-    events: {
-      focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
-      blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
-    }
+  avatar: {
+    classes: ['mb-4'],
+    logo: avatarLogo
   },
-  {
-    label: 'First Name',
-    type: 'text',
-    name: 'first_name',
-    id: 'first_name',
-    placeholder: 'First Name',
-    required: 'required',
-    pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
-    errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars',
-    events: {
-      focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
-      blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
+  inputs: [
+    {
+      label: 'Email',
+      type: 'text',
+      name: 'email',
+      id: 'email',
+      placeholder: 'Email',
+      required: 'required',
+      pattern: '^[A-Za-z0-9_\\/^#&+-]+@[A-Za-z0-9_\\/^#&+-]+\\.+[A-Za-z]+$',
+      errorText: 'latin, may include special chars, @ required'
+    },
+    {
+      label: 'Username',
+      type: 'text',
+      name: 'login',
+      id: 'login',
+      placeholder: 'Username',
+      required: 'required',
+      pattern: '^\\d*[a-zA-Z][a-zA-Z0-9]*$',
+      maxlength: 20,
+      minlength: 3,
+      errorText: '3-20 latin symbols, no spaces, no special chars'
+    },
+    {
+      label: 'First Name',
+      type: 'text',
+      name: 'first_name',
+      id: 'first_name',
+      placeholder: 'First Name',
+      required: 'required',
+      pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
+      errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars'
+    },
+    {
+      label: 'Last Name',
+      type: 'text',
+      name: 'second_name',
+      id: 'second_name',
+      placeholder: 'Last Name',
+      required: 'required',
+      pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
+      errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars'
+    },
+    {
+      label: 'Nickname',
+      type: 'text',
+      name: 'display_name',
+      id: 'display_name',
+      placeholder: 'Nickname',
+      required: 'required',
+      maxlength: 10,
+      minlength: 3,
+      pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
+      errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars'
+    },
+    {
+      label: 'Phone',
+      type: 'text',
+      name: 'phone',
+      id: 'phone',
+      placeholder: 'Phone',
+      required: 'required',
+      maxlength: 15,
+      minlength: 10,
+      pattern: '^[+]?[0-9]*$',
+      errorText: '10-15 numbers, may start with +'
     }
+  ],
+  submitBtn: {
+    text: 'Submit',
+    type: 'submit',
+    classes: ['mt-2']
   },
-  {
-    label: 'Last Name',
-    type: 'text',
-    name: 'second_name',
-    id: 'second_name',
-    placeholder: 'Last Name',
-    required: 'required',
-    pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
-    errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars',
-    events: {
-      focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
-      blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
-    }
-  },
-  {
-    label: 'Nickname',
-    type: 'text',
-    name: 'display_name',
-    id: 'display_name',
-    placeholder: 'Nickname',
-    required: 'required',
-    maxlength: 10,
-    minlength: 3,
-    pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
-    errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars',
-    events: {
-      focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
-      blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
-    }
-  },
-  {
-    label: 'Phone',
-    type: 'text',
-    name: 'phone',
-    id: 'phone',
-    placeholder: 'Phone',
-    required: 'required',
-    maxlength: 15,
-    minlength: 10,
-    pattern: '^[+]?[0-9]*$',
-    errorText: '10-15 numbers, may start with +',
-    events: {
-      focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
-      blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
-    }
-  }
-]
-
-const formIProps = {
-  primaryLinkTo: '/signIn.html',
-  primaryLinkLabel: 'Change password',
-  secondaryLinkTo: '/signIn.html',
-  secondaryLinkLabel: 'Log out'
-}
-
-const primaryBtnIProps = {
-  text: 'Submit',
-  type: 'submit',
-  classes: ['mt-2'],
-  events: {
-    click: () => validateForm()
+  goBackBtn: {
+    classes: ['rot-180', 'round-btn-normal'],
+    logo: arrowLogo,
+    type: 'button'
   }
 }
 
-const roundBtnIProps = {
-  classes: ['rot-180', 'round-btn-normal'],
-  logo: arrowLogo,
-  type: 'button'
-}
+// const textFieldIProps = [
+//   {
+//     label: 'Email',
+//     type: 'text',
+//     name: 'email',
+//     id: 'email',
+//     placeholder: 'Email',
+//     required: 'required',
+//     pattern: '^[A-Za-z0-9_\\/^#&+-]+@[A-Za-z0-9_\\/^#&+-]+\\.+[A-Za-z]+$',
+//     errorText: 'latin, may include special chars, @ required',
+//     events: {
+//       focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
+//       blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
+//     }
+//   },
+//   {
+//     label: 'Username',
+//     type: 'text',
+//     name: 'login',
+//     id: 'login',
+//     placeholder: 'Username',
+//     required: 'required',
+//     pattern: '^\\d*[a-zA-Z][a-zA-Z0-9]*$',
+//     maxlength: 20,
+//     minlength: 3,
+//     errorText: '3-20 latin symbols, no spaces, no special chars',
+//     events: {
+//       focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
+//       blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
+//     }
+//   },
+//   {
+//     label: 'First Name',
+//     type: 'text',
+//     name: 'first_name',
+//     id: 'first_name',
+//     placeholder: 'First Name',
+//     required: 'required',
+//     pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
+//     errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars',
+//     events: {
+//       focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
+//       blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
+//     }
+//   },
+//   {
+//     label: 'Last Name',
+//     type: 'text',
+//     name: 'second_name',
+//     id: 'second_name',
+//     placeholder: 'Last Name',
+//     required: 'required',
+//     pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
+//     errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars',
+//     events: {
+//       focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
+//       blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
+//     }
+//   },
+//   {
+//     label: 'Nickname',
+//     type: 'text',
+//     name: 'display_name',
+//     id: 'display_name',
+//     placeholder: 'Nickname',
+//     required: 'required',
+//     maxlength: 10,
+//     minlength: 3,
+//     pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
+//     errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars',
+//     events: {
+//       focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
+//       blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
+//     }
+//   },
+//   {
+//     label: 'Phone',
+//     type: 'text',
+//     name: 'phone',
+//     id: 'phone',
+//     placeholder: 'Phone',
+//     required: 'required',
+//     maxlength: 15,
+//     minlength: 10,
+//     pattern: '^[+]?[0-9]*$',
+//     errorText: '10-15 numbers, may start with +',
+//     events: {
+//       focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
+//       blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
+//     }
+//   }
+// ]
 
-const avatarIProps = {
-  classes: ['mb-4'],
-  logo: avatarLogo
-}
+// const formIProps = {
+//   primaryLinkTo: '/signIn.html',
+//   primaryLinkLabel: 'Change password',
+//   secondaryLinkTo: '/signIn.html',
+//   secondaryLinkLabel: 'Log out'
+// }
+
+// const primaryBtnIProps = {
+//   text: 'Submit',
+//   type: 'submit',
+//   classes: ['mt-2'],
+//   events: {
+//     click: () => validateForm()
+//   }
+// }
+
+// const roundBtnIProps = {
+//   classes: ['rot-180', 'round-btn-normal'],
+//   logo: arrowLogo,
+//   type: 'button'
+// }
+
+// const avatarIProps = {
+//   classes: ['mb-4'],
+//   logo: avatarLogo
+// }
 
 // 2 - create page structure
 const page = new SideNav({
-  ctrlElement: new RoundBtn(roundBtnIProps),
+  ctrlElement: new RoundBtn(ctx.goBackBtn),
+
   content: new Form({
-    ...formIProps,
-    avatar: new Avatar(avatarIProps),
-    childrenList: textFieldIProps.map(p => new TextField(p)),
-    submitBtn: new PrimaryBtn(primaryBtnIProps),
+    ...ctx.main,
+
+    avatar: new Avatar(ctx.avatar),
+
+    childrenList: ctx.inputs.map(input => new TextField({
+      ...input,
+
+      events: {
+        focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
+        blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
+      }
+    })),
+
+    submitBtn: new PrimaryBtn({
+      ...ctx.submitBtn,
+
+      events: {
+        click: () => validateForm()
+      }
+    }),
+
     events: {
       submit: (event: Event) => submitForm(event)
     }

@@ -12,11 +12,15 @@ export const showMessage = (text: string, classes: string[]): void => {
   }
 }
 
-export const showSpinner = (): void => {
+export const showOverlaySpinner = (): void => {
   document.body.append(new Overlay({ content: Spinner, isClosable: false }).getContent())
 }
 
-export const hideSpinner = (): void => {
+export const showOverlayModal = (ctx: { content: Form }): void => {
+  document.body.append(new Overlay({ ...ctx, isClosable: true }).getContent())
+}
+
+export const hideOverlay = (): void => {
   Overlay.instance!.unmount()
 }
 
@@ -26,8 +30,4 @@ export const showChatSettingsMenu = (ctx: { childrenList: SecondaryBtn[] }): voi
 
 export const hideChatSettingsMenu = (): void => {
   ChatSettingsDropdown.instance!.unmount()
-}
-
-export const showModal = (ctx: { content: Form }): void => {
-  document.body.append(new Overlay({ ...ctx, isClosable: true }).getContent())
 }

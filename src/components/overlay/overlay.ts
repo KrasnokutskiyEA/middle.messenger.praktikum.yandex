@@ -23,7 +23,7 @@ class Overlay extends Block {
       }
     }
     this.handleOverlay = this.unmountDropdown.bind(this)
-    document.addEventListener('mousedown', this.handleOverlay, true)
+    document.addEventListener('mousedown', this.handleOverlay)
   }
 
   render (): HTMLElement {
