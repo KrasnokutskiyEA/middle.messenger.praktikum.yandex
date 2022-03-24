@@ -15,7 +15,7 @@ interface IChildrenSimple { [childName: string]: Block }
 interface IChildrenList { childrenList?: Block[] }
 type IChildren = IChildrenSimple & IChildrenList
 
-export abstract class Block {
+export class Block {
   /* class properties */
   static EVENTS = {
     INIT: 'init',
@@ -33,7 +33,7 @@ export abstract class Block {
   readonly eventBus: () => EventBus
 
   /* constructor */
-  constructor (tagName = 'div', propsAndChildren: IProps) {
+  constructor (tagName: string = 'div', propsAndChildren: IProps = {}) {
     const eventBus = new EventBus()
     this._meta = { tagName, propsAndChildren }
     this._id = uuidv4()

@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "messenger app",
   "scripts": {
-    "start": "parcel build ./static/pages/**/*.html && node server.ts",
-    "watch": "parcel watch ./static/pages/**/*.html",
-    "production": "parcel build ./static/pages/**/*.html",
+    "start": "parcel build ./static/index.html && node server.ts",
+    "watch": "parcel watch ./static/index.html",
+    "production": "parcel build ./static/index.html",
     "dev": "npm run watch & node server.ts"
   },
   "author": "",
@@ -25,6 +25,7 @@
     "typescript": "^4.5.2"
   },
   "dependencies": {
+    "connect-history-api-fallback": "^1.6.0",
     "dotenv": "^14.2.0",
     "express": "^4.17.1",
     "uuid": "^8.3.2"

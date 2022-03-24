@@ -1,6 +1,11 @@
 // asssets import
-import '../../assets/styles/index.scss'
 import logo from '../../assets/images/ghost.svg'
+
+// import base class
+import { Block } from '../../classes/Block'
+
+// template import
+import template from '../../templates/page/page.pug'
 
 // components import (.ts)
 import CenterContent from '../../templates/centerContent/centerContent'
@@ -16,13 +21,19 @@ const ctx = {
 }
 
 // 2 - create page structure
-const page = new CenterContent({
-  content: new ErrorMesssage(ctx)
-})
+const page = {
+  content: new CenterContent({
+    content: new ErrorMesssage(ctx)
+  })
+}
 
-// 3 - generate markup
-const app: HTMLElement | null = document.getElementById('app')
-if (app !== null) {
-  app.innerHTML = ''
-  app.appendChild(page.render())
+// 3 - component
+export default class Page404 extends Block {
+  constructor () {
+    super('div', page)
+  }
+
+  render (): HTMLElement {
+    return this.compile(template, this.props)
+  }
 }
