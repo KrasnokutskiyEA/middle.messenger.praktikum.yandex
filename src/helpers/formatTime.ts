@@ -15,7 +15,7 @@ export default function formatTime (timestamp: string): string {
   }
 
   if (diff === 1) {
-    dateString = 'Yesterday'
+    dateString = 'YDA'
   }
 
   return dateString

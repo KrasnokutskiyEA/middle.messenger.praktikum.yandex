@@ -5,10 +5,9 @@ import logo from '../../assets/images/ghost.svg'
 import { Block } from '../../classes/Block'
 
 // template import
-import template from '../../templates/page/page.pug'
+import template from '../../templates/centerContent/centerContent.pug'
 
 // components import (.ts)
-import CenterContent from '../../templates/centerContent/centerContent'
 import ErrorMesssage from '../../components/errorMessage/errorMessage'
 
 // 1 - generate context
@@ -22,9 +21,7 @@ const ctx = {
 
 // 2 - create page structure
 const page = {
-  content: new CenterContent({
-    content: new ErrorMesssage(ctx)
-  })
+  content: new ErrorMesssage(ctx)
 }
 
 // 3 - component

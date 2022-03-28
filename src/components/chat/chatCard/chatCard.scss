@@ -48,6 +48,7 @@
       color: map.get($colors, 'gray');
       margin-top: 10px;
       font-size: 0.8em;
+      white-space: nowrap;
     }
 
     .chat-card-misc-unread-wrapper {

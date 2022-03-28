@@ -1,13 +1,17 @@
 // asssets import
-import '../../assets/styles/index.scss'
 import avatarLogo from '../../assets/images/avatar.svg'
 import arrowLogo from '../../assets/images/arrow.svg'
 
 // helpers import
 import { validateInput, validateForm, submitForm } from '../../helpers/formUtils'
 
+// import base class
+import { Block } from '../../classes/Block'
+
+// template import
+import template from '../../templates/sideNav/sideNav.pug'
+
 // components import (.ts)
-import SideNav from '../../templates/sideNav/sideNav'
 import Form from '../../modules/form/form'
 import TextField from '../../components/textField/textField'
 import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
@@ -107,7 +111,7 @@ const ctx = {
 }
 
 // 2 - create page structure
-const page = new SideNav({
+const page = {
   ctrlElement: new RoundBtn(ctx.goBackBtn),
 
   content: new Form({
@@ -136,11 +140,15 @@ const page = new SideNav({
       submit: (event: Event) => submitForm(event)
     }
   })
-})
+}
 
-// 3 - generate markup
-const app: HTMLElement | null = document.getElementById('app')
-if (app !== null) {
-  app.innerHTML = ''
-  app.appendChild(page.render())
+// 3 - component
+export default class PageUserProfile extends Block {
+  constructor () {
+    super('div', page)
+  }
+
+  render (): HTMLElement {
+    return this.compile(template, this.props)
+  }
 }

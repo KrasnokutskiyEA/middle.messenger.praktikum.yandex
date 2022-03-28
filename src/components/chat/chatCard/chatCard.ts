@@ -34,7 +34,8 @@ class ChatCard extends Block {
       ownerLastMessage: props.ownerLastMessage,
       chatUnreadMessagesQty: props.counterUnreadMessages,
       chatAvatar: props.avatar ?? defaultAvatar,
-      chatLastMessageTime: formatTime(props.updatedAt),
+      chatLastMessageTime: props.updatedAt,
+      chatLastMessageTimeFormatted: formatTime(props.updatedAt),
       events: props.events
     })
   }

@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     /* Language and Environment */
-    "target": "es2021",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "target": "es2022",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
 
     /* Modules */
-    "module": "es2020",                                  /* Specify what module code is generated. */
+    "module": "es2022",                                  /* Specify what module code is generated. */
     "rootDir": "/",                                      /* Specify the root folder within your source files. */
 
     /* Emit */
@@ -20,7 +20,8 @@
     "noImplicitAny": true,                               /* Enable error reporting for expressions and declarations with an implied `any` type.. */
     "strictNullChecks": true,                            /* When type checking, take into account `null` and `undefined`. */
     "noUnusedLocals": true,                              /* Enable error reporting when a local variables aren't read. */
-    "noUnusedParameters": true                           /* Raise an error when a function parameter isn't read */
+    "noUnusedParameters": true,                           /* Raise an error when a function parameter isn't read */
+    "strictPropertyInitialization": false
   },
-  "include": ["./src/", "./server.ts"]
+  "include": ["./src/**/*", "./server.ts", "index.d.ts"]
 }

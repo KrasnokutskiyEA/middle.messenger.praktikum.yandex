@@ -1,5 +1,4 @@
 // asssets import
-import '../../assets/styles/index.scss'
 import textLogo from '../../assets/images/text.svg'
 import sendLogo from '../../assets/images/send.svg'
 import settingsLogo from '../../assets/images/settings.svg'
@@ -10,6 +9,12 @@ import personLogo from '../../assets/images/person.svg'
 import userAddLogo from '../../assets/images/user_add.svg'
 import userRemoveLogo from '../../assets/images/user_remove.svg'
 
+// import base class
+import { Block } from '../../classes/Block'
+
+// template import
+import template from '../../templates/chatLayout/chatLayout.pug'
+
 // helpers import
 import { chats, messages } from '../../helpers/fakeData'
 import { validateInput, clearInput, submitForm } from '../../helpers/formUtils'
@@ -19,7 +24,6 @@ import { showChatSettingsMenu, hideChatSettingsMenu, showOverlayModal } from '..
 import { chatController } from '../../controllers/index'
 
 // components import (.ts)
-import ChatLayout from '../../templates/chatLayout/chatLayout'
 import ChatsList from '../../components/chat/chatsList/chatsList'
 import ChatControls from '../../components/chat/chatControls/chatControls'
 import ChatCard from '../../components/chat/chatCard/chatCard'
@@ -272,7 +276,7 @@ const chatSettingsMenu = {
 }
 
 // 2 - create page structure
-const page = new ChatLayout({
+const page = {
   chatSearch: new ChatControls({
     ...ctx.chatSearch.main,
 
@@ -365,11 +369,15 @@ const page = new ChatLayout({
       }
     }
   })
-})
+}
 
-// 3 - generate markup
-const app: HTMLElement | null = document.getElementById('app')
-if (app !== null) {
-  app.innerHTML = ''
-  app.appendChild(page.render())
+// 3 - component
+export default class PageChat extends Block {
+  constructor () {
+    super('div', page)
+  }
+
+  render (): HTMLElement {
+    return this.compile(template, this.props)
+  }
 }

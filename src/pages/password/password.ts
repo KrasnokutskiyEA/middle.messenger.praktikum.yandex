@@ -1,5 +1,3 @@
-// asssets import
-import '../../assets/styles/index.scss'
 import arrowLogo from '../../assets/images/arrow.svg'
 
 // helpers import
@@ -8,8 +6,13 @@ import { validateInput, validateForm, submitForm, validateNewPassword } from '..
 // controllers import
 import { authController } from '../../controllers/index'
 
+// import base class
+import { Block } from '../../classes/Block'
+
+// template import
+import template from '../../templates/sideNav/sideNav.pug'
+
 // components import (.ts)
-import SideNav from '../../templates/sideNav/sideNav'
 import Form from '../../modules/form/form'
 import TextField from '../../components/textField/textField'
 import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
@@ -81,7 +84,7 @@ const ctx = {
 }
 
 // 2 - create page structure
-const page = new SideNav({
+const page = {
   ctrlElement: new RoundBtn(ctx.goBackBtn),
 
   content: new Form({
@@ -108,11 +111,15 @@ const page = new SideNav({
       }
     }
   })
-})
+}
 
-// 3 - generate markup
-const app: HTMLElement | null = document.getElementById('app')
-if (app !== null) {
-  app.innerHTML = ''
-  app.appendChild(page.render())
+// 3 - component
+export default class PageChangePassword extends Block {
+  constructor () {
+    super('div', page)
+  }
+
+  render (): HTMLElement {
+    return this.compile(template, this.props)
+  }
 }

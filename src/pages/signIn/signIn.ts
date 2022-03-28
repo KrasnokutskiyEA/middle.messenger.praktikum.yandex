@@ -1,14 +1,16 @@
-// asssets import
-import '../../assets/styles/index.scss'
-
 // helpers import
 import { validateInput, validateForm, submitForm } from '../../helpers/formUtils'
 
 // controllers import
 import { authController } from '../../controllers/index'
 
+// import base class
+import { Block } from '../../classes/Block'
+
+// template import
+import template from '../../templates/centerContent/centerContent.pug'
+
 // components import (.ts)
-import CenterContent from '../../templates/centerContent/centerContent'
 import Form from '../../modules/form/form'
 import TextField from '../../components/textField/textField'
 import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
@@ -56,7 +58,7 @@ const ctx = {
 }
 
 // 2 - create page structure
-const page = new CenterContent({
+const page = {
   content: new Form({
     ...ctx.main,
 
@@ -84,11 +86,15 @@ const page = new CenterContent({
       }
     }
   })
-})
+}
 
-// 3 - generate markup
-const app: HTMLElement | null = document.getElementById('app')
-if (app !== null) {
-  app.innerHTML = ''
-  app.appendChild(page.render())
+// 3 - component
+export default class PageSignIn extends Block {
+  constructor () {
+    super('div', page)
+  }
+
+  render (): HTMLElement {
+    return this.compile(template, this.props)
+  }
 }

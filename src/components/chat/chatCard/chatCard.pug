@@ -6,7 +6,7 @@ div(class='chat-card')
     div(class='chat-card-main-message' title= chatLastMessageText) #{chatLastMessageText}
 
   div(class= 'chat-card-misc')
-    div(class= 'chat-card-misc-time') #{chatLastMessageTime}
+    div(class= 'chat-card-misc-time' title= chatLastMessageTime) #{chatLastMessageTimeFormatted}
     if chatUnreadMessagesQty
       div(class= 'chat-card-misc-unread-wrapper')
         div(class= 'chat-card-misc-unread') #{chatUnreadMessagesQty}

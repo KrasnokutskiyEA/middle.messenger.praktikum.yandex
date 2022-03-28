@@ -1,7 +1,7 @@
 import Route from './Route'
 import { Block } from './Block'
 
-class Router {
+export default class Router {
   public routes: Route[]
   public history: History
   private _currentRoute: Route | null
@@ -101,7 +101,7 @@ class Router {
     this.history.forward()
   }
 
-  public getRoute (pathname: string): Route {
+  public getRoute (pathname: string): Route | undefined {
     return this.routes.find(route => route.match(pathname))
   }
 
@@ -110,4 +110,4 @@ class Router {
   }
 }
 
-export default Router
+// export default Router

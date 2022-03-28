@@ -7,7 +7,7 @@ export const chats = [
     ownerLastMessage: 'Steve Jordan',
     counterUnreadMessages: 1,
     avatar: null,
-    updatedAt: '2021-05-27T19:18:15.563Z'
+    updatedAt: '2022-03-28T19:18:15.563Z'
   },
   {
     id: '2',
@@ -17,7 +17,7 @@ export const chats = [
     ownerLastMessage: 'Peter Ganapolsky',
     counterUnreadMessages: 0,
     avatar: null,
-    updatedAt: '2021-05-24T15:18:02.563Z'
+    updatedAt: '2022-03-27T15:18:02.563Z'
   },
   {
     id: '3',
@@ -27,7 +27,7 @@ export const chats = [
     ownerLastMessage: 'George Hampton',
     counterUnreadMessages: 0,
     avatar: null,
-    updatedAt: '2021-05-23T10:21:07.563Z'
+    updatedAt: '2022-03-23T10:21:07.563Z'
   }
 ]
 
@@ -39,7 +39,7 @@ export const messages = [
     ownerId: 'a1',
     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pharetra, nibh sed condimentum dapibus, erat nunc suscipit sem, sed sollicitudin nisi velit non justo. Nulla luctus ligula ac laoreet viverra. Duis quis pellentesque nunc. Phasellus pretium neque orci, et tincidunt risus pretium vel. Vivamus sagittis, lectus quis sollicitudin sagittis, lacus risus faucibus leo, id condimentum arcu magna sed massa. Donec sodales vestibulum erat dapibus viverr Nulla varius in enim at fringilla. Duis at arcu consequat, pulvinar ante non, vehicula felis. Ut at sapien eu sem interdum ultricies id id neque. Aenean non enim iaculis, tincidunt augue vel. Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
     image: null,
-    date: '2021-05-24T15:17:02.563Z'
+    date: '2022-03-24T15:17:02.563Z'
   },
   {
     id: '2',
@@ -48,7 +48,7 @@ export const messages = [
     ownerId: 'a1',
     text: 'Man, who are you?',
     image: null,
-    date: '2021-05-24T15:18:02.563Z'
+    date: '2022-03-24T15:18:02.563Z'
   },
   {
     id: '3',
@@ -57,7 +57,7 @@ export const messages = [
     ownerId: 'a1',
     text: 'I am your creator',
     image: null,
-    date: '2021-05-24T15:19:02.563Z'
+    date: '2022-03-24T15:19:02.563Z'
   },
   {
     id: '4',
@@ -66,7 +66,7 @@ export const messages = [
     ownerId: 'a1',
     text: 'I created you two days ago...',
     image: null,
-    date: '2021-05-27T15:20:02.563Z'
+    date: '2022-03-27T15:20:02.563Z'
   },
   {
     id: '5',
@@ -75,6 +75,6 @@ export const messages = [
     ownerId: 'a1',
     text: "Ok... I'm calling 911. Seems you need help!",
     image: null,
-    date: '2021-05-28T15:21:02.563Z'
+    date: '2022-03-28T01:21:02.563Z'
   }
 ]
