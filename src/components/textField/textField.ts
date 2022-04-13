@@ -5,7 +5,7 @@ import { Block, IProps } from '../../classes/Block'
 import template from './textField.pug'
 
 // component
-class TextField extends Block {
+export default class TextField extends Block {
   constructor (props: IProps) {
     super('div', props)
   }
@@ -14,5 +14,3 @@ class TextField extends Block {
     return this.compile(template, this.props)
   }
 }
-
-export default TextField

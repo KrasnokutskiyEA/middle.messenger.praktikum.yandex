@@ -24,7 +24,7 @@ interface IChatCard {
 }
 
 // component
-class ChatCard extends Block {
+export default class ChatCard extends Block {
   constructor (props: IChatCard) {
     super('div', {
       id: props.id,
@@ -44,5 +44,3 @@ class ChatCard extends Block {
     return this.compile(template, this.props)
   }
 }
-
-export default ChatCard

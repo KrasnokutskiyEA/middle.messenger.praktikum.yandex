@@ -5,7 +5,7 @@ import { Block, IProps } from '../../classes/Block'
 import template from './overlay.pug'
 
 // component
-class Overlay extends Block {
+export default class Overlay extends Block {
   static instance: Overlay | undefined
 
   readonly unmountDropdown: (evt: MouseEvent) => void
@@ -40,5 +40,3 @@ class Overlay extends Block {
     Overlay.instance = undefined
   }
 }
-
-export default Overlay

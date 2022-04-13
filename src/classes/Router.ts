@@ -109,5 +109,3 @@ export default class Router {
     return window.location.pathname
   }
 }
-
-// export default Router

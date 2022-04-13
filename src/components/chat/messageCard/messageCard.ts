@@ -22,7 +22,7 @@ interface IMessageCard {
 }
 
 // component
-class MessageCard extends Block {
+export default class MessageCard extends Block {
   constructor (props: IMessageCard) {
     super('div', {
       id: props.id,
@@ -39,5 +39,3 @@ class MessageCard extends Block {
     return this.compile(template, this.props)
   }
 }
-
-export default MessageCard

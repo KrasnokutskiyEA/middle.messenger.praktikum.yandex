@@ -14,13 +14,15 @@ import template from '../../templates/centerContent/centerContent.pug'
 import Form from '../../modules/form/form'
 import TextField from '../../components/textField/textField'
 import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
+import Link from '../../components/link/link'
+import router from '../../router'
 
 // 1 - generate context
 const ctx = {
   main: {
-    title: 'Sign In',
-    primaryLinkTo: '/createAccount.html',
-    primaryLinkLabel: 'Create account?'
+    title: 'Sign In'
+    // primaryLinkTo: '/createAccount.html',
+    // primaryLinkLabel: 'Create account?'
   },
   inputs: [
     {
@@ -54,6 +56,10 @@ const ctx = {
     id: 'submit-form-btn',
     classes: ['mt-2'],
     disabled: false
+  },
+  linkPrimary: {
+    to: '/create-account',
+    label: 'Create account?'
   }
 }
 
@@ -76,6 +82,17 @@ const page = {
 
       events: {
         click: () => validateForm()
+      }
+    }),
+
+    linkPrimary: new Link({
+      ...ctx.linkPrimary,
+
+      events: {
+        click: (event: Event) => {
+          event.preventDefault()
+          router.go(ctx.linkPrimary.to)
+        }
       }
     }),
 

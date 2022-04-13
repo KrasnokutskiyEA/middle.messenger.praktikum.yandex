@@ -15,7 +15,7 @@ interface IChatTitle {
 }
 
 // component
-class ChatTitle extends Block {
+export default class ChatTitle extends Block {
   constructor (props: IChatTitle) {
     super('div', {
       chatName: props.chatName,
@@ -28,5 +28,3 @@ class ChatTitle extends Block {
     return this.compile(template, this.props)
   }
 }
-
-export default ChatTitle

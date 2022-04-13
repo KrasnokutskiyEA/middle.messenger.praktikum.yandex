@@ -2,12 +2,12 @@
 import { Block, IProps } from '../../classes/Block'
 
 // import template
-import template from './errorMessage.pug'
+import template from './link.pug'
 
 // component
-export default class ErrorMessage extends Block {
+export default class Link extends Block {
   constructor (props: IProps) {
-    super('div', { ...props })
+    super('div', props)
   }
 
   render (): HTMLElement {

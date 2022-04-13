@@ -5,7 +5,7 @@ import { Block, IProps } from '../../classes/Block'
 import template from './primaryBtn.pug'
 
 // component
-class PrimaryBtn extends Block {
+export default class PrimaryBtn extends Block {
   constructor (props: IProps) {
     super('div', props)
   }
@@ -18,5 +18,3 @@ class PrimaryBtn extends Block {
     return this.compile(template, this.props)
   }
 }
-
-export default PrimaryBtn
