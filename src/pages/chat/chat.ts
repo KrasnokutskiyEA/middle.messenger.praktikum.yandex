@@ -36,6 +36,7 @@ import SecondaryBtn from '../../components/secondaryBtn/secondaryBtn'
 import InputField from '../../components/chat/inputField/inputField'
 import TextField from '../../components/textField/textField'
 import Form from '../../modules/form/form'
+import router from '../../router'
 
 // 0 - generate common context
 const ctxCommon = {
@@ -325,9 +326,7 @@ const page = {
         ...ctx.chatMenu.myProfileBtn,
 
         events: {
-          click: () => {
-            console.log('goto my profile')
-          }
+          click: () => router.go('/profile')
         }
       })
     ]

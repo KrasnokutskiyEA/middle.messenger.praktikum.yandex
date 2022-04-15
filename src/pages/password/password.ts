@@ -17,6 +17,7 @@ import Form from '../../modules/form/form'
 import TextField from '../../components/textField/textField'
 import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
 import RoundBtn from '../../components/roundBtn/roundBtn'
+import router from '../../router'
 
 // 1 - generate context
 const ctx = {
@@ -85,7 +86,13 @@ const ctx = {
 
 // 2 - create page structure
 const page = {
-  ctrlElement: new RoundBtn(ctx.goBackBtn),
+  ctrlElement: new RoundBtn({
+    ...ctx.goBackBtn,
+
+    events: {
+      click: () => router.back()
+    }
+  }),
 
   content: new Form({
     ...ctx.main,

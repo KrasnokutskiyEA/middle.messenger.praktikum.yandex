@@ -116,7 +116,13 @@ const ctx = {
 
 // 2 - create page structure
 const page = {
-  ctrlElement: new RoundBtn(ctx.goBackBtn),
+  ctrlElement: new RoundBtn({
+    ...ctx.goBackBtn,
+
+    events: {
+      click: () => router.back()
+    }
+  }),
 
   content: new Form({
     avatar: new Avatar(ctx.avatar),
