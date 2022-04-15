@@ -9,19 +9,37 @@ import template from '../../templates/centerContent/centerContent.pug'
 
 // components import (.ts)
 import ErrorMesssage from '../../components/errorMessage/errorMessage'
+import Link from '../../components/link/link'
+import router from '../../router'
 
 // 1 - generate context
 const ctx = {
-  code: '500',
-  message: 'Internal Server Error',
-  linkTo: '/index.html',
-  linkMessage: 'Go Back',
-  logo
+  main: {
+    code: '500',
+    message: 'Internal Server Error',
+    logo
+  },
+  link: {
+    label: 'Go Back'
+  }
 }
 
 // 2 - create page structure
 const page = {
-  content: new ErrorMesssage(ctx)
+  content: new ErrorMesssage({
+    ...ctx.main,
+
+    link: new Link({
+      ...ctx.link,
+
+      events: {
+        click: (event: Event) => {
+          event.preventDefault()
+          router.back()
+        }
+      }
+    })
+  })
 }
 
 // 3 - component

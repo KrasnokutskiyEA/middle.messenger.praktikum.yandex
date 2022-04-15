@@ -11,13 +11,13 @@ import template from '../../templates/centerContent/centerContent.pug'
 import Form from '../../modules/form/form'
 import TextField from '../../components/textField/textField'
 import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
+import Link from '../../components/link/link'
+import router from '../../router'
 
 // 1 - generate context
 const ctx = {
   main: {
-    title: 'Create Account',
-    primaryLinkTo: '/signIn.html',
-    primaryLinkLabel: 'Sign in'
+    title: 'Create Account'
   },
   inputs: [
     {
@@ -103,6 +103,10 @@ const ctx = {
     text: 'Sign Up',
     type: 'submit',
     classes: ['mt-2']
+  },
+  linkPrimary: {
+    to: '/sign-in',
+    label: 'Sign In'
   }
 }
 
@@ -119,6 +123,17 @@ const page = {
         blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
       }
     })),
+
+    linkPrimary: new Link({
+      ...ctx.linkPrimary,
+
+      events: {
+        click: (event: Event) => {
+          event.preventDefault()
+          router.go(ctx.linkPrimary.to)
+        }
+      }
+    }),
 
     submitBtn: new PrimaryBtn({
       ...ctx.submitBtn,

@@ -17,15 +17,11 @@ import TextField from '../../components/textField/textField'
 import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
 import RoundBtn from '../../components/roundBtn/roundBtn'
 import Avatar from '../../components/avatar/avatar'
+import Link from '../../components/link/link'
+import router from '../../router'
 
 // 1 - generate context
 const ctx = {
-  main: {
-    primaryLinkTo: '/password.html',
-    primaryLinkLabel: 'Change password',
-    secondaryLinkTo: '/signIn.html',
-    secondaryLinkLabel: 'Log out'
-  },
   avatar: {
     classes: ['mb-4'],
     logo: avatarLogo
@@ -103,6 +99,14 @@ const ctx = {
     type: 'submit',
     classes: ['mt-2']
   },
+  linkPrimary: {
+    to: '/change-password',
+    label: 'Change password'
+  },
+  linkSecondary: {
+    to: '/sign-in',
+    label: 'Log out'
+  },
   goBackBtn: {
     classes: ['rot-180', 'round-btn-normal'],
     logo: arrowLogo,
@@ -115,8 +119,6 @@ const page = {
   ctrlElement: new RoundBtn(ctx.goBackBtn),
 
   content: new Form({
-    ...ctx.main,
-
     avatar: new Avatar(ctx.avatar),
 
     childrenList: ctx.inputs.map(input => new TextField({
@@ -133,6 +135,28 @@ const page = {
 
       events: {
         click: () => validateForm()
+      }
+    }),
+
+    linkPrimary: new Link({
+      ...ctx.linkPrimary,
+
+      events: {
+        click: (event: Event) => {
+          event.preventDefault()
+          router.go(ctx.linkPrimary.to)
+        }
+      }
+    }),
+
+    linkSecondary: new Link({
+      ...ctx.linkSecondary,
+
+      events: {
+        click: (event: Event) => {
+          event.preventDefault()
+          router.go(ctx.linkSecondary.to)
+        }
       }
     }),
 

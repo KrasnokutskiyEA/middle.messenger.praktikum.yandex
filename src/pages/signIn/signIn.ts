@@ -21,8 +21,6 @@ import router from '../../router'
 const ctx = {
   main: {
     title: 'Sign In'
-    // primaryLinkTo: '/createAccount.html',
-    // primaryLinkLabel: 'Create account?'
   },
   inputs: [
     {

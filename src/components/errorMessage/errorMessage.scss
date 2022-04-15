@@ -1,8 +1,6 @@
-@use 'sass:map';
-
 .error-wrapper {
-  width: 40%;
-  height: 100%;
+  width: 100%;
+  height: 80%;
   position: relative;
   display: flex;
   align-items: center;
@@ -12,6 +10,10 @@
     width: 100%;
     height: 100%;
     position: absolute;
+
+    @media (width < 424px), (height < 520px) {
+      display: none;
+    }
   }
 
   .error-message {
@@ -21,17 +23,16 @@
     align-items: center;
 
     .error-code {
-      font-size: 4vw;
+      font-size: 6em;
     }
 
     .error-title {
-      font-size: 2vw;
-    }
+      font-size: 2em;
+      margin-bottom: 100px;
 
-    .error-link {
-      margin-top: 8vw;
-      font-size: 1vw;
-      color: map.get($colors, 'gray');
+      @media (height < 490px) {
+        margin-bottom: 20px;
+      }
     }
   }
 }
