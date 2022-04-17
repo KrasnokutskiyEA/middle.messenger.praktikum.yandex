@@ -7,9 +7,7 @@ class AuthApi extends BaseApi {
   }
 
   public signUp (data: IAuthApiSignUp): Record<string, unknown> {
-    return this.post('/signup', {
-      data
-    })
+    return this.post('/signup', { data })
   }
 
   public signIn (data: IAuthApiSignIn): Record<any, any> {

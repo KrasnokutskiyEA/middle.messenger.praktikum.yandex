@@ -13,11 +13,11 @@ class AuthController {
     }, 5000)
   }
 
-  public async signUp (user: IAuthApiSignUp): Promise<void> {
+  public signUp (user: IAuthApiSignUp): void {
     console.log('99----signing up..........user=', user)
     try {
       showOverlaySpinner()
-      const res = await authApi.signUp(user)
+      const res = authApi.signUp(user)
       console.log('99------res=', res)
     } catch (e) {
       console.log('99-----ERR=', e)
