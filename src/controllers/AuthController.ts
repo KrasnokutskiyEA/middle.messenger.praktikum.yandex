@@ -1,4 +1,6 @@
 import { showMessage, showOverlaySpinner, hideOverlay } from '../helpers/showComponents'
+import authApi from '../api/AuthApi'
+import { IAuthApiSignIn, IAuthApiSignUp } from '../interfaces/IAuthApi'
 
 class AuthController {
   public signIn (user: object): void {
@@ -9,6 +11,34 @@ class AuthController {
       hideOverlay()
       showMessage('this is text', ['message-success'])
     }, 5000)
+  }
+
+  public async signUp (user: IAuthApiSignUp): Promise<void> {
+    console.log('99----signing up..........user=', user)
+    try {
+      showOverlaySpinner()
+      const res = await authApi.signUp(user)
+      console.log('99------res=', res)
+    } catch (e) {
+      console.log('99-----ERR=', e)
+    } finally {
+      console.log('99-----FINALLY')
+      hideOverlay()
+    }
+    // return authApi.signUp(user)
+    //   .then(() => {
+    //     showToast('Вы зарегистрировались', 'success')
+    //     router.go('/sign-in')
+    //   })
+    //   .catch(handleError)
+    //   .finally(() => {
+    //     hidePreloader()
+    //   })
+
+    // setTimeout(() => {
+    //   hideOverlay()
+    //   showMessage('Вы зарегистрировались', ['message-success'])
+    // }, 5000)
   }
 
   public changePassword (password: object): void {

@@ -34,13 +34,13 @@ function serializeForm (formNode: HTMLFormElement): FormData {
   return new FormData(formNode)
 }
 
-export function submitForm (event: Event): Record<string, unknown> {
+export function submitForm (event: Event): Record<string, any> {
   // 1- prevent form default behaviour
   event.preventDefault()
 
   // 2 - gather inputs data
   const data = serializeForm(event.target as HTMLFormElement)
-  console.log('form data=', Object.fromEntries(data.entries()))
+  console.log('utils-----form data=', Object.fromEntries(data.entries()))
   return Object.fromEntries(data.entries())
 }
 

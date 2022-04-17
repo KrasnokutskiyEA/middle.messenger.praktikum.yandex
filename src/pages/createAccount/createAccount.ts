@@ -1,7 +1,13 @@
 // helpers import
 import { validateInput, validateForm, submitForm } from '../../helpers/formUtils'
 
-// import base class
+// interfaces import
+import { IAuthApiSignUp } from '../../interfaces/IAuthApi'
+
+// controllers import
+import { authController } from '../../controllers/index'
+
+// base class import
 import { Block } from '../../classes/Block'
 
 // template import
@@ -144,7 +150,10 @@ const page = {
     }),
 
     events: {
-      submit: (event: Event) => submitForm(event)
+      submit: (event: Event) => {
+        const data = submitForm(event) as IAuthApiSignUp
+        authController.signUp(data)
+      }
     }
   })
 }
