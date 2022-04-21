@@ -150,9 +150,9 @@ const page = {
     }),
 
     events: {
-      submit: (event: Event) => {
+      submit: async (event: Event): Promise<void> => {
         const data = submitForm(event) as IAuthApiSignUp
-        authController.signUp(data)
+        await authController.signUp(data)
       }
     }
   })

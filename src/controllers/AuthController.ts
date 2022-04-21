@@ -1,28 +1,32 @@
 import { showMessage, showOverlaySpinner, hideOverlay } from '../helpers/showComponents'
 import authApi from '../api/AuthApi'
 import { IAuthApiSignIn, IAuthApiSignUp } from '../interfaces/IAuthApi'
+import showError from '../helpers/showError'
+import router from '../router'
 
 class AuthController {
-  public signIn (user: object): void {
-    console.log('----signing in..........user=', user)
-    showOverlaySpinner()
-
-    setTimeout(() => {
-      hideOverlay()
-      showMessage('this is text', ['message-success'])
-    }, 5000)
-  }
-
-  public signUp (user: IAuthApiSignUp): void {
-    console.log('99----signing up..........user=', user)
+  public async signIn (user: IAuthApiSignIn): Promise<void> {
     try {
       showOverlaySpinner()
-      const res = authApi.signUp(user)
-      console.log('99------res=', res)
+      await authApi.signIn(user)
+      showMessage('You have signed in', ['message-success'])
+      router.go('/')
     } catch (e) {
-      console.log('99-----ERR=', e)
+      showError(e)
     } finally {
-      console.log('99-----FINALLY')
+      hideOverlay()
+    }
+  }
+
+  public async signUp (user: IAuthApiSignUp): Promise<void> {
+    try {
+      showOverlaySpinner()
+      await authApi.signUp(user)
+      showMessage('Account has been created', ['message-success'])
+      router.go('/sign-in')
+    } catch (e) {
+      showError(e)
+    } finally {
       hideOverlay()
     }
     // return authApi.signUp(user)

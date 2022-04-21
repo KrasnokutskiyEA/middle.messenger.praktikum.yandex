@@ -43,7 +43,7 @@ class BaseApi {
   }
 
   /* private methods */
-  private handleResponse (res: XMLHttpRequest): Record<any, any> {
+  private handleResponse (res: XMLHttpRequest): Record<string, any> {
     if (res.response === 'OK') {
       return { ok: true }
     }
@@ -67,9 +67,12 @@ class BaseApi {
       .then(this.handleResponse)
   }
 
-  public post (endpoint: `/${string}`, options?: {}): Record<any, any> {
-    return this._http.post(this.getPath() + endpoint, this.handleOptions(options))
-      .then(this.handleResponse)
+  public async post (endpoint: `/${string}`, options?: {}): Promise<Record<string, any>> {
+    // return this._http.post(this.getPath() + endpoint, this.handleOptions(options))
+    //   .then(this.handleResponse)
+
+    const resp = await this._http.post(this.getPath() + endpoint, this.handleOptions(options))
+    return this.handleResponse(resp)
   }
 
   public put (endpoint: `/${string}`, options?: {}): Record<any, any> {

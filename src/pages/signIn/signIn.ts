@@ -1,6 +1,9 @@
 // helpers import
 import { validateInput, validateForm, submitForm } from '../../helpers/formUtils'
 
+// interfaces import
+import { IAuthApiSignIn } from '../../interfaces/IAuthApi'
+
 // controllers import
 import { authController } from '../../controllers/index'
 
@@ -95,9 +98,9 @@ const page = {
     }),
 
     events: {
-      submit: (event: Event) => {
-        const data = submitForm(event)
-        authController.signIn({ login: data.login, password: data.password })
+      submit: async (event: Event): Promise<void> => {
+        const data = submitForm(event) as IAuthApiSignIn
+        await authController.signIn(data)
       }
     }
   })
