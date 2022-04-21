@@ -6,5 +6,6 @@ export default function handleError (error: unknown): void {
   !e.response && router.go('/500')
 
   const { reason } = JSON.parse(e.response)
-  showMessage(reason, ['message-error'])
+  const message = reason === 'Cookie is not valid' ? 'Please, Sign In' : reason
+  showMessage(message, ['message-error'])
 }

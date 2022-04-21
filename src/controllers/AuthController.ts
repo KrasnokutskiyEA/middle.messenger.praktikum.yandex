@@ -5,7 +5,7 @@ import showError from '../helpers/showError'
 import router from '../router'
 
 class AuthController {
-  public async signIn (user: IAuthApiSignIn): Promise<void> {
+  async signIn (user: IAuthApiSignIn): Promise<void> {
     try {
       showOverlaySpinner()
       await authApi.signIn(user)
@@ -18,7 +18,7 @@ class AuthController {
     }
   }
 
-  public async signUp (user: IAuthApiSignUp): Promise<void> {
+  async signUp (user: IAuthApiSignUp): Promise<void> {
     try {
       showOverlaySpinner()
       await authApi.signUp(user)
@@ -29,30 +29,27 @@ class AuthController {
     } finally {
       hideOverlay()
     }
-    // return authApi.signUp(user)
-    //   .then(() => {
-    //     showToast('Вы зарегистрировались', 'success')
-    //     router.go('/sign-in')
-    //   })
-    //   .catch(handleError)
-    //   .finally(() => {
-    //     hidePreloader()
-    //   })
-
-    // setTimeout(() => {
-    //   hideOverlay()
-    //   showMessage('Вы зарегистрировались', ['message-success'])
-    // }, 5000)
   }
 
-  public changePassword (password: object): void {
-    console.log('----changing password..........password=', password)
-    // showMessage('this is text', ['message-success'])
-    showOverlaySpinner()
+  async checkAuth (): Promise<void> {
+    try {
+      await authApi.checkAuth()
+    } catch (e) {
+      showError(e)
+      router.go('/sign-in')
+    }
+  }
 
-    setTimeout(() => {
+  async logout (): Promise<void> {
+    try {
+      showOverlaySpinner()
+      await authApi.logout()
+      router.go('/sign-in')
+    } catch (e) {
+      showError(e)
+    } finally {
       hideOverlay()
-    }, 5000)
+    }
   }
 }
 

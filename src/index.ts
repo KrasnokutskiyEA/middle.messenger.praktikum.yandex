@@ -6,12 +6,12 @@ import PageCreateAccount from './pages/createAccount/createAccount'
 import Page404 from './pages/404/404'
 import Page500 from './pages/500/500'
 import router from './router'
-// import { authController } from './controllers'
+import authController from './controllers/AuthController'
 import './assets/styles/index.scss'
 
 router
-  // .setUnprotectedPaths(['/sign-in', '/sign-up', '/500'])
-  // .onRoute(authController.checkAuth)
+  .setUnprotectedPaths(['/sign-in', '/create-account', '/500'])
+  .onRoute(authController.checkAuth)
   .use('/', PageChat)
   .use('/profile', PageUserProfile)
   .use('/sign-in', PageSignIn)

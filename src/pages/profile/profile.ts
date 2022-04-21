@@ -5,6 +5,9 @@ import arrowLogo from '../../assets/images/arrow.svg'
 // helpers import
 import { validateInput, validateForm, submitForm } from '../../helpers/formUtils'
 
+// controllers import
+import { authController } from '../../controllers/index'
+
 // import base class
 import { Block } from '../../classes/Block'
 
@@ -159,9 +162,9 @@ const page = {
       ...ctx.linkSecondary,
 
       events: {
-        click: (event: Event) => {
+        click: async (event: Event): Promise<void> => {
           event.preventDefault()
-          router.go(ctx.linkSecondary.to)
+          await authController.logout()
         }
       }
     }),

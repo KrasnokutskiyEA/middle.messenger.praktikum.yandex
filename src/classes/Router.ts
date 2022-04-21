@@ -7,7 +7,7 @@ export default class Router {
   private _currentRoute: Route | null
   readonly _rootQuery: string
   readonly _pathnames: string[]
-  private _onRouteCallback: () => void
+  private _onRouteCallback: () => Promise<void>
   private _unprotectedPaths: string[]
   static __instance: Router
 
@@ -22,7 +22,7 @@ export default class Router {
     this.history = window.history
     this._currentRoute = null
     this._rootQuery = rootQuery
-    this._onRouteCallback = () => {}
+    this._onRouteCallback = async () => {}
 
     Router.__instance = this
   }
@@ -49,16 +49,17 @@ export default class Router {
   }
 
   public start (): void {
-    window.onpopstate = () => {
+    window.onpopstate = async () => {
       const pathname = this._hasRoute(window.location.pathname)
-      this._onRoute(pathname)
+      void this._onRoute(pathname)
     }
 
     const pathname = this._hasRoute(window.location.pathname)
-    this._onRoute(pathname)
+    void this._onRoute(pathname)
   }
 
-  private _onRoute (pathname: string): void {
+  private async _onRoute (pathname: string): Promise<void> {
+    console.log('-----_onRoute FIRED')
     const route = this.getRoute(pathname)
 
     if (!route) {
@@ -74,11 +75,12 @@ export default class Router {
     route.render()
 
     if (!this._unprotectedPaths.includes(pathname as `/${string}`)) {
-      this._onRouteCallback()
+      console.log('-----_onRoute CALLBACK FIRED')
+      await this._onRouteCallback()
     }
   }
 
-  public onRoute (callback: () => void): Router {
+  public onRoute (callback: () => Promise<void>): Router {
     this._onRouteCallback = callback
     return this
   }
@@ -90,7 +92,7 @@ export default class Router {
 
   public go (pathname: string): void {
     this.history.pushState({}, '', pathname)
-    this._onRoute(pathname)
+    void this._onRoute(pathname)
   }
 
   public back (): void {

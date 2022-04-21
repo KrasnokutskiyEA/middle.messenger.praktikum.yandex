@@ -62,15 +62,13 @@ class BaseApi {
   }
 
   /* public methods */
-  public get (endpoint: `/${string}`, options?: {}): Record<any, any> {
-    return this._http.get(this.getPath() + endpoint, this.handleOptions(options))
-      .then(this.handleResponse)
+  public async get (endpoint: `/${string}`, options?: {}): Promise<Record<string, any>> {
+    const resp = await this._http.get(this.getPath() + endpoint, this.handleOptions(options))
+    console.log('get resp=', resp)
+    return this.handleResponse(resp)
   }
 
   public async post (endpoint: `/${string}`, options?: {}): Promise<Record<string, any>> {
-    // return this._http.post(this.getPath() + endpoint, this.handleOptions(options))
-    //   .then(this.handleResponse)
-
     const resp = await this._http.post(this.getPath() + endpoint, this.handleOptions(options))
     return this.handleResponse(resp)
   }
