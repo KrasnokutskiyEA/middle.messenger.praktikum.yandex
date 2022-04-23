@@ -41,10 +41,8 @@ export default class Router {
 
   private _hasRoute (pathname: string): string {
     if (!this._pathnames.includes(pathname)) {
-      console.log('11111 pathname=', pathname)
       return '*'
     }
-    console.log('222222 pathname=', pathname)
     return pathname
   }
 
@@ -59,7 +57,6 @@ export default class Router {
   }
 
   private async _onRoute (pathname: string): Promise<void> {
-    console.log('-----_onRoute FIRED')
     const route = this.getRoute(pathname)
 
     if (!route) {
@@ -75,7 +72,6 @@ export default class Router {
     route.render()
 
     if (!this._unprotectedPaths.includes(pathname as `/${string}`)) {
-      console.log('-----_onRoute CALLBACK FIRED')
       await this._onRouteCallback()
     }
   }

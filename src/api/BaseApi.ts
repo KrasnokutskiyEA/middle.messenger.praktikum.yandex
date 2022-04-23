@@ -24,7 +24,6 @@ class BaseApi {
     this._baseUrl = config.baseUrl ?? process.env.HOST_API
     this._path = config.path ?? ''
     this._headers = config.headers ?? defaultHeaders
-    console.log('-----base url=', this._baseUrl)
   }
 
   /* getters */
@@ -64,7 +63,6 @@ class BaseApi {
   /* public methods */
   public async get (endpoint: `/${string}`, options?: {}): Promise<Record<string, any>> {
     const resp = await this._http.get(this.getPath() + endpoint, this.handleOptions(options))
-    console.log('get resp=', resp)
     return this.handleResponse(resp)
   }
 

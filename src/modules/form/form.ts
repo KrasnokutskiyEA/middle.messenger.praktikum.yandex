@@ -6,7 +6,7 @@ import template from './form.pug'
 // component
 export default class Form extends Block {
   constructor (props: IProps) {
-    super('div', { ...props })
+    super('div', props)
   }
 
   render (): HTMLElement {

@@ -2,6 +2,7 @@ import { showMessage, showOverlaySpinner, hideOverlay } from '../helpers/showCom
 import authApi from '../api/AuthApi'
 import { IAuthApiSignIn, IAuthApiSignUp } from '../interfaces/IAuthApi'
 import showError from '../helpers/showError'
+import store from '../classes/Store'
 import router from '../router'
 
 class AuthController {
@@ -33,7 +34,8 @@ class AuthController {
 
   async checkAuth (): Promise<void> {
     try {
-      await authApi.checkAuth()
+      const user = await authApi.checkAuth()
+      store.setState('user', user)
     } catch (e) {
       showError(e)
       router.go('/sign-in')

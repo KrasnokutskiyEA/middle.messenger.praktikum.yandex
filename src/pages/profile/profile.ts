@@ -22,6 +22,7 @@ import RoundBtn from '../../components/roundBtn/roundBtn'
 import Avatar from '../../components/avatar/avatar'
 import Link from '../../components/link/link'
 import router from '../../router'
+import store, { StoreEvents } from '../../classes/Store'
 
 // 1 - generate context
 const ctx = {
@@ -179,6 +180,11 @@ const page = {
 export default class PageUserProfile extends Block {
   constructor () {
     super('div', page)
+
+    store.on(StoreEvents.FLOW_SDU, () => {
+      console.log('1-----STORE UPDATED---!!! new state=', store.getState())
+      this.props.content.children.childrenList[0].setProps({ value: 'AAAA@yndx.ry' })
+    })
   }
 
   render (): HTMLElement {
