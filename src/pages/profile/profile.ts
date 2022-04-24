@@ -4,12 +4,14 @@ import arrowLogo from '../../assets/images/arrow.svg'
 
 // helpers import
 import { validateInput, validateForm, submitForm } from '../../helpers/formUtils'
+import connect from '../../helpers/connect'
 
 // controllers import
 import { authController } from '../../controllers/index'
 
-// import base class
-import { Block } from '../../classes/Block'
+// classes import
+import { Block, IProps } from '../../classes/Block'
+import { TState } from '../../classes/Store'
 
 // template import
 import template from '../../templates/sideNav/sideNav.pug'
@@ -21,8 +23,9 @@ import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
 import RoundBtn from '../../components/roundBtn/roundBtn'
 import Avatar from '../../components/avatar/avatar'
 import Link from '../../components/link/link'
+
+// router import
 import router from '../../router'
-import store, { StoreEvents } from '../../classes/Store'
 
 // 1 - generate context
 const ctx = {
@@ -177,17 +180,29 @@ const page = {
 }
 
 // 3 - component
-export default class PageUserProfile extends Block {
+class PageUserProfile extends Block {
   constructor () {
     super('div', page)
-
-    store.on(StoreEvents.FLOW_SDU, () => {
-      console.log('1-----STORE UPDATED---!!! new state=', store.getState())
-      this.props.content.children.childrenList[0].setProps({ value: 'AAAA@yndx.ry' })
-    })
   }
 
   render (): HTMLElement {
     return this.compile(template, this.props)
   }
 }
+
+// 4 - define mapStateToProps
+function mapStateToProps (state: TState): TState {
+  return {
+    firstName: state?.user?.firstName,
+    email: state?.user?.email
+  }
+}
+
+// 5 - redraw template elements after store has been updated
+function updateTemplate (props: IProps): void {
+  console.log('999---this.props.email=', props.email)
+  props.content.children.childrenList[0].setProps({ value: props.email })
+}
+
+// 6 - export component connected to store
+export default connect(PageUserProfile, mapStateToProps, updateTemplate)
