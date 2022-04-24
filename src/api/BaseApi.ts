@@ -1,5 +1,5 @@
 import http from '../classes/HttpTransport'
-// import env from '../utils/env'
+import { TResponse } from '../types/api'
 import { convertKeysToCamelCase } from '../helpers/formatStrings'
 
 const defaultHeaders = {
@@ -42,7 +42,7 @@ class BaseApi {
   }
 
   /* private methods */
-  private handleResponse (res: XMLHttpRequest): Record<string, any> {
+  private handleResponse (res: XMLHttpRequest): TResponse {
     if (res.response === 'OK') {
       return { ok: true }
     }
@@ -61,24 +61,24 @@ class BaseApi {
   }
 
   /* public methods */
-  public async get (endpoint: `/${string}`, options?: {}): Promise<Record<string, any>> {
+  async get (endpoint: `/${string}`, options?: {}): Promise<TResponse> {
     const resp = await this._http.get(this.getPath() + endpoint, this.handleOptions(options))
     return this.handleResponse(resp)
   }
 
-  public async post (endpoint: `/${string}`, options?: {}): Promise<Record<string, any>> {
+  async post (endpoint: `/${string}`, options?: {}): Promise<TResponse> {
     const resp = await this._http.post(this.getPath() + endpoint, this.handleOptions(options))
     return this.handleResponse(resp)
   }
 
-  public put (endpoint: `/${string}`, options?: {}): Record<any, any> {
-    return this._http.put(this.getPath() + endpoint, this.handleOptions(options))
-      .then(this.handleResponse)
+  async put (endpoint: `/${string}`, options?: {}): Promise<TResponse> {
+    const resp = await this._http.put(this.getPath() + endpoint, this.handleOptions(options))
+    return this.handleResponse(resp)
   }
 
-  public delete (endpoint: `/${string}`, options?: {}): Record<any, any> {
-    return this._http.delete(this.getPath() + endpoint, this.handleOptions(options))
-      .then(this.handleResponse)
+  async delete (endpoint: `/${string}`, options?: {}): Promise<TResponse> {
+    const resp = await this._http.delete(this.getPath() + endpoint, this.handleOptions(options))
+    return this.handleResponse(resp)
   }
 }
 

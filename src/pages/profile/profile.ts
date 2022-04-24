@@ -4,10 +4,14 @@ import arrowLogo from '../../assets/images/arrow.svg'
 
 // helpers import
 import { validateInput, validateForm, submitForm } from '../../helpers/formUtils'
+import get from '../../helpers/get'
 import connect from '../../helpers/connect'
 
+// interfaces import
+import { IUserApiUpdateProfile } from '../../interfaces/IUserApi'
+
 // controllers import
-import { authController } from '../../controllers/index'
+import { authController, userController } from '../../controllers/index'
 
 // classes import
 import { Block, IProps } from '../../classes/Block'
@@ -45,11 +49,11 @@ const ctx = {
       errorText: 'latin, may include special chars, @ required'
     },
     {
-      label: 'Username',
+      label: 'Login',
       type: 'text',
       name: 'login',
       id: 'login',
-      placeholder: 'Username',
+      placeholder: 'Login',
       required: 'required',
       pattern: '^\\d*[a-zA-Z][a-zA-Z0-9]*$',
       maxlength: 20,
@@ -76,6 +80,7 @@ const ctx = {
       pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
       errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars'
     },
+    /*
     {
       label: 'Nickname',
       type: 'text',
@@ -88,6 +93,7 @@ const ctx = {
       pattern: '^[A-Z][a-z-]*$|^[А-я][а-я-]*$',
       errorText: 'latin/cyrillic, capital 1st char, no spaces/numbers/spec chars'
     },
+    */
     {
       label: 'Phone',
       type: 'text',
@@ -174,7 +180,11 @@ const page = {
     }),
 
     events: {
-      submit: (event: Event) => submitForm(event)
+      submit: async (event: Event): Promise<void> => {
+        const data = submitForm(event) as IUserApiUpdateProfile
+        const profile = { ...data, display_name: '' }
+        await userController.updateProfile(profile)
+      }
     }
   })
 }
@@ -193,16 +203,22 @@ class PageUserProfile extends Block {
 // 4 - define mapStateToProps
 function mapStateToProps (state: TState): TState {
   return {
-    firstName: state?.user?.firstName,
-    email: state?.user?.email
+    avatar: get(state, 'user.avatar'),
+    email: get(state, 'user.email'),
+    firstName: get(state, 'user.firstName'),
+    login: get(state, 'user.login'),
+    phone: get(state, 'user.phone'),
+    secondName: get(state, 'user.secondName')
   }
 }
 
-// 5 - redraw template elements after store has been updated
+// 5 - redraw components after store has been updated
 function updateTemplate (props: IProps): void {
-  console.log('999---this.props.email=', props.email)
-  props.content.children.childrenList[0].setProps({ value: props.email })
+  console.log('999---props=', props)
+  const values = [props.email, props.login, props.firstName, props.secondName, props.phone]
+  values.forEach((v, i) => props.content.children.childrenList[i].setProps({ value: v }))
+  // props.content.children.childrenList[0].setProps({ value: props.email })
 }
 
-// 6 - export component connected to store
+// 6 - export page connected to store
 export default connect(PageUserProfile, mapStateToProps, updateTemplate)
