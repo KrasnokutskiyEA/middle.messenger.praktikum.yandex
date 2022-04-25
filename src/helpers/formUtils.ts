@@ -25,7 +25,7 @@ export function validateNewPassword (input: HTMLInputElement): void {
 
 // validate whole form (all inputs at once)
 export function validateForm (): void {
-  const input = document.querySelectorAll('input:not(avatar)')
+  const input = document.querySelectorAll('input:not(#avatar)')
 
   input.forEach((i: any) => validateInput(i))
 }

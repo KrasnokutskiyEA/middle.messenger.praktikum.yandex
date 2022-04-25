@@ -1,6 +1,6 @@
 import store, { StoreEvents, TState } from '../classes/Store'
 import { IProps } from '../classes/Block'
-function connect<T extends new (...props: any[]) => any> (Component: T, mapStateToProps: (state: TState) => TState, updateTemplate: (props: IProps) => void): T {
+function connect<T extends new (...props: any[]) => any> (Component: T, mapStateToProps: (state: TState) => TState, updateTemplate: (propsPage: IProps, propsStore: IProps) => void): T {
   // using class expression
   return class extends Component {
     constructor (...props: any[]) {
@@ -8,11 +8,7 @@ function connect<T extends new (...props: any[]) => any> (Component: T, mapState
 
       store.on(StoreEvents.FLOW_SDU, () => {
         // update component by adding part of the state when state has been updated
-
-        this.setProps({ ...mapStateToProps(store.getState()) })
-        console.log('----CONNECT FIRED STORE ON')
-
-        updateTemplate(this.props)
+        updateTemplate(this.props, mapStateToProps(store.getState()))
       })
     }
   }

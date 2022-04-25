@@ -226,10 +226,20 @@ function mapStateToProps (state: TState): TState {
 }
 
 // 5 - redraw components after store has been updated
-function updateTemplate (props: IProps): void {
-  const values = [props.email, props.login, props.firstName, props.secondName, props.phone]
-  // console.log('-----UPD TEMPLATE props.content.children=', props.content.children)
-  values.forEach((v, i) => props.content.children.childrenList[i].setProps({ value: v }))
+function updateTemplate (propsPage: IProps, propsStore: IProps): void {
+  // update logo
+  const logo = `${process.env.HOST_RESOURCES}` + `${propsStore.avatar}`
+  propsPage.content.children.avatar.setProps({ logo })
+
+  // update textfields
+  const values = [
+    propsStore.email,
+    propsStore.login,
+    propsStore.firstName,
+    propsStore.secondName,
+    propsStore.phone
+  ]
+  values.forEach((v, i) => propsPage.content.children.childrenList[i].setProps({ value: v }))
 }
 
 // 6 - export page connected to store
