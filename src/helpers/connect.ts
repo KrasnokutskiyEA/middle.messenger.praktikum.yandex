@@ -8,7 +8,9 @@ function connect<T extends new (...props: any[]) => any> (Component: T, mapState
 
       store.on(StoreEvents.FLOW_SDU, () => {
         // update component by adding part of the state when state has been updated
+
         this.setProps({ ...mapStateToProps(store.getState()) })
+        console.log('----CONNECT FIRED STORE ON')
 
         updateTemplate(this.props)
       })

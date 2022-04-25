@@ -148,7 +148,7 @@ const page = {
           const formData = new FormData()
           formData.append('avatar', file!)
           await userController.updateAvatar(formData)
-          input.value = ''
+          // input.value = ''
         }
       }
     }),
@@ -228,7 +228,7 @@ function mapStateToProps (state: TState): TState {
 // 5 - redraw components after store has been updated
 function updateTemplate (props: IProps): void {
   const values = [props.email, props.login, props.firstName, props.secondName, props.phone]
-  console.log('-----UPD TEMPLATE props.content.children=', props.content.children)
+  // console.log('-----UPD TEMPLATE props.content.children=', props.content.children)
   values.forEach((v, i) => props.content.children.childrenList[i].setProps({ value: v }))
 }
 

@@ -25,9 +25,9 @@ export function validateNewPassword (input: HTMLInputElement): void {
 
 // validate whole form (all inputs at once)
 export function validateForm (): void {
-  const input = document.querySelectorAll('input')
+  const input = document.querySelectorAll('input:not(avatar)')
 
-  input.forEach((i: HTMLInputElement) => validateInput(i))
+  input.forEach((i: any) => validateInput(i))
 }
 
 function serializeForm (formNode: HTMLFormElement): FormData {
@@ -40,7 +40,6 @@ export function submitForm (event: Event): Record<string, any> {
 
   // 2 - gather inputs data
   const data = serializeForm(event.target as HTMLFormElement)
-  console.log('utils-----form data=', Object.fromEntries(data.entries()))
   return Object.fromEntries(data.entries())
 }
 

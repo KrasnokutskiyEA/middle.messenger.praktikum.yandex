@@ -36,6 +36,7 @@ class AuthController {
     try {
       const user = await authApi.checkAuth()
       store.setState('user', user)
+      // store.setState('sssuser', user)
     } catch (e) {
       showError(e)
       router.go('/sign-in')
