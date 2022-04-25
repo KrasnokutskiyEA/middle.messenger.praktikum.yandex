@@ -8,11 +8,11 @@ class UserApi extends BaseApi {
   }
 
   async search (data: IUserApiSearch): Promise<TResponse> {
-    return this.post('/search', { withCredentials: true, data })
+    return this.post('/search', { withCredentials: true, data: JSON.stringify(data) })
   }
 
   async updateProfile (data: IUserApiUpdateProfile): Promise<TResponse> {
-    return this.put('/profile', { withCredentials: true, data })
+    return this.put('/profile', { withCredentials: true, data: JSON.stringify(data) })
   }
 
   async updateAvatar (data: FormData): Promise<TResponse> {

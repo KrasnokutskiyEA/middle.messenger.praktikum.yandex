@@ -16,10 +16,9 @@ class Store extends EventBus {
 
   public setState (path: string, value: unknown): void {
     set(this.state, path, value)
-    console.log('BEFORE EMIT listeners=', this.listeners)
     Object.keys(this.listeners).includes(StoreEvents.FLOW_SDU) &&
     this.emit(StoreEvents.FLOW_SDU)
-    console.log('AFTER EMIT')
+    console.log('STORE UPDATED=', this.state)
   }
 }
 

@@ -6,38 +6,45 @@
   position: relative;
   border-radius: 50%;
   overflow: hidden;
-  cursor: pointer;
 
-  .avatar-logo {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
+  label {
+    cursor: pointer;
 
-  .avatar-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: map.get($colors, 'black');
-    opacity: 0.5;
-    overflow: hidden;
-    width: 100%;
-    height: 0;
-    transition: 0.5s ease;
-  }
+    input[type='file'] {
+      display: none;
+    }
 
-  .avatar-text {
-    color: map.get($colors, 'white');
-    font-size: 20px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-  }
+    .avatar-logo {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
 
-  &:hover .avatar-overlay {
-    height: 100%;
+    .avatar-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: map.get($colors, 'black');
+      opacity: 0.5;
+      overflow: hidden;
+      width: 100%;
+      height: 0;
+      transition: 0.5s ease;
+
+      .avatar-text {
+        color: map.get($colors, 'white');
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+    }
+
+    &:hover .avatar-overlay {
+      height: 100%;
+    }
   }
 }

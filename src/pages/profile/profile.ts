@@ -138,7 +138,20 @@ const page = {
   }),
 
   content: new Form({
-    avatar: new Avatar(ctx.avatar),
+    avatar: new Avatar({
+      ...ctx.avatar,
+
+      events: {
+        change: async (event: Event): Promise<void> => {
+          const input = event.target as HTMLInputElement
+          const file = input.files?.[0]
+          const formData = new FormData()
+          formData.append('avatar', file!)
+          await userController.updateAvatar(formData)
+          input.value = ''
+        }
+      }
+    }),
 
     childrenList: ctx.inputs.map(input => new TextField({
       ...input,
@@ -214,10 +227,9 @@ function mapStateToProps (state: TState): TState {
 
 // 5 - redraw components after store has been updated
 function updateTemplate (props: IProps): void {
-  console.log('999---props=', props)
   const values = [props.email, props.login, props.firstName, props.secondName, props.phone]
+  console.log('-----UPD TEMPLATE props.content.children=', props.content.children)
   values.forEach((v, i) => props.content.children.childrenList[i].setProps({ value: v }))
-  // props.content.children.childrenList[0].setProps({ value: props.email })
 }
 
 // 6 - export page connected to store

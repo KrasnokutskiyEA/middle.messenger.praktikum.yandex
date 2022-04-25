@@ -8,11 +8,11 @@ class AuthApi extends BaseApi {
   }
 
   async signUp (data: IAuthApiSignUp): Promise<TResponse> {
-    return this.post('/signup', { data })
+    return this.post('/signup', { data: JSON.stringify(data) })
   }
 
   async signIn (data: IAuthApiSignIn): Promise<TResponse> {
-    return this.post('/signin', { withCredentials: true, data })
+    return this.post('/signin', { withCredentials: true, data: JSON.stringify(data) })
   }
 
   async checkAuth (): Promise<TResponse> {
