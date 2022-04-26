@@ -4,7 +4,7 @@ import set from '../helpers/set'
 export type TState = Record<string, any>
 
 export enum StoreEvents {
-  FLOW_SDU = 'flow:store-did-update',
+  FLOW_SDU = 'flow:store-did-update'
 }
 
 class Store extends EventBus {

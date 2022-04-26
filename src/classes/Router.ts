@@ -1,5 +1,6 @@
 import Route from './Route'
 import { Block } from './Block'
+import store from '../classes/Store'
 
 export default class Router {
   public routes: Route[]
@@ -57,6 +58,7 @@ export default class Router {
   }
 
   private async _onRoute (pathname: string): Promise<void> {
+    store.shift('flow:store-did-update')
     const route = this.getRoute(pathname)
 
     if (!route) {
@@ -74,6 +76,8 @@ export default class Router {
     if (!this._unprotectedPaths.includes(pathname as `/${string}`)) {
       await this._onRouteCallback()
     }
+
+    store.setState('route', { name: pathname })
   }
 
   public onRoute (callback: () => Promise<void>): Router {

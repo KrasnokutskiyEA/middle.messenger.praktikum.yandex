@@ -221,25 +221,36 @@ function mapStateToProps (state: TState): TState {
     firstName: get(state, 'user.firstName'),
     login: get(state, 'user.login'),
     phone: get(state, 'user.phone'),
-    secondName: get(state, 'user.secondName')
+    secondName: get(state, 'user.secondName'),
+    route: get(state, 'route.name')
   }
 }
 
-// 5 - redraw components after store has been updated
-function updateTemplate (propsPage: IProps, propsStore: IProps): void {
-  // update logo
-  const logo = `${process.env.HOST_RESOURCES}` + `${propsStore.avatar}`
-  propsPage.content.children.avatar.setProps({ logo })
+// 5 - redraw components after store update | route change
+function updateTemplate (propsPage: IProps, propsStore: IProps, propsInitStore: IProps): void {
+  // 5.1 - hasRouteChanged
+  const hasRouteChanged = propsStore.route !== propsInitStore.route
 
-  // update textfields
-  const values = [
-    propsStore.email,
-    propsStore.login,
-    propsStore.firstName,
-    propsStore.secondName,
-    propsStore.phone
-  ]
-  values.forEach((v, i) => propsPage.content.children.childrenList[i].setProps({ value: v }))
+  // 5.2 - define blocks (components on the page)
+  const blocks = propsPage.content.children
+
+  // 5.3 - update logo
+  const hasAvatarChanged = propsStore.avatar !== propsInitStore.avatar
+
+  if (hasAvatarChanged || hasRouteChanged) {
+    blocks.avatar.setProps({ logo: `${process.env.HOST_RESOURCES}` + `${propsStore.avatar}` })
+  }
+
+  // 5.4 - update form fields
+  const fields = ['email', 'login', 'firstName', 'secondName', 'phone']
+
+  fields.forEach((f, i) => {
+    const hasFieldChanged = propsStore[f] !== propsInitStore[f]
+
+    if (hasFieldChanged || hasRouteChanged) {
+      blocks.childrenList[i].setProps({ value: propsStore[f] })
+    }
+  })
 }
 
 // 6 - export page connected to store

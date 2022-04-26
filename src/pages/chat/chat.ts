@@ -9,8 +9,9 @@ import personLogo from '../../assets/images/person.svg'
 import userAddLogo from '../../assets/images/user_add.svg'
 import userRemoveLogo from '../../assets/images/user_remove.svg'
 
-// import base class
-import { Block } from '../../classes/Block'
+// classes import
+import { Block, IProps } from '../../classes/Block'
+import { TState } from '../../classes/Store'
 
 // template import
 import template from '../../templates/chatLayout/chatLayout.pug'
@@ -19,6 +20,8 @@ import template from '../../templates/chatLayout/chatLayout.pug'
 import { chats, messages } from '../../helpers/fakeData'
 import { validateInput, clearInput, submitForm } from '../../helpers/formUtils'
 import { showChatSettingsMenu, hideChatSettingsMenu, showOverlayModal } from '../../helpers/showComponents'
+import get from '../../helpers/get'
+import connect from '../../helpers/connect'
 
 // controllers import
 import { chatController } from '../../controllers/index'
@@ -371,7 +374,7 @@ const page = {
 }
 
 // 3 - component
-export default class PageChat extends Block {
+class PageChat extends Block {
   constructor () {
     super('div', page)
   }
@@ -380,3 +383,18 @@ export default class PageChat extends Block {
     return this.compile(template, this.props)
   }
 }
+
+// 4 - define mapStateToProps
+function mapStateToProps (state: TState): TState {
+  return {
+    route: get(state, 'route.name')
+  }
+}
+
+// 5 - redraw components after store has been updated
+function updateTemplate (propsPage: IProps, propsStore: IProps, propsInitStore: IProps): void {
+
+}
+
+// 6 - export page connected to store
+export default connect(PageChat, mapStateToProps, updateTemplate)
