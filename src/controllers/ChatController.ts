@@ -1,40 +1,99 @@
-import { showOverlaySpinner, hideOverlay } from '../helpers/showComponents'
+import { showMessage, showOverlaySpinner, hideOverlay } from '../helpers/showComponents'
+import { IAddUserToChatApi, ICreateNewChatApi } from '../interfaces/IChatApi'
+import showError from '../helpers/showError'
+import store from '../classes/Store'
+import router from '../router'
 
 class ChatController {
-  public createChat (chat: object): void {
-    console.log('----creating chat..........chat=', chat)
-    // close modal window
-    hideOverlay()
-    // showMessage('this is text', ['message-success'])
-    // show spinner
-    showOverlaySpinner()
-
-    // hide spinner
-    setTimeout(() => {
+  async createChat (data: ICreateNewChatApi): Promise<void> {
+    try {
+      showOverlaySpinner()
+      const chatId = await chatApi.createChat(data)
+      store.setState('chatId', chatId)
+      showMessage('Chat has been created', ['message-success'])
+    } catch (e) {
+      showError(e)
+    } finally {
       hideOverlay()
-    }, 5000)
+    }
   }
 
-  public addUserToChat (user: object): void {
-    console.log('----adding user to chat..........user=', user)
-    hideOverlay()
-    // showMessage('this is text', ['message-success'])
-    showOverlaySpinner()
+  async getChats (): Promise<void> {
+    try {
+      showOverlaySpinner()
+      const chats = await chatApi.getChats()
+      store.setState('chats', chats)
 
-    setTimeout(() => {
+      if (!store.state.chatId) {
+        store.setState('chatId', chats[0]?.id || null)
+      }
+    } catch (e) {
+      router.go('/sign-in')
+      showError(e)
+    } finally {
       hideOverlay()
-    }, 5000)
+    }
   }
 
-  public removeUserFromChat (user: object): void {
-    console.log('----removing user from chat..........user=', user)
-    hideOverlay()
-    // showMessage('this is text', ['message-success'])
-    showOverlaySpinner()
-
-    setTimeout(() => {
+  async deleteChat (): Promise<void> {
+    try {
+      showOverlaySpinner()
+      await chatApi.deleteChat(store.state.chatId)
+      showMessage('Chat has been deleted', ['message-success'])
+      await this.getChats()
+    } catch (e) {
+      showError(e)
+    } finally {
       hideOverlay()
-    }, 5000)
+    }
+  }
+
+  async addUserToChat (data: IAddUserToChatApi): Promise<void> {
+    try {
+      showOverlaySpinner()
+      await chatApi.addUserToChat(data)
+      showMessage('User has been added to chat', ['message-success'])
+    } catch (e) {
+      showError(e)
+    } finally {
+      hideOverlay()
+    }
+  }
+
+  async removeUserFromChat (data: IAddUserToChatApi): Promise<void> {
+    try {
+      showOverlaySpinner()
+      await chatApi.removeUserFromChat(data)
+      showMessage('User has been removed from chat', ['message-success'])
+    } catch (e) {
+      showError(e)
+    } finally {
+      hideOverlay()
+    }
+  }
+
+  async getMessageToken (chatId: number): Promise<void> {
+    try {
+      // showOverlaySpinner()
+      const token = await chatApi.getMessageToken(chatId)
+      store.setState('token', token)
+    } catch (e) {
+      showError(e)
+    } finally {
+      // hideOverlay()
+    }
+  }
+
+  async getChatUsers (chatId: number): Promise<void> {
+    try {
+      // showOverlaySpinner()
+      const chatUsers = await chatApi.getChatUsers(chatId)
+      store.setState('chatUsers', chatUsers)
+    } catch (e) {
+      showError(e)
+    } finally {
+      // hideOverlay()
+    }
   }
 }
 
