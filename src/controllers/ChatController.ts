@@ -1,5 +1,6 @@
 import { showMessage, showOverlaySpinner, hideOverlay } from '../helpers/showComponents'
 import { IAddUserToChatApi, ICreateNewChatApi } from '../interfaces/IChatApi'
+import chatApi from '../api/ChatApi'
 import showError from '../helpers/showError'
 import store from '../classes/Store'
 import router from '../router'
@@ -21,12 +22,12 @@ class ChatController {
   async getChats (): Promise<void> {
     try {
       showOverlaySpinner()
-      const chats = await chatApi.getChats()
+      const chats = await chatApi.getChats() as Array<Record<string, unknown>>
       store.setState('chats', chats)
 
-      if (!store.state.chatId) {
-        store.setState('chatId', chats[0]?.id || null)
-      }
+      // if (!store.state.chatId) {
+      //   store.setState('chatId', chats[0]?.id || null)
+      // }
     } catch (e) {
       router.go('/sign-in')
       showError(e)
@@ -38,7 +39,7 @@ class ChatController {
   async deleteChat (): Promise<void> {
     try {
       showOverlaySpinner()
-      await chatApi.deleteChat(store.state.chatId)
+      await chatApi.removeChat(store.state.chatId)
       showMessage('Chat has been deleted', ['message-success'])
       await this.getChats()
     } catch (e) {

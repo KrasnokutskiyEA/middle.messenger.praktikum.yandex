@@ -11,7 +11,7 @@ import userRemoveLogo from '../../assets/images/user_remove.svg'
 
 // classes import
 import { Block, IProps } from '../../classes/Block'
-import { TState } from '../../classes/Store'
+import store, { TState } from '../../classes/Store'
 
 // template import
 import template from '../../templates/chatLayout/chatLayout.pug'
@@ -19,12 +19,12 @@ import template from '../../templates/chatLayout/chatLayout.pug'
 // helpers import
 import { chats, messages } from '../../helpers/fakeData'
 import { validateInput, clearInput, submitForm } from '../../helpers/formUtils'
-import { showChatSettingsMenu, hideChatSettingsMenu, showOverlayModal } from '../../helpers/showComponents'
+import { showChatSettingsMenu, hideChatSettingsMenu, showOverlayModal, hideOverlay } from '../../helpers/showComponents'
 import get from '../../helpers/get'
 import connect from '../../helpers/connect'
 
 // controllers import
-import { chatController } from '../../controllers/index'
+import { chatController, messageController } from '../../controllers/index'
 
 // components import (.ts)
 import ChatsList from '../../components/chat/chatsList/chatsList'
@@ -220,6 +220,27 @@ const generateModal = (mainProps: {}, inputProps: {}, submitAction: {}): { conte
   }
 }
 
+/* init selected chat */
+const initSelectedChat = async (chat: Record<string, any>): Promise<void> => {
+  if (chat.id) {
+    return
+  }
+
+  store.setState('messages', [])
+  messageController.leave()
+  store.setState('activeChat', chat)
+  localStorage.setItem('active-chat-id', `${chat.id}`)
+
+  await chatController.getMessageToken(chat.id)
+  messageController.getOldMessages({ offset: 20 })
+
+  messageController.connect({
+    userId: store.getState().user.id,
+    chatId: store.getState().activeChat.id,
+    token: store.getState().token
+  })
+}
+
 /* chat settings menu */
 const chatSettingsMenu = {
   childrenList: [
@@ -233,9 +254,14 @@ const chatSettingsMenu = {
               ctx.modal.addUser.main,
               ctx.modal.addUser.input,
               {
-                submit: (event: Event) => {
+                submit: async (event: Event): Promise<void> => {
+                  hideOverlay() // close modal window...
                   const data = submitForm(event)
-                  chatController.addUserToChat({ chat: data.user_name })
+                  // console.log('add usr data=', data)
+                  await chatController.addUserToChat({
+                    users: [data.user_name],
+                    chatId: 493
+                  })
                 }
               }
             )
@@ -255,9 +281,13 @@ const chatSettingsMenu = {
               ctx.modal.removeUser.main,
               ctx.modal.removeUser.input,
               {
-                submit: (event: Event) => {
+                submit: async (event: Event): Promise<void> => {
+                  hideOverlay() // close modal window...
                   const data = submitForm(event)
-                  chatController.removeUserFromChat({ chat: data.user_name })
+                  await chatController.removeUserFromChat({
+                    users: [data.user_name],
+                    chatId: 493
+                  })
                 }
               }
             )
@@ -294,9 +324,7 @@ const page = {
       ...chat,
 
       events: {
-        click: () => {
-          console.log('chat=', chat)
-        }
+        click: async (): Promise<void> => initSelectedChat(chat)
       }
     }))
   }),
@@ -315,9 +343,10 @@ const page = {
                 ctx.modal.newChat.main,
                 ctx.modal.newChat.input,
                 {
-                  submit: (event: Event) => {
+                  submit: async (event: Event): Promise<void> => {
+                    hideOverlay() // close modal window...
                     const data = submitForm(event)
-                    chatController.createChat({ chat: data.chat_name })
+                    await chatController.createChat({ title: data.chat_name })
                   }
                 }
               )
@@ -366,8 +395,10 @@ const page = {
 
     events: {
       submit: (event: Event) => {
-        submitForm(event)
+        const data = submitForm(event)
         clearInput(event.target as HTMLInputElement)
+
+        console.log('----outgoing message=', data)
       }
     }
   })
@@ -379,8 +410,27 @@ class PageChat extends Block {
     super('div', page)
   }
 
+  async componentDidMount (): Promise<void> {
+    await chatController.getChats()
+
+    const activeChatId = localStorage.getItem('active-chat-id')
+    if (activeChatId) {
+      const activeChat = store.getState().chats
+        .find((chat: Record<string, any>) => chat.id === activeChatId)
+      await initSelectedChat(activeChat)
+    }
+  }
+
   render (): HTMLElement {
     return this.compile(template, this.props)
+  }
+
+  componentDidUnmount (): void {
+    if (store.getState().chats.length) {
+      messageController.leave()
+    }
+
+    store.setState('chats', [])
   }
 }
 

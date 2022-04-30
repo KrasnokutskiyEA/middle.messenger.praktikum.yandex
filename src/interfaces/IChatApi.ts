@@ -3,6 +3,6 @@ export interface ICreateNewChatApi {
 }
 
 export interface IAddUserToChatApi {
-  users: number []
+  users: number[]
   chatId: number
 }

@@ -86,7 +86,7 @@ class MessageController {
     })
   }
 
-  public getOldMessages (options: IMessageWSGet): void {
+  getOldMessages (options: IMessageWSGet): void {
     this._ws.send(JSON.stringify({
       content: options.offset.toString(),
       type: 'get old'
