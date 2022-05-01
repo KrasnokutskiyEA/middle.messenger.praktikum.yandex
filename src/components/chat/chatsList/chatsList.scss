@@ -23,11 +23,12 @@
     }
 
     .chat-card-main {
+      padding-top: 10px;
       padding-left: 10px;
       padding-right: 10px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       width: calc(100% - 80px);
 
       .chat-card-main-message {

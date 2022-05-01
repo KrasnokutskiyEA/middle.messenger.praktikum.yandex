@@ -1,6 +1,6 @@
 div(class='chats-list')
   each chat in chats
-    div(class='chat-card')
+    div(class='chat-card' chat-id= chat.id)
       img(src= chat.avatar class= 'chat-card-avatar')
 
       div(class='chat-card-main')

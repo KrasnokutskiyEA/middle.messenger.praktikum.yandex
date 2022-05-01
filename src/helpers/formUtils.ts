@@ -1,3 +1,5 @@
+import store from '../store'
+
 // toggle error visibility
 function toggleError (isValid: Boolean, input: HTMLInputElement): void {
   !isValid
@@ -45,4 +47,14 @@ export function submitForm (event: Event): Record<string, any> {
 
 export function clearInput (input: HTMLInputElement): void {
   input.firstElementChild!.lastElementChild!.value = ''
+}
+
+export function findChatById (id: string): Record<string, any> | undefined {
+  return store.getState().chats.find((chat: Record<string, any>) => chat.id === Number(id))
+}
+
+export function findChat (event: Event): Record<string, any> | undefined {
+  const chatCard = event.composedPath().find(c => c.className === 'chat-card')
+  const chatId = chatCard?.attributes['chat-id'].value
+  return findChatById(chatId)
 }

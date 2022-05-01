@@ -17,8 +17,8 @@ import { TState } from '../../classes/Store'
 import template from '../../templates/chatLayout/chatLayout.pug'
 
 // helpers import
-import { chats, messages, formatChats } from '../../helpers/fakeData'
-import { validateInput, clearInput, submitForm } from '../../helpers/formUtils'
+import { messages, formatChats } from '../../helpers/fakeData'
+import { validateInput, clearInput, submitForm, findChat, findChatById } from '../../helpers/formUtils'
 import { showChatSettingsMenu, hideChatSettingsMenu, showOverlayModal, hideOverlay } from '../../helpers/showComponents'
 import get from '../../helpers/get'
 import connect from '../../helpers/connect'
@@ -29,7 +29,6 @@ import { chatController, messageController } from '../../controllers/index'
 // components import (.ts)
 import ChatsList from '../../components/chat/chatsList/chatsList'
 import ChatControls from '../../components/chat/chatControls/chatControls'
-// import ChatCard, { IChatCard } from '../../components/chat/chatCard/chatCard'
 import ChatTitle from '../../components/chat/chatTitle/chatTitle'
 import MessagesList from '../../components/chat/messagesList/messagesList'
 import MessageCard from '../../components/chat/messageCard/messageCard'
@@ -223,10 +222,9 @@ const generateModal = (mainProps: {}, inputProps: {}, submitAction: {}): { conte
 
 /* init selected chat */
 const initSelectedChat = async (chat: Record<string, any>): Promise<void> => {
-  if (chat.id) {
-    return
-  }
+  console.log('------INIT SELECTED CHAT chat=', chat)
 
+  /*
   store.setState('messages', [])
   messageController.leave()
   store.setState('activeChat', chat)
@@ -240,6 +238,7 @@ const initSelectedChat = async (chat: Record<string, any>): Promise<void> => {
     chatId: store.getState().activeChat.id,
     token: store.getState().token
   })
+  */
 }
 
 /* chat settings menu */
@@ -321,10 +320,13 @@ const page = {
   }),
 
   chatsList: new ChatsList({
-    chats: chats,
+    chats: [],
 
     events: {
-      click: async (evt: Event): Promise<void> => console.log('chat selected=', evt)
+      click: async (evt: Event): Promise<void> => {
+        const chat = findChat(evt)
+        chat && await initSelectedChat(chat)
+      }
     }
   }),
 
@@ -414,9 +416,8 @@ class PageChat extends Block {
 
     const activeChatId = localStorage.getItem('active-chat-id')
     if (activeChatId) {
-      const activeChat = store.getState().chats
-        .find((chat: Record<string, any>) => chat.id === activeChatId)
-      await initSelectedChat(activeChat)
+      const activeChat = findChatById(activeChatId)
+      activeChat && await initSelectedChat(activeChat)
     }
   }
 
@@ -452,39 +453,12 @@ function updateTemplate (propsPage: IProps, propsStore: IProps, propsInitStore: 
 
   // 5.2 - define blocks (components on the page)
   const blocksChatsList = propsPage.chatsList
-  console.log('1---blocksChatsList=', blocksChatsList)
 
   // 5.3 - update chatsList
   const hasChatsListChanged = propsStore.chats.length !== propsInitStore.chats.length
 
-  if (hasChatsListChanged) {
-    // blocks.avatar.setProps({ logo: `${process.env.HOST_RESOURCES}` + `${propsStore.avatar}` })
-    console.log('----DRAWING CHATS =', propsStore.chats)
-
-    blocksChatsList.setProps({
-      chats: formatChats([
-        {
-          id: 491,
-          title: 'firstChat',
-          lastMessage: {
-            content: 'third message',
-            id: 2617,
-            time: '2022-04-30T09:42:23+00:00',
-            user: {
-              avatar: '/a97495f2-0b7e-40c9-886d-736711505dd2/3d6a76ec-eac1-4dee-b527-005a7a0cc23b_image1.jpeg',
-              email: 'KrasnokutskiyEA@yandex.ruuu',
-              first_name: 'Евгенвьссннн',
-              login: 'adminr',
-              phone: '+79193911915',
-              second_name: 'Краснотеечрррыы'
-            }
-          },
-          unreadCount: 0,
-          avatar: null
-        }])
-    })
-
-    console.log('2---blocksChatsList=', blocksChatsList, 'propsPage=', propsPage)
+  if (hasChatsListChanged || hasRouteChanged) {
+    blocksChatsList.setProps({ chats: formatChats(propsStore.chats) })
   }
 }
 

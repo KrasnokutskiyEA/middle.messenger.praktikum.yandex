@@ -44,11 +44,11 @@ export const formatChats = (props: IChatCard[]): Array<Record<string, any>> => {
   return props.map(chat => ({
     id: chat.id,
     title: chat.title,
-    lastMessageContent: chat.lastMessage.content,
+    lastMessageContent: chat.lastMessage ? chat.lastMessage.content : '',
     unreadCount: chat.unreadCount,
     avatar: chat.avatar ?? defaultAvatar,
-    lastMessageTime: chat.lastMessage.time,
-    lastMessageTimeFormatted: formatTime(chat.lastMessage.time)
+    lastMessageTime: chat.lastMessage?.time,
+    lastMessageTimeFormatted: chat.lastMessage ? formatTime(chat.lastMessage.time) : ''
   }))
 }
 
