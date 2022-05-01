@@ -2,7 +2,7 @@ import { showMessage, showOverlaySpinner, hideOverlay } from '../helpers/showCom
 import authApi from '../api/AuthApi'
 import { IAuthApiSignIn, IAuthApiSignUp } from '../interfaces/IAuthApi'
 import showError from '../helpers/showError'
-import store from '../classes/Store'
+import store from '../store'
 import router from '../router'
 
 class AuthController {

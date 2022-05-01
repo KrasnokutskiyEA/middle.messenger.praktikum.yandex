@@ -1,7 +1,7 @@
 import { IMessageWSGet, IMessageWSConnect } from '../interfaces/IMessageApi'
 import { convertKeysToCamelCase } from '../helpers/formatStrings'
 import { showMessage } from '../helpers/showComponents'
-import store from '../classes/Store'
+import store from '../store'
 
 class MessageController {
   private _chatId: number

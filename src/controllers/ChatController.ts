@@ -2,7 +2,7 @@ import { showMessage, showOverlaySpinner, hideOverlay } from '../helpers/showCom
 import { IAddUserToChatApi, ICreateNewChatApi } from '../interfaces/IChatApi'
 import chatApi from '../api/ChatApi'
 import showError from '../helpers/showError'
-import store from '../classes/Store'
+import store from '../store'
 import router from '../router'
 
 class ChatController {

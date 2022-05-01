@@ -1,12 +1,12 @@
 div(class='chat-card')
-  img(src= chatAvatar class= 'chat-card-avatar')
+  img(src= chat.avatar class= 'chat-card-avatar')
 
   div(class='chat-card-main')
-    strong #{chatName}
-    div(class='chat-card-main-message' title= chatLastMessageText) #{chatLastMessageText}
+    strong #{chat.title}
+    div(class='chat-card-main-message' title= chat.lastMessageContent) #{chat.lastMessageContent}
 
   div(class= 'chat-card-misc')
-    div(class= 'chat-card-misc-time' title= chatLastMessageTime) #{chatLastMessageTimeFormatted}
-    if chatUnreadMessagesQty
+    div(class= 'chat-card-misc-time' title= chat.lastMessageTime) #{chat.lastMessageTimeFormatted}
+    if chat.unreadCount
       div(class= 'chat-card-misc-unread-wrapper')
-        div(class= 'chat-card-misc-unread') #{chatUnreadMessagesQty}
+        div(class= 'chat-card-misc-unread') #{chat.chatUnreadMessagesQty}

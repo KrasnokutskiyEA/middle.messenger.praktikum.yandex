@@ -1,35 +1,56 @@
+// import helpers
+import formatTime from '../helpers/formatTime'
+
+// import assets
+import defaultAvatar from '../assets/images/avatar.svg'
+
 export const chats = [
   {
-    id: '1',
-    name: 'Steve Jordan',
-    isGroup: false,
-    lastMessage: "Hi, how are you? I'd like to introduce you to my new friend who knows a lot of interesting stuff about political situation in a middle eastern region",
-    ownerLastMessage: 'Steve Jordan',
-    counterUnreadMessages: 1,
-    avatar: null,
-    updatedAt: '2022-03-28T19:18:15.563Z'
-  },
-  {
-    id: '2',
-    name: 'Peter Ganapolsky',
-    isGroup: false,
-    lastMessage: 'What are you talking about?',
-    ownerLastMessage: 'Peter Ganapolsky',
-    counterUnreadMessages: 0,
-    avatar: null,
-    updatedAt: '2022-03-27T15:18:02.563Z'
-  },
-  {
-    id: '3',
-    name: 'Work',
-    isGroup: true,
-    lastMessage: 'I assume, we are going to fail deadline. Again.',
-    ownerLastMessage: 'George Hampton',
-    counterUnreadMessages: 0,
-    avatar: null,
-    updatedAt: '2022-03-23T10:21:07.563Z'
+    id: 1,
+    title: 'secondChat',
+    lastMessage: {
+      content: 'second message',
+      id: 2617,
+      time: '2022-04-30T09:42:23+00:00',
+      user: {
+        avatar: '/a97495f2-0b7e-40c9-886d-736711505dd2/3d6a76ec-eac1-4dee-b527-005a7a0cc23b_image1.jpeg',
+        email: 'KrasnokutskiyEA@yandex.ruuu',
+        first_name: 'Евгенвьссннн',
+        login: 'adminr',
+        phone: '+79193911915',
+        second_name: 'Краснотеечрррыы'
+      }
+    },
+    unreadCount: 0,
+    avatar: null
   }
 ]
+
+// props interface
+export interface IChatCard {
+  id: number
+  title: string
+  lastMessage: {
+    id: number
+    user: Record<string, string>
+    content: string
+    time: string
+  }
+  unreadCount: number
+  avatar: string | null
+}
+
+export const formatChats = (props: IChatCard[]): Array<Record<string, any>> => {
+  return props.map(chat => ({
+    id: chat.id,
+    title: chat.title,
+    lastMessageContent: chat.lastMessage.content,
+    unreadCount: chat.unreadCount,
+    avatar: chat.avatar ?? defaultAvatar,
+    lastMessageTime: chat.lastMessage.time,
+    lastMessageTimeFormatted: formatTime(chat.lastMessage.time)
+  }))
+}
 
 export const messages = [
   {

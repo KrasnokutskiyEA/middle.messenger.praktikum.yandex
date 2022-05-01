@@ -10,6 +10,11 @@ export enum StoreEvents {
 class Store extends EventBus {
   readonly state: TState = {}
 
+  constructor (initialState: TState) {
+    super()
+    this.state = initialState
+  }
+
   public getState (): TState {
     return this.state
   }
@@ -18,8 +23,8 @@ class Store extends EventBus {
     set(this.state, path, value)
     Object.keys(this.listeners).includes(StoreEvents.FLOW_SDU) &&
     this.emit(StoreEvents.FLOW_SDU)
-    console.log('STORE UPDATED=', this.state, 'this.listeners=', this.listeners)
+    // !!! console.log('STORE UPDATED=', this.state, 'this.listeners=', this.listeners)
   }
 }
 
-export default new Store()
+export default Store

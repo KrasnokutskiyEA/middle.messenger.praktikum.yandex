@@ -3,7 +3,7 @@ import userApi from '../api/UserApi'
 import { TResponse } from '../types/api'
 import { IUserApiSearch, IUserApiUpdateProfile } from '../interfaces/IUserApi'
 import showError from '../helpers/showError'
-import store from '../classes/Store'
+import store from '../store'
 
 class UserController {
   async updateProfile (user: IUserApiUpdateProfile): Promise<void> {

@@ -11,13 +11,13 @@ import userRemoveLogo from '../../assets/images/user_remove.svg'
 
 // classes import
 import { Block, IProps } from '../../classes/Block'
-import store, { TState } from '../../classes/Store'
+import { TState } from '../../classes/Store'
 
 // template import
 import template from '../../templates/chatLayout/chatLayout.pug'
 
 // helpers import
-import { chats, messages } from '../../helpers/fakeData'
+import { chats, messages, formatChats } from '../../helpers/fakeData'
 import { validateInput, clearInput, submitForm } from '../../helpers/formUtils'
 import { showChatSettingsMenu, hideChatSettingsMenu, showOverlayModal, hideOverlay } from '../../helpers/showComponents'
 import get from '../../helpers/get'
@@ -29,7 +29,7 @@ import { chatController, messageController } from '../../controllers/index'
 // components import (.ts)
 import ChatsList from '../../components/chat/chatsList/chatsList'
 import ChatControls from '../../components/chat/chatControls/chatControls'
-import ChatCard from '../../components/chat/chatCard/chatCard'
+// import ChatCard, { IChatCard } from '../../components/chat/chatCard/chatCard'
 import ChatTitle from '../../components/chat/chatTitle/chatTitle'
 import MessagesList from '../../components/chat/messagesList/messagesList'
 import MessageCard from '../../components/chat/messageCard/messageCard'
@@ -40,6 +40,7 @@ import InputField from '../../components/chat/inputField/inputField'
 import TextField from '../../components/textField/textField'
 import Form from '../../modules/form/form'
 import router from '../../router'
+import store from '../../store'
 
 // 0 - generate common context
 const ctxCommon = {
@@ -320,13 +321,11 @@ const page = {
   }),
 
   chatsList: new ChatsList({
-    childrenList: chats.map(chat => new ChatCard({
-      ...chat,
+    chats: chats,
 
-      events: {
-        click: async (): Promise<void> => initSelectedChat(chat)
-      }
-    }))
+    events: {
+      click: async (evt: Event): Promise<void> => console.log('chat selected=', evt)
+    }
   }),
 
   chatMenuCtrls: new ChatControls({
@@ -426,24 +425,67 @@ class PageChat extends Block {
   }
 
   componentDidUnmount (): void {
-    if (store.getState().chats.length) {
-      messageController.leave()
-    }
+    console.log('-----CHATS CDU, store=', store.getState())
+    // if (store.getState().chats.length) {
+    //   messageController.leave()
+    // }
 
-    store.setState('chats', [])
+    // store.setState('chats', [])
   }
 }
 
 // 4 - define mapStateToProps
 function mapStateToProps (state: TState): TState {
   return {
-    route: get(state, 'route.name')
+    route: get(state, 'route.name'),
+    chats: get(state, 'chats'),
+    userAvatar: get(state, 'user.avatar'),
+    userFirstName: get(state, 'user.firstName'),
+    userSecondName: get(state, 'user.secondName')
   }
 }
 
 // 5 - redraw components after store has been updated
 function updateTemplate (propsPage: IProps, propsStore: IProps, propsInitStore: IProps): void {
+  // 5.1 - hasRouteChanged
+  const hasRouteChanged = propsStore.route !== propsInitStore.route
 
+  // 5.2 - define blocks (components on the page)
+  const blocksChatsList = propsPage.chatsList
+  console.log('1---blocksChatsList=', blocksChatsList)
+
+  // 5.3 - update chatsList
+  const hasChatsListChanged = propsStore.chats.length !== propsInitStore.chats.length
+
+  if (hasChatsListChanged) {
+    // blocks.avatar.setProps({ logo: `${process.env.HOST_RESOURCES}` + `${propsStore.avatar}` })
+    console.log('----DRAWING CHATS =', propsStore.chats)
+
+    blocksChatsList.setProps({
+      chats: formatChats([
+        {
+          id: 491,
+          title: 'firstChat',
+          lastMessage: {
+            content: 'third message',
+            id: 2617,
+            time: '2022-04-30T09:42:23+00:00',
+            user: {
+              avatar: '/a97495f2-0b7e-40c9-886d-736711505dd2/3d6a76ec-eac1-4dee-b527-005a7a0cc23b_image1.jpeg',
+              email: 'KrasnokutskiyEA@yandex.ruuu',
+              first_name: 'Евгенвьссннн',
+              login: 'adminr',
+              phone: '+79193911915',
+              second_name: 'Краснотеечрррыы'
+            }
+          },
+          unreadCount: 0,
+          avatar: null
+        }])
+    })
+
+    console.log('2---blocksChatsList=', blocksChatsList, 'propsPage=', propsPage)
+  }
 }
 
 // 6 - export page connected to store

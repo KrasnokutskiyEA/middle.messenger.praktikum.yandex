@@ -1,6 +1,6 @@
 import Route from './Route'
 import { Block } from './Block'
-import store from '../classes/Store'
+import store from '../store'
 
 export default class Router {
   public routes: Route[]
