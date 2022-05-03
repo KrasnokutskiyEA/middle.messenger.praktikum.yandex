@@ -17,7 +17,7 @@ import { TState } from '../../classes/Store'
 import template from '../../templates/chatLayout/chatLayout.pug'
 
 // helpers import
-import { messages, formatChats } from '../../helpers/fakeData'
+import { messages, formatChats, formatMessages } from '../../helpers/fakeData'
 import { validateInput, clearInput, submitForm, findChat, findChatById } from '../../helpers/formUtils'
 import { showChatSettingsMenu, hideChatSettingsMenu, showOverlayModal, hideOverlay } from '../../helpers/showComponents'
 import get from '../../helpers/get'
@@ -31,7 +31,6 @@ import ChatsList from '../../components/chat/chatsList/chatsList'
 import ChatControls from '../../components/chat/chatControls/chatControls'
 import ChatTitle from '../../components/chat/chatTitle/chatTitle'
 import MessagesList from '../../components/chat/messagesList/messagesList'
-import MessageCard from '../../components/chat/messageCard/messageCard'
 import RoundBtn from '../../components/roundBtn/roundBtn'
 import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
 import SecondaryBtn from '../../components/secondaryBtn/secondaryBtn'
@@ -391,7 +390,8 @@ const page = {
   }),
 
   messagesList: new MessagesList({
-    childrenList: messages.map(message => new MessageCard(message))
+    messages: formatMessages(messages),
+    activeUserId: 11659
   }),
 
   messagesCtrls: new ChatControls({

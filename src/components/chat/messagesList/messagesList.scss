@@ -5,4 +5,34 @@
   @extend %hidden-scrollbar;
 
   background-image: map.get($gradients, 'main-bkg');
+
+  .message-card {
+    padding: 10px;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    max-width: 40%;
+    border-radius: 10px;
+    display: inline-block;
+
+    .message-card-time {
+      float: right;
+      margin-left: 20px;
+      margin-top: 10px;
+      font-size: 0.7em;
+      color: darkgrey;
+    }
+
+    &-outgoing {
+      align-self: flex-end;
+      background-image: map.get($gradients, 'msg-outgoing');
+      box-shadow: 1px 1px 20px #f9ffa3;
+    }
+
+    &-incoming {
+      align-self: flex-start;
+      background-color: white;
+      box-shadow: 1px 1px 20px white;
+    }
+  }
 }

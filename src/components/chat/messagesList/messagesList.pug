@@ -1,2 +1,8 @@
 div(class='messages-list')
-  != childrenList
+  each message in messages
+    div(class= [
+      'message-card',
+      (activeUserId === message.userId)? 'message-card-outgoing' : 'message-card-incoming'
+    ])
+      span(class='message-card-text' title= message.content) #{message.content}
+      div(class='message-card-time') #{message.time}
