@@ -82,6 +82,14 @@ const ctx = {
     }
   },
 
+  /* chats list section */
+  chatsListMenu: {
+    main: {
+      chats: [],
+      activeChatId: 0
+    }
+  },
+
   /* bottom chat menu section */
   chatMenu: {
     main: {
@@ -109,7 +117,7 @@ const ctx = {
       classes: ['chat-controls-top']
     },
     title: {
-      chatName: 'Steve Jordan',
+      chatName: '',
       chatAvatar: null,
       classes: ['ml-2']
     },
@@ -224,11 +232,11 @@ const generateModal = (mainProps: {}, inputProps: {}, submitAction: {}): { conte
 const initSelectedChat = async (chat: Record<string, any>): Promise<void> => {
   console.log('------INIT SELECTED CHAT chat=', chat)
 
+  store.setState('activeChat', chat)
+  localStorage.setItem('active-chat-id', `${chat.id}`)
   /*
   store.setState('messages', [])
   messageController.leave()
-  store.setState('activeChat', chat)
-  localStorage.setItem('active-chat-id', `${chat.id}`)
 
   await chatController.getMessageToken(chat.id)
   messageController.getOldMessages({ offset: 20 })
@@ -320,7 +328,7 @@ const page = {
   }),
 
   chatsList: new ChatsList({
-    chats: [],
+    ...ctx.chatsListMenu.main,
 
     events: {
       click: async (evt: Event): Promise<void> => {
@@ -426,7 +434,7 @@ class PageChat extends Block {
   }
 
   componentDidUnmount (): void {
-    console.log('-----CHATS CDU, store=', store.getState())
+    // console.log('-----CHATS CDU, store=', store.getState())
     // if (store.getState().chats.length) {
     //   messageController.leave()
     // }
@@ -440,6 +448,8 @@ function mapStateToProps (state: TState): TState {
   return {
     route: get(state, 'route.name'),
     chats: get(state, 'chats'),
+    activeChatId: get(state, 'activeChat.id'),
+    activeChatTitle: get(state, 'activeChat.title'),
     userAvatar: get(state, 'user.avatar'),
     userFirstName: get(state, 'user.firstName'),
     userSecondName: get(state, 'user.secondName')
@@ -453,12 +463,21 @@ function updateTemplate (propsPage: IProps, propsStore: IProps, propsInitStore: 
 
   // 5.2 - define blocks (components on the page)
   const blocksChatsList = propsPage.chatsList
+  const blocksChatsTitle = propsPage.chatHeader.children.childrenList[0]
 
   // 5.3 - update chatsList
   const hasChatsListChanged = propsStore.chats.length !== propsInitStore.chats.length
 
   if (hasChatsListChanged || hasRouteChanged) {
     blocksChatsList.setProps({ chats: formatChats(propsStore.chats) })
+  }
+
+  // 5.4 - update selected chat
+  const hasActiveChatChanged = propsStore.activeChatId !== propsInitStore.activeChatId
+
+  if (hasActiveChatChanged || hasRouteChanged) {
+    blocksChatsList.setProps({ activeChatId: propsStore.activeChatId })
+    blocksChatsTitle.setProps({ chatName: propsStore.activeChatTitle })
   }
 }
 

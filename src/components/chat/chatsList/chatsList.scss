@@ -13,6 +13,10 @@
     cursor: pointer;
 
     &:hover {
+      background-color: #fffcee;
+    }
+
+    &.chat-card-active {
       background-color: map.get($colors, 'success-bkg');
     }
 

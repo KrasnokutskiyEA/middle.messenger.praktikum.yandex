@@ -1,6 +1,9 @@
 div(class='chats-list')
   each chat in chats
-    div(class='chat-card' chat-id= chat.id)
+    div(
+        chat-id= chat.id
+        class=['chat-card', activeChatId === chat.id ? 'chat-card-active' : '']
+      )
       img(src= chat.avatar class= 'chat-card-avatar')
 
       div(class='chat-card-main')

@@ -4,7 +4,7 @@ export default new Store({
   route: '',
   token: null,
   chats: [],
-  avtiveChat: {},
+  activeChat: {},
   messages: [],
   user: {}
 })
