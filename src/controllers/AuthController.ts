@@ -10,11 +10,11 @@ class AuthController {
     try {
       showOverlaySpinner()
       await authApi.signIn(user)
+      hideOverlay()
       showMessage('You have signed in', ['message-success'])
       router.go('/')
     } catch (e) {
       showError(e)
-    } finally {
       hideOverlay()
     }
   }

@@ -4,7 +4,7 @@ import arrowLogo from '../../assets/images/arrow.svg'
 import { validateInput, validateForm, submitForm, validateNewPassword } from '../../helpers/formUtils'
 
 // controllers import
-import { authController } from '../../controllers/index'
+import { userController } from '../../controllers/index'
 
 // import base class
 import { Block } from '../../classes/Block'
@@ -108,12 +108,11 @@ const page = {
     }),
 
     events: {
-      submit: (event: Event) => {
+      submit: async (event: Event): Promise<void> => {
         const data = submitForm(event)
-        authController.changePassword({
-          old_password: data.old_password,
-          new_password: data.new_password,
-          confirm_new_password: data.confirm_new_password
+        await userController.changePassword({
+          oldPassword: data.old_password,
+          newPassword: data.new_password
         })
       }
     }

@@ -39,6 +39,18 @@ class UserController {
       hideOverlay()
     }
   }
+
+  async changePassword ({ oldPassword, newPassword }: Record<string, any>): Promise<void> {
+    try {
+      showOverlaySpinner()
+      await userApi.updatePassword({ oldPassword, newPassword })
+      showMessage('Your password has been updated', ['message-success'])
+    } catch (e) {
+      showError(e)
+    } finally {
+      hideOverlay()
+    }
+  }
 }
 
 export default new UserController()

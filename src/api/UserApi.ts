@@ -18,6 +18,10 @@ class UserApi extends BaseApi {
   async updateAvatar (data: FormData): Promise<TResponse> {
     return this.put('/profile/avatar', { headers: {}, withCredentials: true, data })
   }
+
+  async updatePassword (data: Record<string, any>): Promise<TResponse> {
+    return this.put('/password', { withCredentials: true, data: JSON.stringify(data) })
+  }
 }
 
 export default new UserApi()
