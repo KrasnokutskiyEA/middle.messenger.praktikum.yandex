@@ -44,13 +44,14 @@ import store from '../../store'
 const ctxCommon = {
   /* modal windows stuff */
   userInput: {
-    label: 'User name',
+    label: 'User id',
     type: 'text',
-    name: 'user_name',
-    id: 'user_name',
-    placeholder: 'User name',
+    name: 'user_id',
+    id: 'user_id',
+    placeholder: 'User id',
     required: 'required',
-    pattern: '^\\d*[a-zA-Z][a-zA-Z0-9]*$',
+    // pattern: '^\\d*[a-zA-Z][a-zA-Z0-9]*$',
+    pattern: '^\\d*[0-9]*$',
     maxlength: 20,
     minlength: 3,
     errorText: '3-20 latin symbols, no spaces, no special chars'
@@ -251,11 +252,7 @@ const chatSettingsMenu = {
                 submit: async (event: Event): Promise<void> => {
                   hideOverlay() // close modal window...
                   const data = submitForm(event)
-
-                  await chatController.addUserToChat({
-                    users: [data.user_name],
-                    chatId: 493
-                  })
+                  await chatController.addUserToChat({ users: [Number(data.user_id)] })
                 }
               }
             )
@@ -278,10 +275,7 @@ const chatSettingsMenu = {
                 submit: async (event: Event): Promise<void> => {
                   hideOverlay() // close modal window...
                   const data = submitForm(event)
-                  await chatController.removeUserFromChat({
-                    users: [data.user_name],
-                    chatId: 493
-                  })
+                  await chatController.removeUserFromChat({ users: [Number(data.user_id)] })
                 }
               }
             )
@@ -295,7 +289,10 @@ const chatSettingsMenu = {
       ...ctx.chatHeader.deleteChatBtn,
 
       events: {
-        click: async (): Promise<void> => await chatController.deleteChat()
+        click: async (): Promise<void> => {
+          hideChatSettingsMenu() // hide menu
+          await chatController.deleteChat()
+        }
       }
     })
   ]
@@ -386,10 +383,9 @@ const page = {
 
     events: {
       submit: (event: Event) => {
-        const data = submitForm(event)
+        const { message } = submitForm(event)
         clearInput(event.target as HTMLInputElement)
-
-        console.log('----outgoing message=', data)
+        messageController.sendMessage(message)
       }
     }
   })

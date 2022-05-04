@@ -1,5 +1,5 @@
 import { showMessage, showOverlaySpinner, hideOverlay } from '../helpers/showComponents'
-import { IAddUserToChatApi, ICreateNewChatApi } from '../interfaces/IChatApi'
+import { ICreateNewChatApi } from '../interfaces/IChatApi'
 import { initSelectedChat, leaveActiveChat } from '../helpers/chatUtils'
 import chatApi from '../api/ChatApi'
 import showError from '../helpers/showError'
@@ -48,10 +48,10 @@ class ChatController {
     }
   }
 
-  async addUserToChat (data: IAddUserToChatApi): Promise<void> {
+  async addUserToChat (data: { users: number[] }): Promise<void> {
     try {
       showOverlaySpinner()
-      await chatApi.addUserToChat(data)
+      await chatApi.addUserToChat({ ...data, chatId: store.getState().activeChat.id })
       showMessage('User has been added to chat', ['message-success'])
     } catch (e) {
       showError(e)
@@ -60,10 +60,10 @@ class ChatController {
     }
   }
 
-  async removeUserFromChat (data: IAddUserToChatApi): Promise<void> {
+  async removeUserFromChat (data: { users: number[] }): Promise<void> {
     try {
       showOverlaySpinner()
-      await chatApi.removeUserFromChat(data)
+      await chatApi.removeUserFromChat({ ...data, chatId: store.getState().activeChat.id })
       showMessage('User has been removed from chat', ['message-success'])
     } catch (e) {
       showError(e)
