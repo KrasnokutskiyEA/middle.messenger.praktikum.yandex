@@ -9,8 +9,8 @@ class ChatController {
   async createChat (data: ICreateNewChatApi): Promise<void> {
     try {
       showOverlaySpinner()
-      const chatId = await chatApi.createChat(data)
-      store.setState('chatId', chatId)
+      await chatApi.createChat(data)
+      // store.setState('chatId', chatId)
       showMessage('Chat has been created', ['message-success'])
     } catch (e) {
       showError(e)
@@ -39,7 +39,7 @@ class ChatController {
   async deleteChat (): Promise<void> {
     try {
       showOverlaySpinner()
-      await chatApi.removeChat(store.state.chatId)
+      await chatApi.removeChat(store.getState().activeChat.id)
       showMessage('Chat has been deleted', ['message-success'])
       await this.getChats()
     } catch (e) {
@@ -75,13 +75,10 @@ class ChatController {
 
   async getMessageToken (chatId: number): Promise<void> {
     try {
-      // showOverlaySpinner()
       const token = await chatApi.getMessageToken(chatId)
       store.setState('token', token)
     } catch (e) {
       showError(e)
-    } finally {
-      // hideOverlay()
     }
   }
 

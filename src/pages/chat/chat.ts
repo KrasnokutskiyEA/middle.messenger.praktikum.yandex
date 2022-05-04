@@ -17,7 +17,7 @@ import { TState } from '../../classes/Store'
 import template from '../../templates/chatLayout/chatLayout.pug'
 
 // helpers import
-import { messages, formatChats, formatMessages } from '../../helpers/fakeData'
+import { formatChats, formatMessages } from '../../helpers/fakeData'
 import { validateInput, clearInput, submitForm, findChat, findChatById } from '../../helpers/formUtils'
 import { showChatSettingsMenu, hideChatSettingsMenu, showOverlayModal, hideOverlay } from '../../helpers/showComponents'
 import get from '../../helpers/get'
@@ -145,6 +145,14 @@ const ctx = {
     }
   },
 
+  /* messages list */
+  messagesList: {
+    main: {
+      messages: [],
+      activeUserId: null
+    }
+  },
+
   /* bottom message form section */
   messageForm: {
     main: {
@@ -229,23 +237,24 @@ const generateModal = (mainProps: {}, inputProps: {}, submitAction: {}): { conte
 
 /* init selected chat */
 const initSelectedChat = async (chat: Record<string, any>): Promise<void> => {
-  console.log('------INIT SELECTED CHAT chat=', chat)
+  // 1 - leave previous chat
+  if (store.getState().activeChat.id) {
+    messageController.leave()
+    store.setState('messages', [])
+  }
 
+  // 2 - set active chat
   store.setState('activeChat', chat)
   localStorage.setItem('active-chat-id', `${chat.id}`)
-  /*
-  store.setState('messages', [])
-  messageController.leave()
 
+  // 3 - open ws connection for new active chat
   await chatController.getMessageToken(chat.id)
-  messageController.getOldMessages({ offset: 20 })
 
   messageController.connect({
     userId: store.getState().user.id,
     chatId: store.getState().activeChat.id,
-    token: store.getState().token
+    token: store.getState().token.token
   })
-  */
 }
 
 /* chat settings menu */
@@ -264,7 +273,7 @@ const chatSettingsMenu = {
                 submit: async (event: Event): Promise<void> => {
                   hideOverlay() // close modal window...
                   const data = submitForm(event)
-                  // console.log('add usr data=', data)
+
                   await chatController.addUserToChat({
                     users: [data.user_name],
                     chatId: 493
@@ -355,6 +364,7 @@ const page = {
                     hideOverlay() // close modal window...
                     const data = submitForm(event)
                     await chatController.createChat({ title: data.chat_name })
+                    await chatController.getChats()
                   }
                 }
               )
@@ -389,10 +399,7 @@ const page = {
     ]
   }),
 
-  messagesList: new MessagesList({
-    messages: formatMessages(messages),
-    activeUserId: 11659
-  }),
+  messagesList: new MessagesList(ctx.messagesList.main),
 
   messagesCtrls: new ChatControls({
     ...ctx.messageForm.main,
@@ -434,12 +441,11 @@ class PageChat extends Block {
   }
 
   componentDidUnmount (): void {
-    // console.log('-----CHATS CDU, store=', store.getState())
-    // if (store.getState().chats.length) {
-    //   messageController.leave()
-    // }
+    if (store.getState().chats.length) {
+      messageController.leave()
+    }
 
-    // store.setState('chats', [])
+    store.setState('chats', [])
   }
 }
 
@@ -448,11 +454,13 @@ function mapStateToProps (state: TState): TState {
   return {
     route: get(state, 'route.name'),
     chats: get(state, 'chats'),
+    messages: get(state, 'messages'),
     activeChatId: get(state, 'activeChat.id'),
     activeChatTitle: get(state, 'activeChat.title'),
     userAvatar: get(state, 'user.avatar'),
     userFirstName: get(state, 'user.firstName'),
-    userSecondName: get(state, 'user.secondName')
+    userSecondName: get(state, 'user.secondName'),
+    userId: get(state, 'user.id')
   }
 }
 
@@ -464,6 +472,7 @@ function updateTemplate (propsPage: IProps, propsStore: IProps, propsInitStore: 
   // 5.2 - define blocks (components on the page)
   const blocksChatsList = propsPage.chatsList
   const blocksChatsTitle = propsPage.chatHeader.children.childrenList[0]
+  const blocksMessagesList = propsPage.messagesList
 
   // 5.3 - update chatsList
   const hasChatsListChanged = propsStore.chats.length !== propsInitStore.chats.length
@@ -478,6 +487,16 @@ function updateTemplate (propsPage: IProps, propsStore: IProps, propsInitStore: 
   if (hasActiveChatChanged || hasRouteChanged) {
     blocksChatsList.setProps({ activeChatId: propsStore.activeChatId })
     blocksChatsTitle.setProps({ chatName: propsStore.activeChatTitle })
+  }
+
+  // 5.5 - update messages list
+  const hasMessagesListChanged = propsStore.messages.length !== propsInitStore.messages.length
+
+  if (hasMessagesListChanged || hasRouteChanged) {
+    blocksMessagesList.setProps({
+      messages: formatMessages(propsStore.messages),
+      activeUserId: propsStore.userId
+    })
   }
 }
 
