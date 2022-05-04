@@ -17,7 +17,7 @@ import { TState } from '../../classes/Store'
 import template from '../../templates/chatLayout/chatLayout.pug'
 
 // helpers import
-import { formatChats, formatMessages } from '../../helpers/fakeData'
+import { formatChats, formatMessages, initSelectedChat } from '../../helpers/chatUtils'
 import { validateInput, clearInput, submitForm, findChat, findChatById } from '../../helpers/formUtils'
 import { showChatSettingsMenu, hideChatSettingsMenu, showOverlayModal, hideOverlay } from '../../helpers/showComponents'
 import get from '../../helpers/get'
@@ -235,28 +235,6 @@ const generateModal = (mainProps: {}, inputProps: {}, submitAction: {}): { conte
   }
 }
 
-/* init selected chat */
-const initSelectedChat = async (chat: Record<string, any>): Promise<void> => {
-  // 1 - leave previous chat
-  if (store.getState().activeChat.id) {
-    messageController.leave()
-    store.setState('messages', [])
-  }
-
-  // 2 - set active chat
-  store.setState('activeChat', chat)
-  localStorage.setItem('active-chat-id', `${chat.id}`)
-
-  // 3 - open ws connection for new active chat
-  await chatController.getMessageToken(chat.id)
-
-  messageController.connect({
-    userId: store.getState().user.id,
-    chatId: store.getState().activeChat.id,
-    token: store.getState().token.token
-  })
-}
-
 /* chat settings menu */
 const chatSettingsMenu = {
   childrenList: [
@@ -317,9 +295,7 @@ const chatSettingsMenu = {
       ...ctx.chatHeader.deleteChatBtn,
 
       events: {
-        click: () => {
-          console.log('delete chat')
-        }
+        click: async (): Promise<void> => await chatController.deleteChat()
       }
     })
   ]
@@ -364,7 +340,6 @@ const page = {
                     hideOverlay() // close modal window...
                     const data = submitForm(event)
                     await chatController.createChat({ title: data.chat_name })
-                    await chatController.getChats()
                   }
                 }
               )

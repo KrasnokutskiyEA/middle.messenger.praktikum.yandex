@@ -1,33 +1,17 @@
 import { showMessage, showOverlaySpinner, hideOverlay } from '../helpers/showComponents'
 import { IAddUserToChatApi, ICreateNewChatApi } from '../interfaces/IChatApi'
+import { initSelectedChat, leaveActiveChat } from '../helpers/chatUtils'
 import chatApi from '../api/ChatApi'
 import showError from '../helpers/showError'
 import store from '../store'
 import router from '../router'
 
 class ChatController {
-  async createChat (data: ICreateNewChatApi): Promise<void> {
-    try {
-      showOverlaySpinner()
-      await chatApi.createChat(data)
-      // store.setState('chatId', chatId)
-      showMessage('Chat has been created', ['message-success'])
-    } catch (e) {
-      showError(e)
-    } finally {
-      hideOverlay()
-    }
-  }
-
   async getChats (): Promise<void> {
     try {
       showOverlaySpinner()
       const chats = await chatApi.getChats() as Array<Record<string, unknown>>
       store.setState('chats', chats)
-
-      // if (!store.state.chatId) {
-      //   store.setState('chatId', chats[0]?.id || null)
-      // }
     } catch (e) {
       router.go('/sign-in')
       showError(e)
@@ -36,16 +20,31 @@ class ChatController {
     }
   }
 
-  async deleteChat (): Promise<void> {
+  async createChat (data: ICreateNewChatApi): Promise<void> {
     try {
-      showOverlaySpinner()
-      await chatApi.removeChat(store.getState().activeChat.id)
-      showMessage('Chat has been deleted', ['message-success'])
+      await chatApi.createChat(data)
       await this.getChats()
+      showMessage('Chat has been created', ['message-success'])
+
+      const newActiveChat = store.getState().chats[0]
+      await initSelectedChat(newActiveChat)
     } catch (e) {
       showError(e)
-    } finally {
-      hideOverlay()
+    }
+  }
+
+  async deleteChat (): Promise<void> {
+    try {
+      await chatApi.removeChat(store.getState().activeChat.id)
+      await this.getChats()
+      showMessage('Chat has been deleted', ['message-success'])
+
+      const newActiveChat = store.getState().chats[0]
+      newActiveChat?.id
+        ? await initSelectedChat(newActiveChat)
+        : leaveActiveChat(); store.setState('activeChat', {})
+    } catch (e) {
+      showError(e)
     }
   }
 
@@ -84,13 +83,10 @@ class ChatController {
 
   async getChatUsers (chatId: number): Promise<void> {
     try {
-      // showOverlaySpinner()
       const chatUsers = await chatApi.getChatUsers(chatId)
       store.setState('chatUsers', chatUsers)
     } catch (e) {
       showError(e)
-    } finally {
-      // hideOverlay()
     }
   }
 }

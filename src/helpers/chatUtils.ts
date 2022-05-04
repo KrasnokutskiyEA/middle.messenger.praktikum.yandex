@@ -1,7 +1,6 @@
-// import helpers
-import formatTime from '../helpers/formatTime'
-
-// import assets
+import formatTime from './formatTime'
+import { chatController, messageController } from '../controllers/index'
+import store from '../store'
 import defaultAvatar from '../assets/images/avatar.svg'
 
 // chat card interface
@@ -26,6 +25,7 @@ export interface IChatMessage {
   time: string
 }
 
+// format chats list
 export const formatChats = (props: IChatCard[]): Array<Record<string, any>> => {
   return props.map(chat => ({
     id: chat.id,
@@ -38,6 +38,7 @@ export const formatChats = (props: IChatCard[]): Array<Record<string, any>> => {
   }))
 }
 
+// format messages list
 export const formatMessages = (props: IChatMessage[]): Array<Record<string, any>> => {
   return props.map(message => ({
     id: message.id,
@@ -45,4 +46,31 @@ export const formatMessages = (props: IChatMessage[]): Array<Record<string, any>
     content: message.content,
     time: formatTime(message.time)
   })).reverse()
+}
+
+// leave active chat
+export const leaveActiveChat = (): void => {
+  if (store.getState().activeChat.id) {
+    messageController.leave()
+    store.setState('messages', [])
+  }
+}
+
+// init selected chat
+export const initSelectedChat = async (chat: Record<string, any>): Promise<void> => {
+  // 1 - leave previous chat
+  leaveActiveChat()
+
+  // 2 - set active chat
+  store.setState('activeChat', chat)
+  localStorage.setItem('active-chat-id', `${chat.id}`)
+
+  // 3 - open ws connection for new active chat
+  await chatController.getMessageToken(chat.id)
+
+  messageController.connect({
+    userId: store.getState().user.id,
+    chatId: store.getState().activeChat.id,
+    token: store.getState().token.token
+  })
 }
