@@ -45,7 +45,7 @@ export const formatMessages = (props: IChatMessage[]): Array<Record<string, any>
     userId: message.userId,
     content: message.content,
     time: formatTime(message.time)
-  })).reverse()
+  }))
 }
 
 // leave active chat
@@ -74,3 +74,39 @@ export const initSelectedChat = async (chat: Record<string, any>): Promise<void>
     token: store.getState().token.token
   })
 }
+
+// throttle
+function throttle (callee: Function, timeout: number): Function {
+  let timer: ReturnType<typeof setTimeout> | undefined
+
+  return function perform (...args: unknown[]) {
+    if (timer) return
+
+    timer = setTimeout(() => {
+      callee(...args)
+      clearTimeout(timer)
+      timer = undefined
+    }, timeout)
+  }
+}
+
+// handle scroll of a chat messages list
+function handleScroll (evt: Event): void {
+  const list = evt.target as HTMLUListElement
+
+  if (list) {
+    const isEndList = list.scrollTop <= -(list.scrollHeight - list.offsetHeight)
+    // const isEndList = list.scrollTop === 0
+    console.log(list.scrollTop, list.scrollHeight, list.offsetHeight)
+    if (isEndList) {
+      const messagesQty = store.getState().messages.length
+      if (messagesQty && messagesQty % 20 === 0) {
+        console.log('11--GETTING MSG-----')
+        messageController.getOldMessages({ offset: messagesQty })
+      }
+    }
+  }
+}
+
+// handle scroll of a chat messages list
+export const handleScrollThrottled = throttle(handleScroll, 500)

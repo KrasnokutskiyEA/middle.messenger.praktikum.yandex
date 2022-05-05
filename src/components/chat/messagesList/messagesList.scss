@@ -1,10 +1,19 @@
 @use 'sass:map';
 
+.overflow-hidden {
+  overflow-y: hidden !important;
+}
+
 .messages-list {
-  @extend %scrollable-list;
+  @extend %scrollable-list-reverse;
   @extend %hidden-scrollbar;
 
   background-image: map.get($gradients, 'main-bkg');
+  padding-bottom: 20px;
+
+  // list-style: none;
+  // overflow-anchor: none;
+  // overscroll-behavior: none;
 
   .message-card {
     padding: 10px;

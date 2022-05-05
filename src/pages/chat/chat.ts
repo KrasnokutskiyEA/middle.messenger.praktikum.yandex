@@ -17,7 +17,7 @@ import { TState } from '../../classes/Store'
 import template from '../../templates/chatLayout/chatLayout.pug'
 
 // helpers import
-import { formatChats, formatMessages, initSelectedChat } from '../../helpers/chatUtils'
+import { formatChats, formatMessages, initSelectedChat, handleScrollThrottled } from '../../helpers/chatUtils'
 import { validateInput, clearInput, submitForm, findChat, findChatById } from '../../helpers/formUtils'
 import { showChatSettingsMenu, hideChatSettingsMenu, showOverlayModal, hideOverlay } from '../../helpers/showComponents'
 import get from '../../helpers/get'
@@ -371,7 +371,13 @@ const page = {
     ]
   }),
 
-  messagesList: new MessagesList(ctx.messagesList.main),
+  messagesList: new MessagesList({
+    ...ctx.messagesList.main,
+
+    events: {
+      scroll: (evt) => handleScrollThrottled(evt)
+    }
+  }),
 
   messagesCtrls: new ChatControls({
     ...ctx.messageForm.main,

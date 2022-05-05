@@ -11,9 +11,20 @@
 }
 
 // entities list
-%scrollable-list {
+%scrollable {
   display: flex;
-  flex-direction: column;
   flex-grow: 1;
   overflow-y: scroll;
+}
+
+%scrollable-list {
+  @extend %scrollable;
+
+  flex-direction: column;
+}
+
+%scrollable-list-reverse {
+  @extend %scrollable;
+
+  flex-direction: column-reverse;
 }
