@@ -14,4 +14,4 @@ div(class='chats-list')
         div(class= 'chat-card-misc-time' title= chat.lastMessageTime) #{chat.lastMessageTimeFormatted}
         if chat.unreadCount
           div(class= 'chat-card-misc-unread-wrapper')
-            div(class= 'chat-card-misc-unread') #{chat.chatUnreadMessagesQty}
+            div(class= 'chat-card-misc-unread') #{chat.unreadCount}

@@ -25,7 +25,7 @@ function merge (lhs: Indexed, rhs: Indexed): Indexed {
 }
 
 // sets object value
-function set (object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
+export function set (object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
   if (typeof object !== 'object' || object === null) {
     return object
   }
@@ -40,4 +40,16 @@ function set (object: Indexed | unknown, path: string, value: unknown): Indexed 
   return merge(object as Indexed, result)
 }
 
-export default set
+// resets object value
+export function reset (object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
+  if (typeof object !== 'object' || object === null) {
+    return object
+  }
+
+  if (typeof path !== 'string') {
+    throw new Error('path must be string')
+  }
+
+  object[path] = value
+  return Object.assign({}, object)
+}

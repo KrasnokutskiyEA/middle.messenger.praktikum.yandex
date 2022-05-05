@@ -46,6 +46,10 @@ class AuthController {
     try {
       showOverlaySpinner()
       await authApi.logout()
+      store.resetState('activeChat', {})
+      store.resetState('messages', [])
+      store.resetState('token', {})
+      store.resetState('user', {})
       router.go('/sign-in')
     } catch (e) {
       showError(e)

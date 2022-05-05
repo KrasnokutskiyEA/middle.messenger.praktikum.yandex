@@ -40,9 +40,12 @@ class ChatController {
       showMessage('Chat has been deleted', ['message-success'])
 
       const newActiveChat = store.getState().chats[0]
-      newActiveChat?.id
-        ? await initSelectedChat(newActiveChat)
-        : leaveActiveChat(); store.setState('activeChat', {})
+      if (newActiveChat?.id) {
+        await initSelectedChat(newActiveChat)
+      } else {
+        leaveActiveChat()
+        store.resetState('activeChat', {})
+      }
     } catch (e) {
       showError(e)
     }
