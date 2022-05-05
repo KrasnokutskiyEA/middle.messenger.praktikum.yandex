@@ -467,13 +467,21 @@ function updateTemplate (propsPage: IProps, propsStore: IProps, propsInitStore: 
   }
 
   // 5.5 - update messages list
-  const hasMessagesListChanged = propsStore.messages.length !== propsInitStore.messages.length
+  const [newMsgQty, oldMsgQty] = [propsStore.messages.length, propsInitStore.messages.length]
+  const msgDiffQty = newMsgQty - oldMsgQty
+  const hasMessagesListChanged = newMsgQty !== oldMsgQty
 
   if (hasMessagesListChanged || hasRouteChanged) {
     blocksMessagesList.setProps({
       messages: formatMessages(propsStore.messages),
       activeUserId: propsStore.userId
     })
+
+    // now scroll down
+    const newList = document.querySelector('.messages-list');
+    (msgDiffQty === 1 || oldMsgQty === 0) && newList!.scrollTo({ top: newList!.scrollHeight })
+
+    console.log('SCROLLL list=', newList, '----msgDiffQty=', msgDiffQty, '----oldMsgQty', oldMsgQty)
   }
 }
 

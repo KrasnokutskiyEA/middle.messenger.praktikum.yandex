@@ -2,7 +2,7 @@
 
 .chats-list {
   @extend %scrollable-list;
-  @extend %hidden-scrollbar;
+  @extend %custom-scrollbar;
 
   .chat-card {
     display: flex;
