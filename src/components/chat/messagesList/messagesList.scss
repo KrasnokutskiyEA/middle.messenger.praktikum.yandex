@@ -1,9 +1,5 @@
 @use 'sass:map';
 
-.overflow-hidden {
-  overflow-y: hidden !important;
-}
-
 .messages-list {
   @extend %scrollable-list-reverse;
   @extend %hidden-scrollbar;

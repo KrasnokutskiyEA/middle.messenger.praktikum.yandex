@@ -100,7 +100,7 @@ function handleScroll (evt: Event): void {
     console.log(list.scrollTop, list.scrollHeight, list.offsetHeight)
     if (isEndList) {
       const messagesQty = store.getState().messages.length
-      if (messagesQty && messagesQty % 20 === 0) {
+      if (messagesQty /* && messagesQty % 20 === 0 */) {
         console.log('11--GETTING MSG-----')
         messageController.getOldMessages({ offset: messagesQty })
       }

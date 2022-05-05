@@ -54,7 +54,7 @@ class MessageController {
     const data = JSON.parse(evt.data)
     if (Array.isArray(data)) {
       if (!data.length) {
-        store.setState('messages', [])
+        // store.setState('messages', [])
       } else if (data[0].id === 0) {
         store.setState('messages', data.map((item) => convertKeysToCamelCase(item)))
       } else {
