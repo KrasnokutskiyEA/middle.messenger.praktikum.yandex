@@ -1,6 +1,7 @@
 import { IMessageWSGet, IMessageWSConnect } from '../interfaces/IMessageApi'
 import { convertKeysToCamelCase } from '../helpers/formatStrings'
 import { showMessage } from '../helpers/showComponents'
+import env from '../helpers/env'
 import store from '../store'
 
 class MessageController {
@@ -74,7 +75,7 @@ class MessageController {
     this._userId = options.userId
     this._chatId = options.chatId
     this._token = options.token
-    this._ws = new WebSocket(`${process.env.HOST_WS}/chats/${options.userId}/${options.chatId}/${options.token}`)
+    this._ws = new WebSocket(`${env.HOST_WS}/chats/${options.userId}/${options.chatId}/${options.token}`)
     this._addEvents()
   }
 

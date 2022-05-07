@@ -1,6 +1,7 @@
 import http from '../classes/HttpTransport'
 import { TResponse } from '../types/api'
 import { convertKeysToCamelCase } from '../helpers/formatStrings'
+import env from '../helpers/env'
 
 const defaultHeaders = {
   'Content-type': 'application/json; charset=UTF-8'
@@ -21,7 +22,7 @@ class BaseApi {
 
   constructor (config: IBaseApi = {}) {
     this._http = http
-    this._baseUrl = config.baseUrl ?? process.env.HOST_API
+    this._baseUrl = config.baseUrl ?? env.HOST_API
     this._path = config.path ?? ''
     this._headers = config.headers ?? defaultHeaders
   }

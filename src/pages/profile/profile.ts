@@ -6,6 +6,7 @@ import arrowLogo from '../../assets/images/arrow.svg'
 import { validateInput, validateForm, submitForm } from '../../helpers/formUtils'
 import get from '../../helpers/get'
 import connect from '../../helpers/connect'
+import env from '../../helpers/env'
 
 // interfaces import
 import { IUserApiUpdateProfile } from '../../interfaces/IUserApi'
@@ -239,7 +240,7 @@ function updateTemplate (propsPage: IProps, propsStore: IProps, propsInitStore: 
 
   if (hasAvatarChanged || hasRouteChanged) {
     propsStore.avatar &&
-    blocks.avatar.setProps({ logo: `${process.env.HOST_RESOURCES}` + `${propsStore.avatar}` })
+    blocks.avatar.setProps({ logo: `${env.HOST_RESOURCES}` + `${propsStore.avatar}` })
   }
 
   // 5.4 - update form fields
