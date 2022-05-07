@@ -107,7 +107,7 @@ class MessageController {
   }
 
   private _handleError (evt: Event): void {
-    console.log('_handleError', evt)
+    // console.log('_handleError', evt)
   }
 }
 

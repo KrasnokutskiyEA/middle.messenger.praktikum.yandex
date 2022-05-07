@@ -96,7 +96,7 @@ function handleScroll (evt: Event): void {
 
   if (list) {
     const isEndList = list.scrollTop === 0
-    console.log(list.scrollTop, list.scrollHeight, list.offsetHeight)
+
     if (isEndList) {
       const messagesQty = store.getState().messages.length
       if (messagesQty /* && messagesQty % 20 === 0 */) {

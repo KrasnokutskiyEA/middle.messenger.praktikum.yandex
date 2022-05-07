@@ -238,7 +238,6 @@ function updateTemplate (propsPage: IProps, propsStore: IProps, propsInitStore: 
   const hasAvatarChanged = propsStore.avatar !== propsInitStore.avatar
 
   if (hasAvatarChanged || hasRouteChanged) {
-    console.log('propsStore.avatar=', propsStore.avatar)
     propsStore.avatar &&
     blocks.avatar.setProps({ logo: `${process.env.HOST_RESOURCES}` + `${propsStore.avatar}` })
   }
