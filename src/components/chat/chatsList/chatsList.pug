@@ -1,2 +1,17 @@
 div(class='chats-list')
-  != childrenList
+  each chat in chats
+    div(
+        chat-id= chat.id
+        class=['chat-card', activeChatId === chat.id ? 'chat-card-active' : '']
+      )
+      img(src= chat.avatar class= 'chat-card-avatar')
+
+      div(class='chat-card-main')
+        strong #{chat.title}
+        div(class='chat-card-main-message' title= chat.lastMessageContent) #{chat.lastMessageContent}
+
+      div(class= 'chat-card-misc')
+        div(class= 'chat-card-misc-time' title= chat.lastMessageTime) #{chat.lastMessageTimeFormatted}
+        if chat.unreadCount
+          div(class= 'chat-card-misc-unread-wrapper')
+            div(class= 'chat-card-misc-unread') #{chat.unreadCount}

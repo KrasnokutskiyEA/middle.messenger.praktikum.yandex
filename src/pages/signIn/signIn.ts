@@ -1,24 +1,29 @@
-// asssets import
-import '../../assets/styles/index.scss'
-
 // helpers import
 import { validateInput, validateForm, submitForm } from '../../helpers/formUtils'
+
+// interfaces import
+import { IAuthApiSignIn } from '../../interfaces/IAuthApi'
 
 // controllers import
 import { authController } from '../../controllers/index'
 
+// import base class
+import { Block } from '../../classes/Block'
+
+// template import
+import template from '../../templates/centerContent/centerContent.pug'
+
 // components import (.ts)
-import CenterContent from '../../templates/centerContent/centerContent'
 import Form from '../../modules/form/form'
 import TextField from '../../components/textField/textField'
 import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
+import Link from '../../components/link/link'
+import router from '../../router'
 
 // 1 - generate context
 const ctx = {
   main: {
-    title: 'Sign In',
-    primaryLinkTo: '/createAccount.html',
-    primaryLinkLabel: 'Create account?'
+    title: 'Sign In'
   },
   inputs: [
     {
@@ -52,11 +57,15 @@ const ctx = {
     id: 'submit-form-btn',
     classes: ['mt-2'],
     disabled: false
+  },
+  linkPrimary: {
+    to: '/create-account',
+    label: 'Create account?'
   }
 }
 
 // 2 - create page structure
-const page = new CenterContent({
+const page = {
   content: new Form({
     ...ctx.main,
 
@@ -77,18 +86,33 @@ const page = new CenterContent({
       }
     }),
 
+    linkPrimary: new Link({
+      ...ctx.linkPrimary,
+
+      events: {
+        click: (event: Event) => {
+          event.preventDefault()
+          router.go(ctx.linkPrimary.to)
+        }
+      }
+    }),
+
     events: {
-      submit: (event: Event) => {
-        const data = submitForm(event)
-        authController.signIn({ login: data.login, password: data.password })
+      submit: async (event: Event): Promise<void> => {
+        const data = submitForm(event) as IAuthApiSignIn
+        await authController.signIn(data)
       }
     }
   })
-})
+}
 
-// 3 - generate markup
-const app: HTMLElement | null = document.getElementById('app')
-if (app !== null) {
-  app.innerHTML = ''
-  app.appendChild(page.render())
+// 3 - component
+export default class PageSignIn extends Block {
+  constructor () {
+    super('div', page)
+  }
+
+  render (): HTMLElement {
+    return this.compile(template, this.props)
+  }
 }

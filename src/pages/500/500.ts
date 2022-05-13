@@ -1,28 +1,54 @@
 // asssets import
-import '../../assets/styles/index.scss'
 import logo from '../../assets/images/fire.svg'
 
+// import base class
+import { Block } from '../../classes/Block'
+
+// template import
+import template from '../../templates/centerContent/centerContent.pug'
+
 // components import (.ts)
-import CenterContent from '../../templates/centerContent/centerContent'
 import ErrorMesssage from '../../components/errorMessage/errorMessage'
+import Link from '../../components/link/link'
+import router from '../../router'
 
 // 1 - generate context
 const ctx = {
-  code: '500',
-  message: 'Internal Server Error',
-  linkTo: '/index.html',
-  linkMessage: 'Go Back',
-  logo
+  main: {
+    code: '500',
+    message: 'Internal Server Error',
+    logo
+  },
+  link: {
+    label: 'Go Back'
+  }
 }
 
 // 2 - create page structure
-const page = new CenterContent({
-  content: new ErrorMesssage(ctx)
-})
+const page = {
+  content: new ErrorMesssage({
+    ...ctx.main,
 
-// 3 - generate markup
-const app: HTMLElement | null = document.getElementById('app')
-if (app !== null) {
-  app.innerHTML = ''
-  app.appendChild(page.render())
+    link: new Link({
+      ...ctx.link,
+
+      events: {
+        click: (event: Event) => {
+          event.preventDefault()
+          router.back()
+        }
+      }
+    })
+  })
+}
+
+// 3 - component
+export default class Page500 extends Block {
+  constructor () {
+    super('div', page)
+  }
+
+  render (): HTMLElement {
+    return this.compile(template, this.props)
+  }
 }

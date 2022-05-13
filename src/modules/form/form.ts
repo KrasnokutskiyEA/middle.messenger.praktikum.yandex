@@ -4,14 +4,12 @@ import { Block, IProps } from '../../classes/Block'
 import template from './form.pug'
 
 // component
-class Form extends Block {
+export default class Form extends Block {
   constructor (props: IProps) {
-    super('div', { ...props })
+    super('div', props)
   }
 
   render (): HTMLElement {
     return this.compile(template, this.props)
   }
 }
-
-export default Form

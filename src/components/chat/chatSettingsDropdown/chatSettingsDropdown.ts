@@ -5,7 +5,7 @@ import { Block, IProps } from '../../../classes/Block'
 import template from './chatSettingsDropdown.pug'
 
 // component
-class ChatSettingsDropdown extends Block {
+export default class ChatSettingsDropdown extends Block {
   static instance: ChatSettingsDropdown | undefined
 
   readonly unmountDropdown: (evt: MouseEvent) => void
@@ -31,5 +31,3 @@ class ChatSettingsDropdown extends Block {
     document.removeEventListener('mousedown', this.handleOverlay)
   }
 }
-
-export default ChatSettingsDropdown

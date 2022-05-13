@@ -50,3 +50,5 @@ Added features:
 - send files to chat
 - fix time format in messages and chats
 - Use login instead of id to Add user/Remove user from chat.
+
+

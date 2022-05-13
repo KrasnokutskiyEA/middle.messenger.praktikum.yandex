@@ -1,24 +1,61 @@
 import { showMessage, showOverlaySpinner, hideOverlay } from '../helpers/showComponents'
+import authApi from '../api/AuthApi'
+import { IAuthApiSignIn, IAuthApiSignUp } from '../interfaces/IAuthApi'
+import showError from '../helpers/showError'
+import store from '../store'
+import router from '../router'
 
 class AuthController {
-  public signIn (user: object): void {
-    console.log('----signing in..........user=', user)
-    showOverlaySpinner()
-
-    setTimeout(() => {
+  async signIn (user: IAuthApiSignIn): Promise<void> {
+    try {
+      showOverlaySpinner()
+      await authApi.signIn(user)
       hideOverlay()
-      showMessage('this is text', ['message-success'])
-    }, 5000)
+      showMessage('You have signed in', ['message-success'])
+      router.go('/')
+    } catch (e) {
+      showError(e)
+      hideOverlay()
+    }
   }
 
-  public changePassword (password: object): void {
-    console.log('----changing password..........password=', password)
-    // showMessage('this is text', ['message-success'])
-    showOverlaySpinner()
-
-    setTimeout(() => {
+  async signUp (user: IAuthApiSignUp): Promise<void> {
+    try {
+      showOverlaySpinner()
+      await authApi.signUp(user)
+      showMessage('Account has been created', ['message-success'])
+      router.go('/sign-in')
+    } catch (e) {
+      showError(e)
+    } finally {
       hideOverlay()
-    }, 5000)
+    }
+  }
+
+  async checkAuth (): Promise<void> {
+    try {
+      const user = await authApi.checkAuth()
+      store.setState('user', user)
+    } catch (e) {
+      showError(e)
+      router.go('/sign-in')
+    }
+  }
+
+  async logout (): Promise<void> {
+    try {
+      showOverlaySpinner()
+      await authApi.logout()
+      store.resetState('activeChat', {})
+      store.resetState('messages', [])
+      store.resetState('token', {})
+      store.resetState('user', {})
+      router.go('/sign-in')
+    } catch (e) {
+      showError(e)
+    } finally {
+      hideOverlay()
+    }
   }
 }
 

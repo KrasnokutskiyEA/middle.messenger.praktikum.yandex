@@ -1,4 +1,7 @@
 div(class=['avatar-wrapper', ...classes])
-  img(src= logo class='avatar-logo')
-  div(class='avatar-overlay')
-    div(id='avatar' class='avatar-text') Change
+  <label>
+    input(type='file' id='avatar' name='avatar' accept='image/*')
+    img(src= logo class='avatar-logo')
+    div(class='avatar-overlay')
+      div(id='avatar' class='avatar-text') Change
+  </label>

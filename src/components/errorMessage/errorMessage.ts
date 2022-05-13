@@ -5,7 +5,7 @@ import { Block, IProps } from '../../classes/Block'
 import template from './errorMessage.pug'
 
 // component
-class ErrorMessage extends Block {
+export default class ErrorMessage extends Block {
   constructor (props: IProps) {
     super('div', { ...props })
   }
@@ -14,5 +14,3 @@ class ErrorMessage extends Block {
     return this.compile(template, this.props)
   }
 }
-
-export default ErrorMessage

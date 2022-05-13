@@ -1,5 +1,4 @@
 // asssets import
-import '../../assets/styles/index.scss'
 import textLogo from '../../assets/images/text.svg'
 import sendLogo from '../../assets/images/send.svg'
 import settingsLogo from '../../assets/images/settings.svg'
@@ -10,40 +9,49 @@ import personLogo from '../../assets/images/person.svg'
 import userAddLogo from '../../assets/images/user_add.svg'
 import userRemoveLogo from '../../assets/images/user_remove.svg'
 
+// classes import
+import { Block, IProps } from '../../classes/Block'
+import { TState } from '../../classes/Store'
+
+// template import
+import template from '../../templates/chatLayout/chatLayout.pug'
+
 // helpers import
-import { chats, messages } from '../../helpers/fakeData'
-import { validateInput, clearInput, submitForm } from '../../helpers/formUtils'
-import { showChatSettingsMenu, hideChatSettingsMenu, showOverlayModal } from '../../helpers/showComponents'
+import { formatChats, formatMessages, initSelectedChat, handleScrollThrottled } from '../../helpers/chatUtils'
+import { validateInput, clearInput, submitForm, findChat, findChatById } from '../../helpers/formUtils'
+import { showChatSettingsMenu, hideChatSettingsMenu, showOverlayModal, hideOverlay } from '../../helpers/showComponents'
+import get from '../../helpers/get'
+import connect from '../../helpers/connect'
 
 // controllers import
-import { chatController } from '../../controllers/index'
+import { chatController, messageController } from '../../controllers/index'
 
 // components import (.ts)
-import ChatLayout from '../../templates/chatLayout/chatLayout'
 import ChatsList from '../../components/chat/chatsList/chatsList'
 import ChatControls from '../../components/chat/chatControls/chatControls'
-import ChatCard from '../../components/chat/chatCard/chatCard'
 import ChatTitle from '../../components/chat/chatTitle/chatTitle'
 import MessagesList from '../../components/chat/messagesList/messagesList'
-import MessageCard from '../../components/chat/messageCard/messageCard'
 import RoundBtn from '../../components/roundBtn/roundBtn'
 import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
 import SecondaryBtn from '../../components/secondaryBtn/secondaryBtn'
 import InputField from '../../components/chat/inputField/inputField'
 import TextField from '../../components/textField/textField'
 import Form from '../../modules/form/form'
+import router from '../../router'
+import store from '../../store'
 
 // 0 - generate common context
 const ctxCommon = {
   /* modal windows stuff */
   userInput: {
-    label: 'User name',
+    label: 'User id',
     type: 'text',
-    name: 'user_name',
-    id: 'user_name',
-    placeholder: 'User name',
+    name: 'user_id',
+    id: 'user_id',
+    placeholder: 'User id',
     required: 'required',
-    pattern: '^\\d*[a-zA-Z][a-zA-Z0-9]*$',
+    // pattern: '^\\d*[a-zA-Z][a-zA-Z0-9]*$',
+    pattern: '^\\d*[0-9]*$',
     maxlength: 20,
     minlength: 3,
     errorText: '3-20 latin symbols, no spaces, no special chars'
@@ -74,6 +82,14 @@ const ctx = {
     }
   },
 
+  /* chats list section */
+  chatsListMenu: {
+    main: {
+      chats: [],
+      activeChatId: 0
+    }
+  },
+
   /* bottom chat menu section */
   chatMenu: {
     main: {
@@ -101,7 +117,7 @@ const ctx = {
       classes: ['chat-controls-top']
     },
     title: {
-      chatName: 'Steve Jordan',
+      chatName: '',
       chatAvatar: null,
       classes: ['ml-2']
     },
@@ -127,6 +143,14 @@ const ctx = {
       text: 'Delete chat',
       logo: deleteLogo,
       classes: ['w-full', 'h-6', 'secondary-btn-red', 'pr-24']
+    }
+  },
+
+  /* messages list */
+  messagesList: {
+    main: {
+      messages: [],
+      activeUserId: null
     }
   },
 
@@ -225,9 +249,10 @@ const chatSettingsMenu = {
               ctx.modal.addUser.main,
               ctx.modal.addUser.input,
               {
-                submit: (event: Event) => {
+                submit: async (event: Event): Promise<void> => {
+                  hideOverlay() // close modal window...
                   const data = submitForm(event)
-                  chatController.addUserToChat({ chat: data.user_name })
+                  await chatController.addUserToChat({ users: [Number(data.user_id)] })
                 }
               }
             )
@@ -247,9 +272,10 @@ const chatSettingsMenu = {
               ctx.modal.removeUser.main,
               ctx.modal.removeUser.input,
               {
-                submit: (event: Event) => {
+                submit: async (event: Event): Promise<void> => {
+                  hideOverlay() // close modal window...
                   const data = submitForm(event)
-                  chatController.removeUserFromChat({ chat: data.user_name })
+                  await chatController.removeUserFromChat({ users: [Number(data.user_id)] })
                 }
               }
             )
@@ -263,8 +289,9 @@ const chatSettingsMenu = {
       ...ctx.chatHeader.deleteChatBtn,
 
       events: {
-        click: () => {
-          console.log('delete chat')
+        click: async (): Promise<void> => {
+          hideChatSettingsMenu() // hide menu
+          await chatController.deleteChat()
         }
       }
     })
@@ -272,7 +299,7 @@ const chatSettingsMenu = {
 }
 
 // 2 - create page structure
-const page = new ChatLayout({
+const page = {
   chatSearch: new ChatControls({
     ...ctx.chatSearch.main,
 
@@ -282,15 +309,14 @@ const page = new ChatLayout({
   }),
 
   chatsList: new ChatsList({
-    childrenList: chats.map(chat => new ChatCard({
-      ...chat,
+    ...ctx.chatsListMenu.main,
 
-      events: {
-        click: () => {
-          console.log('chat=', chat)
-        }
+    events: {
+      click: async (evt: Event): Promise<void> => {
+        const chat = findChat(evt)
+        chat && await initSelectedChat(chat)
       }
-    }))
+    }
   }),
 
   chatMenuCtrls: new ChatControls({
@@ -307,9 +333,10 @@ const page = new ChatLayout({
                 ctx.modal.newChat.main,
                 ctx.modal.newChat.input,
                 {
-                  submit: (event: Event) => {
+                  submit: async (event: Event): Promise<void> => {
+                    hideOverlay() // close modal window...
                     const data = submitForm(event)
-                    chatController.createChat({ chat: data.chat_name })
+                    await chatController.createChat({ title: data.chat_name })
                   }
                 }
               )
@@ -321,9 +348,7 @@ const page = new ChatLayout({
         ...ctx.chatMenu.myProfileBtn,
 
         events: {
-          click: () => {
-            console.log('goto my profile')
-          }
+          click: () => router.go('/profile')
         }
       })
     ]
@@ -347,7 +372,11 @@ const page = new ChatLayout({
   }),
 
   messagesList: new MessagesList({
-    childrenList: messages.map(message => new MessageCard(message))
+    ...ctx.messagesList.main,
+
+    events: {
+      scroll: (evt) => handleScrollThrottled(evt)
+    }
   }),
 
   messagesCtrls: new ChatControls({
@@ -360,16 +389,99 @@ const page = new ChatLayout({
 
     events: {
       submit: (event: Event) => {
-        submitForm(event)
+        const { message } = submitForm(event)
         clearInput(event.target as HTMLInputElement)
+        messageController.sendMessage(message)
       }
     }
   })
-})
-
-// 3 - generate markup
-const app: HTMLElement | null = document.getElementById('app')
-if (app !== null) {
-  app.innerHTML = ''
-  app.appendChild(page.render())
 }
+
+// 3 - component
+class PageChat extends Block {
+  constructor () {
+    super('div', page)
+  }
+
+  async componentDidMount (): Promise<void> {
+    await chatController.getChats()
+
+    const activeChatId = localStorage.getItem('active-chat-id')
+    if (activeChatId) {
+      const activeChat = findChatById(activeChatId)
+      activeChat && await initSelectedChat(activeChat)
+    }
+  }
+
+  render (): HTMLElement {
+    return this.compile(template, this.props)
+  }
+
+  componentDidUnmount (): void {
+    if (store.getState().chats.length) {
+      messageController.leave()
+    }
+
+    store.setState('chats', [])
+  }
+}
+
+// 4 - define mapStateToProps
+function mapStateToProps (state: TState): TState {
+  return {
+    route: get(state, 'route.name'),
+    chats: get(state, 'chats'),
+    messages: get(state, 'messages'),
+    activeChatId: get(state, 'activeChat.id'),
+    activeChatTitle: get(state, 'activeChat.title'),
+    userAvatar: get(state, 'user.avatar'),
+    userFirstName: get(state, 'user.firstName'),
+    userSecondName: get(state, 'user.secondName'),
+    userId: get(state, 'user.id')
+  }
+}
+
+// 5 - redraw components after store has been updated
+function updateTemplate (propsPage: IProps, propsStore: IProps, propsInitStore: IProps): void {
+  // 5.1 - hasRouteChanged
+  const hasRouteChanged = propsStore.route !== propsInitStore.route
+
+  // 5.2 - define blocks (components on the page)
+  const blocksChatsList = propsPage.chatsList
+  const blocksChatsTitle = propsPage.chatHeader.children.childrenList[0]
+  const blocksMessagesList = propsPage.messagesList
+
+  // 5.3 - update chatsList
+  const hasChatsListChanged = propsStore.chats.length !== propsInitStore.chats.length
+
+  if (hasChatsListChanged || hasRouteChanged) {
+    blocksChatsList.setProps({ chats: formatChats(propsStore.chats) })
+  }
+
+  // 5.4 - update selected chat
+  const hasActiveChatChanged = propsStore.activeChatId !== propsInitStore.activeChatId
+
+  if (hasActiveChatChanged || hasRouteChanged) {
+    blocksChatsList.setProps({ activeChatId: propsStore.activeChatId })
+    blocksChatsTitle.setProps({ chatName: propsStore.activeChatTitle })
+  }
+
+  // 5.5 - update messages list
+  const [newMsgQty, oldMsgQty] = [propsStore.messages.length, propsInitStore.messages.length]
+  const msgDiffQty = newMsgQty - oldMsgQty
+  const hasMessagesListChanged = newMsgQty !== oldMsgQty
+
+  if (hasMessagesListChanged || hasRouteChanged) {
+    blocksMessagesList.setProps({
+      messages: formatMessages(propsStore.messages),
+      activeUserId: propsStore.userId
+    })
+
+    // now scroll down
+    const newList = document.querySelector('.messages-list');
+    (msgDiffQty === 1 || oldMsgQty === 0) && newList!.scrollTo({ top: newList!.scrollHeight })
+  }
+}
+
+// 6 - export page connected to store
+export default connect(PageChat, mapStateToProps, updateTemplate)

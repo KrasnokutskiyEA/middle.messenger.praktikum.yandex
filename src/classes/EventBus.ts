@@ -32,4 +32,8 @@ export default class EventBus {
       listener(...args)
     })
   }
+
+  shift (event: string): void {
+    this.listeners[event]?.shift()
+  }
 }

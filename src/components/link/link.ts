@@ -1,17 +1,16 @@
+// import base class
 import { Block, IProps } from '../../classes/Block'
 
-// template imports
-import template from './centerContent.pug'
+// import template
+import template from './link.pug'
 
 // component
-class CenterContent extends Block {
+export default class Link extends Block {
   constructor (props: IProps) {
-    super('div', { ...props })
+    super('div', props)
   }
 
   render (): HTMLElement {
     return this.compile(template, this.props)
   }
 }
-
-export default CenterContent

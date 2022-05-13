@@ -1,11 +1,11 @@
 import authController from './AuthController'
 import chatController from './ChatController'
-// import userController from './UserController';
-// import messageController from './MessageController';
+import userController from './UserController'
+import messageController from './MessageController'
 
 export {
   authController,
-  chatController
-  // userController,
-  // messageController,
+  chatController,
+  userController,
+  messageController
 }

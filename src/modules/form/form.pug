@@ -13,8 +13,5 @@ form(class='form' name='form' id='form')
   != submitBtn
 
   //- form additional links
-  if primaryLinkTo
-    a(class='form-link' href=primaryLinkTo) #{primaryLinkLabel}
-
-  if secondaryLinkTo
-    a(class='form-link' href=secondaryLinkTo) #{secondaryLinkLabel}
+  != linkPrimary
+  != linkSecondary

@@ -4,6 +4,8 @@
   * output: (string) - ?a=1&b=2&c=[object Object]&k=1,2,3
 */
 function queryStringify (data: object): string {
+  if (!data) return ''
+
   let res = ''
   Object.entries(data).forEach(([key, val]: [string, any]) => { res += `${key}=${val}&` })
   return '?' + res.slice(0, -1)
@@ -22,6 +24,7 @@ interface IRequestOptions {
   headers?: Record<string, string>
   timeout?: number
   data?: unknown
+  withCredentials?: boolean
 }
 
 interface IRequestData {
@@ -50,7 +53,8 @@ class HTTPTransport {
       headers = {},
       method = METHODS.GET,
       data,
-      timeout = 3000
+      timeout = 3000,
+      withCredentials = false
     } = options
 
     const query: string = method === METHODS.GET ? queryStringify(data as IRequestData) : ''
@@ -60,23 +64,27 @@ class HTTPTransport {
 
       xhr.open(method, url + query)
 
+      if (withCredentials) {
+        xhr.withCredentials = true
+      }
+
       Object.keys(headers).forEach(key => {
         xhr.setRequestHeader(key, headers[key])
       })
 
       xhr.onload = () => xhr.status >= 300 ? reject(xhr) : resolve(xhr)
-      xhr.onabort = reject
-      xhr.onerror = reject
+      xhr.onabort = () => reject(xhr)
+      xhr.onerror = () => reject(xhr)
       xhr.timeout = timeout
-      xhr.ontimeout = reject
+      xhr.ontimeout = () => reject(xhr)
 
       if (method === METHODS.GET || data === undefined) {
         xhr.send()
       } else {
-        xhr.send(JSON.stringify(data))
+        xhr.send(data as any)
       }
     })
   }
 }
 
-export default HTTPTransport
+export default new HTTPTransport()

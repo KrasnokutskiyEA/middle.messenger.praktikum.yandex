@@ -1,0 +1,7 @@
+@use 'sass:map';
+
+.link {
+  font-size: 1em;
+  margin-top: 20px;
+  color: map.get($colors, 'gray');
+}

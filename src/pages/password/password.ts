@@ -1,19 +1,23 @@
-// asssets import
-import '../../assets/styles/index.scss'
 import arrowLogo from '../../assets/images/arrow.svg'
 
 // helpers import
 import { validateInput, validateForm, submitForm, validateNewPassword } from '../../helpers/formUtils'
 
 // controllers import
-import { authController } from '../../controllers/index'
+import { userController } from '../../controllers/index'
+
+// import base class
+import { Block } from '../../classes/Block'
+
+// template import
+import template from '../../templates/sideNav/sideNav.pug'
 
 // components import (.ts)
-import SideNav from '../../templates/sideNav/sideNav'
 import Form from '../../modules/form/form'
 import TextField from '../../components/textField/textField'
 import PrimaryBtn from '../../components/primaryBtn/primaryBtn'
 import RoundBtn from '../../components/roundBtn/roundBtn'
+import router from '../../router'
 
 // 1 - generate context
 const ctx = {
@@ -81,8 +85,14 @@ const ctx = {
 }
 
 // 2 - create page structure
-const page = new SideNav({
-  ctrlElement: new RoundBtn(ctx.goBackBtn),
+const page = {
+  ctrlElement: new RoundBtn({
+    ...ctx.goBackBtn,
+
+    events: {
+      click: () => router.back()
+    }
+  }),
 
   content: new Form({
     ...ctx.main,
@@ -98,21 +108,24 @@ const page = new SideNav({
     }),
 
     events: {
-      submit: (event: Event) => {
+      submit: async (event: Event): Promise<void> => {
         const data = submitForm(event)
-        authController.changePassword({
-          old_password: data.old_password,
-          new_password: data.new_password,
-          confirm_new_password: data.confirm_new_password
+        await userController.changePassword({
+          oldPassword: data.old_password,
+          newPassword: data.new_password
         })
       }
     }
   })
-})
+}
 
-// 3 - generate markup
-const app: HTMLElement | null = document.getElementById('app')
-if (app !== null) {
-  app.innerHTML = ''
-  app.appendChild(page.render())
+// 3 - component
+export default class PageChangePassword extends Block {
+  constructor () {
+    super('div', page)
+  }
+
+  render (): HTMLElement {
+    return this.compile(template, this.props)
+  }
 }
