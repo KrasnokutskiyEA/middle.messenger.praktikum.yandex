@@ -24,7 +24,6 @@ const ctx = {
   }
 }
 
-
 // 2 - create page structure
 const page = {
   content: new ErrorMesssage({

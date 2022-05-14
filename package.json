@@ -9,11 +9,6 @@
     "prepare": "husky install",
     "lint": "eslint ./src"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm-run-all test lint"
-    }
-  },
   "author": "Evgeny Krasnokutsky",
   "license": "ISC",
   "devDependencies": {
