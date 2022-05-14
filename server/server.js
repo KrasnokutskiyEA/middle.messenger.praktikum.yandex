@@ -17,6 +17,6 @@ const app = express()
 app.use(limiter)
 app.use(helmet.xssFilter())
 app.use(history())
-app.use(express.static('dist'))
+app.use(express.static('../dist'))
 
 app.listen(PORT, () => console.log(`Server is running http://localhost:${PORT}`))
