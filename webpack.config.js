@@ -25,7 +25,7 @@ module.exports = {
     rules: [
       {
         test: /\.pug$/,
-        use: [{ loader: 'pug-loader' }]
+        use: [{ loader: 'simple-pug-loader' }]
       },
       {
         test: /\.tsx?$/,
