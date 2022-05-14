@@ -13,10 +13,12 @@ Supported features:
 ## Install
 
 - `npm i` — get required npm-packages;
-- `npm run start` — build dist and start express-server on port 3000;
-- `npm run production` — make production build;
-- `npm run dev` — run in development mode;
+- `npm run build` — make production build;
+- `npm run build:image` — make docker-image;
+- `npm run docker` — dockerize app and run it on port 3000;
+- `npm run dev` — run in development mode (webpack dev server);
 - `npm run test` — run tests;
+- `npm run lint` — check lint errors;
 
 ## Figma Template
 
