@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "messenger app",
   "scripts": {
-    "start": "webpack && node server.ts",
     "build": "webpack",
     "dev": "webpack serve",
     "test": "jest"
@@ -41,11 +40,6 @@
     "webpack-dev-server": "^4.9.0"
   },
   "dependencies": {
-    "connect-history-api-fallback": "^1.6.0",
-    "dotenv": "^14.2.0",
-    "express": "^4.17.1",
-    "express-rate-limit": "^6.4.0",
-    "helmet": "^5.0.2",
     "uuid": "^8.3.2"
   },
   "jest": {
