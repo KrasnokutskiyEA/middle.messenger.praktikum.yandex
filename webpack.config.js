@@ -33,7 +33,8 @@ module.exports = {
           {
             loader: 'ts-loader',
             options: {
-              configFile: path.resolve(__dirname, 'tsconfig.json')
+              configFile: path.resolve(__dirname, 'tsconfig.json'),
+              ignoreDiagnostics: [2339, 6133, 7053, 2451, 2349]
             }
           }
         ],

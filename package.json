@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "messenger app",
   "scripts": {
-    "start": "node server.ts",
+    "start": "webpack && node server.ts",
     "build": "webpack",
     "dev": "webpack serve",
     "test": "jest"
