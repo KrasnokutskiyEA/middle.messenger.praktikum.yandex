@@ -5,7 +5,14 @@
   "scripts": {
     "build": "webpack",
     "dev": "webpack serve",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "husky install",
+    "lint": "eslint ./src"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm-run-all test lint"
+    }
   },
   "author": "Evgeny Krasnokutsky",
   "license": "ISC",
@@ -25,9 +32,11 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.1",
     "html-webpack-plugin": "^5.5.0",
+    "husky": "^8.0.1",
     "jest": "^28.1.0",
     "jest-environment-jsdom": "^28.1.0",
     "mini-css-extract-plugin": "^2.6.0",
+    "npm-run-all": "^4.1.5",
     "pug-loader": "^2.4.0",
     "sass": "^1.51.0",
     "sass-loader": "^12.6.0",
