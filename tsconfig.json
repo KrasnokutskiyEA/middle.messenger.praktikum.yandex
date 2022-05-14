@@ -23,5 +23,5 @@
     "noUnusedParameters": true,                           /* Raise an error when a function parameter isn't read */
     "strictPropertyInitialization": false
   },
-  "include": ["./src/**/*", "./server.ts", "index.d.ts"]
+  "include": ["./src/**/*", "index.d.ts", "./webpack.config.js"]
 }
