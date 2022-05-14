@@ -4,6 +4,9 @@
   "description": "messenger app",
   "scripts": {
     "build": "webpack",
+    "build:image": "docker build -t chat-app .",
+    "start:container": "docker run -d -p 3000:3000 chat-app",
+    "docker": "npm-run-all build:image start:container",
     "dev": "webpack serve",
     "test": "jest",
     "prepare": "husky install",
