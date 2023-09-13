@@ -57,10 +57,17 @@ https://github.com/KrasnokutskiyEA/middle.messenger.praktikum.yandex/pull/11
 
 ## todo
 
-- add avatars to messages on chat page. Improve avatars everywhere;
-- add chatroom search functionality on a main page;
-- send files to chat
-- fix time format in messages and chats
-- Use login instead of id to Add user/Remove user from chat.
+- Critical stuff:
+1) fix ts errors
+2) add comments everywhere
+3) fix nav-bar flicker
+4) adapt ui for mobile
+
+- Functionality related stuff:
+1) add avatars to messages on chat page. Improve avatars everywhere;
+2) add chatroom search functionality on a main page;
+3) fix time format in messages and chats
+4) Use login instead of id to Add user/Remove user from chat.
+5) send files to chat
 
 
