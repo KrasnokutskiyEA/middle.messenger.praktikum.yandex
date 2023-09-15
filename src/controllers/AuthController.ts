@@ -1,6 +1,6 @@
 import { showMessage, showOverlaySpinner, hideOverlay } from '../helpers/showComponents'
 import authApi from '../api/AuthApi'
-import { IAuthApiSignIn, IAuthApiSignUp } from '../interfaces/IAuthApi'
+import type { IAuthApiSignIn, IAuthApiSignUp } from '../interfaces/IAuthApi'
 import showError from '../helpers/showError'
 import store from '../store'
 import router from '../router'

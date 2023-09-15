@@ -1,6 +1,6 @@
 import BaseApi from './BaseApi'
-import { TResponse } from '../types/api'
-import { IAddUserToChatApi, ICreateNewChatApi } from '../interfaces/IChatApi'
+import type { TResponse } from '../types/api'
+import type { IAddUserToChatApi, ICreateNewChatApi } from '../interfaces/IChatApi'
 
 class ChatApi extends BaseApi {
   constructor () {

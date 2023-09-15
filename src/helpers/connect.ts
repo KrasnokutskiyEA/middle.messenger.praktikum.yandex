@@ -1,6 +1,6 @@
-import { StoreEvents, TState } from '../classes/Store'
+import { StoreEvents, type TState } from '../classes/Store'
 import store from '../store'
-import { IProps } from '../classes/Block'
+import type { IProps } from '../classes/Block'
 function connect<T extends new (...props: any[]) => any> (
   Component: T,
   mapStateToProps: (state: TState) => TState,

@@ -1,6 +1,6 @@
 import BaseApi from './BaseApi'
-import { TResponse } from '../types/api'
-import { IAuthApiSignIn, IAuthApiSignUp } from '../interfaces/IAuthApi'
+import type { TResponse } from '../types/api'
+import type { IAuthApiSignIn, IAuthApiSignUp } from '../interfaces/IAuthApi'
 
 class AuthApi extends BaseApi {
   constructor () {

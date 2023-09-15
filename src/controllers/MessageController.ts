@@ -1,4 +1,4 @@
-import { IMessageWSGet, IMessageWSConnect } from '../interfaces/IMessageApi'
+import type { IMessageWSGet, IMessageWSConnect } from '../interfaces/IMessageApi'
 import { convertKeysToCamelCase } from '../helpers/formatStrings'
 import { showMessage } from '../helpers/showComponents'
 import env from '../helpers/env'

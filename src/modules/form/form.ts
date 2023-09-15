@@ -1,4 +1,4 @@
-import { Block, IProps } from '../../classes/Block'
+import { Block, type IProps } from '../../classes/Block'
 
 // template imports
 import template from './form.pug'

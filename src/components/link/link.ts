@@ -1,5 +1,5 @@
 // import base class
-import { Block, IProps } from '../../classes/Block'
+import { Block, type IProps } from '../../classes/Block'
 
 // import template
 import template from './link.pug'

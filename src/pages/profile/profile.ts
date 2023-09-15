@@ -9,14 +9,14 @@ import connect from '../../helpers/connect'
 import env from '../../helpers/env'
 
 // interfaces import
-import { IUserApiUpdateProfile } from '../../interfaces/IUserApi'
+import type { IUserApiUpdateProfile } from '../../interfaces/IUserApi'
 
 // controllers import
 import { authController, userController } from '../../controllers/index'
 
 // classes import
-import { Block, IProps } from '../../classes/Block'
-import { TState } from '../../classes/Store'
+import { Block, type IProps } from '../../classes/Block'
+import type { TState } from '../../classes/Store'
 
 // template import
 import template from '../../templates/sideNav/sideNav.pug'
@@ -134,7 +134,9 @@ const page = {
     ...ctx.goBackBtn,
 
     events: {
-      click: () => router.back()
+      click: () => {
+        router.back()
+      }
     }
   }),
 
@@ -158,8 +160,12 @@ const page = {
       ...input,
 
       events: {
-        focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
-        blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
+        focus: (event: Event): void => {
+          validateInput(event.target as HTMLInputElement)
+        },
+        blur: (event: Event): void => {
+          validateInput(event.target as HTMLInputElement)
+        }
       }
     })),
 
@@ -167,7 +173,9 @@ const page = {
       ...ctx.submitBtn,
 
       events: {
-        click: () => validateForm()
+        click: () => {
+          validateForm()
+        }
       }
     }),
 

@@ -1,9 +1,10 @@
-import Form from '../modules/form/form'
 import Message from '../components/message/message'
 import Spinner from '../components/spinner/spinner'
 import Overlay from '../components/overlay/overlay'
-import SecondaryBtn from '../components/secondaryBtn/secondaryBtn'
 import ChatSettingsDropdown from '../components/chat/chatSettingsDropdown/chatSettingsDropdown'
+
+import type Form from '../modules/form/form'
+import type SecondaryBtn from '../components/secondaryBtn/secondaryBtn'
 
 export const showMessage = (text: string, classes: string[]): void => {
   if (!Message.instance) {

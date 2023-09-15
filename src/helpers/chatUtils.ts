@@ -76,10 +76,10 @@ export const initSelectedChat = async (chat: Record<string, any>): Promise<void>
 }
 
 // throttle
-function throttle (callee: Function, timeout: number): Function {
+function throttle (callee: (evt: Event) => void, timeout: number): (evt: Event) => void {
   let timer: ReturnType<typeof setTimeout> | undefined
 
-  return function perform (...args: unknown[]) {
+  return function (...args: [Event]) {
     if (timer) return
 
     timer = setTimeout(() => {

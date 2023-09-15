@@ -10,8 +10,8 @@ import userAddLogo from '../../assets/images/user_add.svg'
 import userRemoveLogo from '../../assets/images/user_remove.svg'
 
 // classes import
-import { Block, IProps } from '../../classes/Block'
-import { TState } from '../../classes/Store'
+import { Block, type IProps } from '../../classes/Block'
+import { type TState } from '../../classes/Store'
 
 // template import
 import template from '../../templates/chatLayout/chatLayout.pug'
@@ -214,7 +214,11 @@ const ctx = {
 }
 
 /* modal window generator */
-const generateModal = (mainProps: {}, inputProps: {}, submitAction: {}): { content: Form } => {
+const generateModal = (
+  mainProps: Record<string, unknown>,
+  inputProps: Record<string, unknown>,
+  submitAction: Record<string, (event: Event) => Promise<void>>
+): { content: Form } => {
   return {
     content: new Form({
       ...mainProps,
@@ -224,8 +228,12 @@ const generateModal = (mainProps: {}, inputProps: {}, submitAction: {}): { conte
           ...inputProps,
 
           events: {
-            focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
-            blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
+            focus: (event: Event): void => {
+              validateInput(event.target as HTMLInputElement)
+            },
+            blur: (event: Event): void => {
+              validateInput(event.target as HTMLInputElement)
+            }
           }
         })
       ],
@@ -348,7 +356,9 @@ const page = {
         ...ctx.chatMenu.myProfileBtn,
 
         events: {
-          click: () => router.go('/profile')
+          click: () => {
+            router.go('/profile')
+          }
         }
       })
     ]
@@ -375,7 +385,9 @@ const page = {
     ...ctx.messagesList.main,
 
     events: {
-      scroll: (evt) => handleScrollThrottled(evt)
+      scroll: (evt) => {
+        handleScrollThrottled(evt)
+      }
     }
   }),
 

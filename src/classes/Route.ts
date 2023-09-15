@@ -1,6 +1,6 @@
-import { Block, IProps } from './Block'
+import type { Block, IProps } from './Block'
 
-function isEqual (lhs: string, rhs: string): Boolean {
+function isEqual (lhs: string, rhs: string): boolean {
   return lhs === rhs
 }
 
@@ -36,7 +36,7 @@ export default class Route {
     }
   }
 
-  public match (pathname: string): Boolean {
+  public match (pathname: string): boolean {
     return isEqual(pathname, this._pathname)
   }
 

@@ -1,5 +1,5 @@
 import Route from './Route'
-import { Block } from './Block'
+import type { Block } from './Block'
 import store from '../store'
 
 export default class Router {

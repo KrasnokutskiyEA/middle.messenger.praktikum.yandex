@@ -1,6 +1,6 @@
 import BaseApi from './BaseApi'
-import { TResponse } from '../types/api'
-import { IUserApiSearch, IUserApiUpdateProfile } from '../interfaces/IUserApi'
+import type { TResponse } from '../types/api'
+import type { IUserApiSearch, IUserApiUpdateProfile } from '../interfaces/IUserApi'
 
 class UserApi extends BaseApi {
   constructor () {

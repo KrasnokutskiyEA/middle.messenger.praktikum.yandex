@@ -59,9 +59,10 @@ https://github.com/KrasnokutskiyEA/middle.messenger.praktikum.yandex/pull/11
 
 - Critical stuff:
 1) fix ts errors
-2) add comments everywhere
-3) fix nav-bar flicker
-4) adapt ui for mobile
+2) relative imports to absolute
+3) add comments everywhere
+4) fix nav-bar flicker
+5) adapt ui for mobile
 
 - Functionality related stuff:
 1) add avatars to messages on chat page. Improve avatars everywhere;
@@ -69,5 +70,6 @@ https://github.com/KrasnokutskiyEA/middle.messenger.praktikum.yandex/pull/11
 3) fix time format in messages and chats
 4) Use login instead of id to Add user/Remove user from chat.
 5) send files to chat
+6) create 2 webpack configs - dev and prod
 
 

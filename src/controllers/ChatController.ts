@@ -1,5 +1,5 @@
 import { showMessage, showOverlaySpinner, hideOverlay } from '../helpers/showComponents'
-import { ICreateNewChatApi } from '../interfaces/IChatApi'
+import type { ICreateNewChatApi } from '../interfaces/IChatApi'
 import { initSelectedChat, leaveActiveChat } from '../helpers/chatUtils'
 import chatApi from '../api/ChatApi'
 import showError from '../helpers/showError'

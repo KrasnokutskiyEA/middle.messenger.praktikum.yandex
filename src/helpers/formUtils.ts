@@ -1,7 +1,7 @@
 import store from '../store'
 
 // toggle error visibility
-function toggleError (isValid: Boolean, input: HTMLInputElement): void {
+function toggleError (isValid: boolean, input: HTMLInputElement): void {
   !isValid
     ? input.nextSibling!.classList.remove('hidden')
     : input.nextSibling!.classList.add('hidden')

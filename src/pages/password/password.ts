@@ -37,7 +37,9 @@ const ctx = {
       minlength: 3,
       errorText: '8-40 symbols, at least one capital letter and number',
       events: {
-        input: (event: Event): void => validateInput(event.target as HTMLInputElement)
+        input: (event: Event): void => {
+          validateInput(event.target as HTMLInputElement)
+        }
       }
     },
     {
@@ -52,7 +54,9 @@ const ctx = {
       minlength: 8,
       errorText: '8-40 symbols, at least one capital letter and number',
       events: {
-        input: (event: Event): void => validateInput(event.target as HTMLInputElement)
+        input: (event: Event): void => {
+          validateInput(event.target as HTMLInputElement)
+        }
       }
     },
     {
@@ -66,7 +70,9 @@ const ctx = {
       minlength: 8,
       errorText: 'Passwords do not match',
       events: {
-        input: (event: Event): void => validateNewPassword(event.target as HTMLInputElement)
+        input: (event: Event): void => {
+          validateNewPassword(event.target as HTMLInputElement)
+        }
       }
     }
   ],
@@ -90,7 +96,9 @@ const page = {
     ...ctx.goBackBtn,
 
     events: {
-      click: () => router.back()
+      click: () => {
+        router.back()
+      }
     }
   }),
 
@@ -103,7 +111,9 @@ const page = {
       ...ctx.submitBtn,
 
       events: {
-        click: () => validateForm()
+        click: () => {
+          validateForm()
+        }
       }
     }),
 

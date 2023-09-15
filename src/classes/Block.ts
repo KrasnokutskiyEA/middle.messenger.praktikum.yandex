@@ -3,7 +3,7 @@ import EventBus from './EventBus'
 
 /* props schema */
 export interface IProps {
-  events?: { [key: string]: (event: Event) => void }
+  events?: { [key: string]: (event: Event) => void | Promise<void> }
   childrenList?: Block[]
   classes?: string[]
   text?: string

@@ -1,4 +1,4 @@
-import { Block, IProps } from './Block'
+import { Block, type IProps } from './Block'
 
 describe('Block test', () => {
   const mockCDM = jest.fn()

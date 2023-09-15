@@ -1,7 +1,7 @@
 import { showMessage, showOverlaySpinner, hideOverlay } from '../helpers/showComponents'
 import userApi from '../api/UserApi'
-import { TResponse } from '../types/api'
-import { IUserApiSearch, IUserApiUpdateProfile } from '../interfaces/IUserApi'
+import type { TResponse } from '../types/api'
+import type { IUserApiSearch, IUserApiUpdateProfile } from '../interfaces/IUserApi'
 import showError from '../helpers/showError'
 import store from '../store'
 

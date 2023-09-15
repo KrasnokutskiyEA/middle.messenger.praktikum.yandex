@@ -2,7 +2,7 @@
 import { validateInput, validateForm, submitForm } from '../../helpers/formUtils'
 
 // interfaces import
-import { IAuthApiSignUp } from '../../interfaces/IAuthApi'
+import type { IAuthApiSignUp } from '../../interfaces/IAuthApi'
 
 // controllers import
 import { authController } from '../../controllers/index'
@@ -125,8 +125,12 @@ const page = {
       ...input,
 
       events: {
-        focus: (event: Event): void => validateInput(event.target as HTMLInputElement),
-        blur: (event: Event): void => validateInput(event.target as HTMLInputElement)
+        focus: (event: Event): void => {
+          validateInput(event.target as HTMLInputElement)
+        },
+        blur: (event: Event): void => {
+          validateInput(event.target as HTMLInputElement)
+        }
       }
     })),
 
@@ -145,7 +149,9 @@ const page = {
       ...ctx.submitBtn,
 
       events: {
-        click: () => validateForm()
+        click: () => {
+          validateForm()
+        }
       }
     }),
 
