@@ -107,7 +107,7 @@ class MessageController {
     this._removeEvents()
   }
 
-  private _handleError (evt: Event): void {
+  private _handleError (): void {
     // console.log('_handleError', evt)
   }
 }

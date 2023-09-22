@@ -148,10 +148,12 @@ const page = {
         change: async (event: Event): Promise<void> => {
           const input = event.target as HTMLInputElement
           const file = input.files?.[0]
-          const formData = new FormData()
-          formData.append('avatar', file!)
-          await userController.updateAvatar(formData)
-          // input.value = ''
+
+          if (file) {
+            const formData = new FormData()
+            formData.append('avatar', file)
+            await userController.updateAvatar(formData)
+          }
         }
       }
     }),

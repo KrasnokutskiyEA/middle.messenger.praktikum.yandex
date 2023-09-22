@@ -26,5 +26,13 @@
     "allowJs": true,
     "checkJs": true
   },
-  "include": ["./src/**/*", "./server/**/*", "index.d.ts", "./webpack.config.js"]
+
+  "include": [
+    "./src/**/*",
+    "./jest.config.ts",
+    "./jest.setup.ts",
+    "./server/**/*",
+    "index.d.ts",
+    "./webpack.config.js"
+  ]
 }

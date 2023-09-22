@@ -1,6 +1,4 @@
-type Indexed<T = any> = {
-  [key in string]: T;
-}
+type Indexed<T = any> = Record<string, T>
 
 // merges two objects
 function merge (lhs: Indexed, rhs: Indexed): Indexed {
@@ -41,7 +39,7 @@ export function set (object: Indexed | unknown, path: string, value: unknown): I
 }
 
 // resets object value
-export function reset (object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
+export function reset (object: Indexed<unknown>, path: string, value: unknown): Indexed | unknown {
   if (typeof object !== 'object' || object === null) {
     return object
   }

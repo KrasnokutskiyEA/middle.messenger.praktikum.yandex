@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid'
 import EventBus from './EventBus'
 
 /* props schema */
@@ -36,7 +35,7 @@ export class Block {
   constructor (tagName: string = 'div', propsAndChildren: IProps = {}) {
     const eventBus = new EventBus()
     this._meta = { tagName, propsAndChildren }
-    this._id = uuidv4()
+    this._id = crypto.randomUUID()
     this.props = this._makeIPropsProxy({ ...propsAndChildren, _id: this._id })
     const { children } = this._getChildren(propsAndChildren)
     this.children = children ?? {}

@@ -2,9 +2,13 @@ import store from '../store'
 
 // toggle error visibility
 function toggleError (isValid: boolean, input: HTMLInputElement): void {
-  !isValid
-    ? input.nextSibling!.classList.remove('hidden')
-    : input.nextSibling!.classList.add('hidden')
+  const errorMsgElement = input.nextSibling
+
+  if (errorMsgElement instanceof HTMLElement) {
+    !isValid
+      ? errorMsgElement.classList.remove('hidden')
+      : errorMsgElement.classList.add('hidden')
+  }
 }
 
 // validate single input
@@ -14,22 +18,29 @@ export function validateInput (input: HTMLInputElement): void {
 }
 
 // validate new password input
-export function validateNewPassword (input: HTMLInputElement): void {
-  const newPass = document.querySelector('#new_password')
-  const isValid = newPass!.value === input.value
+export function validateNewPassword (evt: Event): void {
+  const confirmNewPassField = evt.target
 
-  !isValid
-    ? input.setCustomValidity('Passwords do not match')
-    : input.setCustomValidity('')
+  if (confirmNewPassField instanceof HTMLInputElement) {
+    const newPassField = document.querySelector('#new_password')
 
-  toggleError(isValid, input)
+    if (newPassField instanceof HTMLInputElement) {
+      const isValid = newPassField.value === confirmNewPassField.value
+
+      !isValid
+        ? confirmNewPassField.setCustomValidity('Passwords do not match')
+        : confirmNewPassField.setCustomValidity('')
+
+      toggleError(isValid, confirmNewPassField)
+    }
+  }
 }
 
 // validate whole form (all inputs at once)
 export function validateForm (): void {
   const input = document.querySelectorAll('input:not(#avatar)')
 
-  input.forEach((i: any) => validateInput(i))
+  input.forEach((i: any) => { validateInput(i) })
 }
 
 function serializeForm (formNode: HTMLFormElement): FormData {
@@ -41,20 +52,40 @@ export function submitForm (event: Event): Record<string, any> {
   event.preventDefault()
 
   // 2 - gather inputs data
-  const data = serializeForm(event.target as HTMLFormElement)
-  return Object.fromEntries(data.entries())
+  const form = event.target
+
+  if (form instanceof HTMLFormElement) {
+    const data = serializeForm(form)
+    return Object.fromEntries(data.entries())
+  }
+  return {}
 }
 
-export function clearInput (input: HTMLInputElement): void {
-  input.firstElementChild!.lastElementChild!.value = ''
+export function clearInput (evt: Event): void {
+  const form = evt.target
+  if (form instanceof HTMLElement) {
+    const input = form.querySelector('#message')
+
+    if (input instanceof HTMLInputElement) {
+      input.value = ''
+    }
+  }
 }
 
-export function findChatById (id: string): Record<string, any> | undefined {
+export function findChatById (id: string): Nullable<Record<string, any>> {
   return store.getState().chats.find((chat: Record<string, any>) => chat.id === Number(id))
 }
 
-export function findChat (event: Event): Record<string, any> | undefined {
-  const chatCard = event.composedPath().find(c => c.className === 'chat-card')
-  const chatId = chatCard?.attributes['chat-id'].value
-  return findChatById(chatId)
+export function findChat (event: Event): Nullable<Record<string, any>> {
+  const chatCard = event
+    .composedPath()
+    .find(el => (el instanceof HTMLElement) && (el.className === 'chat-card'))
+
+  if (chatCard instanceof HTMLElement) {
+    const chatId = chatCard.attributes.getNamedItem('chat-id')
+
+    if (chatId) {
+      return findChatById(chatId.value)
+    }
+  }
 }

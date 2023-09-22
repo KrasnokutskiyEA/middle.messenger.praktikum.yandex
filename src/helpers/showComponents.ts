@@ -9,7 +9,7 @@ import type SecondaryBtn from '../components/secondaryBtn/secondaryBtn'
 export const showMessage = (text: string, classes: string[]): void => {
   if (!Message.instance) {
     document.body.append(new Message({ text, classes }).getContent())
-    setTimeout(() => { Message.instance!.unmount() }, 3000)
+    setTimeout(() => { Message?.instance?.unmount() }, 3000)
   }
 }
 
@@ -22,7 +22,7 @@ export const showOverlayModal = (ctx: { content: Form }): void => {
 }
 
 export const hideOverlay = (): void => {
-  Overlay.instance!.unmount()
+  Overlay?.instance?.unmount()
 }
 
 export const showChatSettingsMenu = (ctx: { childrenList: SecondaryBtn[] }): void => {
@@ -30,5 +30,5 @@ export const showChatSettingsMenu = (ctx: { childrenList: SecondaryBtn[] }): voi
 }
 
 export const hideChatSettingsMenu = (): void => {
-  ChatSettingsDropdown.instance!.unmount()
+  ChatSettingsDropdown?.instance?.unmount()
 }

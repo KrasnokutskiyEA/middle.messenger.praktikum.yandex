@@ -10,7 +10,7 @@
     "dev": "webpack serve",
     "test": "jest",
     "prepare": "husky install",
-    "lint": "eslint ./src/**/*.{js,ts,tsx}"
+    "lint": "eslint ./src/**/*.{ts,tsx}"
   },
   "author": "Evgeny Krasnokutsky",
   "license": "ISC",
@@ -41,16 +41,10 @@
     "stylelint": "^15.10.3",
     "stylelint-config-standard-scss": "^11.0.0",
     "ts-loader": "^9.4.4",
+    "ts-node": "^10.9.1",
     "typescript": "^5.2.2",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
-  },
-  "dependencies": {
-    "uuid": "^9.0.1"
-  },
-  "jest": {
-    "testEnvironment": "jsdom",
-    "resolver": "<rootDir>/src/tests/resolver.js"
   }
 }

@@ -402,7 +402,7 @@ const page = {
     events: {
       submit: (event: Event) => {
         const { message } = submitForm(event)
-        clearInput(event.target as HTMLInputElement)
+        clearInput(event)
         messageController.sendMessage(message)
       }
     }
@@ -491,7 +491,7 @@ function updateTemplate (propsPage: IProps, propsStore: IProps, propsInitStore: 
 
     // now scroll down
     const newList = document.querySelector('.messages-list');
-    (msgDiffQty === 1 || oldMsgQty === 0) && newList!.scrollTo({ top: newList!.scrollHeight })
+    (msgDiffQty === 1 || oldMsgQty === 0) && newList?.scrollTo({ top: newList.scrollHeight })
   }
 }
 

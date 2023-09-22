@@ -71,7 +71,7 @@ const ctx = {
       errorText: 'Passwords do not match',
       events: {
         input: (event: Event): void => {
-          validateNewPassword(event.target as HTMLInputElement)
+          validateNewPassword(event)
         }
       }
     }

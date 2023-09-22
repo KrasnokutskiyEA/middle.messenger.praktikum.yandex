@@ -31,12 +31,20 @@ export default class Overlay extends Block {
   }
 
   componentDidMount (): void {
-    document.querySelector<HTMLElement>('#app')!.style.filter = 'blur(4px)'
+    const canvas = document.querySelector('#app')
+
+    if (canvas instanceof HTMLElement) {
+      canvas.style.filter = 'blur(4px)'
+    }
   }
 
   componentDidUnmount (): void {
-    document.querySelector<HTMLElement>('#app')!.removeAttribute('style')
-    document.removeEventListener('mousedown', this.handleOverlay)
-    Overlay.instance = undefined
+    const canvas = document.querySelector('#app')
+
+    if (canvas instanceof HTMLElement) {
+      canvas.removeAttribute('style')
+      document.removeEventListener('mousedown', this.handleOverlay)
+      Overlay.instance = undefined
+    }
   }
 }
