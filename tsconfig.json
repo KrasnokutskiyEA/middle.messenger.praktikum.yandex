@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     /* Language and Environment */
-    "target": "es2022",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "target": "ESNext",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
 
     /* Modules */
-    "module": "es2022",                                  /* Specify what module code is generated. */
+    "module": "NodeNext",                                /* Specify what module code is generated. */
     "rootDir": "/",                                      /* Specify the root folder within your source files. */
+    "moduleResolution": "NodeNext",
 
     /* Emit */
     "sourceMap": true,                                   /* Create source map files for emitted JavaScript files. */
@@ -25,5 +26,5 @@
     "allowJs": true,
     "checkJs": true
   },
-  "include": ["./src/**/*", "index.d.ts", "./webpack.config.js"]
+  "include": ["./src/**/*", "./server/**/*", "index.d.ts", "./webpack.config.js"]
 }
